@@ -3188,7 +3188,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"solid-js@npm:^1.6.6":
+"solid-js@npm:^1.6.9":
   version: 1.6.9
   resolution: "solid-js@npm:1.6.9"
   dependencies:
@@ -3220,7 +3220,7 @@ __metadata:
     eslint-config-prettier: ^8.6.0
     eslint-plugin-solid: ^0.9.3
     prettier: 2.8.3
-    solid-js: ^1.6.6
+    solid-js: ^1.6.9
     typescript: ^4.9.4
     vite: ^4.0.3
     vite-plugin-eslint: ^1.8.1
