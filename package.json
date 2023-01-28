@@ -1,0 +1,27 @@
+{
+  "name": "solid-typer",
+  "version": "0.0.1",
+  "description": "Typing game made with SolidJS",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "eslint": "^8.32.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-solid": "^0.9.3",
+    "prettier": "2.8.3",
+    "typescript": "^4.9.4",
+    "vite": "^4.0.3",
+    "vite-plugin-eslint": "^1.8.1",
+    "vite-plugin-solid": "^2.5.0"
+  },
+  "dependencies": {
+    "solid-js": "^1.6.6"
+  }
+}

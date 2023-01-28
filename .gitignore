@@ -1,0 +1,12 @@
+## Yarn ignores
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+## Other ignores
+node_modules
+dist
