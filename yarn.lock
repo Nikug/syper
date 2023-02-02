@@ -364,6 +364,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@catppuccin/palette@npm:0.1.5":
+  version: 0.1.5
+  resolution: "@catppuccin/palette@npm:0.1.5"
+  checksum: b6be48610e05f57019649baa7f9a69cdba6719e1867f51aebbe534ee28524a5f6141a888b82a6753a3afcb2a3ec3cbc79d66765908df04d8fa8aa4d60ababbcb
+  languageName: node
+  linkType: hard
+
+"@catppuccin/tailwindcss@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@catppuccin/tailwindcss@npm:0.1.1"
+  dependencies:
+    "@catppuccin/palette": 0.1.5
+    tailwindcss: ^3.0.24
+  checksum: 9f0b6cb8a70830d75548b778f538b4a804d1ff3dcd14aab9166308e87ff8037283fa52dd886fa9f11763b39a7e5de7723f8a10e2b67da2c275750ad303948e6c
+  languageName: node
+  linkType: hard
+
 "@esbuild/android-arm64@npm:0.16.17":
   version: 0.16.17
   resolution: "@esbuild/android-arm64@npm:0.16.17"
@@ -3505,6 +3522,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "solid-typer@workspace:."
   dependencies:
+    "@catppuccin/tailwindcss": ^0.1.1
     "@typescript-eslint/eslint-plugin": latest
     "@typescript-eslint/parser": latest
     autoprefixer: ^10.4.13
@@ -3630,7 +3648,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailwindcss@npm:^3.2.4":
+"tailwindcss@npm:^3.0.24, tailwindcss@npm:^3.2.4":
   version: 3.2.4
   resolution: "tailwindcss@npm:3.2.4"
   dependencies:
