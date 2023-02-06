@@ -1,9 +1,14 @@
-import { attempt, getRandomQuote, setAttempt, setQuote } from './App'
+import { attempt, resetAttempt, setAttempt } from './App'
+
+const preventDefaultCharacters: string[] = ["'", 'Tab', ' ']
 
 const handleKeyboard = (event: KeyboardEvent) => {
-  event.preventDefault()
+  if (preventDefaultCharacters.includes(event.key)) {
+    event.preventDefault()
+  }
+
   if (event.key === 'Tab') {
-    setQuote(getRandomQuote())
+    resetAttempt()
     return
   }
 

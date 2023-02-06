@@ -8,6 +8,12 @@ import { getRandomFromArray } from './util'
 const quotes = quotesJson as QuotesJson
 export const getRandomQuote = () => getRandomFromArray(quotes.quotes)
 export const newAttempt = (): Attempt => ({ allText: '', finalText: '' })
+
+export const resetAttempt = () => {
+  setAttempt(newAttempt())
+  setQuote(getRandomQuote())
+}
+
 export const [quote, setQuote] = createSignal<Quote>(getRandomQuote())
 export const [attempt, setAttempt] = createSignal<Attempt>(newAttempt())
 

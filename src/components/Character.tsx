@@ -7,7 +7,7 @@ const defaultClasses = `
 `
 
 const characterClasses: Record<CharacterMode, string> = {
-  default: 'text-ctp-text',
+  default: 'text-ctp-text decoration-ctp-yellow',
   correct: 'text-ctp-yellow bg-ctp-surface-2',
   incorrect: 'text-ctp-red bg-ctp-peach',
 }
