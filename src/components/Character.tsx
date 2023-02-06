@@ -1,5 +1,4 @@
 import { clsx } from 'clsx'
-import { createEffect, createMemo } from 'solid-js'
 import { CharacterMode } from '../types'
 
 const defaultClasses = `
@@ -16,15 +15,20 @@ const characterClasses: Record<CharacterMode, string> = {
 interface Props {
   expected: string
   actual?: string
+  isNext: boolean
 }
 
 export const Character = (props: Props) => {
-  const characterMode = createMemo((): CharacterMode => {
+  const characterMode = () => {
     if (props.actual == null) return 'default'
     return props.actual === props.expected ? 'correct' : 'incorrect'
-  })
+  }
 
   return (
-    <span class={clsx(characterClasses[characterMode()], defaultClasses)}>{props.expected}</span>
+    <span
+      class={clsx(characterClasses[characterMode()], defaultClasses, props.isNext && 'underline')}
+    >
+      {props.expected}
+    </span>
   )
 }

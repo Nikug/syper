@@ -17,3 +17,5 @@ export interface Attempt {
 }
 
 export type CharacterMode = 'default' | 'correct' | 'incorrect'
+
+export type Word = Map<number, string>

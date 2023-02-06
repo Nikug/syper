@@ -1,8 +1,8 @@
 import { attempt, getRandomQuote, setAttempt, setQuote } from './App'
 
 const handleKeyboard = (event: KeyboardEvent) => {
+  event.preventDefault()
   if (event.key === 'Tab') {
-    event.preventDefault()
     setQuote(getRandomQuote())
     return
   }
