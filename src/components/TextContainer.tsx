@@ -4,18 +4,18 @@ import { Character } from './Character'
 
 const splitParagraph = (text: string): Word[] => {
   const words: Word[] = []
-  let wordBuffer: Word = new Map()
+  let word: Word = new Map()
   for (let i = 0, limit = text.length; i < limit; i++) {
     if (text[i] !== ' ') {
-      wordBuffer.set(i, text[i])
+      word.set(i, text[i])
     } else {
-      words.push(wordBuffer)
+      words.push(word)
       words.push(new Map().set(i, ' '))
-      wordBuffer = new Map()
+      word = new Map()
     }
   }
 
-  words.push(wordBuffer)
+  words.push(word)
   return words
 }
 
@@ -29,7 +29,7 @@ export const TextContainer = (props: Props) => {
 
   return (
     <div class="flex justify-center w-full p-4 overflow-hidden font-mono">
-      <div class="max-w-xl w-full flex flex-wrap justify-start">
+      <div class="flex flex-wrap justify-start">
         <For each={quoteWords()}>
           {(word) => (
             <div>

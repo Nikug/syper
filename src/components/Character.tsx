@@ -3,7 +3,7 @@ import { CharacterMode } from '../types'
 
 const defaultClasses = `
   whitespace-pre
-  text-3xl
+  text-5xl
 `
 
 const characterClasses: Record<CharacterMode, string> = {
