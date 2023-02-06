@@ -1,5 +1,6 @@
 import { Component, createSignal, onCleanup, onMount } from 'solid-js'
 import quotesJson from './assets/quotes.json'
+import { TextContainer } from './components/TextContainer'
 import { CleanupKeyboard, SetupKeyboard } from './KeyboardHandler'
 import { Attempt, Quote, QuotesJson } from './types'
 import { getRandomFromArray } from './util'
@@ -14,10 +15,8 @@ const App: Component = () => {
   onMount(() => SetupKeyboard())
   onCleanup(() => CleanupKeyboard())
   return (
-    <div class="text-center mt-16">
-      <p class="font-bold text-lg">{quote().text}</p>
-      <p class="font-bold text-lg">{attempt().allText}</p>
-      <p class="font-bold text-lg">{attempt().finalText}</p>
+    <div>
+      <TextContainer attempt={attempt()} quote={quote()} />
     </div>
   )
 }
