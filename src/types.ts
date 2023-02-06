@@ -10,3 +10,8 @@ export interface Quote {
   length: number
   id: number
 }
+
+export interface Attempt {
+  finalText: string
+  allText: string
+}
