@@ -8,12 +8,24 @@ interface Props {
 }
 
 export const TextContainer = (props: Props) => {
+  const quoteWords = () => props.quote.text.split(' ')
+  const actualWords = () => props.attempt.finalText.split(' ')
+
   return (
-    <div class="flex justify-center w-full border p-4 overflow-hidden">
-      <div class="max-w-xl w-full flex flex-wrap justify-start">
-        <For each={Array.from(props.quote.text)}>
-          {(character, i) => (
-            <Character expected={character} actual={props.attempt.finalText.at(i())} />
+    <div class="flex justify-center w-full p-4 overflow-hidden font-mono">
+      <div class="max-w-xl w-full flex flex-wrap justify-start gap-x-4">
+        <For each={quoteWords()}>
+          {(word, wordIndex) => (
+            <div class="flex-shrink-0">
+              <For each={Array.from(word)}>
+                {(character, characterIndex) => (
+                  <Character
+                    expected={character}
+                    actual={actualWords()?.[wordIndex()]?.[characterIndex()]}
+                  />
+                )}
+              </For>
+            </div>
           )}
         </For>
       </div>

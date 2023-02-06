@@ -15,3 +15,5 @@ export interface Attempt {
   finalText: string
   allText: string
 }
+
+export type CharacterMode = 'default' | 'correct' | 'incorrect'

@@ -15,7 +15,7 @@ const App: Component = () => {
   onMount(() => SetupKeyboard())
   onCleanup(() => CleanupKeyboard())
   return (
-    <div>
+    <div class="w-screen h-screen bg-ctp-base">
       <TextContainer attempt={attempt()} quote={quote()} />
     </div>
   )
