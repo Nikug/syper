@@ -1,4 +1,4 @@
-import { attempt, resetAttempt, setAttempt } from './App'
+import { attempt, quote, resetAttempt, setAttempt } from './App'
 
 const preventDefaultCharacters: string[] = ["'", 'Tab', ' ']
 
@@ -32,6 +32,7 @@ const handleCharacter = (event: KeyboardEvent) => {
   }
 
   if (event.key.length > 1) return
+  if (attempt().finalText.length >= quote().length) return
   setAttempt({
     finalText: attempt().finalText + event.key,
     allText: attempt().allText + event.key,
