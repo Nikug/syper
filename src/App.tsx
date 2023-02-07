@@ -1,5 +1,6 @@
 import { Component, createSignal, onCleanup, onMount } from 'solid-js'
 import quotesJson from './assets/quotes.json'
+import { ProgressBar } from './components/ProgressBar'
 import { QuoteInformation } from './components/QuoteInformation'
 import { TextContainer } from './components/TextContainer'
 import { CleanupKeyboard, SetupKeyboard } from './KeyboardHandler'
@@ -30,6 +31,9 @@ const App: Component = () => {
           </div>
           <div class="h-32 overflow-hidden">
             <TextContainer attempt={attempt()} quote={quote()} />
+          </div>
+          <div class="h-8">
+            <ProgressBar />
           </div>
         </div>
       </div>
