@@ -23,7 +23,7 @@ const App: Component = () => {
   return (
     <div class="w-screen bg-ctp-base">
       <div class="grid grid-rows-3 h-screen justify-center">
-        <div class="row-start-2 row-end-2 overflow-scroll max-w-5xl px-16">
+        <div class="row-start-2 row-end-2 overflow-scroll max-w-5xl px-16 h-32 my-auto">
           <TextContainer attempt={attempt()} quote={quote()} />
         </div>
       </div>

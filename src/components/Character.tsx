@@ -1,9 +1,11 @@
 import { clsx } from 'clsx'
+import { createEffect } from 'solid-js'
 import { CharacterMode } from '../types'
 
 const defaultClasses = `
   whitespace-pre
-  text-5xl
+  text-4xl
+  scroll-mt-10
 `
 
 const characterClasses: Record<CharacterMode, string> = {
@@ -19,13 +21,21 @@ interface Props {
 }
 
 export const Character = (props: Props) => {
+  let element: HTMLSpanElement | undefined
   const characterMode = () => {
     if (props.actual == null) return 'default'
     return props.actual === props.expected ? 'correct' : 'incorrect'
   }
 
+  createEffect(() => {
+    if (props.isNext && element) {
+      element.scrollIntoView()
+    }
+  })
+
   return (
     <span
+      ref={element}
       class={clsx(characterClasses[characterMode()], defaultClasses, props.isNext && 'underline')}
     >
       {props.expected}
