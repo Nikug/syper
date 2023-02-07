@@ -28,7 +28,7 @@ export const TextContainer = (props: Props) => {
   const quoteWords = () => splitParagraph(props.quote.text)
 
   return (
-    <div class="flex justify-center w-full overflow-hidden font-mono">
+    <div class="flex justify-center w-full overflow-hidden font-mono leading-8">
       <div class="flex flex-wrap justify-start">
         <For each={quoteWords()}>
           {(word) => (
