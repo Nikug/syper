@@ -2,7 +2,7 @@ import { produce } from 'solid-js/store'
 import { attempt, quote, resetAttempt, setAttempt } from './App'
 import { AttemptStates } from './types'
 
-const preventDefaultCharacters: string[] = ["'", 'Tab', ' ']
+const preventDefaultCharacters: string[] = ["'", 'Tab', ' ', '?', '/']
 
 const handleKeyboard = (event: KeyboardEvent) => {
   if (preventDefaultCharacters.includes(event.key)) {

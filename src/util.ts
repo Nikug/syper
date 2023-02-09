@@ -16,3 +16,24 @@ export const randomBetween = (min: number, max: number) => {
 export const getRandomFromArray = <T>(array: T[]): T => {
   return array[randomBetween(0, array.length)]
 }
+
+/*
+ * Returns the number of matching items from two arrays by comparing
+ * items from both arrays at each index.
+ * @param {T[]} arrayA - First array
+ * @param {T[]} arrayB - Second array
+ */
+export const numberOfMatchingItems = <T extends string | unknown[]>(
+  arrayA: T,
+  arrayB: T
+): number => {
+  const limit = arrayA.length > arrayB.length ? arrayA.length : arrayB.length
+  let matchingItems = 0
+  for (let i = 0; i < limit; i++) {
+    if (arrayA[i] === arrayB[i]) {
+      matchingItems++
+    }
+  }
+
+  return matchingItems
+}
