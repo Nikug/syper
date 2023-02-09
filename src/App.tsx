@@ -1,8 +1,9 @@
-import { Component, createSignal, onCleanup, onMount } from 'solid-js'
+import { Component, createSignal, onCleanup, onMount, Show } from 'solid-js'
 import { createStore } from 'solid-js/store'
 import quotesJson from './assets/quotes.json'
 import { ProgressBar } from './components/ProgressBar'
 import { QuoteInformation } from './components/QuoteInformation'
+import { StatisticsContainer } from './components/StatisticsContainer'
 import { TextContainer } from './components/TextContainer'
 import { CleanupKeyboard, SetupKeyboard } from './KeyboardHandler'
 import { Attempt, AttemptStates, Quote, QuotesJson } from './types'
@@ -39,10 +40,17 @@ const App: Component = () => {
             <QuoteInformation />
           </div>
           <div class="h-32 overflow-hidden">
-            <TextContainer attempt={attempt} quote={quote()} />
+            <Show when={attempt.state === AttemptStates.completed}>
+              <StatisticsContainer attempt={attempt} quote={quote()} />
+            </Show>
+            <Show when={attempt.state !== AttemptStates.completed}>
+              <TextContainer attempt={attempt} quote={quote()} />
+            </Show>
           </div>
           <div class="h-8">
-            <ProgressBar />
+            <Show when={attempt.state !== AttemptStates.completed}>
+              <ProgressBar />
+            </Show>
           </div>
         </div>
       </div>

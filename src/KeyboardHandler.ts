@@ -42,11 +42,13 @@ const handleCharacter = (event: KeyboardEvent) => {
       // Handle start
       if (attempt.finalText.length === 0) {
         attempt.state = AttemptStates.started
+        attempt.measurements.startTime = performance.now()
       }
 
       // Handle end
       if (attempt.finalText.length >= quote().length - 1) {
         attempt.state = AttemptStates.completed
+        attempt.measurements.endTime = performance.now()
       }
 
       attempt.finalText = attempt.finalText + event.key
