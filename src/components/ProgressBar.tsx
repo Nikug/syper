@@ -4,7 +4,7 @@ import { quote, attempt } from '../App'
 const gradient = 'bg-gradient-to-r from-transparent via-ctp-peach to-ctp-red'
 
 export const ProgressBar = () => {
-  const progress = () => (attempt().finalText.length / quote().length) * 100
+  const progress = () => (attempt.finalText.length / quote().length) * 100
   return (
     <div class="relative w-full h-2 mt-2">
       <div class={clsx(gradient, 'absolute inset-0')} />

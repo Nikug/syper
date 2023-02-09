@@ -1,4 +1,6 @@
+import { produce } from 'solid-js/store'
 import { attempt, quote, resetAttempt, setAttempt } from './App'
+import { AttemptStates } from './types'
 
 const preventDefaultCharacters: string[] = ["'", 'Tab', ' ']
 
@@ -24,17 +26,33 @@ export const CleanupKeyboard = () => {
 }
 
 const handleCharacter = (event: KeyboardEvent) => {
-  if (event.key === 'Backspace') {
-    setAttempt({
-      ...attempt(),
-      finalText: attempt().finalText.substring(0, attempt().finalText.length - 1),
-    })
-  }
+  if (attempt.state === AttemptStates.completed) return
 
-  if (event.key.length > 1) return
-  if (attempt().finalText.length >= quote().length) return
-  setAttempt({
-    finalText: attempt().finalText + event.key,
-    allText: attempt().allText + event.key,
-  })
+  setAttempt(
+    produce((attempt) => {
+      // Handle backspace
+      if (event.key === 'Backspace' && attempt.finalText.length > 0) {
+        attempt.finalText = attempt.finalText.substring(0, attempt.finalText.length - 1)
+        return attempt
+      }
+
+      // Don't handle other special characters
+      if (event.key.length > 1) return
+
+      // Handle start
+      if (attempt.finalText.length === 0) {
+        attempt.state = AttemptStates.started
+      }
+
+      // Handle end
+      if (attempt.finalText.length >= quote().length - 1) {
+        attempt.state = AttemptStates.completed
+      }
+
+      attempt.finalText = attempt.finalText + event.key
+      attempt.allText = attempt.allText + event.key
+
+      return attempt
+    })
+  )
 }

@@ -1,15 +1,24 @@
 import { Component, createSignal, onCleanup, onMount } from 'solid-js'
+import { createStore } from 'solid-js/store'
 import quotesJson from './assets/quotes.json'
 import { ProgressBar } from './components/ProgressBar'
 import { QuoteInformation } from './components/QuoteInformation'
 import { TextContainer } from './components/TextContainer'
 import { CleanupKeyboard, SetupKeyboard } from './KeyboardHandler'
-import { Attempt, Quote, QuotesJson } from './types'
+import { Attempt, AttemptStates, Quote, QuotesJson } from './types'
 import { getRandomFromArray } from './util'
 
 const quotes = quotesJson as QuotesJson
 export const getRandomQuote = () => getRandomFromArray(quotes.quotes)
-export const newAttempt = (): Attempt => ({ allText: '', finalText: '' })
+export const newAttempt = (): Attempt => ({
+  state: AttemptStates.notStarted,
+  allText: '',
+  finalText: '',
+  measurements: {
+    startTime: null,
+    endTime: null,
+  },
+})
 
 export const resetAttempt = () => {
   setAttempt(newAttempt())
@@ -17,7 +26,7 @@ export const resetAttempt = () => {
 }
 
 export const [quote, setQuote] = createSignal<Quote>(getRandomQuote())
-export const [attempt, setAttempt] = createSignal<Attempt>(newAttempt())
+export const [attempt, setAttempt] = createStore<Attempt>(newAttempt())
 
 const App: Component = () => {
   onMount(() => SetupKeyboard())
@@ -30,7 +39,7 @@ const App: Component = () => {
             <QuoteInformation />
           </div>
           <div class="h-32 overflow-hidden">
-            <TextContainer attempt={attempt()} quote={quote()} />
+            <TextContainer attempt={attempt} quote={quote()} />
           </div>
           <div class="h-8">
             <ProgressBar />
