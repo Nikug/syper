@@ -37,3 +37,11 @@ export const numberOfMatchingItems = <T extends string | unknown[]>(
 
   return matchingItems
 }
+
+/*
+ * Creates a string from Map values.
+ * @param {Map<K, V>} map - The map to turn to string
+ */
+export const mapToString = <K, V>(map: Map<K, V>): string => {
+  return Array.from(map.values()).join('')
+}

@@ -6,11 +6,33 @@ import { QuoteInformation } from './components/QuoteInformation'
 import { StatisticsContainer } from './components/StatisticsContainer'
 import { TextContainer } from './components/TextContainer'
 import { CleanupKeyboard, SetupKeyboard } from './KeyboardHandler'
-import { Attempt, AttemptStates, Quote, QuotesJson } from './types'
+import { Attempt, AttemptStates, QuotesJson, QuoteWithWords, Word } from './types'
 import { getRandomFromArray } from './util'
 
 const quotes = quotesJson as QuotesJson
 export const getRandomQuote = () => getRandomFromArray(quotes.quotes)
+
+const splitParagraph = (text: string): Word[] => {
+  const words: Word[] = []
+  let word: Word = new Map()
+  for (let i = 0, limit = text.length; i < limit; i++) {
+    if (text[i] !== ' ') {
+      word.set(i, text[i])
+    } else {
+      words.push(word)
+      words.push(new Map().set(i, ' '))
+      word = new Map()
+    }
+  }
+
+  words.push(word)
+  return words
+}
+
+export const initQuote = () => {
+  const randomQuote = getRandomQuote()
+  return { ...randomQuote, words: splitParagraph(randomQuote.text) }
+}
 export const newAttempt = (): Attempt => ({
   state: AttemptStates.notStarted,
   allText: '',
@@ -18,15 +40,16 @@ export const newAttempt = (): Attempt => ({
   measurements: {
     startTime: null,
     endTime: null,
+    words: [],
   },
 })
 
 export const resetAttempt = () => {
   setAttempt(newAttempt())
-  setQuote(getRandomQuote())
+  setQuote(initQuote())
 }
 
-export const [quote, setQuote] = createSignal<Quote>(getRandomQuote())
+export const [quote, setQuote] = createSignal<QuoteWithWords>(initQuote())
 export const [attempt, setAttempt] = createStore<Attempt>(newAttempt())
 
 const App: Component = () => {

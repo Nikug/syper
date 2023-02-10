@@ -11,6 +11,10 @@ export interface Quote {
   id: number
 }
 
+export type QuoteWithWords = Quote & {
+  words: Word[]
+}
+
 export interface Attempt {
   finalText: string
   allText: string
@@ -21,10 +25,19 @@ export interface Attempt {
 export interface Measurements {
   startTime: number | null
   endTime: number | null
+  words: WordMeasurement[]
 }
 
 export interface Statistics {
   wordsPerMinute: number
+}
+
+export interface WordMeasurement {
+  startIndex: number
+  endIndex: number
+  word: string
+  startTime: number | null
+  endTime: number | null
 }
 
 export const AttemptStates = {
