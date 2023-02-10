@@ -1,9 +1,10 @@
+import { For } from 'solid-js'
 import { CharactersPerWord } from '../constants'
-import { Attempt, Quote } from '../types'
+import { Attempt, QuoteWithWords, WordMeasurement } from '../types'
 import { numberOfMatchingItems } from '../util'
 
 interface Props {
-  quote: Quote
+  quote: QuoteWithWords
   attempt: Attempt
 }
 
@@ -33,11 +34,30 @@ export const StatisticsContainer = (props: Props) => {
     )
   }
 
+  const wordMeasurements = () => {
+    return props.attempt.measurements.words.filter((word) => word.word !== ' ')
+  }
+
+  const getWordWordsPerMinute = (word: WordMeasurement) => {
+    const calculatedWords = word.word.length / CharactersPerWord
+    if (word.startTime == null || word.endTime == null) return
+    const durationInMinutes = (word.endTime - word.startTime) / 1000 / 60
+    return calculatedWords / durationInMinutes
+  }
+
   return (
-    <div>
+    <div class="h-full overflow-auto">
       <p>Wpm: {getWordsPerMinute()?.toFixed(1)}</p>
       <p>Correctedness: {(getCorrectedness() * 100).toFixed(1)}%</p>
       <p>Accuracy: {(getAccuracy() * 100).toFixed(1)}%</p>
+      <h3>Wpm by words:</h3>
+      <For each={wordMeasurements()}>
+        {(word) => (
+          <p>
+            {word.word}: {getWordWordsPerMinute(word)?.toFixed(2)}
+          </p>
+        )}
+      </For>
     </div>
   )
 }
