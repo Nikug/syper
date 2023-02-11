@@ -1,6 +1,6 @@
 import { Component, For } from 'solid-js'
 import { CharactersPerWord } from '../constants'
-import { Attempt, QuoteWithWords, WordMeasurement } from '../types'
+import { Attempt, QuoteWithWords } from '../types'
 import { numberOfMatchingItems } from '../util'
 import { LabeledValue } from './LabeledValue'
 import { WordWithWpm } from './WordWithWpm'
