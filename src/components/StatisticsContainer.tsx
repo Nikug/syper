@@ -41,15 +41,16 @@ export const StatisticsContainer: Component<Props> = (props) => {
   }
 
   return (
-    <div class="h-full overflow-auto">
-      <h1 class="font-bold text-4xl">Results</h1>
-      <div class="w-full flex justify-evenly">
+    <div class="h-full">
+      <h1 class="font-bold text-4xl mt-8">Results</h1>
+      <div class="w-full flex justify-evenly mt-4">
         <LabeledValue value={getWordsPerMinute()?.toFixed(1)} label="Words per minute" />
         <LabeledValue value={`${(getAccuracy() * 100).toFixed(1)}%`} label="Accuracy" />
         <LabeledValue value={`${(getCorrectedness() * 100).toFixed(1)}%`} label="Correctedness" />
       </div>
-      <h2 class="font-bold text-2xl">Words per minute by words:</h2>
-      <div class="mt-4">
+      <div class="mt-4">Graph comes here</div>
+      <h2 class="font-bold text-2xl mt-8">Words per minute by words:</h2>
+      <div class="mt-8">
         <div class="flex flex-wrap gap-x-4 gap-y-4 w-full">
           <For each={wordMeasurements()}>{(word) => <WordWithWpm word={word} />}</For>
         </div>

@@ -76,7 +76,11 @@ const App: Component = () => {
         </div>
       </Show>
       <Show when={attempt.state === AttemptStates.completed}>
-        <StatisticsContainer attempt={attempt} quote={quote()} />
+        <div class="flex justify-center">
+          <div class="max-w-5xl px-16">
+            <StatisticsContainer attempt={attempt} quote={quote()} />
+          </div>
+        </div>
       </Show>
     </div>
   )
