@@ -57,27 +57,27 @@ const App: Component = () => {
   onMount(() => SetupKeyboard())
   onCleanup(() => CleanupKeyboard())
   return (
-    <div class="w-screen bg-ctp-base text-ctp-text">
-      <div class="grid grid-rows-3 h-screen justify-center">
-        <div class="row-start-2 row-end-2 overflow-scroll max-w-5xl px-16 h-48 my-auto">
-          <div class="h-8">
-            <QuoteInformation />
-          </div>
-          <div class="h-32 overflow-hidden">
-            <Show when={attempt.state === AttemptStates.completed}>
-              <StatisticsContainer attempt={attempt} quote={quote()} />
-            </Show>
-            <Show when={attempt.state !== AttemptStates.completed}>
+    <div class="w-screen min-h-screen bg-ctp-base text-ctp-text">
+      <Show when={attempt.state !== AttemptStates.completed}>
+        <div class="grid grid-rows-3 h-screen justify-center">
+          <div class="row-start-2 row-end-2 overflow-scroll max-w-5xl px-16 h-48 my-auto">
+            <div class="h-8">
+              <QuoteInformation />
+            </div>
+            <div class="h-32 overflow-hidden">
               <TextContainer attempt={attempt} quote={quote()} />
-            </Show>
-          </div>
-          <div class="h-8">
-            <Show when={attempt.state !== AttemptStates.completed}>
-              <ProgressBar />
-            </Show>
+            </div>
+            <div class="h-8">
+              <Show when={attempt.state !== AttemptStates.completed}>
+                <ProgressBar />
+              </Show>
+            </div>
           </div>
         </div>
-      </div>
+      </Show>
+      <Show when={attempt.state === AttemptStates.completed}>
+        <StatisticsContainer attempt={attempt} quote={quote()} />
+      </Show>
     </div>
   )
 }

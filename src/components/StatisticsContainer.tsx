@@ -28,7 +28,6 @@ export const StatisticsContainer = (props: Props) => {
   }
 
   const getAccuracy = (): number => {
-    console.log(props.attempt.measurements.timestamps)
     return (
       numberOfMatchingItems(props.quote.text, props.attempt.finalText) /
       props.attempt.allText.length
@@ -55,7 +54,7 @@ export const StatisticsContainer = (props: Props) => {
       <For each={wordMeasurements()}>
         {(word) => (
           <p>
-            {word.word}: {getWordWordsPerMinute(word)?.toFixed(2)}
+            {word.word}: {getWordWordsPerMinute(word)?.toFixed(1)}
           </p>
         )}
       </For>
