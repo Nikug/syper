@@ -26,6 +26,7 @@ export interface Measurements {
   startTime: number | null
   endTime: number | null
   words: WordMeasurement[]
+  timestamps: WordsPerMinuteTimestamp
 }
 
 export interface Statistics {
@@ -52,3 +53,4 @@ export type AttemptState = (typeof AttemptStates)[AttemptStateKey]
 export type CharacterMode = 'default' | 'correct' | 'incorrect'
 
 export type Word = Map<number, string>
+export type WordsPerMinuteTimestamp = Map<number, number>

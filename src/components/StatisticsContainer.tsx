@@ -28,6 +28,7 @@ export const StatisticsContainer = (props: Props) => {
   }
 
   const getAccuracy = (): number => {
+    console.log(props.attempt.measurements.timestamps)
     return (
       numberOfMatchingItems(props.quote.text, props.attempt.finalText) /
       props.attempt.allText.length

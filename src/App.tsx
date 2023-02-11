@@ -41,6 +41,7 @@ export const newAttempt = (): Attempt => ({
     startTime: null,
     endTime: null,
     words: [],
+    timestamps: new Map(),
   },
 })
 

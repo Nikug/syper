@@ -87,6 +87,9 @@ const handleWordMeasurement = (attempt: Attempt): Attempt => {
     attempt.measurements.words = attempt.measurements.words.map((word) =>
       word.endIndex === currentIndex ? { ...word, endTime: performance.now() } : word
     )
+    if (currentWord.size !== 1 || currentWord.get(currentIndex) !== ' ') {
+      attempt.measurements.timestamps.set(currentIndex, performance.now())
+    }
   }
 
   return attempt
