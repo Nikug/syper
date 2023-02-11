@@ -1,6 +1,6 @@
 import { Component } from 'solid-js'
-import { CharactersPerWord } from '../constants'
 import { WordMeasurement } from '../types'
+import { wordsPerMinute } from '../util'
 
 interface Props {
   word: WordMeasurement
@@ -8,12 +8,8 @@ interface Props {
 
 export const WordWithWpm: Component<Props> = (props) => {
   const getWordWordsPerMinute = (word: WordMeasurement) => {
-    const calculatedWords = word.word.length / CharactersPerWord
     if (word.startTime == null || word.endTime == null) return null
-    const durationInMinutes = (word.endTime - word.startTime) / 1000 / 60
-
-    if (durationInMinutes === 0) return null
-    return calculatedWords / durationInMinutes
+    return wordsPerMinute(word.word.length, word.endTime - word.startTime)
   }
 
   return (

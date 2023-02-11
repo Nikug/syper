@@ -1,9 +1,9 @@
 import { Component, For } from 'solid-js'
-import { CharactersPerWord } from '../constants'
 import { Attempt, QuoteWithWords } from '../types'
-import { numberOfMatchingItems } from '../util'
+import { numberOfMatchingItems, wordsPerMinute } from '../util'
 import { LabeledValue } from './LabeledValue'
 import { WordWithWpm } from './WordWithWpm'
+import { WpmChart } from './WpmChart'
 
 interface Props {
   quote: QuoteWithWords
@@ -18,11 +18,9 @@ export const StatisticsContainer: Component<Props> = (props) => {
     ) {
       return null
     }
-    const calculatedWords = props.quote.length / CharactersPerWord
-    const durationInMinutes =
-      (props.attempt.measurements.endTime - props.attempt.measurements.startTime) / 1000 / 60
 
-    return calculatedWords / durationInMinutes
+    const duration = props.attempt.measurements.endTime - props.attempt.measurements.startTime
+    return wordsPerMinute(props.quote.length, duration)
   }
 
   const getCorrectedness = (): number => {
@@ -48,7 +46,9 @@ export const StatisticsContainer: Component<Props> = (props) => {
         <LabeledValue value={`${(getAccuracy() * 100).toFixed(1)}%`} label="Accuracy" />
         <LabeledValue value={`${(getCorrectedness() * 100).toFixed(1)}%`} label="Correctedness" />
       </div>
-      <div class="mt-4">Graph comes here</div>
+      <div class="mt-4">
+        <WpmChart measurements={props.attempt.measurements} />
+      </div>
       <h2 class="font-bold text-2xl mt-8">Words per minute by words:</h2>
       <div class="mt-8">
         <div class="flex flex-wrap gap-x-4 gap-y-4 w-full">

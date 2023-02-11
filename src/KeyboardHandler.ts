@@ -1,5 +1,6 @@
 import { produce } from 'solid-js/store'
 import { attempt, quote, resetAttempt, setAttempt } from './App'
+import { CharactersPerWord } from './constants'
 import { Attempt, AttemptStates } from './types'
 import { mapToString } from './util'
 
@@ -55,6 +56,14 @@ const handleCharacter = (event: KeyboardEvent) => {
       // Handle word
       attempt = handleWordMeasurement(attempt)
 
+      // Handle standardized timestamps
+      if (
+        attempt.finalText.length % CharactersPerWord === 0 ||
+        attempt.finalText.length >= quote().length - 1
+      ) {
+        attempt.measurements.timestamps.set(attempt.finalText.length, performance.now())
+      }
+
       attempt.finalText = attempt.finalText + event.key
       attempt.allText = attempt.allText + event.key
 
@@ -87,9 +96,6 @@ const handleWordMeasurement = (attempt: Attempt): Attempt => {
     attempt.measurements.words = attempt.measurements.words.map((word) =>
       word.endIndex === currentIndex ? { ...word, endTime: performance.now() } : word
     )
-    if (currentWord.size !== 1 || currentWord.get(currentIndex) !== ' ') {
-      attempt.measurements.timestamps.set(currentIndex, performance.now())
-    }
   }
 
   return attempt
