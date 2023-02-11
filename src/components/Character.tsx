@@ -1,5 +1,5 @@
 import { clsx } from 'clsx'
-import { createEffect } from 'solid-js'
+import { Component, createEffect } from 'solid-js'
 import { CharacterMode } from '../types'
 
 const defaultClasses = `
@@ -20,7 +20,7 @@ interface Props {
   isNext: boolean
 }
 
-export const Character = (props: Props) => {
+export const Character: Component<Props> = (props) => {
   let element: HTMLSpanElement | undefined
   const characterMode = () => {
     if (props.actual == null) return 'default'

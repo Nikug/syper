@@ -1,14 +1,16 @@
-import { For } from 'solid-js'
+import { Component, For } from 'solid-js'
 import { CharactersPerWord } from '../constants'
 import { Attempt, QuoteWithWords, WordMeasurement } from '../types'
 import { numberOfMatchingItems } from '../util'
+import { LabeledValue } from './LabeledValue'
+import { WordWithWpm } from './WordWithWpm'
 
 interface Props {
   quote: QuoteWithWords
   attempt: Attempt
 }
 
-export const StatisticsContainer = (props: Props) => {
+export const StatisticsContainer: Component<Props> = (props) => {
   const getWordsPerMinute = (): number | null => {
     if (
       props.attempt.measurements.endTime == null ||
@@ -38,26 +40,20 @@ export const StatisticsContainer = (props: Props) => {
     return props.attempt.measurements.words.filter((word) => word.word !== ' ')
   }
 
-  const getWordWordsPerMinute = (word: WordMeasurement) => {
-    const calculatedWords = word.word.length / CharactersPerWord
-    if (word.startTime == null || word.endTime == null) return
-    const durationInMinutes = (word.endTime - word.startTime) / 1000 / 60
-    return calculatedWords / durationInMinutes
-  }
-
   return (
     <div class="h-full overflow-auto">
-      <p>Wpm: {getWordsPerMinute()?.toFixed(1)}</p>
-      <p>Correctedness: {(getCorrectedness() * 100).toFixed(1)}%</p>
-      <p>Accuracy: {(getAccuracy() * 100).toFixed(1)}%</p>
-      <h3>Wpm by words:</h3>
-      <For each={wordMeasurements()}>
-        {(word) => (
-          <p>
-            {word.word}: {getWordWordsPerMinute(word)?.toFixed(1)}
-          </p>
-        )}
-      </For>
+      <h1 class="font-bold text-4xl">Results</h1>
+      <div class="w-full flex justify-evenly">
+        <LabeledValue value={getWordsPerMinute()?.toFixed(1)} label="Words per minute" />
+        <LabeledValue value={`${(getAccuracy() * 100).toFixed(1)}%`} label="Accuracy" />
+        <LabeledValue value={`${(getCorrectedness() * 100).toFixed(1)}%`} label="Correctedness" />
+      </div>
+      <h2 class="font-bold text-2xl">Words per minute by words:</h2>
+      <div class="mt-4">
+        <div class="flex flex-wrap gap-x-4 gap-y-4 w-full">
+          <For each={wordMeasurements()}>{(word) => <WordWithWpm word={word} />}</For>
+        </div>
+      </div>
     </div>
   )
 }

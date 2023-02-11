@@ -1,9 +1,10 @@
 import clsx from 'clsx'
+import { Component } from 'solid-js'
 import { quote, attempt } from '../App'
 
 const gradient = 'bg-gradient-to-r from-transparent via-ctp-peach to-ctp-red'
 
-export const ProgressBar = () => {
+export const ProgressBar: Component = () => {
   const progress = () => (attempt.finalText.length / quote().length) * 100
   return (
     <div class="relative w-full h-2 mt-2">

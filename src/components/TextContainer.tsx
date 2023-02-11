@@ -1,4 +1,4 @@
-import { For } from 'solid-js'
+import { Component, For } from 'solid-js'
 import { Attempt, QuoteWithWords } from '../types'
 import { Character } from './Character'
 
@@ -7,7 +7,7 @@ interface Props {
   attempt: Attempt
 }
 
-export const TextContainer = (props: Props) => {
+export const TextContainer: Component<Props> = (props) => {
   return (
     <div class="flex justify-center w-full overflow-hidden font-mono leading-8">
       <div class="flex flex-wrap justify-start">
