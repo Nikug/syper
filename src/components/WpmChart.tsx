@@ -26,16 +26,19 @@ const createOptions = (measurements: Measurements) => {
     y: wordsPerMinute(key, value - startTime),
   }))
 
-  const betweenTimestamps = timestamps.map(([key, value], i) => ({
+  const wpmBetweenTimestamps = timestamps.map(([key, value], i) => ({
     x: i + 1,
     y: wordsPerMinute(
-      key - (timestamps.at(i - 1)?.[0] ?? 0),
-      value - (timestamps.at(i - 1)?.[1] ?? startTime)
+      key - (timestamps[i - 1]?.[0] ?? 0),
+      value - (timestamps[i - 1]?.[1] ?? startTime)
     ),
   }))
 
   const options: ApexOptions = {
-    series: [{ data: wpmOverTime }, { data: betweenTimestamps }],
+    series: [
+      { name: 'Words per minute total', data: wpmOverTime },
+      { name: 'Words per minute', data: wpmBetweenTimestamps },
+    ],
     chart: {
       height: 400,
       type: 'line',
@@ -47,7 +50,7 @@ const createOptions = (measurements: Measurements) => {
       enabled: false,
     },
     stroke: {
-      curve: 'straight',
+      curve: 'smooth',
     },
   }
 

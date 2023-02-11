@@ -41,38 +41,39 @@ const handleCharacter = (event: KeyboardEvent) => {
       // Don't handle other special characters
       if (event.key.length > 1) return
 
+      const performanceNow = performance.now()
+      const isStart = attempt.finalText.length === 0
+      const isEnd = attempt.finalText.length === quote().length - 1
+
       // Handle start
-      if (attempt.finalText.length === 0) {
+      if (isStart) {
         attempt.state = AttemptStates.started
-        attempt.measurements.startTime = performance.now()
+        attempt.measurements.startTime = performanceNow
       }
 
       // Handle end
-      if (attempt.finalText.length >= quote().length - 1) {
+      if (isEnd) {
         attempt.state = AttemptStates.completed
-        attempt.measurements.endTime = performance.now()
+        attempt.measurements.endTime = performanceNow
       }
 
       // Handle word
-      attempt = handleWordMeasurement(attempt)
-
-      // Handle standardized timestamps
-      if (
-        attempt.finalText.length % CharactersPerWord === 0 ||
-        attempt.finalText.length >= quote().length - 1
-      ) {
-        attempt.measurements.timestamps.set(attempt.finalText.length, performance.now())
-      }
+      attempt = handleWordMeasurement(attempt, performanceNow)
 
       attempt.finalText = attempt.finalText + event.key
       attempt.allText = attempt.allText + event.key
+
+      // Handle standardized timestamps
+      if (attempt.finalText.length % CharactersPerWord === 0 || isEnd) {
+        attempt.measurements.timestamps.set(attempt.finalText.length, performanceNow)
+      }
 
       return attempt
     })
   )
 }
 
-const handleWordMeasurement = (attempt: Attempt): Attempt => {
+const handleWordMeasurement = (attempt: Attempt, performanceNow: number): Attempt => {
   const currentIndex = attempt.finalText.length
   const currentWord = quote().words.find((word) => word.has(currentIndex))
   const currentMeasurement = attempt.measurements.words.find(
@@ -86,7 +87,7 @@ const handleWordMeasurement = (attempt: Attempt): Attempt => {
       startIndex: currentIndex,
       endIndex: currentIndex + currentWord.size - 1,
       word: mapToString(currentWord),
-      startTime: performance.now(),
+      startTime: performanceNow,
       endTime: null,
     })
   }
@@ -94,7 +95,7 @@ const handleWordMeasurement = (attempt: Attempt): Attempt => {
   // Is the last character
   if (!currentWord.has(currentIndex + 1)) {
     attempt.measurements.words = attempt.measurements.words.map((word) =>
-      word.endIndex === currentIndex ? { ...word, endTime: performance.now() } : word
+      word.endIndex === currentIndex ? { ...word, endTime: performanceNow } : word
     )
   }
 
