@@ -64,7 +64,7 @@ const createOptions = (measurements: Measurements) => {
           show: false,
         },
       },
-      borderColor: catppuccinColor().text.hex,
+      borderColor: catppuccinColor().overlay0.hex,
     },
     dataLabels: {
       enabled: false,
@@ -81,11 +81,11 @@ const createOptions = (measurements: Measurements) => {
       width: 3,
     },
     markers: {
-      size: 4,
+      size: 5,
       strokeColors: undefined,
       strokeWidth: 0,
     },
-    colors: [catppuccinColor().peach.hex, catppuccinColor().blue.hex],
+    colors: [catppuccinColor().overlay2.hex, catppuccinColor().mauve.hex],
     xaxis: {
       tickAmount: 10,
       labels: {
@@ -126,19 +126,30 @@ const createOptions = (measurements: Measurements) => {
     },
     tooltip: {
       custom: ({ series, dataPointIndex, w }) => {
+        const showSeries0 = series.at(0)?.[dataPointIndex] != null
+        const showSeries1 = series.at(1)?.[dataPointIndex] != null
         return `
           <div class="bg-ctp-surface2 rounded px-4 py-2 !border-ctp-red">
             <h3 class="font-semibold mb-2">At ${
               w.globals.initialSeries.at(0)?.data.at(dataPointIndex)?.x
-            } characters</h3>
-            <div class="flex gap-x-2 items-center">
-              <div class="bg-ctp-peach rounded-full w-4 h-4"></div>
-              <p>Current Wpm: ${series[0][dataPointIndex].toFixed(1)}</p>
-            </div>
-            <div class="flex gap-x-2 items-center">
-              <div class="bg-ctp-blue rounded-full w-4 h-4"></div>
-              <p>Total Wpm: ${series[1][dataPointIndex].toFixed(1)}</p>
-            </div>
+            } characters
+            </h3>
+            ${
+              showSeries0
+                ? `<div class="flex gap-x-2 items-center">
+                     <div class="bg-ctp-overlay2 rounded-full w-4 h-4"></div>
+                     <p>Current Wpm: ${series.at(0)?.[dataPointIndex]?.toFixed(1)}</p>
+                   </div>`
+                : ''
+            }
+            ${
+              showSeries1
+                ? `<div class="flex gap-x-2 items-center">
+                     <div class="bg-ctp-mauve rounded-full w-4 h-4"></div>
+                     <p>Total Wpm: ${series.at(1)?.[dataPointIndex]?.toFixed(1)}</p>
+                   </div>`
+                : ''
+            }
           </div>
         `
       },

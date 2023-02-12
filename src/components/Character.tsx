@@ -9,9 +9,9 @@ const defaultClasses = `
 `
 
 const characterClasses: Record<CharacterMode, string> = {
-  default: 'text-ctp-text decoration-ctp-yellow',
-  correct: 'text-ctp-yellow bg-ctp-surface-2',
-  incorrect: 'text-ctp-red bg-ctp-peach',
+  default: 'text-ctp-text decoration-ctp-mauve',
+  correct: 'text-ctp-mauve bg-ctp-mauve/20',
+  incorrect: 'text-ctp-red bg-ctp-red/40',
 }
 
 interface Props {
