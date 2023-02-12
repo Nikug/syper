@@ -40,7 +40,6 @@ export const StatisticsContainer: Component<Props> = (props) => {
 
   return (
     <div class="h-full">
-      <h1 class="font-bold text-4xl mt-8">Results</h1>
       <div class="w-full flex justify-evenly mt-4">
         <LabeledValue value={getWordsPerMinute()?.toFixed(1)} label="Words per minute" />
         <LabeledValue value={`${(getAccuracy() * 100).toFixed(1)}%`} label="Accuracy" />

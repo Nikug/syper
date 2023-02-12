@@ -60,3 +60,11 @@ export const wordsPerMinute = (characters: number, duration: number): number | n
 
   return words / durationInMinutes
 }
+
+/*
+ * Capitalizes the given text by switching the first character to uppercase.
+ * @param {string} text - Text to capitalize
+ */
+export const capitalize = (text: string): string => {
+  return text[0]?.toUpperCase() + text.substring(1)
+}

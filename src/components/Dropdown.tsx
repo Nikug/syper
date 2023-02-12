@@ -6,13 +6,13 @@ export interface Option<K, V> {
   value: V
 }
 
-interface Props<K extends string | number, V> {
+interface Props<K, V extends string | number> {
   value: string
   options: Option<K, V>[]
   onSelect?: (option: Option<K, V>) => void
 }
 
-export const Dropdown = <K extends string | number, V>(props: Props<K, V>) => {
+export const Dropdown = <K, V extends string | number>(props: Props<K, V>) => {
   let dropdownRef: HTMLDivElement | undefined
   let panelRef: HTMLDivElement | undefined
   const [open, setOpen] = createSignal(false)
@@ -47,7 +47,7 @@ export const Dropdown = <K extends string | number, V>(props: Props<K, V>) => {
 
   return (
     <div ref={dropdownRef} onClick={() => setOpen(!open())} class="cursor-pointer">
-      <p>{props.value}</p>
+      <p class="px-4 py-2">{props.value}</p>
       <Show when={open()}>
         <Portal mount={document.getElementById('root') ?? undefined}>
           <div
@@ -61,7 +61,7 @@ export const Dropdown = <K extends string | number, V>(props: Props<K, V>) => {
                   class="hover:bg-ctp-overlay1 px-4 py-1 cursor-pointer"
                   onClick={() => handleSelect(option)}
                 >
-                  {option.key.toString()}
+                  {option.value}
                 </div>
               )}
             </For>

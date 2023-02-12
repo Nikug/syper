@@ -18,7 +18,7 @@ import {
   Theme,
   Word,
 } from './types'
-import { getRandomFromArray } from './util'
+import { capitalize, getRandomFromArray } from './util'
 
 const quotes = quotesJson as QuotesJson
 export const getRandomQuote = () => getRandomFromArray(quotes.quotes)
@@ -81,17 +81,23 @@ const App: Component = () => {
 
   return (
     <div class="w-screen min-h-screen bg-ctp-base text-ctp-text">
-      <Dropdown
-        value={catppuccinFlavour().flavour}
-        options={Object.entries(catppuccinFlavours).map(([key, value]) => ({
-          key: key as CatppuccinFlavour,
-          value,
-        }))}
-        onSelect={(option) => setTheme(option.key)}
-      />
-      <Show when={attempt.state !== AttemptStates.completed}>
-        <div class="grid grid-rows-3 h-screen justify-center">
-          <div class="row-span-1 overflow-scroll max-w-5xl px-16 h-48 my-auto">
+      <div class="grid grid-rows-5 h-screen justify-center">
+        <div class="row-span-1 flex flex-col items-center">
+          <h1 class="text-5xl font-bold mt-4 mb-4">Solid typer</h1>
+          <Dropdown
+            value={capitalize(catppuccinFlavour().flavour)}
+            options={Object.entries(catppuccinFlavours).map(([key]) => ({
+              key: key as CatppuccinFlavour,
+              value: capitalize(key),
+            }))}
+            onSelect={(option) => setTheme(option.key)}
+          />
+          <Show when={attempt.state === AttemptStates.completed}>
+            <h2 class="text-4xl font-bold mt-auto mb-4">Your score</h2>
+          </Show>
+        </div>
+        <Show when={attempt.state !== AttemptStates.completed}>
+          <div class="row-span-3 overflow-scroll max-w-5xl px-16 h-48 my-auto">
             <div class="h-8">
               <QuoteInformation />
             </div>
@@ -104,15 +110,15 @@ const App: Component = () => {
               </Show>
             </div>
           </div>
-        </div>
-      </Show>
-      <Show when={attempt.state === AttemptStates.completed}>
-        <div class="flex justify-center">
-          <div class="max-w-5xl px-16">
-            <StatisticsContainer attempt={attempt} quote={quote()} />
+        </Show>
+        <Show when={attempt.state === AttemptStates.completed}>
+          <div class="row-span-4 flex justify-center">
+            <div class="max-w-5xl px-16">
+              <StatisticsContainer attempt={attempt} quote={quote()} />
+            </div>
           </div>
-        </div>
-      </Show>
+        </Show>
+      </div>
     </div>
   )
 }
