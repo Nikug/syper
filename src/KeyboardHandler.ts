@@ -1,5 +1,5 @@
 import { produce } from 'solid-js/store'
-import { attempt, quote, resetAttempt, setAttempt } from './App'
+import { attempt, nextAttempt, quote, restartAttempt, setAttempt } from './App'
 import { CharactersPerWord } from './constants'
 import { Attempt, AttemptStates } from './types'
 import { mapToString } from './util'
@@ -12,7 +12,12 @@ const handleKeyboard = (event: KeyboardEvent) => {
   }
 
   if (event.key === 'Tab') {
-    resetAttempt()
+    nextAttempt()
+    return
+  }
+
+  if (event.key === ' ' && event.ctrlKey) {
+    restartAttempt()
     return
   }
 

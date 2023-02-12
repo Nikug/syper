@@ -54,9 +54,13 @@ export const newAttempt = (): Attempt => ({
   },
 })
 
-export const resetAttempt = () => {
+export const nextAttempt = () => {
   setAttempt(newAttempt())
   setQuote(initQuote())
+}
+
+export const restartAttempt = () => {
+  setAttempt(newAttempt())
 }
 
 export const [quote, setQuote] = createSignal<QuoteWithWords>(initQuote())
@@ -88,7 +92,7 @@ const App: Component = () => {
     <div class="w-screen min-h-screen bg-ctp-base text-ctp-text">
       <div class="grid grid-rows-5 min-h-screen justify-center">
         <div class="row-span-1 flex flex-col items-center">
-          <h1 class="text-5xl font-bold pt-4 pb-4">Solid typer</h1>
+          <h1 class="text-5xl font-bold pt-4 pb-4">Solid Typist</h1>
           <Dropdown
             value={capitalize(catppuccinFlavour().flavour)}
             options={Object.entries(catppuccinFlavours).map(([key]) => ({
