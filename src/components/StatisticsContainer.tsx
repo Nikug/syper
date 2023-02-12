@@ -42,7 +42,7 @@ export const StatisticsContainer: Component<Props> = (props) => {
         <LabeledValue value={`${(getCorrectedness() * 100).toFixed(1)}%`} label="Correctedness" />
       </div>
       <div class="mt-4">
-        <WpmChart measurements={props.attempt.measurements} />
+        <WpmChart measurements={props.attempt.measurements} state={props.attempt.state} />
       </div>
       <h2 class="font-bold text-2xl mt-8 text-center">Words per minute by words</h2>
       <div class="mt-4">

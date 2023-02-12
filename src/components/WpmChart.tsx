@@ -1,19 +1,20 @@
 import { Component, createEffect, createSignal, on } from 'solid-js'
 import ApexCharts, { ApexOptions } from 'apexcharts'
 import { variants } from '@catppuccin/palette'
-import { Measurements } from '../types'
+import { AttemptState, Measurements } from '../types'
 import { wordsPerMinute } from '../util'
-import { attempt, catppuccinFlavour } from '../App'
+import { catppuccinFlavour } from '../App'
 import './WpmChart.css'
 
 interface Props {
   measurements: Measurements
+  state: AttemptState
 }
 
 export const WpmChart: Component<Props> = (props) => {
   let element: HTMLDivElement | undefined
   const [chart, setChart] = createSignal<ApexCharts | null>(null)
-  const getState = () => attempt.state
+  const getState = () => props.state
 
   createEffect(
     on([getState, catppuccinFlavour], () => {
