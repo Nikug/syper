@@ -144,7 +144,9 @@ const createOptions = (measurements: Measurements) => {
               showSeries0
                 ? `<div class="flex gap-x-2 items-center">
                      <div class="bg-ctp-overlay2 rounded-full w-4 h-4"></div>
-                     <p>Current Wpm: ${series.at(0)?.[dataPointIndex]?.toFixed(1)}</p>
+                     <p>Current Wpm: <span class="font-bold">${series
+                       .at(0)
+                       ?.[dataPointIndex]?.toFixed(1)}</span></p>
                    </div>`
                 : ''
             }
@@ -152,7 +154,9 @@ const createOptions = (measurements: Measurements) => {
               showSeries1
                 ? `<div class="flex gap-x-2 items-center">
                      <div class="bg-ctp-mauve rounded-full w-4 h-4"></div>
-                     <p>Total Wpm: ${series.at(1)?.[dataPointIndex]?.toFixed(1)}</p>
+                     <p>Total Wpm: <span class="font-bold">${series
+                       .at(1)
+                       ?.[dataPointIndex]?.toFixed(1)}</span></p>
                    </div>`
                 : ''
             }

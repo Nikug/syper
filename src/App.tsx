@@ -6,6 +6,7 @@ import { ProgressBar } from './components/ProgressBar'
 import { QuoteInformation } from './components/QuoteInformation'
 import { StatisticsContainer } from './components/StatisticsContainer'
 import { TextContainer } from './components/TextContainer'
+import { ThemeStorageKey } from './constants'
 import { CleanupKeyboard, SetupKeyboard } from './KeyboardHandler'
 import {
   Attempt,
@@ -72,18 +73,25 @@ export const setTheme = (flavour: CatppuccinFlavour): Theme =>
   setCatppuccinFlavour({ flavour, class: `ctp-${flavour}` })
 
 const App: Component = () => {
-  onMount(() => SetupKeyboard())
+  onMount(() => {
+    const storedTheme = localStorage.getItem(ThemeStorageKey)
+    if (storedTheme && Object.keys(catppuccinFlavours).includes(storedTheme)) {
+      setTheme(storedTheme as CatppuccinFlavour)
+    }
+    SetupKeyboard()
+  })
   onCleanup(() => CleanupKeyboard())
 
   createEffect(() => {
     document.body.className = catppuccinFlavour().class
+    localStorage.setItem(ThemeStorageKey, catppuccinFlavour().flavour)
   })
 
   return (
     <div class="w-screen min-h-screen bg-ctp-base text-ctp-text">
-      <div class="grid grid-rows-5 h-screen justify-center">
+      <div class="grid grid-rows-5 min-h-screen justify-center">
         <div class="row-span-1 flex flex-col items-center">
-          <h1 class="text-5xl font-bold mt-4 mb-4">Solid typer</h1>
+          <h1 class="text-5xl font-bold pt-4 pb-4">Solid typer</h1>
           <Dropdown
             value={capitalize(catppuccinFlavour().flavour)}
             options={Object.entries(catppuccinFlavours).map(([key]) => ({
