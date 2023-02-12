@@ -6,7 +6,15 @@ import { QuoteInformation } from './components/QuoteInformation'
 import { StatisticsContainer } from './components/StatisticsContainer'
 import { TextContainer } from './components/TextContainer'
 import { CleanupKeyboard, SetupKeyboard } from './KeyboardHandler'
-import { Attempt, AttemptStates, QuotesJson, QuoteWithWords, Word } from './types'
+import {
+  Attempt,
+  AttemptStates,
+  CatppuccinFlavour,
+  QuotesJson,
+  QuoteWithWords,
+  Theme,
+  Word,
+} from './types'
 import { getRandomFromArray } from './util'
 
 const quotes = quotesJson as QuotesJson
@@ -50,19 +58,15 @@ export const resetAttempt = () => {
   setQuote(initQuote())
 }
 
-export const catppuccinFlavours = {
-  latte: 'ctp-latte',
-  frappe: 'ctp-frappe',
-  macchiato: 'ctp-macchiato',
-  mocha: 'ctp-mocha',
-} as const
-export type CatppuccinFlavour = (typeof catppuccinFlavours)[keyof typeof catppuccinFlavours]
-
 export const [quote, setQuote] = createSignal<QuoteWithWords>(initQuote())
-export const [catppuccinFlavor, setCatppuccinFlavor] = createSignal<CatppuccinFlavour>(
-  catppuccinFlavours.mocha
-)
 export const [attempt, setAttempt] = createStore<Attempt>(newAttempt())
+
+export const [catppuccinFlavour, setCatppuccinFlavour] = createSignal<Theme>({
+  flavour: 'mocha',
+  class: 'ctp-mocha',
+})
+export const setTheme = (flavour: CatppuccinFlavour): Theme =>
+  setCatppuccinFlavour({ flavour, class: `ctp-${flavour}` })
 
 const App: Component = () => {
   onMount(() => SetupKeyboard())
