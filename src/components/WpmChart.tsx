@@ -4,6 +4,7 @@ import { variants } from '@catppuccin/palette'
 import { Measurements } from '../types'
 import { wordsPerMinute } from '../util'
 import { catppuccinFlavour } from '../App'
+import './WpmChart.css'
 
 interface Props {
   measurements: Measurements
@@ -52,6 +53,10 @@ const createOptions = (measurements: Measurements) => {
       animations: {
         enabled: false,
       },
+      toolbar: {
+        show: false,
+      },
+      fontFamily: 'inherit',
     },
     grid: {
       xaxis: {
@@ -66,6 +71,7 @@ const createOptions = (measurements: Measurements) => {
     },
     legend: {
       position: 'top',
+      fontSize: 'inherit',
       labels: {
         colors: catppuccinColor().text.hex,
       },
@@ -97,6 +103,8 @@ const createOptions = (measurements: Measurements) => {
         text: 'Characters written',
         style: {
           color: catppuccinColor().text.hex,
+          fontSize: 'inherit',
+          fontWeight: 'normal',
         },
       },
     },
@@ -111,7 +119,28 @@ const createOptions = (measurements: Measurements) => {
         text: 'Words per minute',
         style: {
           color: catppuccinColor().text.hex,
+          fontSize: 'inherit',
+          fontWeight: 'normal',
         },
+      },
+    },
+    tooltip: {
+      custom: ({ series, dataPointIndex, w }) => {
+        return `
+          <div class="bg-ctp-surface2 rounded px-4 py-2 !border-ctp-red">
+            <h3 class="font-semibold mb-2">At ${
+              w.globals.initialSeries.at(0)?.data.at(dataPointIndex)?.x
+            } characters</h3>
+            <div class="flex gap-x-2 items-center">
+              <div class="bg-ctp-peach rounded-full w-4 h-4"></div>
+              <p>Current Wpm: ${series[0][dataPointIndex].toFixed(1)}</p>
+            </div>
+            <div class="flex gap-x-2 items-center">
+              <div class="bg-ctp-blue rounded-full w-4 h-4"></div>
+              <p>Total Wpm: ${series[1][dataPointIndex].toFixed(1)}</p>
+            </div>
+          </div>
+        `
       },
     },
   }
