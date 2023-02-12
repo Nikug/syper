@@ -1,6 +1,7 @@
-import { Component, createSignal, onCleanup, onMount, Show } from 'solid-js'
+import { Component, createEffect, createSignal, onCleanup, onMount, Show } from 'solid-js'
 import { createStore } from 'solid-js/store'
 import quotesJson from './assets/quotes.json'
+import { Dropdown } from './components/Dropdown'
 import { ProgressBar } from './components/ProgressBar'
 import { QuoteInformation } from './components/QuoteInformation'
 import { StatisticsContainer } from './components/StatisticsContainer'
@@ -10,6 +11,8 @@ import {
   Attempt,
   AttemptStates,
   CatppuccinFlavour,
+  CatppuccinFlavourClass,
+  catppuccinFlavours,
   QuotesJson,
   QuoteWithWords,
   Theme,
@@ -72,34 +75,44 @@ const App: Component = () => {
   onMount(() => SetupKeyboard())
   onCleanup(() => CleanupKeyboard())
 
+  createEffect(() => {
+    document.body.className = catppuccinFlavour().class
+  })
+
   return (
-    <div class={`ctp-mocha`}>
-      <div class="w-screen min-h-screen bg-ctp-base text-ctp-text">
-        <Show when={attempt.state !== AttemptStates.completed}>
-          <div class="grid grid-rows-3 h-screen justify-center">
-            <div class="row-start-2 row-end-2 overflow-scroll max-w-5xl px-16 h-48 my-auto">
-              <div class="h-8">
-                <QuoteInformation />
-              </div>
-              <div class="h-32 overflow-hidden">
-                <TextContainer attempt={attempt} quote={quote()} />
-              </div>
-              <div class="h-8">
-                <Show when={attempt.state !== AttemptStates.completed}>
-                  <ProgressBar />
-                </Show>
-              </div>
+    <div class="w-screen min-h-screen bg-ctp-base text-ctp-text">
+      <Dropdown
+        value={catppuccinFlavour().flavour}
+        options={Object.entries(catppuccinFlavours).map(([key, value]) => ({
+          key: key as CatppuccinFlavour,
+          value,
+        }))}
+        onSelect={(option) => setTheme(option.key)}
+      />
+      <Show when={attempt.state !== AttemptStates.completed}>
+        <div class="grid grid-rows-3 h-screen justify-center">
+          <div class="row-span-1 overflow-scroll max-w-5xl px-16 h-48 my-auto">
+            <div class="h-8">
+              <QuoteInformation />
+            </div>
+            <div class="h-32 overflow-hidden">
+              <TextContainer attempt={attempt} quote={quote()} />
+            </div>
+            <div class="h-8">
+              <Show when={attempt.state !== AttemptStates.completed}>
+                <ProgressBar />
+              </Show>
             </div>
           </div>
-        </Show>
-        <Show when={attempt.state === AttemptStates.completed}>
-          <div class="flex justify-center">
-            <div class="max-w-5xl px-16">
-              <StatisticsContainer attempt={attempt} quote={quote()} />
-            </div>
+        </div>
+      </Show>
+      <Show when={attempt.state === AttemptStates.completed}>
+        <div class="flex justify-center">
+          <div class="max-w-5xl px-16">
+            <StatisticsContainer attempt={attempt} quote={quote()} />
           </div>
-        </Show>
-      </div>
+        </div>
+      </Show>
     </div>
   )
 }

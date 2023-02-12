@@ -10,7 +10,7 @@ const defaultClasses = `
 
 const characterClasses: Record<CharacterMode, string> = {
   default: 'text-ctp-text decoration-ctp-mauve',
-  correct: 'text-ctp-mauve bg-ctp-mauve/20',
+  correct: 'text-ctp-mauve bg-ctp-mauve/10',
   incorrect: 'text-ctp-red bg-ctp-red/40',
 }
 

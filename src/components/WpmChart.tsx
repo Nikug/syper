@@ -18,7 +18,7 @@ export const WpmChart: Component<Props> = (props) => {
     chart.render()
   })
 
-  return <div ref={element} class="paper" />
+  return <div ref={element} class="paper py-4 pr-4" />
 }
 
 const catppuccinColor = () => variants[catppuccinFlavour().flavour]
@@ -99,6 +99,9 @@ const createOptions = (measurements: Measurements) => {
       crosshairs: {
         show: false,
       },
+      axisTicks: {
+        color: catppuccinColor().overlay0.hex,
+      },
       title: {
         text: 'Characters written',
         style: {
@@ -114,6 +117,9 @@ const createOptions = (measurements: Measurements) => {
           colors: catppuccinColor().text.hex,
         },
         formatter: (value: number) => value?.toFixed(),
+      },
+      axisTicks: {
+        color: catppuccinColor().overlay0.hex,
       },
       title: {
         text: 'Words per minute',
