@@ -11,8 +11,8 @@ export const Header: Component = () => {
   return (
     <div
       class={clsx(
-        'flex flex-col items-center transition-opacity duration-300',
-        isOngoingAttempt() && 'opacity-25'
+        'flex flex-col items-center transition-all duration-300',
+        isOngoingAttempt() && 'blur-md opacity-50'
       )}
     >
       <h1 class="text-5xl font-bold pt-4 pb-4">Solid Typist</h1>
