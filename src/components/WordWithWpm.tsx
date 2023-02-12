@@ -13,7 +13,7 @@ export const WordWithWpm: Component<Props> = (props) => {
   }
 
   return (
-    <div class="text-center">
+    <div class="text-start">
       <p class="text-sm h-5">{getWordWordsPerMinute(props.word)?.toFixed(1)}</p>
       <p class="text-xl font-bold leading-tight">{props.word.word}</p>
     </div>
