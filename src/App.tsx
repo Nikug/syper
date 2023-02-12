@@ -1,7 +1,7 @@
 import { Component, createEffect, createSignal, onCleanup, onMount, Show } from 'solid-js'
 import { createStore } from 'solid-js/store'
 import quotesJson from './assets/quotes.json'
-import { Dropdown } from './components/Dropdown'
+import { Header } from './components/Header'
 import { ProgressBar } from './components/ProgressBar'
 import { QuoteInformation } from './components/QuoteInformation'
 import { StatisticsContainer } from './components/StatisticsContainer'
@@ -18,7 +18,7 @@ import {
   Theme,
   Word,
 } from './types'
-import { capitalize, getRandomFromArray } from './util'
+import { getRandomFromArray } from './util'
 
 const quotes = quotesJson as QuotesJson
 export const getRandomQuote = () => getRandomFromArray(quotes.quotes)
@@ -91,19 +91,8 @@ const App: Component = () => {
   return (
     <div class="w-screen min-h-screen bg-ctp-base text-ctp-text">
       <div class="grid grid-rows-5 min-h-screen justify-center">
-        <div class="row-span-1 flex flex-col items-center">
-          <h1 class="text-5xl font-bold pt-4 pb-4">Solid Typist</h1>
-          <Dropdown
-            value={capitalize(catppuccinFlavour().flavour)}
-            options={Object.entries(catppuccinFlavours).map(([key]) => ({
-              key: key as CatppuccinFlavour,
-              value: capitalize(key),
-            }))}
-            onSelect={(option) => setTheme(option.key)}
-          />
-          <Show when={attempt.state === AttemptStates.completed}>
-            <h2 class="text-4xl font-bold mt-auto mb-4">Your score</h2>
-          </Show>
+        <div class="row-span-1">
+          <Header />
         </div>
         <Show when={attempt.state !== AttemptStates.completed}>
           <div class="row-span-3 overflow-scroll max-w-5xl px-16 h-48 my-auto">
