@@ -17,7 +17,7 @@ export const WpmChart: Component<Props> = (props) => {
     chart.render()
   })
 
-  return <div ref={element} class="rounded overflow-hidden bg-ctp-surface0" />
+  return <div ref={element} class="paper" />
 }
 
 const catppuccinColor = () => variants[catppuccinFlavour().flavour]

@@ -1,3 +1,9 @@
 @tailwind base;
-@taildwind components;
+@tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .paper {
+    @apply rounded bg-ctp-surface0;
+  }
+}
