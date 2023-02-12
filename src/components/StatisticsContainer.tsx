@@ -34,10 +34,6 @@ export const StatisticsContainer: Component<Props> = (props) => {
     )
   }
 
-  const wordMeasurements = () => {
-    return props.attempt.measurements.words.filter((word) => word.word !== ' ')
-  }
-
   return (
     <div class="h-full">
       <div class="w-full flex justify-evenly mt-4">
@@ -51,7 +47,7 @@ export const StatisticsContainer: Component<Props> = (props) => {
       <h2 class="font-bold text-2xl mt-8">Words per minute by words:</h2>
       <div class="mt-4">
         <div class="flex flex-wrap gap-x-4 gap-y-4 w-full paper p-4">
-          <For each={wordMeasurements()}>{(word) => <WordWithWpm word={word} />}</For>
+          <For each={props.attempt.measurements.words}>{(word) => <WordWithWpm word={word} />}</For>
         </div>
       </div>
     </div>

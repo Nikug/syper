@@ -12,7 +12,6 @@ import {
   Attempt,
   AttemptStates,
   CatppuccinFlavour,
-  CatppuccinFlavourClass,
   catppuccinFlavours,
   QuotesJson,
   QuoteWithWords,
@@ -28,11 +27,9 @@ const splitParagraph = (text: string): Word[] => {
   const words: Word[] = []
   let word: Word = new Map()
   for (let i = 0, limit = text.length; i < limit; i++) {
-    if (text[i] !== ' ') {
-      word.set(i, text[i])
-    } else {
+    word.set(i, text[i])
+    if (text[i] === ' ') {
       words.push(word)
-      words.push(new Map().set(i, ' '))
       word = new Map()
     }
   }
