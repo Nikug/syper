@@ -50,38 +50,52 @@ export const resetAttempt = () => {
   setQuote(initQuote())
 }
 
+export const catppuccinFlavours = {
+  latte: 'ctp-latte',
+  frappe: 'ctp-frappe',
+  macchiato: 'ctp-macchiato',
+  mocha: 'ctp-mocha',
+} as const
+export type CatppuccinFlavour = (typeof catppuccinFlavours)[keyof typeof catppuccinFlavours]
+
 export const [quote, setQuote] = createSignal<QuoteWithWords>(initQuote())
+export const [catppuccinFlavor, setCatppuccinFlavor] = createSignal<CatppuccinFlavour>(
+  catppuccinFlavours.mocha
+)
 export const [attempt, setAttempt] = createStore<Attempt>(newAttempt())
 
 const App: Component = () => {
   onMount(() => SetupKeyboard())
   onCleanup(() => CleanupKeyboard())
+
   return (
-    <div class="w-screen min-h-screen bg-ctp-base text-ctp-text">
-      <Show when={attempt.state !== AttemptStates.completed}>
-        <div class="grid grid-rows-3 h-screen justify-center">
-          <div class="row-start-2 row-end-2 overflow-scroll max-w-5xl px-16 h-48 my-auto">
-            <div class="h-8">
-              <QuoteInformation />
-            </div>
-            <div class="h-32 overflow-hidden">
-              <TextContainer attempt={attempt} quote={quote()} />
-            </div>
-            <div class="h-8">
-              <Show when={attempt.state !== AttemptStates.completed}>
-                <ProgressBar />
-              </Show>
+    <div class={`ctp-mocha`}>
+      <div class="w-screen min-h-screen bg-ctp-base text-ctp-text">
+        <Show when={attempt.state !== AttemptStates.completed}>
+          <div class="grid grid-rows-3 h-screen justify-center">
+            <div class="row-start-2 row-end-2 overflow-scroll max-w-5xl px-16 h-48 my-auto">
+              <div class="h-8">
+                <QuoteInformation />
+              </div>
+              <div class="h-32 overflow-hidden">
+                <TextContainer attempt={attempt} quote={quote()} />
+              </div>
+              <div class="h-8">
+                <Show when={attempt.state !== AttemptStates.completed}>
+                  <ProgressBar />
+                </Show>
+              </div>
             </div>
           </div>
-        </div>
-      </Show>
-      <Show when={attempt.state === AttemptStates.completed}>
-        <div class="flex justify-center">
-          <div class="max-w-5xl px-16">
-            <StatisticsContainer attempt={attempt} quote={quote()} />
+        </Show>
+        <Show when={attempt.state === AttemptStates.completed}>
+          <div class="flex justify-center">
+            <div class="max-w-5xl px-16">
+              <StatisticsContainer attempt={attempt} quote={quote()} />
+            </div>
           </div>
-        </div>
-      </Show>
+        </Show>
+      </div>
     </div>
   )
 }

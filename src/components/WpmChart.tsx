@@ -52,6 +52,11 @@ const createOptions = (measurements: Measurements) => {
     stroke: {
       curve: 'smooth',
     },
+    grid: {
+      row: {
+        colors: [],
+      },
+    },
   }
 
   return options

@@ -1,5 +1,4 @@
 import { Component, For } from 'solid-js'
-import { attempt, quote } from '../App'
 import { Attempt, QuoteWithWords } from '../types'
 import { numberOfMatchingItems, wordsPerMinute } from '../util'
 import { LabeledValue } from './LabeledValue'
