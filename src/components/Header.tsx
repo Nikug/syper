@@ -15,7 +15,7 @@ export const Header: Component = () => {
         isOngoingAttempt() && 'blur-md opacity-50'
       )}
     >
-      <h1 class="text-5xl font-bold pt-4 pb-4">Solid Typist</h1>
+      <h1 class="text-5xl font-bold pt-8 pb-4">Solid Typist</h1>
       <Dropdown
         value={capitalize(catppuccinFlavour().flavour)}
         options={Object.entries(catppuccinFlavours).map(([key]) => ({
@@ -24,7 +24,7 @@ export const Header: Component = () => {
         }))}
         onSelect={(option) => setTheme(option.key)}
       />
-      <div class="flex mt-4 text-sm">
+      <div class="flex mt-4 mb-4 text-sm">
         <p class="px-4">
           Next: <span class="font-bold">Tab</span>
         </p>
