@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { Component } from 'solid-js'
-import { quote, attempt } from '../App'
+import { quote, attempt } from '../StateManager'
 
 const gradient = 'bg-gradient-to-r from-transparent via-ctp-blue to-ctp-mauve'
 

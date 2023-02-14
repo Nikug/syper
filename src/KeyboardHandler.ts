@@ -7,7 +7,7 @@ import {
   quote,
   restartAttempt,
   setAttempt,
-} from './App'
+} from './StateManager'
 import { CharactersPerWord } from './constants'
 import { Attempt, AttemptStates } from './types'
 import { mapToString } from './util'

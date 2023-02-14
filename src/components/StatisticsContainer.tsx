@@ -1,4 +1,5 @@
 import { Component, For } from 'solid-js'
+import { animationState } from '../StateManager'
 import { Attempt, QuoteWithWords } from '../types'
 import { numberOfMatchingItems, wordsPerMinute } from '../util'
 import { LabeledValue } from './LabeledValue'
@@ -42,7 +43,7 @@ export const StatisticsContainer: Component<Props> = (props) => {
         <LabeledValue value={`${(getCorrectedness() * 100).toFixed(1)}%`} label="Correctedness" />
       </div>
       <div class="mt-4">
-        <WpmChart measurements={props.attempt.measurements} state={props.attempt.state} />
+        <WpmChart measurements={props.attempt.measurements} state={animationState().resultsState} />
       </div>
       <h2 class="font-bold text-2xl mt-8 text-center">Words per minute by words</h2>
       <div class="mt-4">

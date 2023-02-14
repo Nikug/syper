@@ -1,5 +1,5 @@
 import { Component } from 'solid-js'
-import { quote } from '../App'
+import { quote } from '../StateManager'
 
 export const QuoteInformation: Component = () => {
   return (

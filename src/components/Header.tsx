@@ -1,6 +1,6 @@
 import { clsx } from 'clsx'
 import { Component, Show } from 'solid-js'
-import { attempt, catppuccinFlavour, setTheme } from '../App'
+import { attempt, catppuccinFlavour, setTheme } from '../StateManager'
 import { AttemptStates, CatppuccinFlavour, catppuccinFlavours } from '../types'
 import { capitalize } from '../util'
 import { Dropdown } from './Dropdown'
