@@ -1,6 +1,6 @@
 import { clsx } from 'clsx'
 import { Component, Show } from 'solid-js'
-import { attempt, catppuccinFlavour, setTheme } from '../StateManager'
+import { attempt, catppuccinFlavour, quote, setTheme } from '../StateManager'
 import { AttemptStates, CatppuccinFlavour, catppuccinFlavours } from '../types'
 import { capitalize } from '../util'
 import { Dropdown } from './Dropdown'
@@ -11,7 +11,7 @@ export const Header: Component = () => {
   return (
     <div
       class={clsx(
-        'flex flex-col items-center transition-all duration-300',
+        'h-full flex flex-col items-center transition-all duration-300',
         isOngoingAttempt() && 'blur-md opacity-50'
       )}
     >
@@ -25,7 +25,10 @@ export const Header: Component = () => {
         onSelect={(option) => setTheme(option.key)}
       />
       <Show when={attempt.state === AttemptStates.completed}>
-        <h2 class="text-4xl font-bold mt-auto mb-4">Your score</h2>
+        <div class="mt-auto mb-4 text-center">
+          <span>source:</span>
+          <h2 class="text-4xl font-bold">{quote().source}</h2>
+        </div>
       </Show>
     </div>
   )

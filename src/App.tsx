@@ -41,7 +41,7 @@ const App: Component = () => {
               AnimationDurationClass
             )}
           >
-            <div class="overflow-scroll max-w-5xl px-16 h-48">
+            <div class="overflow-scroll max-w-7xl px-16 h-48">
               <div class="h-8">
                 <QuoteInformation />
               </div>
@@ -65,7 +65,7 @@ const App: Component = () => {
             )}
           >
             <div class="flex justify-center">
-              <div class="max-w-5xl px-16">
+              <div class="max-w-7xl px-16">
                 <StatisticsContainer attempt={attempt} quote={quote()} />
               </div>
             </div>
