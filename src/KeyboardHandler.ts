@@ -47,7 +47,16 @@ const handleCharacter = (event: KeyboardEvent) => {
     produce((attempt) => {
       // Handle backspace
       if (event.key === 'Backspace' && attempt.finalText.length > 0) {
-        attempt.finalText = attempt.finalText.substring(0, attempt.finalText.length - 1)
+        if (event.ctrlKey) {
+          const index = attempt.finalText.length - 1
+          const word = quote().words.find((word) => word.has(index))
+          if (!word) return attempt
+
+          const wordStartIndex = word.entries().next().value[0]
+          attempt.finalText = attempt.finalText.substring(0, wordStartIndex)
+        } else {
+          attempt.finalText = attempt.finalText.substring(0, attempt.finalText.length - 1)
+        }
         return attempt
       }
 
