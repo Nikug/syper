@@ -1,4 +1,13 @@
-import { Component, createEffect, createSignal, onCleanup, onMount, Show } from 'solid-js'
+import { clsx } from 'clsx'
+import {
+  Component,
+  createEffect,
+  createSignal,
+  onCleanup,
+  onMount,
+  Show,
+  startTransition,
+} from 'solid-js'
 import { createStore } from 'solid-js/store'
 import quotesJson from './assets/quotes.json'
 import { Header } from './components/Header'
@@ -9,6 +18,8 @@ import { TextContainer } from './components/TextContainer'
 import { ThemeStorageKey } from './constants'
 import { CleanupKeyboard, SetupKeyboard } from './KeyboardHandler'
 import {
+  AnimationStates,
+  Animation,
   Attempt,
   AttemptStates,
   CatppuccinFlavour,
@@ -18,7 +29,7 @@ import {
   Theme,
   Word,
 } from './types'
-import { getRandomFromArray } from './util'
+import { getRandomFromArray, sleep } from './util'
 
 const quotes = quotesJson as QuotesJson
 export const getRandomQuote = () => getRandomFromArray(quotes.quotes)
@@ -55,8 +66,12 @@ export const newAttempt = (): Attempt => ({
 })
 
 export const nextAttempt = () => {
-  setAttempt(newAttempt())
-  setQuote(initQuote())
+  if (animationState().view === 'results') {
+    startTransition(fromResultsToWriting)
+  } else {
+    setAttempt(newAttempt())
+    setQuote(initQuote())
+  }
 }
 
 export const restartAttempt = () => {
@@ -72,6 +87,33 @@ export const [catppuccinFlavour, setCatppuccinFlavour] = createSignal<Theme>({
 })
 export const setTheme = (flavour: CatppuccinFlavour): Theme =>
   setCatppuccinFlavour({ flavour, class: `ctp-${flavour}` })
+
+export const [animationState, setAnimationState] = createSignal<Animation>({
+  writingState: AnimationStates.shown,
+  resultsState: AnimationStates.hidden,
+  view: 'writing',
+})
+
+export const fromWritingToResults = async () => {
+  setAnimationState({
+    ...animationState(),
+    writingState: AnimationStates.hidden,
+    resultsState: AnimationStates.hidden,
+  })
+  await sleep(200)
+  setAnimationState({ ...animationState(), view: 'results' })
+  await sleep(0)
+  setAnimationState({ ...animationState(), resultsState: AnimationStates.shown })
+}
+export const fromResultsToWriting = async () => {
+  setAnimationState({ ...animationState(), resultsState: AnimationStates.hidden })
+  await sleep(200)
+  setAnimationState({ ...animationState(), view: 'writing' })
+  await sleep(0)
+  setAnimationState({ ...animationState(), writingState: AnimationStates.shown })
+  setAttempt(newAttempt())
+  setQuote(initQuote())
+}
 
 const App: Component = () => {
   onMount(() => {
@@ -94,25 +136,41 @@ const App: Component = () => {
         <div class="row-span-1">
           <Header />
         </div>
-        <Show when={attempt.state !== AttemptStates.completed}>
-          <div class="row-span-3 overflow-scroll max-w-5xl px-16 h-48 my-auto">
-            <div class="h-8">
-              <QuoteInformation />
-            </div>
-            <div class="h-32 overflow-hidden">
-              <TextContainer attempt={attempt} quote={quote()} />
-            </div>
-            <div class="h-8">
-              <Show when={attempt.state !== AttemptStates.completed}>
+        <Show when={animationState().view === 'writing'}>
+          <div
+            class={clsx(
+              animationState().writingState === AnimationStates.shown
+                ? 'opacity-100 blur-none'
+                : 'opacity-0 blur-lg',
+              'transition-opacity duration-200 row-span-3 my-auto'
+            )}
+          >
+            <div class="overflow-scroll max-w-5xl px-16 h-48">
+              <div class="h-8">
+                <QuoteInformation />
+              </div>
+              <div class="h-32 overflow-hidden">
+                <TextContainer attempt={attempt} quote={quote()} />
+              </div>
+              <div class="h-8">
                 <ProgressBar />
-              </Show>
+              </div>
             </div>
           </div>
         </Show>
-        <Show when={attempt.state === AttemptStates.completed}>
-          <div class="row-span-4 flex justify-center">
-            <div class="max-w-5xl px-16">
-              <StatisticsContainer attempt={attempt} quote={quote()} />
+        <Show when={animationState().view === 'results'}>
+          <div
+            class={clsx(
+              animationState().resultsState === AnimationStates.shown
+                ? 'opacity-100 blur-none'
+                : 'opacity-0 blur-lg',
+              'transition-opacity duration-200 row-span-4 '
+            )}
+          >
+            <div class="flex justify-center">
+              <div class="max-w-5xl px-16">
+                <StatisticsContainer attempt={attempt} quote={quote()} />
+              </div>
             </div>
           </div>
         </Show>

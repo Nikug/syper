@@ -68,3 +68,11 @@ export const wordsPerMinute = (characters: number, duration: number): number | n
 export const capitalize = (text: string): string => {
   return text[0]?.toUpperCase() + text.substring(1)
 }
+
+/*
+ * Wait for the specified duration.
+ * @param {number} duration - Duration to wait in milliseconds
+ */
+export const sleep = (duration: number): Promise<void> => {
+  return new Promise((resolve) => setTimeout(resolve, duration))
+}

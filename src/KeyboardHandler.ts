@@ -1,5 +1,13 @@
+import { startTransition } from 'solid-js'
 import { produce } from 'solid-js/store'
-import { attempt, nextAttempt, quote, restartAttempt, setAttempt } from './App'
+import {
+  attempt,
+  fromWritingToResults,
+  nextAttempt,
+  quote,
+  restartAttempt,
+  setAttempt,
+} from './App'
 import { CharactersPerWord } from './constants'
 import { Attempt, AttemptStates } from './types'
 import { mapToString } from './util'
@@ -60,6 +68,7 @@ const handleCharacter = (event: KeyboardEvent) => {
       if (isEnd) {
         attempt.state = AttemptStates.completed
         attempt.measurements.endTime = performanceNow
+        startTransition(fromWritingToResults)
       }
 
       // Handle word

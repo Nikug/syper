@@ -67,3 +67,16 @@ export interface Theme {
   flavour: CatppuccinFlavour
   class: CatppuccinFlavourClass
 }
+
+export const AnimationStates = {
+  hidden: 0,
+  shown: 1,
+} as const
+export type AnimationStateKey = keyof typeof AnimationStates
+export type AnimationState = (typeof AnimationStates)[AnimationStateKey]
+export type View = 'writing' | 'results'
+export interface Animation {
+  writingState: AnimationState
+  resultsState: AnimationState
+  view: View
+}
