@@ -13,7 +13,7 @@ import {
   Word,
   AnimationStates,
 } from './types'
-import { getRandomFromArray, sleep } from './util'
+import { getRandomFromArray, replaceBadQuotes, sleep } from './util'
 
 const quotes = quotesJson as QuotesJson
 export const getRandomQuote = () => getRandomFromArray(quotes.quotes)
@@ -35,6 +35,7 @@ const splitParagraph = (text: string): Word[] => {
 
 export const initQuote = () => {
   const randomQuote = getRandomQuote()
+  randomQuote.text = replaceBadQuotes(randomQuote.text)
   return { ...randomQuote, words: splitParagraph(randomQuote.text) }
 }
 export const newAttempt = (): Attempt => ({
@@ -96,6 +97,4 @@ export const fromResultsToWriting = async () => {
   setAnimationState({ ...animationState(), view: 'writing' })
   await sleep(0)
   setAnimationState({ ...animationState(), writingState: AnimationStates.shown })
-  setAttempt(newAttempt())
-  setQuote(initQuote())
 }

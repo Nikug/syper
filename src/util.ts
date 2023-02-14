@@ -76,3 +76,11 @@ export const capitalize = (text: string): string => {
 export const sleep = (duration: number): Promise<void> => {
   return new Promise((resolve) => setTimeout(resolve, duration))
 }
+
+/*
+ * Replaces non-regular quotes with reqular quotes.
+ *  @param {string} text - The text in which to replace quotes
+ */
+export const replaceBadQuotes = (text: string) => {
+  return text.replace(/[“”]/g, '"').replace(/[‘’]/g, "'")
+}

@@ -24,6 +24,14 @@ export const Header: Component = () => {
         }))}
         onSelect={(option) => setTheme(option.key)}
       />
+      <div class="flex mt-4 text-sm">
+        <p class="px-4">
+          Next: <span class="font-bold">Tab</span>
+        </p>
+        <p class="px-4">
+          Restart: <span class="font-bold">Esc</span>
+        </p>
+      </div>
       <Show when={attempt.state === AttemptStates.completed}>
         <div class="mt-auto mb-4 text-center">
           <span>source:</span>

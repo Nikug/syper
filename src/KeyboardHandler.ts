@@ -12,7 +12,7 @@ import { CharactersPerWord } from './constants'
 import { Attempt, AttemptStates } from './types'
 import { mapToString } from './util'
 
-const preventDefaultCharacters: string[] = ["'", 'Tab', ' ', '?', '/']
+const preventDefaultCharacters: string[] = ["'", 'Tab', ' ', '?', '/', 'Escape']
 
 const handleKeyboard = (event: KeyboardEvent) => {
   if (preventDefaultCharacters.includes(event.key)) {
@@ -24,7 +24,7 @@ const handleKeyboard = (event: KeyboardEvent) => {
     return
   }
 
-  if (event.key === ' ' && event.ctrlKey) {
+  if (event.key === 'Escape') {
     restartAttempt()
     return
   }

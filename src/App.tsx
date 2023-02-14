@@ -41,7 +41,7 @@ const App: Component = () => {
               AnimationDurationClass
             )}
           >
-            <div class="overflow-scroll max-w-7xl px-16 h-48">
+            <div class="max-w-7xl px-16 h-48">
               <div class="h-8">
                 <QuoteInformation />
               </div>
