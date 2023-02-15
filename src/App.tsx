@@ -26,7 +26,7 @@ const App: Component = () => {
   })
 
   return (
-    <div class="w-screen min-h-screen bg-ctp-base text-ctp-text">
+    <div class="w-screen overflow-x-hidden min-h-screen bg-ctp-base text-ctp-text">
       <div class="grid grid-rows-5 min-h-screen justify-center">
         <div class="row-span-1">
           <Header />
@@ -41,7 +41,7 @@ const App: Component = () => {
               AnimationDurationClass
             )}
           >
-            <div class="max-w-7xl px-16 h-48">
+            <div class="max-w-7xl w-screen px-16 h-48">
               <div class="h-8">
                 <QuoteInformation />
               </div>
