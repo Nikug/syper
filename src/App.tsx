@@ -65,7 +65,7 @@ const App: Component = () => {
             )}
           >
             <div class="flex justify-center">
-              <div class="max-w-7xl px-16">
+              <div class="max-w-7xl w-screen px-16">
                 <StatisticsContainer attempt={attempt} quote={quote()} />
               </div>
             </div>
