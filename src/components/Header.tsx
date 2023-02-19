@@ -15,7 +15,7 @@ export const Header: Component = () => {
         isOngoingAttempt() && 'blur-md opacity-50'
       )}
     >
-      <h1 class="text-5xl font-bold pt-8 pb-4">Solid Typist</h1>
+      <h1 class="text-5xl font-bold pt-8 pb-4">Syper</h1>
       <Dropdown
         value={capitalize(catppuccinFlavour().flavour)}
         options={Object.entries(catppuccinFlavours).map(([key]) => ({
