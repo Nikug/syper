@@ -5,7 +5,7 @@ import { CharacterMode } from '../types'
 const defaultClasses = `
   whitespace-pre
   text-4xl
-  scroll-mt-10
+  scroll-mb-11
 `
 
 const characterClasses: Record<CharacterMode, string> = {
@@ -29,7 +29,7 @@ export const Character: Component<Props> = (props) => {
 
   createEffect(() => {
     if (props.isNext && element) {
-      element.scrollIntoView()
+      element.scrollIntoView(false)
     }
   })
 

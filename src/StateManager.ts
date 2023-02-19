@@ -18,7 +18,7 @@ import {
 import { getRandomFromArray, replaceBadQuotes, sleep } from './util'
 
 // Text mode
-export const [textMode, setTextMode] = createSignal<TextMode>('words')
+export const [textMode, setTextMode] = createSignal<TextMode>('quote')
 
 // Helpers
 const getText = async (): Promise<Quote> => {
