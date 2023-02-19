@@ -1,3 +1,8 @@
+export interface WordsJson {
+  name: string
+  words: string[]
+}
+
 export interface QuotesJson {
   language: string
   groups: number[][]
@@ -80,3 +85,5 @@ export interface Animation {
   resultsState: AnimationState
   view: View
 }
+
+export type TextMode = 'quote' | 'words'

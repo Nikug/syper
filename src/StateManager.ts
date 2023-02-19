@@ -1,6 +1,5 @@
 import { createSignal, startTransition } from 'solid-js'
 import { createStore } from 'solid-js/store'
-import quotesJson from './assets/quotes.json'
 import { AnimationDuration } from './constants'
 import {
   Attempt,
@@ -12,11 +11,36 @@ import {
   Theme,
   Word,
   AnimationStates,
+  TextMode,
+  WordsJson,
+  Quote,
 } from './types'
 import { getRandomFromArray, replaceBadQuotes, sleep } from './util'
 
-const quotes = quotesJson as QuotesJson
-export const getRandomQuote = () => getRandomFromArray(quotes.quotes)
+// Text mode
+export const [textMode, setTextMode] = createSignal<TextMode>('words')
+
+// Helpers
+
+const getText = async (): Promise<Quote> => {
+  if (textMode() === 'quote') {
+    const quotes: QuotesJson = await import('./assets/monkeytype-quotes.json')
+    return getRandomFromArray(quotes.quotes)
+  } else {
+    const words: WordsJson = await import('./assets/english-1k.json')
+    const text: string[] = []
+    for (let i = 0, limit = 50; i < limit; i++) {
+      text.push(getRandomFromArray(words.words))
+    }
+    const finalText = text.join(' ')
+    return {
+      id: 0,
+      source: 'words',
+      text: finalText,
+      length: finalText.length,
+    }
+  }
+}
 
 const splitParagraph = (text: string): Word[] => {
   const words: Word[] = []
@@ -33,8 +57,8 @@ const splitParagraph = (text: string): Word[] => {
   return words
 }
 
-export const initQuote = () => {
-  const randomQuote = getRandomQuote()
+export const initQuote = async () => {
+  const randomQuote = await getText()
   randomQuote.text = replaceBadQuotes(randomQuote.text)
   return { ...randomQuote, words: splitParagraph(randomQuote.text) }
 }
@@ -55,7 +79,7 @@ export const nextAttempt = async () => {
     await startTransition(fromResultsToWriting)
   }
   setAttempt(newAttempt())
-  setQuote(initQuote())
+  setQuote(await initQuote())
 }
 
 export const restartAttempt = async () => {
@@ -65,9 +89,11 @@ export const restartAttempt = async () => {
   setAttempt(newAttempt())
 }
 
-export const [quote, setQuote] = createSignal<QuoteWithWords>(initQuote())
+// Main signals and stores
+export const [quote, setQuote] = createSignal<QuoteWithWords>(await initQuote())
 export const [attempt, setAttempt] = createStore<Attempt>(newAttempt())
 
+// Theme
 export const [catppuccinFlavour, setCatppuccinFlavour] = createSignal<Theme>({
   flavour: 'mocha',
   class: 'ctp-mocha',
@@ -75,6 +101,7 @@ export const [catppuccinFlavour, setCatppuccinFlavour] = createSignal<Theme>({
 export const setTheme = (flavour: CatppuccinFlavour): Theme =>
   setCatppuccinFlavour({ flavour, class: `ctp-${flavour}` })
 
+// Animation
 export const [animationState, setAnimationState] = createSignal<Animation>({
   writingState: AnimationStates.shown,
   resultsState: AnimationStates.hidden,
