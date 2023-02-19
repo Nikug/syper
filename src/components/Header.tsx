@@ -25,7 +25,7 @@ export const Header: Component = () => {
         isOngoingAttempt() && 'blur-md opacity-50'
       )}
     >
-      <h1 class="text-5xl font-bold pt-8 pb-4">Syper</h1>
+      <h1 class="text-5xl font-bold pt-8 pb-4">Syper_</h1>
       <div class="flex">
         <Dropdown
           value={capitalize(catppuccinFlavour().flavour)}
