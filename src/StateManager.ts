@@ -21,7 +21,6 @@ import { getRandomFromArray, replaceBadQuotes, sleep } from './util'
 export const [textMode, setTextMode] = createSignal<TextMode>('words')
 
 // Helpers
-
 const getText = async (): Promise<Quote> => {
   if (textMode() === 'quote') {
     const quotes: QuotesJson = await import('./assets/monkeytype-quotes.json')
@@ -74,6 +73,14 @@ export const newAttempt = (): Attempt => ({
   },
 })
 
+const newText = (): QuoteWithWords => ({
+  id: 0,
+  text: '',
+  source: '',
+  length: 0,
+  words: [],
+})
+
 export const nextAttempt = async () => {
   if (animationState().view === 'results') {
     await startTransition(fromResultsToWriting)
@@ -90,7 +97,7 @@ export const restartAttempt = async () => {
 }
 
 // Main signals and stores
-export const [quote, setQuote] = createSignal<QuoteWithWords>(await initQuote())
+export const [quote, setQuote] = createSignal<QuoteWithWords>(newText())
 export const [attempt, setAttempt] = createStore<Attempt>(newAttempt())
 
 // Theme

@@ -1,9 +1,19 @@
 import { clsx } from 'clsx'
 import { Component, Show } from 'solid-js'
-import { attempt, catppuccinFlavour, quote, setTheme } from '../StateManager'
-import { AttemptStates, CatppuccinFlavour, catppuccinFlavours } from '../types'
+import { attempt, catppuccinFlavour, quote, setTextMode, setTheme, textMode } from '../StateManager'
+import { AttemptStates, CatppuccinFlavour, catppuccinFlavours, TextMode } from '../types'
 import { capitalize } from '../util'
 import { Dropdown } from './Dropdown'
+
+interface TextModeOption {
+  key: TextMode
+  value: string
+}
+
+const textModeOptions: TextModeOption[] = [
+  { key: 'quote', value: 'Quote' },
+  { key: 'words', value: 'Words' },
+]
 
 export const Header: Component = () => {
   const isOngoingAttempt = () => attempt.state === AttemptStates.started
@@ -16,14 +26,21 @@ export const Header: Component = () => {
       )}
     >
       <h1 class="text-5xl font-bold pt-8 pb-4">Syper</h1>
-      <Dropdown
-        value={capitalize(catppuccinFlavour().flavour)}
-        options={Object.entries(catppuccinFlavours).map(([key]) => ({
-          key: key as CatppuccinFlavour,
-          value: capitalize(key),
-        }))}
-        onSelect={(option) => setTheme(option.key)}
-      />
+      <div class="flex">
+        <Dropdown
+          value={capitalize(catppuccinFlavour().flavour)}
+          options={Object.entries(catppuccinFlavours).map(([key]) => ({
+            key: key as CatppuccinFlavour,
+            value: capitalize(key),
+          }))}
+          onSelect={(option) => setTheme(option.key)}
+        />
+        <Dropdown
+          value={capitalize(textMode())}
+          options={textModeOptions}
+          onSelect={(option) => setTextMode(option.key)}
+        />
+      </div>
       <div class="flex mt-4 mb-4 text-sm">
         <p class="px-4">
           Next: <span class="font-bold">Tab</span>

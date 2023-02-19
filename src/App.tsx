@@ -1,5 +1,5 @@
 import { clsx } from 'clsx'
-import { Component, createEffect, onCleanup, onMount, Show } from 'solid-js'
+import { Component, createEffect, onCleanup, onMount, Show, on } from 'solid-js'
 import { Header } from './components/Header'
 import { ProgressBar } from './components/ProgressBar'
 import { QuoteInformation } from './components/QuoteInformation'
@@ -7,16 +7,26 @@ import { StatisticsContainer } from './components/StatisticsContainer'
 import { TextContainer } from './components/TextContainer'
 import { AnimationDurationClass, ThemeStorageKey } from './constants'
 import { CleanupKeyboard, SetupKeyboard } from './KeyboardHandler'
-import { animationState, attempt, catppuccinFlavour, quote, setTheme } from './StateManager'
+import {
+  animationState,
+  attempt,
+  catppuccinFlavour,
+  initQuote,
+  quote,
+  setQuote,
+  setTheme,
+  textMode,
+} from './StateManager'
 import { AnimationStates, CatppuccinFlavour, catppuccinFlavours } from './types'
 
 const App: Component = () => {
-  onMount(() => {
+  onMount(async () => {
     const storedTheme = localStorage.getItem(ThemeStorageKey)
     if (storedTheme && Object.keys(catppuccinFlavours).includes(storedTheme)) {
       setTheme(storedTheme as CatppuccinFlavour)
     }
     SetupKeyboard()
+    setQuote(await initQuote())
   })
   onCleanup(() => CleanupKeyboard())
 
@@ -24,6 +34,14 @@ const App: Component = () => {
     document.body.className = catppuccinFlavour().class
     localStorage.setItem(ThemeStorageKey, catppuccinFlavour().flavour)
   })
+
+  createEffect(
+    on(textMode, async () => {
+      if (animationState().view === 'writing') {
+        setQuote(await initQuote())
+      }
+    })
+  )
 
   return (
     <div class="w-screen overflow-x-hidden min-h-screen bg-ctp-base text-ctp-text">
