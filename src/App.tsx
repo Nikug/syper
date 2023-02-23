@@ -8,7 +8,7 @@ import { TextContainer } from './components/TextContainer'
 import { AnimationDurationClass } from './constants'
 import { CleanupKeyboard, SetupKeyboard } from './KeyboardHandler'
 import { persistUserOptions, userOptions } from './OptionsManager'
-import { animationState, attempt, initQuote, quote, setQuote, textMode } from './StateManager'
+import { animationState, attempt, initQuote, quote, setQuote } from './StateManager'
 import { AnimationStates } from './types'
 
 const App: Component = () => {

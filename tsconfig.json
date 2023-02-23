@@ -12,6 +12,7 @@
     "noEmit": true,
     "isolatedModules": true,
     "resolveJsonModule": true,
-    "allowJs": true
+    "allowJs": true,
+    "skipLibCheck": true
   }
 }
