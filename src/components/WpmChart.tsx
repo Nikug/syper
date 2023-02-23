@@ -3,8 +3,8 @@ import ApexCharts, { ApexOptions } from 'apexcharts'
 import { variants } from '@catppuccin/palette'
 import { AnimationState, AnimationStates, Measurements } from '../types'
 import { wordsPerMinute } from '../util'
-import { catppuccinFlavour } from '../StateManager'
 import './WpmChart.css'
+import { userOptions } from '../OptionsManager'
 
 interface Props {
   measurements: Measurements
@@ -17,7 +17,7 @@ export const WpmChart: Component<Props> = (props) => {
   const getState = () => props.state === AnimationStates.shown
 
   createEffect(
-    on([getState, catppuccinFlavour], () => {
+    on([getState, () => userOptions.theme], () => {
       if (!getState()) return
       chart()?.destroy()
       const newChart = new ApexCharts(element, createOptions(props.measurements))
@@ -29,7 +29,7 @@ export const WpmChart: Component<Props> = (props) => {
   return <div ref={element} class="paper py-4 pr-4" />
 }
 
-const catppuccinColor = () => variants[catppuccinFlavour().flavour]
+const catppuccinColor = () => variants[userOptions.theme]
 
 const createOptions = (measurements: Measurements) => {
   const timestamps = Array.from(measurements.timestamps.entries())

@@ -1,28 +1,23 @@
 import { createSignal, startTransition } from 'solid-js'
 import { createStore } from 'solid-js/store'
 import { AnimationDuration } from './constants'
+import { userOptions } from './OptionsManager'
 import {
   Attempt,
   Animation,
   AttemptStates,
-  CatppuccinFlavour,
   QuotesJson,
   QuoteWithWords,
-  Theme,
   Word,
   AnimationStates,
-  TextMode,
   WordsJson,
   Quote,
 } from './types'
 import { getRandomFromArray, replaceBadQuotes, sleep } from './util'
 
-// Text mode
-export const [textMode, setTextMode] = createSignal<TextMode>('quote')
-
 // Helpers
 const getText = async (): Promise<Quote> => {
-  if (textMode() === 'quote') {
+  if (userOptions.textMode === 'quote') {
     const quotes: QuotesJson = await import('./assets/monkeytype-quotes.json')
     return getRandomFromArray(quotes.quotes)
   } else {
@@ -99,14 +94,6 @@ export const restartAttempt = async () => {
 // Main signals and stores
 export const [quote, setQuote] = createSignal<QuoteWithWords>(newText())
 export const [attempt, setAttempt] = createStore<Attempt>(newAttempt())
-
-// Theme
-export const [catppuccinFlavour, setCatppuccinFlavour] = createSignal<Theme>({
-  flavour: 'mocha',
-  class: 'ctp-mocha',
-})
-export const setTheme = (flavour: CatppuccinFlavour): Theme =>
-  setCatppuccinFlavour({ flavour, class: `ctp-${flavour}` })
 
 // Animation
 export const [animationState, setAnimationState] = createSignal<Animation>({

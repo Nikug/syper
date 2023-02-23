@@ -1,6 +1,7 @@
 import { clsx } from 'clsx'
 import { Component, Show } from 'solid-js'
-import { attempt, catppuccinFlavour, quote, setTextMode, setTheme, textMode } from '../StateManager'
+import { setTextMode, setTheme, userOptions } from '../OptionsManager'
+import { attempt, quote } from '../StateManager'
 import { AttemptStates, CatppuccinFlavour, catppuccinFlavours, TextMode } from '../types'
 import { capitalize } from '../util'
 import { Dropdown } from './Dropdown'
@@ -28,7 +29,7 @@ export const Header: Component = () => {
       <h1 class="text-5xl font-bold pt-8 pb-4">Syper_</h1>
       <div class="flex">
         <Dropdown
-          value={capitalize(catppuccinFlavour().flavour)}
+          value={capitalize(userOptions.theme)}
           options={Object.entries(catppuccinFlavours).map(([key]) => ({
             key: key as CatppuccinFlavour,
             value: capitalize(key),
@@ -36,7 +37,7 @@ export const Header: Component = () => {
           onSelect={(option) => setTheme(option.key)}
         />
         <Dropdown
-          value={capitalize(textMode())}
+          value={capitalize(userOptions.textMode)}
           options={textModeOptions}
           onSelect={(option) => setTextMode(option.key)}
         />

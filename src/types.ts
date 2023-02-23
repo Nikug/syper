@@ -87,3 +87,8 @@ export interface Animation {
 }
 
 export type TextMode = 'quote' | 'words'
+
+export interface UserOptions {
+  textMode: TextMode
+  theme: CatppuccinFlavour
+}

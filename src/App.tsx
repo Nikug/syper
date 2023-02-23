@@ -5,43 +5,37 @@ import { ProgressBar } from './components/ProgressBar'
 import { QuoteInformation } from './components/QuoteInformation'
 import { StatisticsContainer } from './components/StatisticsContainer'
 import { TextContainer } from './components/TextContainer'
-import { AnimationDurationClass, ThemeStorageKey } from './constants'
+import { AnimationDurationClass } from './constants'
 import { CleanupKeyboard, SetupKeyboard } from './KeyboardHandler'
-import {
-  animationState,
-  attempt,
-  catppuccinFlavour,
-  initQuote,
-  quote,
-  setQuote,
-  setTheme,
-  textMode,
-} from './StateManager'
-import { AnimationStates, CatppuccinFlavour, catppuccinFlavours } from './types'
+import { persistUserOptions, userOptions } from './OptionsManager'
+import { animationState, attempt, initQuote, quote, setQuote, textMode } from './StateManager'
+import { AnimationStates } from './types'
 
 const App: Component = () => {
   onMount(async () => {
-    const storedTheme = localStorage.getItem(ThemeStorageKey)
-    if (storedTheme && Object.keys(catppuccinFlavours).includes(storedTheme)) {
-      setTheme(storedTheme as CatppuccinFlavour)
-    }
     SetupKeyboard()
     setQuote(await initQuote())
   })
   onCleanup(() => CleanupKeyboard())
 
   createEffect(() => {
-    document.body.className = catppuccinFlavour().class
-    localStorage.setItem(ThemeStorageKey, catppuccinFlavour().flavour)
+    document.body.className = `ctp-${userOptions.theme}`
   })
 
   createEffect(
-    on(textMode, async () => {
-      if (animationState().view === 'writing') {
-        setQuote(await initQuote())
+    on(
+      () => userOptions.textMode,
+      async () => {
+        if (animationState().view === 'writing') {
+          setQuote(await initQuote())
+        }
       }
-    })
+    )
   )
+
+  createEffect(() => {
+    persistUserOptions()
+  })
 
   return (
     <div class="w-screen overflow-x-hidden min-h-screen bg-ctp-base text-ctp-text">
