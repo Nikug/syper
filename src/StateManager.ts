@@ -51,7 +51,7 @@ const splitParagraph = (text: string): Word[] => {
   return words
 }
 
-export const initQuote = async () => {
+export const initializeText = async () => {
   const randomQuote = await getText()
   randomQuote.text = replaceBadQuotes(randomQuote.text)
   return { ...randomQuote, words: splitParagraph(randomQuote.text) }
@@ -81,7 +81,7 @@ export const nextAttempt = async () => {
     await startTransition(fromResultsToWriting)
   }
   setAttempt(newAttempt())
-  setQuote(await initQuote())
+  setQuote(await initializeText())
 }
 
 export const restartAttempt = async () => {
