@@ -28,6 +28,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
+            ["@azure/msal-browser", "npm:2.33.0"],\
             ["@catppuccin/palette", "npm:0.1.6"],\
             ["@catppuccin/tailwindcss", "npm:0.1.1"],\
             ["@typescript-eslint/eslint-plugin", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:5.49.0"],\
@@ -58,6 +59,25 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@ampproject/remapping", "npm:2.2.0"],\
             ["@jridgewell/gen-mapping", "npm:0.1.1"],\
             ["@jridgewell/trace-mapping", "npm:0.3.17"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@azure/msal-browser", [\
+        ["npm:2.33.0", {\
+          "packageLocation": "./.yarn/cache/@azure-msal-browser-npm-2.33.0-43d88462dc-062b4d70df.zip/node_modules/@azure/msal-browser/",\
+          "packageDependencies": [\
+            ["@azure/msal-browser", "npm:2.33.0"],\
+            ["@azure/msal-common", "npm:10.0.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@azure/msal-common", [\
+        ["npm:10.0.0", {\
+          "packageLocation": "./.yarn/cache/@azure-msal-common-npm-10.0.0-cf3f0f9ff7-57ff5ed9fc.zip/node_modules/@azure/msal-common/",\
+          "packageDependencies": [\
+            ["@azure/msal-common", "npm:10.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4495,6 +4515,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["solid-typer", "workspace:."],\
+            ["@azure/msal-browser", "npm:2.33.0"],\
             ["@catppuccin/palette", "npm:0.1.6"],\
             ["@catppuccin/tailwindcss", "npm:0.1.1"],\
             ["@typescript-eslint/eslint-plugin", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:5.49.0"],\

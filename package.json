@@ -30,6 +30,7 @@
     "vite-plugin-solid": "^2.5.0"
   },
   "dependencies": {
+    "@azure/msal-browser": "^2.33.0",
     "@catppuccin/palette": "^0.1.6",
     "apexcharts": "^3.37.0",
     "clsx": "^1.2.1",
