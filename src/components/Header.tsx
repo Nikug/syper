@@ -1,9 +1,11 @@
 import { clsx } from 'clsx'
 import { Component, Show } from 'solid-js'
+import { getAccount, isSignedIn, signIn, signOut } from '../authentication/Authentication'
 import { setTextMode, setTheme, userOptions } from '../OptionsManager'
 import { attempt, quote } from '../StateManager'
 import { AttemptStates, CatppuccinFlavour, catppuccinFlavours, TextMode } from '../types'
 import { capitalize } from '../util'
+import { Button } from './Button'
 import { Dropdown } from './Dropdown'
 
 interface TextModeOption {
@@ -41,6 +43,9 @@ export const Header: Component = () => {
           options={textModeOptions}
           onSelect={(option) => setTextMode(option.key)}
         />
+        <Button onClick={() => signIn()} text="Sign in" />
+        <Button onClick={() => signOut()} text="Sign out" />
+        <p>{getAccount()?.name}</p>
       </div>
       <div class="flex mt-4 mb-4 text-sm">
         <p class="px-4">
