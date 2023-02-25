@@ -1,22 +1,24 @@
 import { clsx } from 'clsx'
 import { Component, createEffect, onCleanup, onMount, Show, on } from 'solid-js'
+import { setupAuth } from './authentication/Authentication'
 import { Header } from './components/Header'
 import { ProgressBar } from './components/ProgressBar'
 import { QuoteInformation } from './components/QuoteInformation'
 import { StatisticsContainer } from './components/StatisticsContainer'
 import { TextContainer } from './components/TextContainer'
 import { AnimationDurationClass } from './constants'
-import { CleanupKeyboard, SetupKeyboard } from './KeyboardHandler'
+import { cleanupKeyboard, setupKeyboard } from './KeyboardHandler'
 import { persistUserOptions, userOptions } from './OptionsManager'
 import { animationState, attempt, initializeText, quote, setQuote } from './StateManager'
 import { AnimationStates } from './types'
 
 const App: Component = () => {
   onMount(async () => {
-    SetupKeyboard()
+    setupAuth()
+    setupKeyboard()
     setQuote(await initializeText())
   })
-  onCleanup(() => CleanupKeyboard())
+  onCleanup(() => cleanupKeyboard())
 
   createEffect(() => {
     document.body.className = `ctp-${userOptions.theme}`

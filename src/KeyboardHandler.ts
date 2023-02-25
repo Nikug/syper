@@ -32,11 +32,11 @@ const handleKeyboard = (event: KeyboardEvent) => {
   handleCharacter(event)
 }
 
-export const SetupKeyboard = () => {
+export const setupKeyboard = () => {
   window.addEventListener('keydown', handleKeyboard)
 }
 
-export const CleanupKeyboard = () => {
+export const cleanupKeyboard = () => {
   window.removeEventListener('keydown', handleKeyboard)
 }
 

@@ -1,6 +1,6 @@
 import { clsx } from 'clsx'
 import { Component, Show } from 'solid-js'
-import { getAccount, isSignedIn, signIn, signOut } from '../authentication/Authentication'
+import { account, isSignedIn, signIn, signOut } from '../authentication/Authentication'
 import { setTextMode, setTheme, userOptions } from '../OptionsManager'
 import { attempt, quote } from '../StateManager'
 import { AttemptStates, CatppuccinFlavour, catppuccinFlavours, TextMode } from '../types'
@@ -29,7 +29,7 @@ export const Header: Component = () => {
       )}
     >
       <h1 class="text-5xl font-bold pt-8 pb-4">Syper_</h1>
-      <div class="flex">
+      <div class="flex items-center">
         <Dropdown
           value={capitalize(userOptions.theme)}
           options={Object.entries(catppuccinFlavours).map(([key]) => ({
@@ -43,9 +43,10 @@ export const Header: Component = () => {
           options={textModeOptions}
           onSelect={(option) => setTextMode(option.key)}
         />
-        <Button onClick={() => signIn()} text="Sign in" />
-        <Button onClick={() => signOut()} text="Sign out" />
-        <p>{getAccount()?.name}</p>
+        <Show when={isSignedIn()} fallback={<Button onClick={() => signIn()} text="Sign in" />}>
+          <Button onClick={() => signOut()} text="Sign out" />
+        </Show>
+        <p class="px-4">{account()?.name}</p>
       </div>
       <div class="flex mt-4 mb-4 text-sm">
         <p class="px-4">
