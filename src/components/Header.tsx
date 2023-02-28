@@ -21,12 +21,12 @@ export const Header: Component = () => {
   const isOngoingAttempt = () => attempt.state === AttemptStates.started
 
   return (
-    <div
-      class={clsx('h-full pt-8 pb-4 transition-all duration-300', isOngoingAttempt() && 'blurred')}
-    >
-      <div class="h-full w-full flex justify-between items-center">
+    <div class={clsx('h-full pt-16 transition-all duration-300', isOngoingAttempt() && 'blurred')}>
+      <div class="w-full mb-4 flex justify-between items-center">
         <h1 class="text-5xl font-bold">Syper_</h1>
-        <div>Profile</div>
+        <div>
+          <h2 class="text-xl">Profile</h2>
+        </div>
       </div>
       <div class="h-full w-full flex justify-start">
         <div class="flex flex-col">
