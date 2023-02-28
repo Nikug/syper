@@ -13,7 +13,7 @@ import {
   WordsJson,
   Quote,
 } from './types'
-import { getRandomFromArray, replaceBadQuotes, sleep } from './util'
+import { getRandomFromArray, replaceBadCharacters, sleep } from './util'
 
 // Helpers
 const getText = async (): Promise<Quote> => {
@@ -53,7 +53,7 @@ const splitParagraph = (text: string): Word[] => {
 
 export const initializeText = async () => {
   const randomQuote = await getText()
-  randomQuote.text = replaceBadQuotes(randomQuote.text)
+  randomQuote.text = replaceBadCharacters(randomQuote.text)
   return { ...randomQuote, words: splitParagraph(randomQuote.text) }
 }
 export const newAttempt = (): Attempt => ({

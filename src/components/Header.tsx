@@ -1,11 +1,10 @@
 import { clsx } from 'clsx'
-import { Component, Show } from 'solid-js'
-import { account, isSignedIn, signIn, signOut } from '../authentication/Authentication'
+import { Component } from 'solid-js'
+import { account } from '../authentication/Authentication'
 import { setTextMode, setTheme, userOptions } from '../OptionsManager'
-import { attempt, quote } from '../StateManager'
+import { attempt } from '../StateManager'
 import { AttemptStates, CatppuccinFlavour, catppuccinFlavours, TextMode } from '../types'
 import { capitalize } from '../util'
-import { Button } from './Button'
 import { Dropdown } from './Dropdown'
 
 interface TextModeOption {
@@ -23,45 +22,32 @@ export const Header: Component = () => {
 
   return (
     <div
-      class={clsx(
-        'h-full flex flex-col items-center transition-all duration-300',
-        isOngoingAttempt() && 'blur-md opacity-50'
-      )}
+      class={clsx('h-full pt-8 pb-4 transition-all duration-300', isOngoingAttempt() && 'blurred')}
     >
-      <h1 class="text-5xl font-bold pt-8 pb-4">Syper_</h1>
-      <div class="flex items-center">
-        <Dropdown
-          value={capitalize(userOptions.theme)}
-          options={Object.entries(catppuccinFlavours).map(([key]) => ({
-            key: key as CatppuccinFlavour,
-            value: capitalize(key),
-          }))}
-          onSelect={(option) => setTheme(option.key)}
-        />
-        <Dropdown
-          value={capitalize(userOptions.textMode)}
-          options={textModeOptions}
-          onSelect={(option) => setTextMode(option.key)}
-        />
-        <Show when={isSignedIn()} fallback={<Button onClick={() => signIn()} text="Sign in" />}>
-          <Button onClick={() => signOut()} text="Sign out" />
-        </Show>
-        <p class="px-4">{account()?.name}</p>
+      <div class="h-full w-full flex justify-between items-center">
+        <h1 class="text-5xl font-bold">Syper_</h1>
+        <div>Profile</div>
       </div>
-      <div class="flex mt-4 mb-4 text-sm">
-        <p class="px-4">
-          Next: <span class="font-bold">Tab</span>
-        </p>
-        <p class="px-4">
-          Restart: <span class="font-bold">Esc</span>
-        </p>
-      </div>
-      <Show when={attempt.state === AttemptStates.completed}>
-        <div class="mt-auto mb-4 text-center">
-          <span>source:</span>
-          <h2 class="text-4xl font-bold">{quote().source}</h2>
+      <div class="h-full w-full flex justify-start">
+        <div class="flex flex-col">
+          <div class="flex items-center">
+            <Dropdown
+              value={capitalize(userOptions.theme)}
+              options={Object.entries(catppuccinFlavours).map(([key]) => ({
+                key: key as CatppuccinFlavour,
+                value: capitalize(key),
+              }))}
+              onSelect={(option) => setTheme(option.key)}
+            />
+            <Dropdown
+              value={capitalize(userOptions.textMode)}
+              options={textModeOptions}
+              onSelect={(option) => setTextMode(option.key)}
+            />
+            <p class="px-4">{account()?.name}</p>
+          </div>
         </div>
-      </Show>
+      </div>
     </div>
   )
 }

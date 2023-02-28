@@ -1,6 +1,6 @@
-import { Component, For } from 'solid-js'
-import { animationState } from '../StateManager'
-import { Attempt, QuoteWithWords } from '../types'
+import { Component, For, Show } from 'solid-js'
+import { animationState, attempt, quote } from '../StateManager'
+import { Attempt, AttemptStates, QuoteWithWords } from '../types'
 import { numberOfMatchingItems, wordsPerMinute } from '../util'
 import { LabeledValue } from './LabeledValue'
 import { WordWithWpm } from './WordWithWpm'
@@ -37,6 +37,12 @@ export const StatisticsContainer: Component<Props> = (props) => {
 
   return (
     <div class="h-full pt-8 pb-32">
+      <Show when={attempt.state === AttemptStates.completed}>
+        <div class="mt-auto mb-16 text-center">
+          <span>source:</span>
+          <h2 class="text-4xl font-bold">{quote().source}</h2>
+        </div>
+      </Show>
       <div class="w-full flex justify-evenly">
         <LabeledValue value={getWordsPerMinute()?.toFixed(1)} label="Words per minute" />
         <LabeledValue value={`${(getAccuracy() * 100).toFixed(1)}%`} label="Accuracy" />

@@ -78,9 +78,9 @@ export const sleep = (duration: number): Promise<void> => {
 }
 
 /*
- * Replaces non-regular quotes with reqular quotes.
- *  @param {string} text - The text in which to replace quotes
+ * Replaces non-regular characters with reqular characters.
+ *  @param {string} text - The text in which to replace bad characters
  */
-export const replaceBadQuotes = (text: string) => {
-  return text.replace(/[“”]/g, '"').replace(/[‘’]/g, "'")
+export const replaceBadCharacters = (text: string) => {
+  return text.replace(/[“”]/g, '"').replace(/[‘’]/g, "'").replace(/[…]/g, '...')
 }

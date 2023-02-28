@@ -1,6 +1,7 @@
 import { clsx } from 'clsx'
 import { Component, createEffect, onCleanup, onMount, Show, on } from 'solid-js'
 import { setupAuth } from './authentication/Authentication'
+import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { ProgressBar } from './components/ProgressBar'
 import { QuoteInformation } from './components/QuoteInformation'
@@ -40,22 +41,19 @@ const App: Component = () => {
   })
 
   return (
-    <div class="w-screen overflow-x-hidden min-h-screen bg-ctp-base text-ctp-text">
-      <div class="grid grid-rows-5 min-h-screen justify-center">
+    <div class="w-screen  overflow-x-hidden min-h-screen bg-ctp-base text-ctp-text">
+      <div class="grid mx-auto max-w-7xl px-16 grid-rows-5 min-h-screen justify-items-stretch">
         <div class="row-span-1">
           <Header />
         </div>
         <Show when={animationState().view === 'writing'}>
           <div
             class={clsx(
-              animationState().writingState === AnimationStates.shown
-                ? 'opacity-100 blur-none'
-                : 'opacity-0 blur-lg',
-              'transition-opacity row-span-3 my-auto',
-              AnimationDurationClass
+              'row-span-3 my-auto justify-self-start',
+              handleBlur(animationState().writingState === AnimationStates.shown)
             )}
           >
-            <div class="max-w-7xl w-screen px-16 h-48">
+            <div class="h-48">
               <div class="h-8">
                 <QuoteInformation />
               </div>
@@ -71,23 +69,29 @@ const App: Component = () => {
         <Show when={animationState().view === 'results'}>
           <div
             class={clsx(
-              animationState().resultsState === AnimationStates.shown
-                ? 'opacity-100 blur-none'
-                : 'opacity-0 blur-lg',
-              'transition-opacity row-span-4',
-              AnimationDurationClass
+              'row-span-4',
+              handleBlur(animationState().resultsState === AnimationStates.shown)
             )}
           >
-            <div class="flex justify-center">
-              <div class="max-w-7xl w-screen px-16">
-                <StatisticsContainer attempt={attempt} quote={quote()} />
-              </div>
-            </div>
+            <StatisticsContainer attempt={attempt} quote={quote()} />
+          </div>
+        </Show>
+        <Show when={animationState().view === 'writing'}>
+          <div
+            class={clsx(
+              'row-span-1',
+              handleBlur(animationState().writingState === AnimationStates.shown)
+            )}
+          >
+            <Footer />
           </div>
         </Show>
       </div>
     </div>
   )
 }
+
+const handleBlur = (condition: boolean): string =>
+  clsx(condition ? 'focus' : 'blur', 'transition-opacity', AnimationDurationClass)
 
 export default App
