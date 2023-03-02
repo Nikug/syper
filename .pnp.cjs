@@ -31,6 +31,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@azure/msal-browser", "npm:2.33.0"],\
             ["@catppuccin/palette", "npm:0.1.6"],\
             ["@catppuccin/tailwindcss", "npm:0.1.1"],\
+            ["@solidjs/router", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:0.7.0"],\
             ["@typescript-eslint/eslint-plugin", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:5.49.0"],\
             ["@typescript-eslint/parser", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:5.49.0"],\
             ["apexcharts", "npm:3.37.0"],\
@@ -936,6 +937,28 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@rollup/pluginutils", "npm:4.2.1"],\
             ["estree-walker", "npm:2.0.2"],\
             ["picomatch", "npm:2.3.1"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@solidjs/router", [\
+        ["npm:0.7.0", {\
+          "packageLocation": "./.yarn/cache/@solidjs-router-npm-0.7.0-fa8bf8ada9-1e53e127f4.zip/node_modules/@solidjs/router/",\
+          "packageDependencies": [\
+            ["@solidjs/router", "npm:0.7.0"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:0.7.0", {\
+          "packageLocation": "./.yarn/__virtual__/@solidjs-router-virtual-d258bf49c7/0/cache/@solidjs-router-npm-0.7.0-fa8bf8ada9-1e53e127f4.zip/node_modules/@solidjs/router/",\
+          "packageDependencies": [\
+            ["@solidjs/router", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:0.7.0"],\
+            ["@types/solid-js", null],\
+            ["solid-js", "npm:1.6.9"]\
+          ],\
+          "packagePeers": [\
+            "@types/solid-js",\
+            "solid-js"\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4518,6 +4541,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@azure/msal-browser", "npm:2.33.0"],\
             ["@catppuccin/palette", "npm:0.1.6"],\
             ["@catppuccin/tailwindcss", "npm:0.1.1"],\
+            ["@solidjs/router", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:0.7.0"],\
             ["@typescript-eslint/eslint-plugin", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:5.49.0"],\
             ["@typescript-eslint/parser", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:5.49.0"],\
             ["apexcharts", "npm:3.37.0"],\

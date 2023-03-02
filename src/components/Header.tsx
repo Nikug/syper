@@ -1,3 +1,4 @@
+import { A } from '@solidjs/router'
 import { clsx } from 'clsx'
 import { Component } from 'solid-js'
 import { account } from '../authentication/Authentication'
@@ -23,9 +24,13 @@ export const Header: Component = () => {
   return (
     <div class={clsx('h-full pt-16 transition-all duration-300', isOngoingAttempt() && 'blurred')}>
       <div class="w-full mb-4 flex justify-between items-center">
-        <h1 class="text-5xl font-bold">Syper_</h1>
+        <A href="/" class="text-5xl font-bold">
+          Syper_
+        </A>
         <div>
-          <h2 class="text-xl">Profile</h2>
+          <A href="/profile" class="text-xl cursor-pointer">
+            Profile
+          </A>
         </div>
       </div>
       <div class="h-full w-full flex justify-start">

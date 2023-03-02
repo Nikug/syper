@@ -32,6 +32,7 @@
   "dependencies": {
     "@azure/msal-browser": "^2.33.0",
     "@catppuccin/palette": "^0.1.6",
+    "@solidjs/router": "^0.7.0",
     "apexcharts": "^3.37.0",
     "clsx": "^1.2.1",
     "solid-js": "^1.6.9"

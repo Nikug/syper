@@ -716,6 +716,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@solidjs/router@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "@solidjs/router@npm:0.7.0"
+  peerDependencies:
+    solid-js: ^1.5.3
+  checksum: 1e53e127f400a8da39eb637fac3a2aaf1b43eb4dc442182ba516d11a4aad08df86119ce4f97dfd8ee7c86511d8627065d7990fb0eaa7d4c025c2c98c7af0405a
+  languageName: node
+  linkType: hard
+
 "@tootallnate/once@npm:2":
   version: 2.0.0
   resolution: "@tootallnate/once@npm:2.0.0"
@@ -3781,6 +3790,7 @@ __metadata:
     "@azure/msal-browser": ^2.33.0
     "@catppuccin/palette": ^0.1.6
     "@catppuccin/tailwindcss": ^0.1.1
+    "@solidjs/router": ^0.7.0
     "@typescript-eslint/eslint-plugin": latest
     "@typescript-eslint/parser": latest
     apexcharts: ^3.37.0
