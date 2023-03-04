@@ -12,7 +12,7 @@ import { AnimationDurationClass } from '../constants'
 
 const TestPage: Component = () => {
   return (
-    <div class="w-screen  overflow-x-hidden min-h-screen bg-ctp-base text-ctp-text">
+    <div class="w-full h-full">
       <div class="grid mx-auto max-w-7xl px-16 grid-rows-5 min-h-screen justify-items-stretch">
         <div class="row-span-1">
           <Header />

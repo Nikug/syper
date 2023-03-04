@@ -13,6 +13,7 @@ export const setupAuth = () => {
 }
 
 export const isSignedIn = (): boolean => !!account()
+export const getUserName = (): string | null => account()?.name || account()?.username || null
 
 export const signIn = async (): Promise<void> => {
   if (!auth) return

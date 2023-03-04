@@ -36,10 +36,12 @@ const App: Component = () => {
   })
 
   return (
-    <Routes>
-      <Route path="/" component={TestPage} />
-      <Route path="/profile" component={ProfilePage} />
-    </Routes>
+    <div class="w-screen overflow-x-hidden min-h-screen bg-ctp-base text-ctp-text">
+      <Routes>
+        <Route path="/" component={TestPage} />
+        <Route path="/profile" component={ProfilePage} />
+      </Routes>
+    </div>
   )
 }
 

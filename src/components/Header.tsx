@@ -1,7 +1,8 @@
 import { A } from '@solidjs/router'
 import { clsx } from 'clsx'
 import { Component } from 'solid-js'
-import { account } from '../authentication/Authentication'
+import { getUserName } from '../authentication/Authentication'
+import { UserIcon } from '../icons/UserIcon'
 import { setTextMode, setTheme, userOptions } from '../OptionsManager'
 import { attempt } from '../StateManager'
 import { AttemptStates, CatppuccinFlavour, catppuccinFlavours, TextMode } from '../types'
@@ -28,8 +29,9 @@ export const Header: Component = () => {
           Syper_
         </A>
         <div>
-          <A href="/profile" class="text-xl cursor-pointer">
-            Profile
+          <A href="/profile" class="cursor-pointer flex items-center">
+            <UserIcon class="w-8 h-8 mr-2" />
+            {getUserName() ?? 'Profile'}
           </A>
         </div>
       </div>
@@ -49,7 +51,6 @@ export const Header: Component = () => {
               options={textModeOptions}
               onSelect={(option) => setTextMode(option.key)}
             />
-            <p class="px-4">{account()?.name}</p>
           </div>
         </div>
       </div>

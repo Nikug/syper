@@ -23,12 +23,12 @@ export const Button: Component<Props> = (props) => {
 const buttonClasses = `
   border
   border-2
-  border-ctp-mauve
-  hover:border-ctp-blue
   rounded
+  border-ctp-mauve
   text-ctp-mauve
-  hover:text-ctp-blue
-  hover:bg-ctp-blue/10
+  hover:border-ctp-maroon
+  hover:text-ctp-maroon
+  hover:bg-ctp-maroon/10
   font-bold
   px-4 py-2
 `
