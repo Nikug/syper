@@ -1,7 +1,7 @@
 import { Component, Show } from 'solid-js'
 import { clsx } from 'clsx'
 import { Header } from './Header'
-import { animationState, attempt, quote } from '../StateManager'
+import { animationState, attempt, typingTest } from '../StateManager'
 import { QuoteInformation } from './QuoteInformation'
 import { TextContainer } from './TextContainer'
 import { ProgressBar } from './ProgressBar'
@@ -29,7 +29,7 @@ const TestPage: Component = () => {
                 <QuoteInformation />
               </div>
               <div class="h-32 overflow-hidden">
-                <TextContainer attempt={attempt} quote={quote()} />
+                <TextContainer attempt={attempt} quote={typingTest()} />
               </div>
               <div class="h-8">
                 <ProgressBar />
@@ -44,7 +44,7 @@ const TestPage: Component = () => {
               handleBlur(animationState().resultsState === AnimationStates.shown)
             )}
           >
-            <StatisticsContainer attempt={attempt} quote={quote()} />
+            <StatisticsContainer attempt={attempt} quote={typingTest()} />
           </div>
         </Show>
         <Show when={animationState().view === 'writing'}>

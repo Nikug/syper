@@ -3,7 +3,7 @@ import { Routes, Route } from '@solidjs/router'
 import { setupAuth } from './authentication/Authentication'
 import { cleanupKeyboard, setupKeyboard } from './KeyboardHandler'
 import { persistUserOptions, userOptions } from './OptionsManager'
-import { animationState, setQuote } from './StateManager'
+import { animationState, setTypingTest } from './StateManager'
 import { initializeText } from './helpers/stateHelpers'
 
 const TestPage = lazy(() => import('./components/TestPage'))
@@ -13,7 +13,7 @@ const App: Component = () => {
   onMount(async () => {
     setupAuth()
     setupKeyboard()
-    setQuote(await initializeText())
+    setTypingTest(await initializeText())
   })
   onCleanup(() => cleanupKeyboard())
 
@@ -26,7 +26,7 @@ const App: Component = () => {
       () => userOptions.textMode,
       async () => {
         if (animationState().view === 'writing') {
-          setQuote(await initializeText())
+          setTypingTest(await initializeText())
         }
       }
     )

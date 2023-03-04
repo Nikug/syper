@@ -16,7 +16,7 @@ export interface Quote {
   id: number
 }
 
-export type QuoteWithWords = Quote & {
+export type TypingTest = Quote & {
   words: Word[]
 }
 

@@ -2,7 +2,7 @@ import { createSignal, startTransition } from 'solid-js'
 import { createStore } from 'solid-js/store'
 import { AnimationDuration } from './constants'
 import { initializeText } from './helpers/stateHelpers'
-import { Attempt, Animation, AttemptStates, QuoteWithWords, AnimationStates } from './types'
+import { Attempt, Animation, AttemptStates, TypingTest, AnimationStates } from './types'
 import { sleep } from './util'
 
 // Helpers
@@ -18,7 +18,7 @@ export const newAttempt = (): Attempt => ({
   },
 })
 
-const newText = (): QuoteWithWords => ({
+const newText = (): TypingTest => ({
   id: 0,
   text: '',
   source: '',
@@ -31,7 +31,7 @@ export const nextAttempt = async () => {
     await startTransition(fromResultsToWriting)
   }
   setAttempt(newAttempt())
-  setQuote(await initializeText())
+  setTypingTest(await initializeText())
 }
 
 export const restartAttempt = async () => {
@@ -42,7 +42,7 @@ export const restartAttempt = async () => {
 }
 
 // Main signals and stores
-export const [quote, setQuote] = createSignal<QuoteWithWords>(newText())
+export const [typingTest, setTypingTest] = createSignal<TypingTest>(newText())
 export const [attempt, setAttempt] = createStore<Attempt>(newAttempt())
 
 // Animation

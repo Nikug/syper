@@ -1,9 +1,9 @@
 import { Component, For } from 'solid-js'
-import { Attempt, QuoteWithWords } from '../types'
+import { Attempt, TypingTest } from '../types'
 import { Character } from './Character'
 
 interface Props {
-  quote: QuoteWithWords
+  quote: TypingTest
   attempt: Attempt
 }
 

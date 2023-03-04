@@ -1,13 +1,13 @@
 import { Component, For, Show } from 'solid-js'
-import { animationState, attempt, quote } from '../StateManager'
-import { Attempt, AttemptStates, QuoteWithWords } from '../types'
+import { animationState, attempt, typingTest } from '../StateManager'
+import { Attempt, AttemptStates, TypingTest } from '../types'
 import { numberOfMatchingItems, wordsPerMinute } from '../util'
 import { LabeledValue } from './LabeledValue'
 import { WordWithWpm } from './WordWithWpm'
 import { WpmChart } from './WpmChart'
 
 interface Props {
-  quote: QuoteWithWords
+  quote: TypingTest
   attempt: Attempt
 }
 
@@ -40,7 +40,7 @@ export const StatisticsContainer: Component<Props> = (props) => {
       <Show when={attempt.state === AttemptStates.completed}>
         <div class="mt-auto mb-16 text-center">
           <span>source:</span>
-          <h2 class="text-4xl font-bold">{quote().source}</h2>
+          <h2 class="text-4xl font-bold">{typingTest().source}</h2>
         </div>
       </Show>
       <div class="w-full flex justify-evenly">

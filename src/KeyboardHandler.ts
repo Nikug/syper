@@ -4,7 +4,7 @@ import {
   attempt,
   fromWritingToResults,
   nextAttempt,
-  quote,
+  typingTest,
   restartAttempt,
   setAttempt,
 } from './StateManager'
@@ -49,7 +49,7 @@ const handleCharacter = (event: KeyboardEvent) => {
       if (event.key === 'Backspace' && attempt.finalText.length > 0) {
         if (event.ctrlKey) {
           const index = attempt.finalText.length - 1
-          const word = quote().words.find((word) => word.has(index))
+          const word = typingTest().words.find((word) => word.has(index))
           if (!word) return attempt
 
           const wordStartIndex = word.entries().next().value[0]
@@ -65,7 +65,7 @@ const handleCharacter = (event: KeyboardEvent) => {
 
       const performanceNow = performance.now()
       const isStart = attempt.finalText.length === 0
-      const isEnd = attempt.finalText.length === quote().length - 1
+      const isEnd = attempt.finalText.length === typingTest().length - 1
 
       // Handle start
       if (isStart) {
@@ -98,7 +98,7 @@ const handleCharacter = (event: KeyboardEvent) => {
 
 const handleWordMeasurement = (attempt: Attempt, performanceNow: number): Attempt => {
   const currentIndex = attempt.finalText.length
-  const currentWord = quote().words.find((word) => word.has(currentIndex))
+  const currentWord = typingTest().words.find((word) => word.has(currentIndex))
   const currentMeasurement = attempt.measurements.words.find(
     (word) => word.startIndex <= currentIndex && word.endIndex >= currentIndex
   )
