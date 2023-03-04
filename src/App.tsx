@@ -3,7 +3,8 @@ import { Routes, Route } from '@solidjs/router'
 import { setupAuth } from './authentication/Authentication'
 import { cleanupKeyboard, setupKeyboard } from './KeyboardHandler'
 import { persistUserOptions, userOptions } from './OptionsManager'
-import { animationState, initializeText, setQuote } from './StateManager'
+import { animationState, setQuote } from './StateManager'
+import { initializeText } from './helpers/stateHelpers'
 
 const TestPage = lazy(() => import('./components/TestPage'))
 const ProfilePage = lazy(() => import('./components/ProfilePage'))
