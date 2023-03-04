@@ -9,7 +9,7 @@ const getText = async (): Promise<Quote> => {
   } else {
     const words: WordsJson = await import('../assets/english-1k.json')
     const text: string[] = []
-    for (let i = 0, limit = 50; i < limit; i++) {
+    for (let i = 0, limit = userOptions.wordCount; i < limit; i++) {
       text.push(getRandomFromArray(words.words))
     }
     const finalText = text.join(' ')

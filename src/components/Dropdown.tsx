@@ -37,6 +37,7 @@ export const Dropdown = <K, V extends string | number>(props: Props<K, V>) => {
     return {
       top: `${bounds.y + dropdownRef.clientHeight}px`,
       left: `${bounds.x}px`,
+      'min-width': `${dropdownRef.getBoundingClientRect().width}px`,
     }
   }
 
@@ -47,7 +48,7 @@ export const Dropdown = <K, V extends string | number>(props: Props<K, V>) => {
 
   return (
     <div ref={dropdownRef} onClick={() => setOpen(!open())} class="cursor-pointer">
-      <p class="px-4 py-2">{props.value}</p>
+      <p class="px-2 py-2">{props.value}</p>
       <Show when={open()}>
         <Portal mount={document.getElementById('root') ?? undefined}>
           <div

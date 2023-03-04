@@ -1,9 +1,10 @@
 import { A } from '@solidjs/router'
 import { clsx } from 'clsx'
-import { Component } from 'solid-js'
+import { Component, Show } from 'solid-js'
 import { getUserName } from '../authentication/Authentication'
+import { WordCounts } from '../constants'
 import { UserIcon } from '../icons/UserIcon'
-import { setTextMode, setTheme, userOptions } from '../OptionsManager'
+import { setTextMode, setTheme, setWordCount, userOptions } from '../OptionsManager'
 import { attempt } from '../StateManager'
 import { AttemptStates, CatppuccinFlavour, catppuccinFlavours, TextMode } from '../types'
 import { capitalize } from '../util'
@@ -37,7 +38,7 @@ export const Header: Component = () => {
       </div>
       <div class="h-full w-full flex justify-start">
         <div class="flex flex-col">
-          <div class="flex items-center">
+          <div class="flex items-center gap-x-2">
             <Dropdown
               value={capitalize(userOptions.theme)}
               options={Object.entries(catppuccinFlavours).map(([key]) => ({
@@ -51,6 +52,13 @@ export const Header: Component = () => {
               options={textModeOptions}
               onSelect={(option) => setTextMode(option.key)}
             />
+            <Show when={userOptions.textMode === 'words'}>
+              <Dropdown
+                value={`Words: ${userOptions.wordCount}`}
+                options={WordCounts.map((count) => ({ key: count, value: count }))}
+                onSelect={(option) => setWordCount(option.key)}
+              />
+            </Show>
           </div>
         </div>
       </div>

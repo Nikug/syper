@@ -91,4 +91,5 @@ export type TextMode = 'quote' | 'words'
 export interface UserOptions {
   textMode: TextMode
   theme: CatppuccinFlavour
+  wordCount: number
 }

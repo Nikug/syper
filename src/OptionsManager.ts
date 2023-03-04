@@ -1,4 +1,5 @@
 import { createStore } from 'solid-js/store'
+import { nextAttempt } from './StateManager'
 import { CatppuccinFlavour, TextMode, UserOptions } from './types'
 
 const UserOptionsStorageKey = 'userOptions'
@@ -6,6 +7,7 @@ const UserOptionsStorageKey = 'userOptions'
 const defaultUserOptions = (): UserOptions => ({
   theme: 'frappe',
   textMode: 'quote',
+  wordCount: 50,
 })
 
 const getInitialUserOptions = (): UserOptions => {
@@ -27,4 +29,13 @@ export const persistUserOptions = () => {
 }
 
 export const setTheme = (theme: CatppuccinFlavour) => setUserOptions('theme', theme)
-export const setTextMode = (textMode: TextMode) => setUserOptions('textMode', textMode)
+
+export const setTextMode = async (textMode: TextMode) => {
+  setUserOptions('textMode', textMode)
+  await nextAttempt()
+}
+
+export const setWordCount = async (count: number) => {
+  setUserOptions('wordCount', count)
+  await nextAttempt()
+}
