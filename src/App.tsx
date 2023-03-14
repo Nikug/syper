@@ -2,7 +2,7 @@ import { Component, createEffect, onCleanup, onMount, lazy } from 'solid-js'
 import { Routes, Route } from '@solidjs/router'
 import { setupAuth } from './authentication/Authentication'
 import { cleanupKeyboard, setupKeyboard } from './KeyboardHandler'
-import { persistUserOptions, userOptions } from './OptionsManager'
+import { getStoredUserOptions, setUserOptions, userOptions } from './OptionsManager'
 import { setTypingTest } from './StateManager'
 import { initializeText } from './helpers/stateHelpers'
 
@@ -12,6 +12,7 @@ const ProfilePage = lazy(() => import('./components/ProfilePage'))
 const App: Component = () => {
   onMount(async () => {
     await setupAuth()
+    setUserOptions(await getStoredUserOptions())
     setupKeyboard()
     setTypingTest(await initializeText())
   })
@@ -19,10 +20,6 @@ const App: Component = () => {
 
   createEffect(() => {
     document.body.className = `ctp-${userOptions.theme}`
-  })
-
-  createEffect(() => {
-    persistUserOptions()
   })
 
   return (

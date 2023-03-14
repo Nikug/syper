@@ -10,3 +10,4 @@
 ## Other ignores
 node_modules
 dist
+.env

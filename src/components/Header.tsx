@@ -4,7 +4,7 @@ import { Component, Show } from 'solid-js'
 import { getUserName } from '../authentication/Authentication'
 import { WordCounts } from '../constants'
 import { UserIcon } from '../icons/UserIcon'
-import { setTextMode, setTheme, setWordCount, userOptions } from '../OptionsManager'
+import { setTextMode, setTheme, setWordCount, syncing, userOptions } from '../OptionsManager'
 import { attempt } from '../StateManager'
 import { AttemptStates, CatppuccinFlavour, catppuccinFlavours, TextMode } from '../types'
 import { capitalize } from '../util'
@@ -29,6 +29,7 @@ export const Header: Component = () => {
         <A href="/" class="text-5xl font-bold">
           Syper_
         </A>
+        <Show when={syncing()}>Syncing...</Show>
         <div>
           <A href="/profile" class="cursor-pointer flex items-center">
             <UserIcon class="w-8 h-8 mr-2" />

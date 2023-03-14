@@ -756,6 +756,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:^18.15.3":
+  version: 18.15.3
+  resolution: "@types/node@npm:18.15.3"
+  checksum: 31b1d92475a82c30de29aa6c0771b18a276552d191283b4423ba2d61b3f01159bf0d02576c0b7cc834b043997893800db6bb47f246083ed85aa45e79c80875d7
+  languageName: node
+  linkType: hard
+
 "@types/semver@npm:^7.3.12":
   version: 7.3.13
   resolution: "@types/semver@npm:7.3.13"
@@ -3791,6 +3798,7 @@ __metadata:
     "@catppuccin/palette": ^0.1.6
     "@catppuccin/tailwindcss": ^0.1.1
     "@solidjs/router": ^0.7.0
+    "@types/node": ^18.15.3
     "@typescript-eslint/eslint-plugin": latest
     "@typescript-eslint/parser": latest
     apexcharts: ^3.37.0
