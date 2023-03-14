@@ -22,5 +22,4 @@ export const MsalConfig: Configuration = {
     cacheLocation: 'sessionStorage',
     storeAuthStateInCookie: false,
   },
-  
 }

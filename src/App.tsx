@@ -11,7 +11,7 @@ const ProfilePage = lazy(() => import('./components/ProfilePage'))
 
 const App: Component = () => {
   onMount(async () => {
-    setupAuth()
+    await setupAuth()
     setupKeyboard()
     setTypingTest(await initializeText())
   })
