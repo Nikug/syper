@@ -3,30 +3,34 @@ import { createSignal } from 'solid-js'
 import { MsalConfig } from './constants'
 
 let auth: PublicClientApplication | null = null
+
 export const [account, setAccount] = createSignal<AccountInfo | null>(null)
-export const [idToken, setIdToken] = createSignal<string | null>(null)
 
 export const setupAuth = async () => {
   auth = new PublicClientApplication(MsalConfig)
   const activeAccount = auth.getAllAccounts().at(0) ?? null
-  const token = await getIdToken(activeAccount)
+  await getIdToken(activeAccount)
   auth.setActiveAccount(activeAccount)
   setAccount(activeAccount)
-  setIdToken(token)
 }
 
 export const isSignedIn = (): boolean => !!account()
 export const getUserName = (): string | null => account()?.name || account()?.username || null
 export const getUserId = (): string | null => account()?.homeAccountId ?? null
-export const getBearerToken = (): string | null => (idToken() ? `Bearer ${idToken()}` : null)
+export const getBearerToken = async (): Promise<string | null> => {
+  const token = await getIdToken(account())
+  if (token) {
+    return `Bearer ${token}`
+  }
+  return null
+}
 
 export const signIn = async (): Promise<void> => {
   if (!auth) return
   try {
     const result = await auth.loginPopup({ scopes: [] })
-    const token = await getIdToken(result.account)
+    await getIdToken(result.account)
     setAccount(result.account)
-    setIdToken(token)
   } catch (e) {
     console.error(e)
   }

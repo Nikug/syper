@@ -5,7 +5,7 @@ const getBaseRoute = () => `${import.meta.env.VITE_API}/api`
 
 export const saveUserOptions = async (options: UserOptions): Promise<boolean> => {
   const userId = getUserId()
-  const bearerToken = getBearerToken()
+  const bearerToken = await getBearerToken()
   if (!userId || !bearerToken) return false
 
   const result = await fetch(`${getBaseRoute()}/userOptions/${userId}`, {
@@ -21,7 +21,7 @@ export const saveUserOptions = async (options: UserOptions): Promise<boolean> =>
 
 export const getUserOptions = async (): Promise<UserOptions | null> => {
   const userId = getUserId()
-  const bearerToken = getBearerToken()
+  const bearerToken = await getBearerToken()
   if (!userId || !bearerToken) return null
 
   const result = await fetch(`${getBaseRoute()}/userOptions/${userId}`, {
