@@ -18,6 +18,7 @@ export const setupAuth = async () => {
 export const isSignedIn = (): boolean => !!account()
 export const getUserName = (): string | null => account()?.name || account()?.username || null
 export const getUserId = (): string | null => account()?.homeAccountId ?? null
+export const getBearerToken = (): string | null => (idToken() ? `Bearer ${idToken()}` : null)
 
 export const signIn = async (): Promise<void> => {
   if (!auth) return
