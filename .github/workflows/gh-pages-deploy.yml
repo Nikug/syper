@@ -26,6 +26,8 @@ jobs:
         run: |
           yarn
           yarn predeploy
+        env:
+          VITE_API: ${{ vars.VITE_API }}
       - uses: actions/upload-pages-artifact@v1
         with:
           path: ./dist
@@ -41,4 +43,3 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v1
         with:
-          VITE_API: ${{ vars.VITE_API }}
