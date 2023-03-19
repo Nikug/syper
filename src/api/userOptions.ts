@@ -12,7 +12,7 @@ export const saveUserOptions = async (options: UserOptions): Promise<boolean> =>
     method: 'post',
     body: JSON.stringify(options),
     headers: {
-      Authentication: bearerToken,
+      Authorization: bearerToken,
     },
   })
 
@@ -26,7 +26,7 @@ export const getUserOptions = async (): Promise<UserOptions | null> => {
 
   const result = await fetch(`${getBaseRoute()}/userOptions/${userId}`, {
     headers: {
-      Authentication: bearerToken,
+      Authorization: bearerToken,
     },
   })
 
