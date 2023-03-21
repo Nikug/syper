@@ -1,7 +1,7 @@
-import { Component } from 'solid-js'
+import { Component, JSX } from 'solid-js'
 
 interface Props {
-  value: string | number | undefined | null
+  value: string | number | JSX.Element | undefined | null
   label: string | undefined | null
 }
 
