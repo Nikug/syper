@@ -1,7 +1,8 @@
-import { Component, For, JSX, Show } from 'solid-js'
+import { Component, For, Show } from 'solid-js'
 import { animationState, attempt, typingTest } from '../StateManager'
 import { Attempt, AttemptStates, TypingTest } from '../types'
 import { numberOfMatchingItems, wordsPerMinute } from '../util'
+import { FormattedDuration } from './FormattedDuration'
 import { LabeledValue } from './LabeledValue'
 import { WordWithWpm } from './WordWithWpm'
 import { WpmChart } from './WpmChart'
@@ -40,25 +41,6 @@ export const StatisticsContainer: Component<Props> = (props) => {
     )
   }
 
-  const getFormattedDuration = (): JSX.Element | null => {
-    const duration = getDuration()
-    if (duration == null) return null
-
-    const totalSeconds = duration / 1000
-    const minutes = Math.floor(totalSeconds / 60)
-    const remainingSeconds = totalSeconds % 60
-    return (
-      <span>
-        <Show when={minutes}>
-          {minutes}
-          <span class="font-normal text-lg mr-2">m</span>
-        </Show>
-        {remainingSeconds.toFixed(1)}
-        <span class="font-normal text-lg">s</span>
-      </span>
-    )
-  }
-
   return (
     <div class="h-full pt-8 pb-32">
       <Show when={attempt.state === AttemptStates.completed}>
@@ -75,7 +57,10 @@ export const StatisticsContainer: Component<Props> = (props) => {
       </Show>
       <div class="w-full flex justify-evenly">
         <LabeledValue value={getWordsPerMinute()?.toFixed(1)} label="Words per minute" />
-        <LabeledValue value={getFormattedDuration()} label="Duration" />
+        <LabeledValue
+          value={<FormattedDuration duration={getDuration() ?? 0} />}
+          label="Duration"
+        />
         <LabeledValue value={`${(getAccuracy() * 100).toFixed(1)}%`} label="Accuracy" />
         <LabeledValue value={`${(getCorrectedness() * 100).toFixed(1)}%`} label="Correctedness" />
       </div>
