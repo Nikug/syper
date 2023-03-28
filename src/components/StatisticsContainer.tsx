@@ -8,7 +8,7 @@ import { WordWithWpm } from './WordWithWpm'
 import { WpmChart } from './WpmChart'
 
 interface Props {
-  quote: TypingTest
+  typingTest: TypingTest
   attempt: Attempt
 }
 
@@ -27,16 +27,16 @@ export const StatisticsContainer: Component<Props> = (props) => {
   const getWordsPerMinute = (): number | null => {
     const duration = getDuration()
     if (duration == null) return null
-    return wordsPerMinute(props.quote.length, duration)
+    return wordsPerMinute(props.typingTest.length, duration)
   }
 
-  const getCorrectedness = (): number => {
-    return numberOfMatchingItems(props.quote.text, props.attempt.finalText) / props.quote.length
+  const getCorrectness = (): number => {
+    return numberOfMatchingItems(props.typingTest.text, props.attempt.finalText) / props.typingTest.length
   }
 
   const getAccuracy = (): number => {
     return (
-      numberOfMatchingItems(props.quote.text, props.attempt.finalText) /
+      numberOfMatchingItems(props.typingTest.text, props.attempt.finalText) /
       props.attempt.allText.length
     )
   }
@@ -48,10 +48,10 @@ export const StatisticsContainer: Component<Props> = (props) => {
           <span>source:</span>
           <h2 class="text-4xl font-bold mb-2">{typingTest().source}</h2>
           <span class="mr-4">
-            Words: <span class="font-bold">{props.quote.words.length}</span>
+            Words: <span class="font-bold">{props.typingTest.words.length}</span>
           </span>
           <span>
-            Characters: <span class="font-bold">{props.quote.text.length}</span>
+            Characters: <span class="font-bold">{props.typingTest.text.length}</span>
           </span>
         </div>
       </Show>
@@ -62,7 +62,7 @@ export const StatisticsContainer: Component<Props> = (props) => {
           label="Duration"
         />
         <LabeledValue value={`${(getAccuracy() * 100).toFixed(1)}%`} label="Accuracy" />
-        <LabeledValue value={`${(getCorrectedness() * 100).toFixed(1)}%`} label="Correctedness" />
+        <LabeledValue value={`${(getCorrectness() * 100).toFixed(1)}%`} label="Correctedness" />
       </div>
       <div class="mt-4">
         <WpmChart measurements={props.attempt.measurements} state={animationState().resultsState} />

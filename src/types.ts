@@ -34,10 +34,6 @@ export interface Measurements {
   timestamps: WordsPerMinuteTimestamp
 }
 
-export interface Statistics {
-  wordsPerMinute: number
-}
-
 export interface WordMeasurement {
   startIndex: number
   endIndex: number
@@ -92,4 +88,22 @@ export interface UserOptions {
   textMode: TextMode
   theme: CatppuccinFlavour
   wordCount: number
+}
+
+export interface DatabaseTestResultInput {
+  userId: string
+  date: string
+  textMode: TextMode
+  quoteId?: string
+  source: string
+  characters: number
+  words: number
+  duration: number
+  wordsPerMinute: number
+  accuracy: number
+  correctness: number
+}
+
+export interface DatabaseTestResult extends DatabaseTestResultInput {
+  id: string
 }

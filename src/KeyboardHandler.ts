@@ -11,6 +11,8 @@ import {
 import { CharactersPerWord } from './constants'
 import { Attempt, AttemptStates } from './types'
 import { mapToString } from './util'
+import { submitTestResult } from './logic/testResult'
+import { userOptions } from './OptionsManager'
 
 const preventDefaultCharacters: string[] = ["'", 'Tab', ' ', '?', '/', 'Escape']
 
@@ -43,6 +45,7 @@ export const cleanupKeyboard = () => {
 const handleCharacter = (event: KeyboardEvent) => {
   if (attempt.state === AttemptStates.completed) return
 
+  let isEnd = false
   setAttempt(
     produce((attempt) => {
       // Handle backspace
@@ -65,7 +68,7 @@ const handleCharacter = (event: KeyboardEvent) => {
 
       const performanceNow = performance.now()
       const isStart = attempt.finalText.length === 0
-      const isEnd = attempt.finalText.length === typingTest().length - 1
+      isEnd = attempt.finalText.length === typingTest().length - 1
 
       // Handle start
       if (isStart) {
@@ -77,7 +80,6 @@ const handleCharacter = (event: KeyboardEvent) => {
       if (isEnd) {
         attempt.state = AttemptStates.completed
         attempt.measurements.endTime = performanceNow
-        startTransition(fromWritingToResults)
       }
 
       // Handle word
@@ -94,6 +96,11 @@ const handleCharacter = (event: KeyboardEvent) => {
       return attempt
     })
   )
+
+  if (isEnd) {
+    startTransition(fromWritingToResults)
+    submitTestResult(attempt, userOptions.textMode, typingTest())
+  }
 }
 
 const handleWordMeasurement = (attempt: Attempt, performanceNow: number): Attempt => {

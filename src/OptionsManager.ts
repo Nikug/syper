@@ -16,8 +16,14 @@ const defaultUserOptions = (): UserOptions => ({
 export const getStoredUserOptions = async (): Promise<UserOptions> => {
   let options: UserOptions | null = null
   if (isSignedIn()) {
-    options = await getUserOptions()
-  } else {
+    try {
+      options = await getUserOptions()
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  if (options === null) {
     const optionsString = localStorage.getItem(UserOptionsStorageKey)
     if (optionsString) {
       options = JSON.parse(optionsString)

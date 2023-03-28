@@ -28,7 +28,7 @@ export const getBearerToken = async (): Promise<string | null> => {
 export const signIn = async (): Promise<void> => {
   if (!auth) return
   try {
-    const result = await auth.loginPopup({ scopes: [] })
+    const result = await auth.loginPopup({ scopes: ['offline_access'] })
     await getIdToken(result.account)
     setAccount(result.account)
   } catch (e) {
@@ -48,6 +48,30 @@ export const signOut = async (): Promise<void> => {
 
 const getIdToken = async (account: AccountInfo | null): Promise<string | null> => {
   if (!account) return null
-  const response = await auth?.acquireTokenSilent({ account, scopes: [] })
+  const response = await auth?.acquireTokenSilent({
+    account,
+    scopes: ['offline_access'],
+  })
   return response?.idToken ?? null
+}
+
+export const authFetch = async (
+  input: RequestInfo | URL,
+  settings?: RequestInit | undefined
+): Promise<Response> => {
+  const bearerToken = await getBearerToken()
+
+  if (!bearerToken) {
+    throw new Error('Could not get bearer token.')
+  }
+
+  settings ??= {}
+
+  if (settings.headers) {
+    settings.headers = { ...settings.headers, Authorization: bearerToken }
+  } else {
+    settings.headers = { Authorization: bearerToken }
+  }
+
+  return fetch(input, settings)
 }

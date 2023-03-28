@@ -44,7 +44,7 @@ const TestPage: Component = () => {
               handleBlur(animationState().resultsState === AnimationStates.shown)
             )}
           >
-            <StatisticsContainer attempt={attempt} quote={typingTest()} />
+            <StatisticsContainer attempt={attempt} typingTest={typingTest()} />
           </div>
         </Show>
         <Show when={animationState().view === 'writing'}>
