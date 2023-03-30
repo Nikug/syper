@@ -1,5 +1,9 @@
 import { Configuration } from '@azure/msal-browser'
 
+export const scopes = [
+  'https://Syper.onmicrosoft.com/ee98da05-7a87-4e08-8265-215eda6f67a6/User.Functions',
+]
+
 const MsalPolicies = {
   names: {
     signUpSignIn: 'B2C_1_SignUpSignIn',

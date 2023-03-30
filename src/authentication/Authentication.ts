@@ -1,6 +1,6 @@
 import { AccountInfo, PublicClientApplication } from '@azure/msal-browser'
 import { createSignal } from 'solid-js'
-import { MsalConfig } from './constants'
+import { MsalConfig, scopes } from './constants'
 
 let auth: PublicClientApplication | null = null
 
@@ -9,7 +9,7 @@ export const [account, setAccount] = createSignal<AccountInfo | null>(null)
 export const setupAuth = async () => {
   auth = new PublicClientApplication(MsalConfig)
   const activeAccount = auth.getAllAccounts().at(0) ?? null
-  await getIdToken(activeAccount)
+  await getAccessToken(activeAccount)
   auth.setActiveAccount(activeAccount)
   setAccount(activeAccount)
 }
@@ -18,7 +18,7 @@ export const isSignedIn = (): boolean => !!account()
 export const getUserName = (): string | null => account()?.name || account()?.username || null
 export const getUserId = (): string | null => account()?.homeAccountId ?? null
 export const getBearerToken = async (): Promise<string | null> => {
-  const token = await getIdToken(account())
+  const token = await getAccessToken(account())
   if (token) {
     return `Bearer ${token}`
   }
@@ -28,8 +28,8 @@ export const getBearerToken = async (): Promise<string | null> => {
 export const signIn = async (): Promise<void> => {
   if (!auth) return
   try {
-    const result = await auth.loginPopup({ scopes: ['offline_access'] })
-    await getIdToken(result.account)
+    const result = await auth.loginPopup({ scopes })
+    await getAccessToken(result.account)
     setAccount(result.account)
   } catch (e) {
     console.error(e)
@@ -46,13 +46,13 @@ export const signOut = async (): Promise<void> => {
   }
 }
 
-const getIdToken = async (account: AccountInfo | null): Promise<string | null> => {
+const getAccessToken = async (account: AccountInfo | null): Promise<string | null> => {
   if (!account) return null
   const response = await auth?.acquireTokenSilent({
     account,
-    scopes: ['offline_access'],
+    scopes,
   })
-  return response?.idToken ?? null
+  return response?.accessToken ?? response?.idToken ?? null
 }
 
 export const authFetch = async (
