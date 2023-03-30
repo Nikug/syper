@@ -15,7 +15,6 @@ export const submitTestResult = async (
 
   const testResult: DatabaseTestResultInput = {
     userId: userId,
-    date: new Date().toISOString(),
     textMode: textMode,
     quoteId: textMode === 'quote' ? typingTest.id.toString() : undefined,
     source: typingTest.source,

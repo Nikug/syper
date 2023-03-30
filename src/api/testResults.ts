@@ -6,7 +6,7 @@ export const saveTestResult = async (testResult: DatabaseTestResultInput): Promi
   const userId = getUserId()
   if (!userId) return false
 
-  const result = await authFetch(`${getBaseRoute()}/testResults/${userId}`, {
+  const result = await authFetch(`${getBaseRoute()}/userTestResults/${userId}`, {
     method: 'post',
     body: JSON.stringify(testResult),
   })

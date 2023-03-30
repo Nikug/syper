@@ -92,7 +92,6 @@ export interface UserOptions {
 
 export interface DatabaseTestResultInput {
   userId: string
-  date: string
   textMode: TextMode
   quoteId?: string
   source: string
@@ -106,4 +105,5 @@ export interface DatabaseTestResultInput {
 
 export interface DatabaseTestResult extends DatabaseTestResultInput {
   id: string
+  date: string
 }
