@@ -1,18 +1,15 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+.paper {
+  @apply rounded bg-ctp-surface0;
+}
 
-@layer components {
-  .paper {
-    @apply rounded bg-ctp-surface0;
-  }
-  .blur {
-    @apply opacity-0 blur-lg;
-  }
-  .focus {
-    @apply opacity-100 blur-none;
-  }
-  .blurred {
-    @apply opacity-50 blur-md transition-all duration-300;
-  }
+.blur {
+  @apply opacity-0 blur-lg;
+}
+
+.focus {
+  @apply opacity-100 blur-none;
+}
+
+.blurred {
+  @apply opacity-50 blur-md transition-all duration-300;
 }
