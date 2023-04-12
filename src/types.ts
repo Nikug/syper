@@ -1,3 +1,5 @@
+import { ThemeKey } from './themes/themes'
+
 export interface WordsJson {
   name: string
   words: string[]
@@ -56,19 +58,6 @@ export type CharacterMode = 'default' | 'correct' | 'incorrect'
 export type Word = Map<number, string>
 export type WordsPerMinuteTimestamp = Map<number, number>
 
-export const catppuccinFlavours = {
-  latte: 'ctp-latte',
-  frappe: 'ctp-frappe',
-  macchiato: 'ctp-macchiato',
-  mocha: 'ctp-mocha',
-} as const
-export type CatppuccinFlavour = keyof typeof catppuccinFlavours
-export type CatppuccinFlavourClass = (typeof catppuccinFlavours)[CatppuccinFlavour]
-export interface Theme {
-  flavour: CatppuccinFlavour
-  class: CatppuccinFlavourClass
-}
-
 export const AnimationStates = {
   hidden: 0,
   shown: 1,
@@ -86,7 +75,7 @@ export type TextMode = 'quote' | 'words'
 
 export interface UserOptions {
   textMode: TextMode
-  theme: CatppuccinFlavour
+  theme: ThemeKey
   wordCount: number
 }
 

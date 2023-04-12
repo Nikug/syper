@@ -14,4 +14,20 @@ export default defineConfig({
     }),
   ],
   transformers: [transformerDirectives()],
+  rules: [
+    [
+      /^text-ctp-(\w*)(\/(.*))?$/,
+      (match) => ({
+        color: `rgba(var(--ctp-${match[1]}), ${match[3] ? Number(match[3]) / 100 : 1})`,
+      }),
+    ],
+    [
+      /^bg-ctp-(\w*)(\/(.*))?$/,
+      (match) => ({
+        'background-color': `rgba(var(--ctp-${match[1]}), ${
+          match[3] ? Number(match[3]) / 100 : 1
+        })`,
+      }),
+    ],
+  ],
 })

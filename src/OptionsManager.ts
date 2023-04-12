@@ -3,12 +3,13 @@ import { createStore } from 'solid-js/store'
 import { getUserOptions, saveUserOptions } from './api/userOptions'
 import { isSignedIn } from './authentication/Authentication'
 import { nextAttempt } from './StateManager'
-import { CatppuccinFlavour, TextMode, UserOptions } from './types'
+import { setTheme } from './themes/ThemeManager'
+import { TextMode, UserOptions } from './types'
 
 const UserOptionsStorageKey = 'userOptions'
 
 const defaultUserOptions = (): UserOptions => ({
-  theme: 'frappe',
+  theme: 'ctp-latte',
   textMode: 'quote',
   wordCount: 50,
 })
@@ -31,11 +32,14 @@ export const getStoredUserOptions = async (): Promise<UserOptions> => {
   }
 
   if (options) {
-    const mergedOptions = { ...defaultUserOptions(), ...options }
-    return mergedOptions
+    options = { ...defaultUserOptions(), ...options }
+  } else {
+    options = defaultUserOptions()
   }
 
-  return defaultUserOptions()
+  setTheme(options.theme)
+
+  return options
 }
 
 export const [userOptions, setUserOptions] = createStore<UserOptions>(defaultUserOptions())
@@ -52,11 +56,6 @@ export const persistUserOptions = async () => {
     localStorage.setItem(UserOptionsStorageKey, jsonOptions)
     return true
   }
-}
-
-export const setTheme = async (theme: CatppuccinFlavour) => {
-  setUserOptions('theme', theme)
-  await persistUserOptions()
 }
 
 export const setTextMode = async (textMode: TextMode) => {

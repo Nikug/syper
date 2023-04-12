@@ -1,8 +1,8 @@
-import { Component, createEffect, onCleanup, onMount, lazy } from 'solid-js'
+import { Component, onCleanup, onMount, lazy } from 'solid-js'
 import { Routes, Route } from '@solidjs/router'
 import { setupAuth } from './authentication/Authentication'
 import { cleanupKeyboard, setupKeyboard } from './KeyboardHandler'
-import { getStoredUserOptions, setUserOptions, userOptions } from './OptionsManager'
+import { getStoredUserOptions, setUserOptions } from './OptionsManager'
 import { setTypingTest } from './StateManager'
 import { initializeText } from './helpers/stateHelpers'
 
@@ -17,10 +17,6 @@ const App: Component = () => {
     setTypingTest(await initializeText())
   })
   onCleanup(() => cleanupKeyboard())
-
-  createEffect(() => {
-    document.body.className = `ctp-${userOptions.theme}`
-  })
 
   return (
     <div class="w-screen font-sans overflow-x-hidden min-h-screen bg-ctp-base text-ctp-text">

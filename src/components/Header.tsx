@@ -4,9 +4,11 @@ import { Component, Show } from 'solid-js'
 import { getUserName } from '../authentication/Authentication'
 import { WordCounts } from '../constants'
 import { UserIcon } from '../icons/UserIcon'
-import { setTextMode, setTheme, setWordCount, syncing, userOptions } from '../OptionsManager'
+import { setTextMode, setWordCount, syncing, userOptions } from '../OptionsManager'
 import { attempt } from '../StateManager'
-import { AttemptStates, CatppuccinFlavour, catppuccinFlavours, TextMode } from '../types'
+import { setTheme } from '../themes/ThemeManager'
+import { ThemeKey, themes } from '../themes/themes'
+import { AttemptStates, TextMode } from '../types'
 import { capitalize } from '../util'
 import { Dropdown } from './Dropdown'
 
@@ -41,10 +43,10 @@ export const Header: Component = () => {
         <div class="flex flex-col">
           <div class="flex items-center gap-x-2">
             <Dropdown
-              value={capitalize(userOptions.theme)}
-              options={Object.entries(catppuccinFlavours).map(([key]) => ({
-                key: key as CatppuccinFlavour,
-                value: capitalize(key),
+              value={themes[userOptions.theme].name}
+              options={Object.entries(themes).map(([key, value]) => ({
+                key: key as ThemeKey,
+                value: value.name,
               }))}
               onSelect={(option) => setTheme(option.key)}
             />
