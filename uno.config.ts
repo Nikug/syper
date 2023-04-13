@@ -17,17 +17,56 @@ export default defineConfig({
   rules: [
     [
       /^text-ctp-(\w*)(\/(.*))?$/,
-      (match) => ({
-        color: `rgba(var(--ctp-${match[1]}), ${match[3] ? Number(match[3]) / 100 : 1})`,
+      ([, rgb, , alpha]) => ({
+        color: color(rgb, alpha),
       }),
     ],
     [
       /^bg-ctp-(\w*)(\/(.*))?$/,
-      (match) => ({
-        'background-color': `rgba(var(--ctp-${match[1]}), ${
-          match[3] ? Number(match[3]) / 100 : 1
-        })`,
+      ([, rgb, , alpha]) => ({
+        'background-color': color(rgb, alpha),
+      }),
+    ],
+    [
+      /^border-ctp-(\w*)(\/(.*))?$/,
+      ([, rgb, , alpha]) => ({
+        'border-color': color(rgb, alpha),
+      }),
+    ],
+    [
+      /^bg-gradient-to-(.)$/,
+      ([, direction]) => ({
+        'background-image': `linear-gradient(to ${
+          direction === 'r' ? 'right' : 'left'
+        }, var(--custom-gradient-stops))`,
+      }),
+    ],
+    [
+      /^from-transparent$/,
+      () => ({
+        '--custom-gradient-from': 'transparent',
+        '--custom-gradient-to': 'rgb(0 0 0 / 0)',
+        '--custom-gradient-stops': 'var(--custom-gradient-from), var(--custom-gradient-to)',
+      }),
+    ],
+    [
+      /^via-ctp-(\w*)(\/(.*))?$/,
+      ([, rgb, , alpha]) => ({
+        '--custom-gradient-to': color(rgb, alpha),
+        '--custom-gradient-stops': `var(--custom-gradient-from), ${color(
+          rgb,
+          alpha
+        )}, var(--custom-gradient-to)`,
+      }),
+    ],
+    [
+      /^to-ctp-(\w*)(\/(.*))?$/,
+      ([, rgb, , alpha]) => ({
+        '--custom-gradient-to': color(rgb, alpha),
       }),
     ],
   ],
 })
+
+const color = (rgb: string, alpha: string | undefined) =>
+  `rgba(var(--ctp-${rgb}), ${alpha ? Number(alpha) / 100 : 1})`
