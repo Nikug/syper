@@ -34,6 +34,12 @@ export default defineConfig({
       }),
     ],
     [
+      /^decoration-ctp-(\w*)(\/(.*))?$/,
+      ([, rgb, , alpha]) => ({
+        'text-decoration-color': color(rgb, alpha),
+      }),
+    ],
+    [
       /^bg-gradient-to-(.)$/,
       ([, direction]) => ({
         'background-image': `linear-gradient(to ${

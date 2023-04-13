@@ -13,7 +13,6 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@catppuccin/tailwindcss": "^0.1.1",
     "@types/node": "^18.15.3",
     "@typescript-eslint/eslint-plugin": "latest",
     "@typescript-eslint/parser": "latest",
@@ -34,7 +33,6 @@
   },
   "dependencies": {
     "@azure/msal-browser": "^2.33.0",
-    "@catppuccin/palette": "^0.1.6",
     "@solidjs/router": "^0.7.0",
     "@unocss/reset": "^0.51.4",
     "apexcharts": "^3.37.0",
