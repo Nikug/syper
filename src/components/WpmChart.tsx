@@ -1,10 +1,10 @@
 import { Component, createEffect, createSignal, on } from 'solid-js'
 import ApexCharts, { ApexOptions } from 'apexcharts'
-import { variants } from '@catppuccin/palette'
 import { AnimationState, AnimationStates, Measurements } from '../types'
 import { wordsPerMinute } from '../util'
 import './WpmChart.css'
 import { userOptions } from '../OptionsManager'
+import { getColor } from '../themes/themeHelper'
 
 interface Props {
   measurements: Measurements
@@ -28,8 +28,6 @@ export const WpmChart: Component<Props> = (props) => {
 
   return <div ref={element} class="paper py-4 pr-4" />
 }
-
-const catppuccinColor = () => variants[userOptions.theme]
 
 const createOptions = (measurements: Measurements) => {
   const timestamps = Array.from(measurements.timestamps.entries())
@@ -72,7 +70,7 @@ const createOptions = (measurements: Measurements) => {
           show: false,
         },
       },
-      borderColor: catppuccinColor().overlay0.hex,
+      borderColor: getColor(userOptions.theme, '--ctp-overlay0'),
     },
     dataLabels: {
       enabled: false,
@@ -81,7 +79,7 @@ const createOptions = (measurements: Measurements) => {
       position: 'top',
       fontSize: 'inherit',
       labels: {
-        colors: catppuccinColor().text.hex,
+        colors: getColor(userOptions.theme, '--ctp-text'),
       },
     },
     stroke: {
@@ -93,12 +91,15 @@ const createOptions = (measurements: Measurements) => {
       strokeColors: undefined,
       strokeWidth: 0,
     },
-    colors: [catppuccinColor().overlay2.hex, catppuccinColor().mauve.hex],
+    colors: [
+      getColor(userOptions.theme, '--ctp-overlay2'),
+      getColor(userOptions.theme, '--ctp-mauve'),
+    ],
     xaxis: {
       tickAmount: 10,
       labels: {
         style: {
-          colors: catppuccinColor().text.hex,
+          colors: getColor(userOptions.theme, '--ctp-text'),
         },
       },
       tooltip: {
@@ -108,12 +109,12 @@ const createOptions = (measurements: Measurements) => {
         show: false,
       },
       axisTicks: {
-        color: catppuccinColor().overlay0.hex,
+        color: getColor(userOptions.theme, '--ctp-overlay0'),
       },
       title: {
         text: 'Characters written',
         style: {
-          color: catppuccinColor().text.hex,
+          color: getColor(userOptions.theme, '--ctp-text'),
           fontSize: 'inherit',
           fontWeight: 'normal',
         },
@@ -122,17 +123,17 @@ const createOptions = (measurements: Measurements) => {
     yaxis: {
       labels: {
         style: {
-          colors: catppuccinColor().text.hex,
+          colors: getColor(userOptions.theme, '--ctp-text'),
         },
         formatter: (value: number) => value?.toFixed(),
       },
       axisTicks: {
-        color: catppuccinColor().overlay0.hex,
+        color: getColor(userOptions.theme, '--ctp-overlay0'),
       },
       title: {
         text: 'Words per minute',
         style: {
-          color: catppuccinColor().text.hex,
+          color: getColor(userOptions.theme, '--ctp-text'),
           fontSize: 'inherit',
           fontWeight: 'normal',
         },
