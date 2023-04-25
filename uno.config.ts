@@ -1,6 +1,7 @@
 import { defineConfig, presetUno } from 'unocss'
 import presetWebFonts from '@unocss/preset-web-fonts'
 import transformerDirectives from '@unocss/transformer-directives'
+import presetIcons from '@unocss/preset-icons'
 
 export default defineConfig({
   presets: [
@@ -12,6 +13,7 @@ export default defineConfig({
         mono: 'Fragment Mono:400,600,700',
       },
     }),
+    presetIcons(),
   ],
   transformers: [transformerDirectives()],
   rules: [

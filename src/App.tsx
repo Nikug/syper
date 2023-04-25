@@ -5,6 +5,7 @@ import { cleanupKeyboard, setupKeyboard } from './KeyboardHandler'
 import { getStoredUserOptions, setUserOptions } from './OptionsManager'
 import { setTypingTest } from './StateManager'
 import { initializeText } from './helpers/stateHelpers'
+import { SyncingIndicator } from './components/SyncingIndicator'
 
 const TestPage = lazy(() => import('./components/TestPage'))
 const ProfilePage = lazy(() => import('./components/ProfilePage'))
@@ -20,6 +21,7 @@ const App: Component = () => {
 
   return (
     <div class="w-screen font-sans overflow-x-hidden min-h-screen bg-ctp-base text-ctp-text">
+      <SyncingIndicator />
       <Routes>
         <Route path="/" component={TestPage} />
         <Route path="/profile" component={ProfilePage} />

@@ -3,8 +3,7 @@ import { clsx } from 'clsx'
 import { Component, Show } from 'solid-js'
 import { getUserName } from '../authentication/Authentication'
 import { WordCounts } from '../constants'
-import { UserIcon } from '../icons/UserIcon'
-import { setTextMode, setWordCount, syncing, userOptions } from '../OptionsManager'
+import { setTextMode, setWordCount, userOptions } from '../OptionsManager'
 import { attempt } from '../StateManager'
 import { setTheme } from '../themes/ThemeManager'
 import { ThemeKey, themes } from '../themes/themes'
@@ -31,10 +30,9 @@ export const Header: Component = () => {
         <A href="/" class="text-5xl font-bold">
           Syper_
         </A>
-        <Show when={syncing()}>Syncing...</Show>
         <div>
           <A href="/profile" class="cursor-pointer flex items-center">
-            <UserIcon class="w-8 h-8 mr-2" />
+            <div class="i-ri-user-line w-8 h-8 mr-2" />
             {getUserName() ?? 'Profile'}
           </A>
         </div>

@@ -1,8 +1,8 @@
-import { createSignal } from 'solid-js'
 import { createStore } from 'solid-js/store'
 import { getUserOptions, saveUserOptions } from './api/userOptions'
 import { isSignedIn } from './authentication/Authentication'
 import { nextAttempt } from './StateManager'
+import { startSyncing, stopSyncing } from './SyncingManager'
 import { setTheme } from './themes/ThemeManager'
 import { TextMode, UserOptions } from './types'
 
@@ -43,14 +43,16 @@ export const getStoredUserOptions = async (): Promise<UserOptions> => {
 }
 
 export const [userOptions, setUserOptions] = createStore<UserOptions>(defaultUserOptions())
-export const [syncing, setSyncing] = createSignal<boolean>(false)
 
 export const persistUserOptions = async () => {
   if (isSignedIn()) {
-    setSyncing(true)
-    const success = await saveUserOptions(userOptions)
-    setSyncing(false)
-    return success
+    try {
+      startSyncing()
+      const success = await saveUserOptions(userOptions)
+      return success
+    } finally {
+      stopSyncing()
+    }
   } else {
     const jsonOptions = JSON.stringify(userOptions)
     localStorage.setItem(UserOptionsStorageKey, jsonOptions)
