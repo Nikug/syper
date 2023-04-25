@@ -8,8 +8,8 @@ export default defineConfig({
     presetWebFonts({
       provider: 'google',
       fonts: {
-        sans: 'Open Sans',
-        mono: 'Fragment Mono',
+        sans: 'Open Sans:400,600,700',
+        mono: 'Fragment Mono:400,600,700',
       },
     }),
   ],
