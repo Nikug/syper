@@ -45,6 +45,9 @@ export const getStoredUserOptions = async (): Promise<UserOptions> => {
 export const [userOptions, setUserOptions] = createStore<UserOptions>(defaultUserOptions())
 
 export const persistUserOptions = async () => {
+  const jsonOptions = JSON.stringify(userOptions)
+  localStorage.setItem(UserOptionsStorageKey, jsonOptions)
+
   if (isSignedIn()) {
     try {
       startSyncing()
@@ -53,10 +56,6 @@ export const persistUserOptions = async () => {
     } finally {
       stopSyncing()
     }
-  } else {
-    const jsonOptions = JSON.stringify(userOptions)
-    localStorage.setItem(UserOptionsStorageKey, jsonOptions)
-    return true
   }
 }
 
