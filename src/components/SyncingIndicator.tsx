@@ -4,7 +4,7 @@ import { isSyncing } from '../SyncingManager'
 export const SyncingIndicator: Component = () => {
   return (
     <Show when={isSyncing()}>
-      <div class="absolute top-8 right-8 flex items-center opacity-50">
+      <div class="fixed top-8 right-8 flex items-center opacity-50">
         <p>Syncing</p>
         <div class="relative h-5 w-5 ml-1 animate-spin">
           {/* Firefox has weird bug with spinning css icons, so use svg instead */}
