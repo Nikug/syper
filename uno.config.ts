@@ -18,25 +18,25 @@ export default defineConfig({
   transformers: [transformerDirectives()],
   rules: [
     [
-      /^text-ctp-(\w*)(\/(.*))?$/,
+      /^text-theme-(\w*)(\/(.*))?$/,
       ([, rgb, , alpha]) => ({
         color: color(rgb, alpha),
       }),
     ],
     [
-      /^bg-ctp-(\w*)(\/(.*))?$/,
+      /^bg-theme-(\w*)(\/(.*))?$/,
       ([, rgb, , alpha]) => ({
         'background-color': color(rgb, alpha),
       }),
     ],
     [
-      /^border-ctp-(\w*)(\/(.*))?$/,
+      /^border-theme-(\w*)(\/(.*))?$/,
       ([, rgb, , alpha]) => ({
         'border-color': color(rgb, alpha),
       }),
     ],
     [
-      /^decoration-ctp-(\w*)(\/(.*))?$/,
+      /^decoration-theme-(\w*)(\/(.*))?$/,
       ([, rgb, , alpha]) => ({
         'text-decoration-color': color(rgb, alpha),
       }),
@@ -58,7 +58,7 @@ export default defineConfig({
       }),
     ],
     [
-      /^via-ctp-(\w*)(\/(.*))?$/,
+      /^via-theme-(\w*)(\/(.*))?$/,
       ([, rgb, , alpha]) => ({
         '--custom-gradient-to': color(rgb, alpha),
         '--custom-gradient-stops': `var(--custom-gradient-from), ${color(
@@ -68,7 +68,7 @@ export default defineConfig({
       }),
     ],
     [
-      /^to-ctp-(\w*)(\/(.*))?$/,
+      /^to-theme-(\w*)(\/(.*))?$/,
       ([, rgb, , alpha]) => ({
         '--custom-gradient-to': color(rgb, alpha),
       }),
@@ -77,4 +77,4 @@ export default defineConfig({
 })
 
 const color = (rgb: string, alpha: string | undefined) =>
-  `rgba(var(--ctp-${rgb}), ${alpha ? Number(alpha) / 100 : 1})`
+  `rgba(var(--theme-${rgb}), ${alpha ? Number(alpha) / 100 : 1})`

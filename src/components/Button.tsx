@@ -24,11 +24,11 @@ const buttonClasses = `
   border
   border-2
   rounded
-  border-ctp-mauve
-  text-ctp-mauve
-  hover:border-ctp-maroon
-  hover:text-ctp-maroon
-  hover:bg-ctp-maroon/10
+  border-theme-primary
+  text-theme-primary
+  hover:border-theme-highlight
+  hover:text-theme-highlight
+  hover:bg-theme-highlight/10
   font-bold
   px-4 py-2
 `

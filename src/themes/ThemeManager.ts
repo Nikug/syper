@@ -3,7 +3,7 @@ import { ThemeKey, themes, ThemeVariables } from './themes'
 
 export const setTheme = async (theme: ThemeKey) => {
   if (!isValidTheme(theme)) {
-    theme = 'ctp-mocha'
+    theme = 'catppuccin-mocha'
   }
 
   setUserOptions('theme', theme)
@@ -13,7 +13,9 @@ export const setTheme = async (theme: ThemeKey) => {
 
 const setCssVariables = (theme: ThemeVariables) => {
   const root = document.documentElement
-  Object.entries(theme.variables).map(([key, value]) => root.style.setProperty(key, value))
+  Object.entries(theme.variables).map(([key, value]) =>
+    root.style.setProperty(`--theme-${key}`, value)
+  )
 }
 
 const isValidTheme = (theme: string): boolean => {

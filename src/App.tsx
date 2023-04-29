@@ -24,7 +24,7 @@ const App: Component = () => {
   onCleanup(() => cleanupKeyboard())
 
   return (
-    <div class="w-screen font-sans overflow-x-hidden min-h-screen bg-ctp-base text-ctp-text">
+    <div class="w-screen font-sans overflow-x-hidden min-h-screen bg-theme-base text-theme-text">
       <SyncingIndicator />
       <Show when={!loading()} fallback={<p>Loading...</p>}>
         <Routes>

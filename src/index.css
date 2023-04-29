@@ -1,5 +1,5 @@
 .paper {
-  @apply rounded bg-ctp-surface0;
+  @apply rounded bg-theme-surface0;
 }
 
 .blur {

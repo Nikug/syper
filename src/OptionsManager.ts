@@ -9,7 +9,7 @@ import { TextMode, UserOptions } from './types'
 const UserOptionsStorageKey = 'userOptions'
 
 const defaultUserOptions = (): UserOptions => ({
-  theme: 'ctp-latte',
+  theme: 'catppuccin-mocha',
   textMode: 'quote',
   wordCount: 50,
 })

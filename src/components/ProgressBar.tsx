@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import { Component } from 'solid-js'
 import { typingTest, attempt } from '../StateManager'
 
-const gradient = 'bg-gradient-to-r from-transparent via-ctp-blue to-ctp-mauve'
+const gradient = 'bg-gradient-to-r from-transparent via-theme-accent to-theme-primary'
 
 export const ProgressBar: Component = () => {
   const progress = () => (attempt.finalText.length / typingTest().length) * 100
@@ -11,7 +11,7 @@ export const ProgressBar: Component = () => {
       <div class={clsx(gradient, 'absolute inset-0')} />
       <div
         style={{ left: `${progress()}%` }}
-        class="inset-y-0 right-0 absolute bg-ctp-base transition-all duration-75"
+        class="inset-y-0 right-0 absolute bg-theme-base transition-all duration-75"
       />
     </div>
   )

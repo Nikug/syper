@@ -70,7 +70,7 @@ const createOptions = (measurements: Measurements) => {
           show: false,
         },
       },
-      borderColor: getColor(userOptions.theme, '--ctp-overlay0'),
+      borderColor: getColor(userOptions.theme, 'overlay0'),
     },
     dataLabels: {
       enabled: false,
@@ -79,7 +79,7 @@ const createOptions = (measurements: Measurements) => {
       position: 'top',
       fontSize: 'inherit',
       labels: {
-        colors: getColor(userOptions.theme, '--ctp-text'),
+        colors: getColor(userOptions.theme, 'text'),
       },
     },
     stroke: {
@@ -91,15 +91,12 @@ const createOptions = (measurements: Measurements) => {
       strokeColors: undefined,
       strokeWidth: 0,
     },
-    colors: [
-      getColor(userOptions.theme, '--ctp-overlay2'),
-      getColor(userOptions.theme, '--ctp-mauve'),
-    ],
+    colors: [getColor(userOptions.theme, 'overlay2'), getColor(userOptions.theme, 'primary')],
     xaxis: {
       tickAmount: 10,
       labels: {
         style: {
-          colors: getColor(userOptions.theme, '--ctp-text'),
+          colors: getColor(userOptions.theme, 'text'),
         },
       },
       tooltip: {
@@ -109,12 +106,12 @@ const createOptions = (measurements: Measurements) => {
         show: false,
       },
       axisTicks: {
-        color: getColor(userOptions.theme, '--ctp-overlay0'),
+        color: getColor(userOptions.theme, 'overlay0'),
       },
       title: {
         text: 'Characters written',
         style: {
-          color: getColor(userOptions.theme, '--ctp-text'),
+          color: getColor(userOptions.theme, 'text'),
           fontSize: 'inherit',
           fontWeight: 'normal',
         },
@@ -123,17 +120,17 @@ const createOptions = (measurements: Measurements) => {
     yaxis: {
       labels: {
         style: {
-          colors: getColor(userOptions.theme, '--ctp-text'),
+          colors: getColor(userOptions.theme, 'text'),
         },
         formatter: (value: number) => value?.toFixed(),
       },
       axisTicks: {
-        color: getColor(userOptions.theme, '--ctp-overlay0'),
+        color: getColor(userOptions.theme, 'overlay0'),
       },
       title: {
         text: 'Words per minute',
         style: {
-          color: getColor(userOptions.theme, '--ctp-text'),
+          color: getColor(userOptions.theme, 'text'),
           fontSize: 'inherit',
           fontWeight: 'normal',
         },
@@ -144,7 +141,7 @@ const createOptions = (measurements: Measurements) => {
         const showSeries0 = series.at(0)?.[dataPointIndex] != null
         const showSeries1 = series.at(1)?.[dataPointIndex] != null
         return `
-          <div class="bg-ctp-surface2 rounded px-4 py-2 !border-ctp-red">
+          <div class="bg-theme-surface2 rounded px-4 py-2 !border-theme-danger">
             <h3 class="font-semibold mb-2">At ${
               w.globals.initialSeries.at(0)?.data.at(dataPointIndex)?.x
             } characters
@@ -152,7 +149,7 @@ const createOptions = (measurements: Measurements) => {
             ${
               showSeries0
                 ? `<div class="flex gap-x-2 items-center">
-                     <div class="bg-ctp-overlay2 rounded-full w-4 h-4"></div>
+                     <div class="bg-theme-overlay2 rounded-full w-4 h-4"></div>
                      <p>Current Wpm: <span class="font-bold">${series
                        .at(0)
                        ?.[dataPointIndex]?.toFixed(1)}</span></p>
@@ -162,7 +159,7 @@ const createOptions = (measurements: Measurements) => {
             ${
               showSeries1
                 ? `<div class="flex gap-x-2 items-center">
-                     <div class="bg-ctp-mauve rounded-full w-4 h-4"></div>
+                     <div class="bg-theme-primary rounded-full w-4 h-4"></div>
                      <p>Total Wpm: <span class="font-bold">${series
                        .at(1)
                        ?.[dataPointIndex]?.toFixed(1)}</span></p>
