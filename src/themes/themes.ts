@@ -46,4 +46,21 @@ export const themes = {
       base: Color.rgb(239, 241, 245),
     },
   },
+  synthwave: {
+    name: 'Synthwave',
+    variables: {
+      text: Color.rgb(45, 226, 230),
+      primary: Color.rgb(255, 56, 100),
+      highlight: Color.rgb(249, 200, 14),
+      accent: Color.rgb(25, 226, 230),
+      danger: Color.rgb(255, 108, 17),
+      overlay2: Color.rgb(121, 30, 148),
+      overlay1: Color.rgb(84, 13, 110),
+      overlay0: Color.rgb(84, 19, 136),
+      surface2: Color.rgb(71, 54, 96),
+      surface1: Color.rgb(43, 33, 58),
+      surface0: Color.rgb(36, 27, 48),
+      base: Color.rgb(13, 2, 33),
+    },
+  },
 }
