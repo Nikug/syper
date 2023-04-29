@@ -31,7 +31,10 @@ export const StatisticsContainer: Component<Props> = (props) => {
   }
 
   const getCorrectness = (): number => {
-    return numberOfMatchingItems(props.typingTest.text, props.attempt.finalText) / props.typingTest.length
+    return (
+      numberOfMatchingItems(props.typingTest.text, props.attempt.finalText) /
+      props.typingTest.length
+    )
   }
 
   const getAccuracy = (): number => {
@@ -62,7 +65,7 @@ export const StatisticsContainer: Component<Props> = (props) => {
           label="Duration"
         />
         <LabeledValue value={`${(getAccuracy() * 100).toFixed(1)}%`} label="Accuracy" />
-        <LabeledValue value={`${(getCorrectness() * 100).toFixed(1)}%`} label="Correctedness" />
+        <LabeledValue value={`${(getCorrectness() * 100).toFixed(1)}%`} label="Correctness" />
       </div>
       <div class="mt-4">
         <WpmChart measurements={props.attempt.measurements} state={animationState().resultsState} />
