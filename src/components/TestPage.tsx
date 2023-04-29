@@ -28,7 +28,7 @@ const TestPage: Component = () => {
               <div class="h-8">
                 <QuoteInformation />
               </div>
-              <div class="h-32 overflow-hidden">
+              <div class="h-36 overflow-hidden">
                 <TextContainer attempt={attempt} quote={typingTest()} />
               </div>
               <div class="h-8">
