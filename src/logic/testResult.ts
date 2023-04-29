@@ -1,8 +1,8 @@
 import { saveTestResult } from '../api/testResults'
 import { getUserId } from '../authentication/Authentication'
+import { getAccuracy, getCorrectness, getWordsPerMinute } from '../helpers/mathHelpers'
 import { startSyncing, stopSyncing } from '../SyncingManager'
 import { Attempt, DatabaseTestResultInput, TextMode, TypingTest } from '../types'
-import { numberOfMatchingItems, wordsPerMinute } from '../util'
 
 export const submitTestResult = async (
   attempt: Attempt,
@@ -24,9 +24,9 @@ export const submitTestResult = async (
       characters: typingTest.length,
       words: typingTest.words.length,
       duration: duration,
-      wordsPerMinute: wordsPerMinute(typingTest.length, duration) ?? 0,
-      correctness: numberOfMatchingItems(typingTest.text, attempt.finalText) / typingTest.length,
-      accuracy: numberOfMatchingItems(typingTest.text, attempt.finalText) / attempt.allText.length,
+      wordsPerMinute: getWordsPerMinute(attempt.measurements, typingTest) ?? 0,
+      correctness: getCorrectness(typingTest, attempt),
+      accuracy: getAccuracy(typingTest, attempt),
     }
 
     await saveTestResult(testResult)

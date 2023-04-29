@@ -1,5 +1,3 @@
-import { CharactersPerWord } from './constants'
-
 /*
  * Gets random integer value between min and max
  * @param {end} min - inclusive
@@ -46,19 +44,6 @@ export const numberOfMatchingItems = <T extends string | unknown[]>(
  */
 export const mapToString = <K, V>(map: Map<K, V>): string => {
   return Array.from(map.values()).join('')
-}
-
-/*
- * Calculates words per minute from characters and duration.
- * @param {number} characters - Number of characters
- * @param {number} duration - Duration in milliseconds
- */
-export const wordsPerMinute = (characters: number, duration: number): number | null => {
-  const words = characters / CharactersPerWord
-  const durationInMinutes = duration / 1000 / 60
-  if (duration === 0) return null
-
-  return words / durationInMinutes
 }
 
 /*

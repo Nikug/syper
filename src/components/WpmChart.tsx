@@ -1,7 +1,7 @@
 import { Component, createEffect, createSignal, on } from 'solid-js'
 import ApexCharts, { ApexOptions } from 'apexcharts'
 import { AnimationState, AnimationStates, Measurements } from '../types'
-import { wordsPerMinute } from '../util'
+import { wordsPerMinute } from '../helpers/mathHelpers'
 import './WpmChart.css'
 import { userOptions } from '../OptionsManager'
 import { getColor } from '../themes/themeHelper'

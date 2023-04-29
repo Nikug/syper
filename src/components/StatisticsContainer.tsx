@@ -1,7 +1,7 @@
 import { Component, For, Show } from 'solid-js'
+import { getAccuracy, getCorrectness, getDuration, getWordsPerMinute } from '../helpers/mathHelpers'
 import { animationState, attempt, typingTest } from '../StateManager'
 import { Attempt, AttemptStates, TypingTest } from '../types'
-import { numberOfMatchingItems, wordsPerMinute } from '../util'
 import { FormattedDuration } from './FormattedDuration'
 import { LabeledValue } from './LabeledValue'
 import { WordWithWpm } from './WordWithWpm'
@@ -13,37 +13,6 @@ interface Props {
 }
 
 export const StatisticsContainer: Component<Props> = (props) => {
-  const getDuration = (): number | null => {
-    if (
-      props.attempt.measurements.endTime == null ||
-      props.attempt.measurements.startTime == null
-    ) {
-      return null
-    }
-
-    return props.attempt.measurements.endTime - props.attempt.measurements.startTime
-  }
-
-  const getWordsPerMinute = (): number | null => {
-    const duration = getDuration()
-    if (duration == null) return null
-    return wordsPerMinute(props.typingTest.length, duration)
-  }
-
-  const getCorrectness = (): number => {
-    return (
-      numberOfMatchingItems(props.typingTest.text, props.attempt.finalText) /
-      props.typingTest.length
-    )
-  }
-
-  const getAccuracy = (): number => {
-    return (
-      numberOfMatchingItems(props.typingTest.text, props.attempt.finalText) /
-      props.attempt.allText.length
-    )
-  }
-
   return (
     <div class="h-full pt-8 pb-32">
       <Show when={attempt.state === AttemptStates.completed}>
@@ -59,13 +28,16 @@ export const StatisticsContainer: Component<Props> = (props) => {
         </div>
       </Show>
       <div class="w-full flex justify-evenly">
-        <LabeledValue value={getWordsPerMinute()?.toFixed(1)} label="Words per minute" />
         <LabeledValue
-          value={<FormattedDuration duration={getDuration() ?? 0} />}
+          value={getWordsPerMinute(props.attempt.measurements, props.typingTest)?.toFixed(1)}
+          label="Words per minute"
+        />
+        <LabeledValue
+          value={<FormattedDuration duration={getDuration(props.attempt.measurements) ?? 0} />}
           label="Duration"
         />
-        <LabeledValue value={`${(getAccuracy() * 100).toFixed(1)}%`} label="Accuracy" />
-        <LabeledValue value={`${(getCorrectness() * 100).toFixed(1)}%`} label="Correctness" />
+        <LabeledValue value={`${(getAccuracy(props.typingTest, props.attempt) * 100).toFixed(1)}%`} label="Accuracy" />
+        <LabeledValue value={`${(getCorrectness(props.typingTest, props.attempt) * 100).toFixed(1)}%`} label="Correctness" />
       </div>
       <div class="mt-4">
         <WpmChart measurements={props.attempt.measurements} state={animationState().resultsState} />

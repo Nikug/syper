@@ -1,6 +1,6 @@
 import { Component } from 'solid-js'
 import { WordMeasurement } from '../types'
-import { wordsPerMinute } from '../util'
+import { wordsPerMinute } from '../helpers/mathHelpers'
 
 interface Props {
   word: WordMeasurement
