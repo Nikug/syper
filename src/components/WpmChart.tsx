@@ -65,12 +65,13 @@ const createOptions = (measurements: Measurements) => {
       fontFamily: 'inherit',
     },
     grid: {
+      position: 'back',
       xaxis: {
         lines: {
           show: false,
         },
       },
-      borderColor: getColor(userOptions.theme, 'overlay0'),
+      borderColor: getColor(userOptions.theme, 'text', 0.5),
     },
     dataLabels: {
       enabled: false,
@@ -91,7 +92,7 @@ const createOptions = (measurements: Measurements) => {
       strokeColors: undefined,
       strokeWidth: 0,
     },
-    colors: [getColor(userOptions.theme, 'overlay2'), getColor(userOptions.theme, 'primary')],
+    colors: [getColor(userOptions.theme, 'secondary'), getColor(userOptions.theme, 'primary')],
     xaxis: {
       tickAmount: 10,
       labels: {
@@ -106,7 +107,10 @@ const createOptions = (measurements: Measurements) => {
         show: false,
       },
       axisTicks: {
-        color: getColor(userOptions.theme, 'overlay0'),
+        color: getColor(userOptions.theme, 'text', 0.5),
+      },
+      axisBorder: {
+        show: false,
       },
       title: {
         text: 'Characters written',
@@ -149,7 +153,7 @@ const createOptions = (measurements: Measurements) => {
             ${
               showSeries0
                 ? `<div class="flex gap-x-2 items-center">
-                     <div class="bg-theme-overlay2 rounded-full w-4 h-4"></div>
+                     <div class="bg-theme-secondary rounded-full w-4 h-4"></div>
                      <p>Current Wpm: <span class="font-bold">${series
                        .at(0)
                        ?.[dataPointIndex]?.toFixed(1)}</span></p>
