@@ -32,7 +32,7 @@ export const getBearerToken = async (): Promise<string | null> => {
 export const signIn = async (): Promise<void> => {
   if (!auth) return
   try {
-    const result = await auth.loginPopup({ scopes })
+    const result = await auth.loginPopup({ scopes, prompt: 'select_account' })
     await getAccessToken(result.account)
     setAccount(result.account)
     startSyncing()
@@ -48,7 +48,7 @@ export const signIn = async (): Promise<void> => {
 export const signOut = async (): Promise<void> => {
   if (!auth) return
   try {
-    await auth.logoutPopup()
+    await auth.logoutPopup({ account: account() })
     setAccount(null)
   } catch (e) {
     console.error(e)
