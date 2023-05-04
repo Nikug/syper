@@ -7,7 +7,7 @@ export const saveUserOptions = async (options: UserOptions): Promise<boolean> =>
   const userId = getUserId()
   if (!userId) return false
 
-  const result = await authFetch(`${getBaseRoute()}/userOptions/${userId}`, {
+  const result = await authFetch(`${getBaseRoute()}/userOptions`, {
     method: 'post',
     body: JSON.stringify(options),
   })

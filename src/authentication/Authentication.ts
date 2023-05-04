@@ -20,7 +20,7 @@ export const setupAuth = async () => {
 
 export const isSignedIn = (): boolean => !!account()
 export const getUserName = (): string | null => account()?.name || account()?.username || null
-export const getUserId = (): string | null => account()?.homeAccountId ?? null
+export const getUserId = (): string | null => account()?.localAccountId ?? null
 export const getBearerToken = async (): Promise<string | null> => {
   const token = await getAccessToken(account())
   if (token) {
