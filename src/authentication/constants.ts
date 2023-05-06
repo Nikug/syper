@@ -23,7 +23,7 @@ export const MsalConfig: Configuration = {
     knownAuthorities: [MsalPolicies.authorityDomain],
   },
   cache: {
-    cacheLocation: 'sessionStorage',
+    cacheLocation: 'localStorage',
     storeAuthStateInCookie: false,
   },
 }
