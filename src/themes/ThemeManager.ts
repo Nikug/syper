@@ -1,13 +1,17 @@
 import { persistUserOptions, setUserOptions } from '../OptionsManager'
 import { ThemeKey, themes, ThemeVariables } from './themes'
 
-export const setTheme = async (theme: ThemeKey) => {
+export const setTheme = (theme: ThemeKey) => {
   if (!isValidTheme(theme)) {
     theme = 'catppuccin-mocha'
   }
 
   setUserOptions('theme', theme)
   setCssVariables(themes[theme])
+}
+
+export const setAndSaveTheme = async (theme: ThemeKey) => {
+  setTheme(theme)
   await persistUserOptions()
 }
 

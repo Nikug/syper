@@ -3,7 +3,7 @@ import { createSignal } from 'solid-js'
 import { initializeText } from '../helpers/stateHelpers'
 import { getStoredUserOptions, setUserOptions } from '../OptionsManager'
 import { setTypingTest } from '../StateManager'
-import { startSyncing, stopSyncing } from '../SyncingManager'
+import { setShowLoadingScreen } from '../SyncingManager'
 import { MsalConfig, scopes } from './constants'
 
 let auth: PublicClientApplication | null = null
@@ -35,13 +35,13 @@ export const signIn = async (): Promise<void> => {
     const result = await auth.loginPopup({ scopes, prompt: 'select_account' })
     await getAccessToken(result.account)
     setAccount(result.account)
-    startSyncing()
+    setShowLoadingScreen(true)
     setUserOptions(await getStoredUserOptions())
     setTypingTest(await initializeText())
   } catch (e) {
     console.error(e)
   } finally {
-    stopSyncing()
+    setShowLoadingScreen(false)
   }
 }
 
