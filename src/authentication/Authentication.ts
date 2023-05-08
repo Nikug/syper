@@ -57,11 +57,19 @@ export const signOut = async (): Promise<void> => {
 
 const getAccessToken = async (account: AccountInfo | null): Promise<string | null> => {
   if (!account) return null
-  const response = await auth?.acquireTokenSilent({
-    account,
-    scopes,
-  })
-  return response?.accessToken ?? response?.idToken ?? null
+  try {
+    const response = await auth?.acquireTokenSilent({
+      account,
+      scopes,
+    })
+    return response?.accessToken ?? response?.idToken ?? null
+  } catch (e) {
+    await auth?.logoutRedirect({ account })
+    setAccount(null)
+    console.error(e)
+  }
+
+  return null
 }
 
 export const authFetch = async (

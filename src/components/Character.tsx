@@ -5,7 +5,7 @@ import { CharacterMode } from '../types'
 const defaultClasses = `
   whitespace-pre
   text-4xl
-  scroll-mb-12
+  scroll-mb-14
 `
 
 const characterClasses: Record<CharacterMode, string> = {

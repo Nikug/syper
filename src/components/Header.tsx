@@ -5,7 +5,7 @@ import { getUserName } from '../authentication/Authentication'
 import { WordCounts } from '../constants'
 import { setTextMode, setWordCount, userOptions } from '../OptionsManager'
 import { attempt } from '../StateManager'
-import { setTheme } from '../themes/ThemeManager'
+import { setAndSaveTheme } from '../themes/ThemeManager'
 import { ThemeKey, themes } from '../themes/themes'
 import { AttemptStates, TextMode } from '../types'
 import { capitalize } from '../util'
@@ -46,7 +46,7 @@ export const Header: Component = () => {
                 key: key as ThemeKey,
                 value: value.name,
               }))}
-              onSelect={(option) => setTheme(option.key)}
+              onSelect={(option) => setAndSaveTheme(option.key)}
             />
             <Dropdown
               value={capitalize(userOptions.textMode)}
