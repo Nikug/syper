@@ -47,8 +47,8 @@ const createOptions = (measurements: Measurements) => {
 
   const options = createDefaultChartOptions('Characters written', 'Words per minute')
   options.series = [
-    { name: 'Words per minute', data: wpmBetweenTimestamps },
     { name: 'Words per minute total', data: wpmOverTime },
+    { name: 'Words per minute', data: wpmBetweenTimestamps },
   ]
 
   return options
@@ -100,7 +100,7 @@ export const createDefaultChartOptions = (xTitle: string, yTitle: string): ApexO
       strokeColors: undefined,
       strokeWidth: 0,
     },
-    colors: [getColor(userOptions.theme, 'secondary'), getColor(userOptions.theme, 'primary')],
+    colors: [getColor(userOptions.theme, 'primary'), getColor(userOptions.theme, 'secondary')],
     xaxis: {
       tickAmount: 10,
       labels: {
@@ -161,8 +161,8 @@ export const createDefaultChartOptions = (xTitle: string, yTitle: string): ApexO
             ${
               showSeries0
                 ? `<div class="flex gap-x-2 items-center">
-                     <div class="bg-theme-secondary rounded-full w-4 h-4"></div>
-                     <p>Current Wpm: <span class="font-bold">${series
+                     <div class="bg-theme-primary rounded-full w-4 h-4"></div>
+                     <p>Total Wpm: <span class="font-bold">${series
                        .at(0)
                        ?.[dataPointIndex]?.toFixed(1)}</span></p>
                    </div>`
@@ -171,8 +171,8 @@ export const createDefaultChartOptions = (xTitle: string, yTitle: string): ApexO
             ${
               showSeries1
                 ? `<div class="flex gap-x-2 items-center">
-                     <div class="bg-theme-primary rounded-full w-4 h-4"></div>
-                     <p>Total Wpm: <span class="font-bold">${series
+                     <div class="bg-theme-secondary rounded-full w-4 h-4"></div>
+                     <p>Current Wpm: <span class="font-bold">${series
                        .at(1)
                        ?.[dataPointIndex]?.toFixed(1)}</span></p>
                    </div>`
