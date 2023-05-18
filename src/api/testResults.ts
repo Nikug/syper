@@ -1,6 +1,7 @@
 import { authFetch, getUserId } from '../authentication/Authentication'
-import { DatabaseTestResultInput } from '../types'
+import { DatabaseTestResult, DatabaseTestResultInput } from '../types'
 import { getBaseRoute } from './userOptions'
+import { endOfDay, startOfDay } from 'date-fns'
 
 export const saveTestResult = async (testResult: DatabaseTestResultInput): Promise<boolean> => {
   const userId = getUserId()
@@ -12,4 +13,25 @@ export const saveTestResult = async (testResult: DatabaseTestResultInput): Promi
   })
 
   return result.ok
+}
+
+export const getTestResults = async (
+  startDate?: Date,
+  endDate?: Date
+): Promise<DatabaseTestResult[]> => {
+  if (!endDate) endDate = endOfDay(new Date())
+  if (!startDate) startDate = startOfDay(endDate)
+
+  const userId = getUserId()
+  if (!userId) return []
+
+  const result = await authFetch(
+    `${getBaseRoute()}/userTestResults/${userId}?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`
+  )
+
+  if (result.ok) {
+    return await result.json()
+  }
+
+  return []
 }

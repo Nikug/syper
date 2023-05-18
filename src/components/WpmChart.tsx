@@ -26,7 +26,7 @@ export const WpmChart: Component<Props> = (props) => {
     })
   )
 
-  return <div ref={element} class="paper py-4 pr-4" />
+  return <div ref={element} class="paper p-4" />
 }
 
 const createOptions = (measurements: Measurements) => {
@@ -45,13 +45,21 @@ const createOptions = (measurements: Measurements) => {
     ),
   }))
 
+  const options = createDefaultChartOptions('Characters written', 'Words per minute')
+  options.series = [
+    { name: 'Words per minute', data: wpmBetweenTimestamps },
+    { name: 'Words per minute total', data: wpmOverTime },
+  ]
+
+  return options
+}
+
+export const createDefaultChartOptions = (xTitle: string, yTitle: string): ApexOptions => {
   const options: ApexOptions = {
-    series: [
-      { name: 'Words per minute', data: wpmBetweenTimestamps },
-      { name: 'Words per minute total', data: wpmOverTime },
-    ],
+    series: [],
     chart: {
       height: 400,
+      width: '100%',
       type: 'line',
       zoom: {
         enabled: false,
@@ -113,7 +121,7 @@ const createOptions = (measurements: Measurements) => {
         show: false,
       },
       title: {
-        text: 'Characters written',
+        text: xTitle,
         style: {
           color: getColor(userOptions.theme, 'text'),
           fontSize: 'inherit',
@@ -132,7 +140,7 @@ const createOptions = (measurements: Measurements) => {
         color: getColor(userOptions.theme, 'overlay0'),
       },
       title: {
-        text: 'Words per minute',
+        text: yTitle,
         style: {
           color: getColor(userOptions.theme, 'text'),
           fontSize: 'inherit',

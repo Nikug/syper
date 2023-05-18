@@ -1,8 +1,13 @@
 import { Component, For, Show } from 'solid-js'
-import { getAccuracy, getCorrectness, getDuration, getWordsPerMinute } from '../helpers/mathHelpers'
+import {
+  getAccuracy,
+  getCorrectness,
+  getDuration,
+  getFormattedDuration,
+  getWordsPerMinute,
+} from '../helpers/mathHelpers'
 import { animationState, attempt, typingTest } from '../StateManager'
 import { Attempt, AttemptStates, TypingTest } from '../types'
-import { FormattedDuration } from './FormattedDuration'
 import { LabeledValue } from './LabeledValue'
 import { WordWithWpm } from './WordWithWpm'
 import { WpmChart } from './WpmChart'
@@ -33,11 +38,17 @@ export const StatisticsContainer: Component<Props> = (props) => {
           label="Words per minute"
         />
         <LabeledValue
-          value={<FormattedDuration duration={getDuration(props.attempt.measurements) ?? 0} />}
+          value={getFormattedDuration(getDuration(props.attempt.measurements) ?? 0)}
           label="Duration"
         />
-        <LabeledValue value={`${(getAccuracy(props.typingTest, props.attempt) * 100).toFixed(1)}%`} label="Accuracy" />
-        <LabeledValue value={`${(getCorrectness(props.typingTest, props.attempt) * 100).toFixed(1)}%`} label="Correctness" />
+        <LabeledValue
+          value={`${(getAccuracy(props.typingTest, props.attempt) * 100).toFixed(1)}%`}
+          label="Accuracy"
+        />
+        <LabeledValue
+          value={`${(getCorrectness(props.typingTest, props.attempt) * 100).toFixed(1)}%`}
+          label="Correctness"
+        />
       </div>
       <div class="mt-4">
         <WpmChart measurements={props.attempt.measurements} state={animationState().resultsState} />

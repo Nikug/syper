@@ -2,6 +2,7 @@ import { Component, Show } from 'solid-js'
 import { getUserName, isSignedIn, signIn, signOut } from '../authentication/Authentication'
 import { Button } from './Button'
 import { Header } from './Header'
+import { HistoricalStatisticsContainer } from './HistoricalStatisticsContainer'
 
 const ProfilePage: Component = () => {
   return (
@@ -15,6 +16,7 @@ const ProfilePage: Component = () => {
         <Show when={isSignedIn()}>
           <h3 class="text-xl font-bold mb-8">Signed in: {getUserName()}</h3>
           <Button onClick={() => signOut()} text="Sign out" />
+          <HistoricalStatisticsContainer />
         </Show>
       </div>
     </div>
