@@ -57,6 +57,14 @@ const createOptions = (measurements: Measurements) => {
 export const createDefaultChartOptions = (xTitle: string, yTitle: string): ApexOptions => {
   const options: ApexOptions = {
     series: [],
+    title: {
+      align: 'center',
+      offsetY: 24,
+      style: {
+        color: getColor(userOptions.theme, 'text'),
+        fontSize: '1.25rem',
+      },
+    },
     chart: {
       height: 400,
       width: '100%',

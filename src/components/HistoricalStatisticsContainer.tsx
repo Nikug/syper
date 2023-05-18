@@ -79,7 +79,11 @@ export const HistoricalStatisticsContainer: Component = () => {
         />
       </div>
       <Show when={!testResults.loading} fallback={'Loading'}>
-        <HistoryChart tests={testResults() ?? []} />
+        <HistoryChart
+          tests={testResults() ?? []}
+          startDate={dates()?.startDate}
+          endDate={dates()?.endDate}
+        />
       </Show>
     </div>
   )
