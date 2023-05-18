@@ -1,4 +1,4 @@
-import { endOfDay, formatDuration, startOfDay, subDays } from 'date-fns'
+import { endOfDay, startOfDay, subDays } from 'date-fns'
 import { Component, createMemo, createResource, createSignal, onMount, Show } from 'solid-js'
 import { getTestResults } from '../api/testResults'
 import { getFormattedDuration } from '../helpers/mathHelpers'
