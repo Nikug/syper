@@ -35,7 +35,7 @@ export const Dropdown = <K, V extends string | number>(props: Props<K, V>) => {
     if (!dropdownRef) return {}
     const bounds = dropdownRef.getBoundingClientRect()
     return {
-      top: `${bounds.y + dropdownRef.clientHeight}px`,
+      top: `${bounds.y + dropdownRef.clientHeight + window.scrollY}px`,
       left: `${bounds.x}px`,
       'min-width': `${dropdownRef.getBoundingClientRect().width}px`,
     }
