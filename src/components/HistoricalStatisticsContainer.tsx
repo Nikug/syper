@@ -1,10 +1,35 @@
-import { endOfDay, startOfDay, subDays } from 'date-fns'
+import { endOfDay, startOfDay, subDays, subYears } from 'date-fns'
 import { Component, createMemo, createResource, createSignal, onMount, Show } from 'solid-js'
 import { getTestResults } from '../api/testResults'
 import { getFormattedDuration } from '../helpers/mathHelpers'
 import { TestResultSum } from '../types'
+import { Dropdown } from './Dropdown'
 import { HistoryChart } from './HistoryChart'
 import { LabeledValue } from './LabeledValue'
+
+const durations = {
+  day: () => ({ startDate: startOfDay(new Date()), endDate: endOfDay(new Date()) }),
+  tenDays: () => ({
+    startDate: startOfDay(subDays(new Date(), 10)),
+    endDate: endOfDay(new Date()),
+  }),
+  month: () => ({ startDate: startOfDay(subDays(new Date(), 30)), endDate: endOfDay(new Date()) }),
+  threeMonths: () => ({
+    startDate: startOfDay(subDays(new Date(), 90)),
+    endDate: endOfDay(new Date()),
+  }),
+  year: () => ({ startDate: startOfDay(subYears(new Date(), 1)), endDate: endOfDay(new Date()) }),
+} as const
+
+type Durations = keyof typeof durations
+
+const durationOptions: { key: Durations; value: string }[] = [
+  { key: 'day', value: 'This day' },
+  { key: 'tenDays', value: '10 days' },
+  { key: 'month', value: 'Month' },
+  { key: 'threeMonths', value: 'Three months' },
+  { key: 'year', value: 'Year' },
+]
 
 interface Dates {
   startDate: Date
@@ -13,6 +38,7 @@ interface Dates {
 
 export const HistoricalStatisticsContainer: Component = () => {
   const [dates, setDates] = createSignal<Dates | null>(null)
+  const [historyDuration, setHistoryDuration] = createSignal<Durations>('tenDays')
   const [testResults] = createResource(dates, (dates) =>
     getTestResults(dates?.startDate, dates?.endDate)
   )
@@ -55,9 +81,25 @@ export const HistoricalStatisticsContainer: Component = () => {
     return sum
   })
 
+  const handleHistorySelect = (duration: Durations) => {
+    setHistoryDuration(duration)
+    setDates(durations[duration]())
+  }
+
+  const durationValue = () => {
+    return durationOptions.find((option) => option.key === historyDuration())?.value ?? ''
+  }
+
   return (
     <div class="w-full mt-16 mb-32">
-      <h3 class="text-3xl font-bold text-center mb-8">History (last 10 days)</h3>
+      <h3 class="text-3xl font-bold text-center mb-4">History</h3>
+      <div class="flex justify-center mb-16">
+        <Dropdown
+          value={durationValue()}
+          options={durationOptions}
+          onSelect={(option) => handleHistorySelect(option.key)}
+        />
+      </div>
       <div class="w-full flex justify-center mb-8 gap-16">
         <LabeledValue value={summedResult().tests} label="Completed tests" />
         <LabeledValue value={summedResult().characters} label="Total characters" />
