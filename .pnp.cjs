@@ -28,7 +28,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
-            ["@azure/msal-browser", "npm:2.33.0"],\
+            ["@azure/msal-browser", "npm:2.37.0"],\
             ["@iconify-json/ri", "npm:1.1.8"],\
             ["@solidjs/router", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:0.8.2"],\
             ["@types/color", "npm:3.0.3"],\
@@ -106,20 +106,20 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@azure/msal-browser", [\
-        ["npm:2.33.0", {\
-          "packageLocation": "./.yarn/cache/@azure-msal-browser-npm-2.33.0-43d88462dc-062b4d70df.zip/node_modules/@azure/msal-browser/",\
+        ["npm:2.37.0", {\
+          "packageLocation": "./.yarn/cache/@azure-msal-browser-npm-2.37.0-2cad072a1b-e57d04517d.zip/node_modules/@azure/msal-browser/",\
           "packageDependencies": [\
-            ["@azure/msal-browser", "npm:2.33.0"],\
-            ["@azure/msal-common", "npm:10.0.0"]\
+            ["@azure/msal-browser", "npm:2.37.0"],\
+            ["@azure/msal-common", "npm:13.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
       ]],\
       ["@azure/msal-common", [\
-        ["npm:10.0.0", {\
-          "packageLocation": "./.yarn/cache/@azure-msal-common-npm-10.0.0-cf3f0f9ff7-57ff5ed9fc.zip/node_modules/@azure/msal-common/",\
+        ["npm:13.0.0", {\
+          "packageLocation": "./.yarn/cache/@azure-msal-common-npm-13.0.0-5d94df3115-89f56f9fbf.zip/node_modules/@azure/msal-common/",\
           "packageDependencies": [\
-            ["@azure/msal-common", "npm:10.0.0"]\
+            ["@azure/msal-common", "npm:13.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -5195,7 +5195,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["solid-typer", "workspace:."],\
-            ["@azure/msal-browser", "npm:2.33.0"],\
+            ["@azure/msal-browser", "npm:2.37.0"],\
             ["@iconify-json/ri", "npm:1.1.8"],\
             ["@solidjs/router", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:0.8.2"],\
             ["@types/color", "npm:3.0.3"],\

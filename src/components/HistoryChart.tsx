@@ -4,6 +4,7 @@ import { DatabaseTestResult } from '../types'
 import { userOptions } from '../OptionsManager'
 import { createDefaultChartOptions } from './WpmChart'
 import { format } from 'date-fns'
+import { calculateTrendLine } from '../helpers/mathHelpers'
 
 interface Props {
   startDate?: Date
@@ -39,6 +40,8 @@ const createOptions = (
     x: new Date(test.date),
     y: test.wordsPerMinute,
   }))
+  const trendLine = calculateTrendLine(data.map((point) => ({ x: point.x.getTime(), y: point.y })))
+  console.log(trendLine)
 
   const formattedStart = format(startDate ?? new Date(), 'dd.MM.yyyy')
   const formattedEnd = format(endDate ?? new Date(), 'dd.MM.yyyy')
@@ -48,10 +51,17 @@ const createOptions = (
   }
 
   const options = createDefaultChartOptions('Date', 'Words per minute')
-  options.series = [{ name: 'Words per minute', data }]
+  options.series = [
+    { name: 'Words per minute', data, type: 'scatter' },
+    { name: 'Trend', data: trendLine, type: 'line' },
+  ]
   /* eslint-disable @typescript-eslint/no-non-null-assertion */
   options.xaxis!.type = 'datetime'
   options.title!.text = title
+  options.stroke!.curve = 'straight'
+  options.stroke!.dashArray = 6
+  options.markers!.size = [6, 0]
   /* eslint-enable @typescript-eslint/no-non-null-assertion */
+
   return options
 }

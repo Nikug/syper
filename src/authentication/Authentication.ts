@@ -13,8 +13,12 @@ export const [account, setAccount] = createSignal<AccountInfo | null>(null)
 export const setupAuth = async () => {
   auth = new PublicClientApplication(MsalConfig)
   const activeAccount = auth.getAllAccounts().at(0) ?? null
+
+  if (activeAccount) {
+    auth.setActiveAccount(activeAccount)
+  }
+
   await getAccessToken(activeAccount)
-  auth.setActiveAccount(activeAccount)
   setAccount(activeAccount)
 }
 
