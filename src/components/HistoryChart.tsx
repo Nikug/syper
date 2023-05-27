@@ -41,8 +41,6 @@ const createOptions = (
     y: test.wordsPerMinute,
   }))
   const trendLine = calculateTrendLine(data.map((point) => ({ x: point.x.getTime(), y: point.y })))
-  console.log(trendLine)
-
   const formattedStart = format(startDate ?? new Date(), 'dd.MM.yyyy')
   const formattedEnd = format(endDate ?? new Date(), 'dd.MM.yyyy')
   let title = formattedStart
