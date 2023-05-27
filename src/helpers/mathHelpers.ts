@@ -51,7 +51,7 @@ interface Vector2 {
 }
 // Source: https://math.stackexchange.com/questions/204020/what-is-the-equation-used-to-calculate-a-linear-trendline
 export const calculateTrendLine = (points: Vector2[]): Vector2[] => {
-  if (points.length <= 0) return []
+  if (points.length < 2) return []
 
   let xSum = 0
   let ySum = 0

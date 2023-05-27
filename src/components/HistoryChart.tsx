@@ -55,6 +55,8 @@ const createOptions = (
   ]
   /* eslint-disable @typescript-eslint/no-non-null-assertion */
   options.xaxis!.type = 'datetime'
+  options.xaxis!.min = startDate?.getTime()
+  options.xaxis!.max = endDate?.getTime()
   options.title!.text = title
   options.stroke!.curve = 'straight'
   options.stroke!.dashArray = 6
