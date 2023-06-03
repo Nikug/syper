@@ -1,5 +1,5 @@
 import { endOfDay, startOfDay, subDays, subYears } from 'date-fns'
-import { Component, createMemo, createResource, createSignal, onMount, Show } from 'solid-js'
+import { Component, createMemo, createResource, createSignal, Show } from 'solid-js'
 import { getTestResults } from '../api/testResults'
 import { getFormattedDuration } from '../helpers/mathHelpers'
 import { setHistoryMode, userOptions } from '../OptionsManager'
@@ -38,16 +38,10 @@ interface Dates {
 }
 
 export const HistoricalStatisticsContainer: Component = () => {
-  const [dates, setDates] = createSignal<Dates | null>(null)
+  const [dates, setDates] = createSignal<Dates>(durations[userOptions.historyMode]())
   const [testResults] = createResource(dates, (dates) =>
-    getTestResults(dates?.startDate, dates?.endDate)
+    getTestResults(dates.startDate, dates.endDate)
   )
-
-  onMount(() => {
-    const endDate = endOfDay(new Date())
-    const startDate = startOfDay(subDays(endDate, 10))
-    setDates({ startDate, endDate })
-  })
 
   const summedResult = createMemo<TestResultSum>(() => {
     const tests = testResults()
@@ -123,8 +117,8 @@ export const HistoricalStatisticsContainer: Component = () => {
       <Show when={!testResults.loading} fallback={'Loading'}>
         <HistoryChart
           tests={testResults() ?? []}
-          startDate={dates()?.startDate}
-          endDate={dates()?.endDate}
+          startDate={dates().startDate}
+          endDate={dates().endDate}
         />
       </Show>
     </div>
