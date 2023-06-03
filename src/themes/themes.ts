@@ -12,20 +12,6 @@ type ThemeVariable = Record<string, Color>
 export type Themes = Record<ThemeKey, ThemeVariables>
 
 export const themes = {
-  'catppuccin-mocha': {
-    name: 'Catppuccin Mocha',
-    variables: () => ({
-      text: Color.rgb(205, 214, 244), // Text default color
-      primary: Color.rgb(203, 166, 247), // Correct character
-      secondary: Color.rgb(147, 153, 178), // Wpm chart secondary line
-      danger: Color.rgb(243, 139, 168), // Incorrect character
-      highlight: Color.rgb(235, 160, 172), // Button highlight
-      accent: Color.rgb(137, 180, 250), // Used only in progress meter gradient
-      surface1: Color.rgb(88, 91, 112), // Hovered paper and wpm chart hover background
-      surface0: Color.rgb(49, 50, 68), // Paper
-      base: Color.rgb(30, 30, 46), // Background
-    }),
-  },
   'catppuccin-latte': {
     name: 'Catppuccin Latte',
     variables: () => ({
@@ -40,18 +26,32 @@ export const themes = {
       base: Color.rgb(239, 241, 245),
     }),
   },
-  synthwave: {
-    name: 'Synthwave',
+  'catppuccin-mocha': {
+    name: 'Catppuccin Mocha',
     variables: () => ({
-      text: Color.rgb(45, 226, 230),
-      primary: Color.rgb(255, 56, 100),
-      secondary: Color.rgb(146, 0, 117),
-      highlight: Color.rgb(249, 200, 14),
-      accent: Color.rgb(246, 1, 157),
-      danger: Color.rgb(255, 108, 17),
-      surface1: Color.rgb(36, 23, 52).lighten(0.5),
-      surface0: Color.rgb(36, 23, 52),
-      base: Color.rgb(13, 2, 33),
+      text: Color.rgb(205, 214, 244), // Text default color
+      primary: Color.rgb(203, 166, 247), // Correct character
+      secondary: Color.rgb(147, 153, 178), // Wpm chart secondary line
+      danger: Color.rgb(243, 139, 168), // Incorrect character
+      highlight: Color.rgb(235, 160, 172), // Button highlight
+      accent: Color.rgb(137, 180, 250), // Used only in progress meter gradient
+      surface1: Color.rgb(88, 91, 112), // Hovered paper and wpm chart hover background
+      surface0: Color.rgb(49, 50, 68), // Paper
+      base: Color.rgb(30, 30, 46), // Background
+    }),
+  },
+  tokyonight: {
+    name: 'Tokyo night',
+    variables: () => ({
+      text: Color('#9aa5ce'),
+      primary: Color('#7aa2f7'),
+      secondary: Color('#e0af68'),
+      highlight: Color('#e0af68'),
+      accent: Color('#565f89'),
+      danger: Color('#f7768e'),
+      surface1: Color('#1a1b26').lighten(0.6),
+      surface0: Color('#1a1b26').lighten(0.3),
+      base: Color('#1a1b26'),
     }),
   },
   'gruvbox-dark': {
@@ -82,18 +82,18 @@ export const themes = {
       base: Color('#1f1311').darken(0.2),
     }),
   },
-  tokyonight: {
-    name: 'Tokyo night',
+  synthwave: {
+    name: 'Synthwave',
     variables: () => ({
-      text: Color('#9aa5ce'),
-      primary: Color('#7aa2f7'),
-      secondary: Color('#e0af68'),
-      highlight: Color('#e0af68'),
-      accent: Color('#565f89'),
-      danger: Color('#f7768e'),
-      surface1: Color('#1a1b26').lighten(0.6),
-      surface0: Color('#1a1b26').lighten(0.3),
-      base: Color('#1a1b26'),
+      text: Color.rgb(45, 226, 230),
+      primary: Color.rgb(255, 56, 100),
+      secondary: Color.rgb(146, 0, 117),
+      highlight: Color.rgb(249, 200, 14),
+      accent: Color.rgb(246, 1, 157),
+      danger: Color.rgb(255, 108, 17),
+      surface1: Color.rgb(36, 23, 52).lighten(0.5),
+      surface0: Color.rgb(36, 23, 52),
+      base: Color.rgb(13, 2, 33),
     }),
   },
 }
