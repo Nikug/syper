@@ -145,7 +145,7 @@ export const createDefaultChartOptions = (xTitle: string, yTitle: string): ApexO
         formatter: (value: number) => value?.toFixed(),
       },
       axisTicks: {
-        color: getColor(userOptions.theme, 'overlay0'),
+        color: getColor(userOptions.theme, 'text', 0.5),
       },
       title: {
         text: yTitle,
@@ -161,7 +161,7 @@ export const createDefaultChartOptions = (xTitle: string, yTitle: string): ApexO
         const showSeries0 = series.at(0)?.[dataPointIndex] != null
         const showSeries1 = series.at(1)?.[dataPointIndex] != null
         return `
-          <div class="bg-theme-surface2 rounded px-4 py-2 !border-theme-danger">
+          <div class="bg-theme-surface1 rounded px-4 py-2 !border-theme-danger">
             <h3 class="font-semibold mb-2">At ${
               w.globals.initialSeries.at(0)?.data.at(dataPointIndex)?.x
             } characters

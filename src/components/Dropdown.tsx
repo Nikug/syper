@@ -59,7 +59,7 @@ export const Dropdown = <K, V extends string | number>(props: Props<K, V>) => {
             <For each={props.options}>
               {(option) => (
                 <div
-                  class="hover:bg-theme-overlay1 px-4 py-1 cursor-pointer"
+                  class="hover:bg-theme-surface1 px-4 py-1 cursor-pointer"
                   onClick={() => handleSelect(option)}
                 >
                   {option.value}
