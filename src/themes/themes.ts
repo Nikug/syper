@@ -82,4 +82,18 @@ export const themes = {
       base: Color('#1f1311').darken(0.2),
     }),
   },
+  tokyonight: {
+    name: 'Tokyo night',
+    variables: () => ({
+      text: Color('#9aa5ce'),
+      primary: Color('#7aa2f7'),
+      secondary: Color('#e0af68'),
+      highlight: Color('#e0af68'),
+      accent: Color('#565f89'),
+      danger: Color('#f7768e'),
+      surface1: Color('#1a1b26').lighten(0.6),
+      surface0: Color('#1a1b26').lighten(0.3),
+      base: Color('#1a1b26'),
+    }),
+  },
 }
