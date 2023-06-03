@@ -2,6 +2,7 @@ import { endOfDay, startOfDay, subDays, subYears } from 'date-fns'
 import { Component, createMemo, createResource, createSignal, onMount, Show } from 'solid-js'
 import { getTestResults } from '../api/testResults'
 import { getFormattedDuration } from '../helpers/mathHelpers'
+import { setHistoryMode, userOptions } from '../OptionsManager'
 import { TestResultSum } from '../types'
 import { Dropdown } from './Dropdown'
 import { HistoryChart } from './HistoryChart'
@@ -21,9 +22,9 @@ const durations = {
   year: () => ({ startDate: startOfDay(subYears(new Date(), 1)), endDate: endOfDay(new Date()) }),
 } as const
 
-type Durations = keyof typeof durations
+export type HistoryMode = keyof typeof durations
 
-const durationOptions: { key: Durations; value: string }[] = [
+const durationOptions: { key: HistoryMode; value: string }[] = [
   { key: 'day', value: 'This day' },
   { key: 'tenDays', value: '10 days' },
   { key: 'month', value: 'Month' },
@@ -38,7 +39,6 @@ interface Dates {
 
 export const HistoricalStatisticsContainer: Component = () => {
   const [dates, setDates] = createSignal<Dates | null>(null)
-  const [historyDuration, setHistoryDuration] = createSignal<Durations>('tenDays')
   const [testResults] = createResource(dates, (dates) =>
     getTestResults(dates?.startDate, dates?.endDate)
   )
@@ -81,13 +81,13 @@ export const HistoricalStatisticsContainer: Component = () => {
     return sum
   })
 
-  const handleHistorySelect = (duration: Durations) => {
-    setHistoryDuration(duration)
+  const handleHistorySelect = (duration: HistoryMode) => {
+    setHistoryMode(duration)
     setDates(durations[duration]())
   }
 
   const durationValue = () => {
-    return durationOptions.find((option) => option.key === historyDuration())?.value ?? ''
+    return durationOptions.find((option) => option.key === userOptions.historyMode)?.value ?? ''
   }
 
   return (

@@ -1,3 +1,4 @@
+import { HistoryMode } from './components/HistoricalStatisticsContainer'
 import { ThemeKey } from './themes/themes'
 
 export interface WordsJson {
@@ -77,6 +78,7 @@ export interface UserOptions {
   textMode: TextMode
   theme: ThemeKey
   wordCount: number
+  historyMode: HistoryMode
 }
 
 export interface DatabaseTestResultInput {
