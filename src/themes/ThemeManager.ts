@@ -17,7 +17,7 @@ export const setAndSaveTheme = async (theme: ThemeKey) => {
 
 const setCssVariables = (theme: ThemeVariables) => {
   const root = document.documentElement
-  Object.entries(theme.variables).map(([key, value]) =>
+  Object.entries(theme.variables()).map(([key, value]) =>
     root.style.setProperty(`--theme-${key}`, value.rgb().array().join())
   )
 }

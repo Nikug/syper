@@ -4,7 +4,7 @@ export type ThemeKey = keyof typeof themes
 
 export interface ThemeVariables {
   name: string
-  variables: ThemeVariable
+  variables: () => ThemeVariable
 }
 
 type ThemeVariable = Record<string, Color>
@@ -14,7 +14,7 @@ export type Themes = Record<ThemeKey, ThemeVariables>
 export const themes = {
   'catppuccin-mocha': {
     name: 'Catppuccin Mocha',
-    variables: {
+    variables: () => ({
       text: Color.rgb(205, 214, 244),
       primary: Color.rgb(203, 166, 247),
       secondary: Color.rgb(147, 153, 178),
@@ -28,11 +28,11 @@ export const themes = {
       surface1: Color.rgb(69, 71, 90),
       surface0: Color.rgb(49, 50, 68),
       base: Color.rgb(30, 30, 46),
-    },
+    }),
   },
   'catppuccin-latte': {
     name: 'Catppuccin Latte',
-    variables: {
+    variables: () => ({
       text: Color.rgb(76, 79, 105),
       primary: Color.rgb(136, 57, 239),
       secondary: Color.rgb(124, 127, 147),
@@ -46,11 +46,11 @@ export const themes = {
       surface1: Color.rgb(188, 192, 204),
       surface0: Color.rgb(204, 208, 218),
       base: Color.rgb(239, 241, 245),
-    },
+    }),
   },
   synthwave: {
     name: 'Synthwave',
-    variables: {
+    variables: () => ({
       text: Color.rgb(45, 226, 230),
       primary: Color.rgb(255, 56, 100),
       secondary: Color.rgb(146, 0, 117),
@@ -64,6 +64,6 @@ export const themes = {
       surface1: Color.rgb(38, 20, 71),
       surface0: Color.rgb(36, 23, 52),
       base: Color.rgb(13, 2, 33),
-    },
+    }),
   },
 }
