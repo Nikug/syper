@@ -68,4 +68,18 @@ export const themes = {
       base: Color('#282828'),
     }),
   },
+  farout: {
+    name: 'Farout',
+    variables: () => ({
+      text: Color('#f2ddbc'),
+      primary: Color('#f2a766'),
+      secondary: Color('#8a4b53'),
+      highlight: Color('#8a4b53'),
+      accent: Color('#8a4b53'),
+      danger: Color('#bf472c'),
+      surface1: Color('#6b4035'),
+      surface0: Color('#291916'),
+      base: Color('#1f1311').darken(0.2),
+    }),
+  },
 }
