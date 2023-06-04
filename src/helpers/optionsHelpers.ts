@@ -71,3 +71,5 @@ export const setHistoryMode = async (historyMode: HistoryMode) => {
 }
 
 export const isTimeMode = () => userOptions.textMode === 'time'
+export const isQuoteMode = () => userOptions.textMode === 'quote'
+export const isWordsMode = () => userOptions.textMode === 'words'

@@ -1,6 +1,8 @@
 import { saveTestResult } from '../api/testResults'
 import { getUserId } from '../authentication/Authentication'
+import { CharactersPerWord } from '../constants'
 import { getAccuracy, getCorrectness, getWordsPerMinute } from '../helpers/mathHelpers'
+import { isQuoteMode, isTimeMode } from '../helpers/optionsHelpers'
 import { startSyncing, stopSyncing } from '../SyncingManager'
 import { Attempt, DatabaseTestResultInput, TextMode, TypingTest } from '../types'
 
@@ -19,10 +21,12 @@ export const submitTestResult = async (
     const testResult: DatabaseTestResultInput = {
       userId: userId,
       textMode: textMode,
-      quoteId: textMode === 'quote' ? typingTest.id.toString() : undefined,
+      quoteId: isQuoteMode() ? typingTest.id.toString() : undefined,
       source: typingTest.source,
       characters: typingTest.length,
-      words: typingTest.words.length,
+      words: isTimeMode()
+        ? Math.round(typingTest.length / CharactersPerWord)
+        : typingTest.words.length,
       duration: duration,
       wordsPerMinute: getWordsPerMinute(attempt.measurements, typingTest) ?? 0,
       correctness: getCorrectness(typingTest, attempt),

@@ -85,7 +85,6 @@ export const nextAttempt = async () => {
   stopTimer()
   setAttempt(newAttempt())
   setTypingTest(await initializeText())
-  console.log(typingTest().words, typingTest().length)
 }
 
 export const restartAttempt = async () => {
