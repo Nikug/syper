@@ -1,7 +1,8 @@
 import { Component, Show } from 'solid-js'
 import { getShortFormattedDuration } from '../helpers/mathHelpers'
 import { isTimeMode } from '../helpers/optionsHelpers'
-import { attempt, typingTest } from '../StateManager'
+import { testStarted } from '../helpers/stateHelpers'
+import { attempt, typingTest, userOptions } from '../StateManager'
 
 export const QuoteInformation: Component = () => {
   return (
@@ -11,7 +12,11 @@ export const QuoteInformation: Component = () => {
         <span>{typingTest().length} characters</span>
       </Show>
       <Show when={isTimeMode()}>
-        <span>{getShortFormattedDuration(attempt.remainingDuration)}</span>
+        <span>
+          {getShortFormattedDuration(
+            testStarted() ? attempt.remainingDuration : userOptions.timeDuration
+          )}
+        </span>
       </Show>
     </div>
   )

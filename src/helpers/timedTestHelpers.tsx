@@ -1,9 +1,11 @@
 import { createSignal, startTransition } from 'solid-js'
 import { produce } from 'solid-js/store'
 import { fromWritingToResults } from '../AnimationManager'
+import { TimedTestCharacters } from '../constants'
 import { submitTestResult } from '../logic/testResult'
 import { attempt, setAttempt, setTypingTest, typingTest, userOptions } from '../StateManager'
-import { Attempt } from '../types'
+import { Attempt, Word, WordsJson } from '../types'
+import { getRandomFromArray } from '../util'
 import { handleTestEnd } from './stateHelpers'
 
 const [timer, setTimer] = createSignal<NodeJS.Timer | null>(null)
@@ -35,16 +37,51 @@ const updateAttempt = () => {
 
   if (isEnd) {
     endAttempt(attempt)
+    return
   }
+
+  extendText()
 }
 
 const endAttempt = (attempt: Attempt) => {
   stopTimer()
   startTransition(fromWritingToResults)
-  setTypingTest(
-    produce((test) => {
-      test.length = attempt.finalText.length
-    })
-  )
+  setTypingTest({
+    ...typingTest(),
+    text: typingTest().text.substring(0, attempt.finalText.length),
+    length: attempt.finalText.length,
+  })
   submitTestResult(attempt, userOptions.textMode, typingTest())
+}
+
+const extendText = async () => {
+  let currentLength = typingTest().length
+  let remainingTextLength = currentLength - attempt.finalText.length
+  if (remainingTextLength >= TimedTestCharacters) {
+    return
+  }
+
+  const testWords = typingTest().words
+  let testText = typingTest().text
+  const words: WordsJson = await import('../assets/english-1k.json')
+
+  while (remainingTextLength < TimedTestCharacters) {
+    const newWord = getRandomFromArray(words.words)
+
+    const word: Word = new Map()
+    for (let i = 0, limit = newWord.length; i < limit; i++) {
+      word.set(currentLength + i + 1, newWord[i])
+    }
+
+    const lastWord = testWords.at(-1)
+    lastWord?.set(currentLength, ' ')
+    testWords[testWords.length - 1] = new Map(lastWord)
+    testWords.push(word)
+
+    testText += ` ${newWord}`
+    currentLength = testText.length
+    remainingTextLength = currentLength - attempt.finalText.length
+  }
+
+  setTypingTest({ ...typingTest(), words: testWords, text: testText, length: testText.length })
 }

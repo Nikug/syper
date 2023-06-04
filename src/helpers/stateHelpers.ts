@@ -1,6 +1,14 @@
 import { startTransition } from 'solid-js'
 import { fromResultsToWriting, showingResults } from '../AnimationManager'
-import { newAttempt, setAttempt, setTypingTest, userOptions } from '../StateManager'
+import { TimedTestWords } from '../constants'
+import {
+  attempt,
+  newAttempt,
+  setAttempt,
+  setTypingTest,
+  typingTest,
+  userOptions,
+} from '../StateManager'
 import { QuotesJson, Word, WordsJson, Quote, AttemptStates, Attempt } from '../types'
 import { getRandomFromArray, replaceBadCharacters } from '../util'
 import { isTimeMode } from './optionsHelpers'
@@ -23,12 +31,12 @@ const getText = async (): Promise<Quote> => {
     const words: WordsJson = await import('../assets/english-1k.json')
 
     // Generate enough words that it fills the three shown lines
-    const text = generateText(50, words)
+    const text = generateText(TimedTestWords, words)
     return {
       id: 0,
       source: 'English 1k',
       text: text,
-      length: 0, // Length is calculated after the test is finished
+      length: text.length,
     }
   }
 
@@ -75,8 +83,9 @@ export const nextAttempt = async () => {
     await startTransition(fromResultsToWriting)
   }
   stopTimer()
-  setAttempt(newAttempt(userOptions))
+  setAttempt(newAttempt())
   setTypingTest(await initializeText())
+  console.log(typingTest().words, typingTest().length)
 }
 
 export const restartAttempt = async () => {
@@ -84,12 +93,14 @@ export const restartAttempt = async () => {
     await startTransition(fromResultsToWriting)
   }
   stopTimer()
-  setAttempt(newAttempt(userOptions))
+  setAttempt(newAttempt())
 }
 
 export const handleTestStart = (attempt: Attempt, start: number) => {
   if (isTimeMode()) {
     startTimer()
+    attempt.testDuration = userOptions.timeDuration
+    attempt.remainingDuration = userOptions.timeDuration
   }
 
   attempt.state = AttemptStates.started
@@ -103,3 +114,5 @@ export const handleTestEnd = (attempt: Attempt, end: number) => {
   attempt.measurements.timestamps.set(attempt.finalText.length, end)
   return attempt
 }
+
+export const testStarted = () => attempt.state === AttemptStates.started

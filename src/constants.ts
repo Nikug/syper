@@ -13,3 +13,6 @@ export const TimeDurations: { key: number; value: string }[] = [
 
 export const AnimationDuration = 100
 export const AnimationDurationClass = 'duration-100'
+
+export const TimedTestWords = 50
+export const TimedTestCharacters = 300

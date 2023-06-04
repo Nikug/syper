@@ -8,6 +8,7 @@ import { submitTestResult } from './logic/testResult'
 import { userOptions } from './StateManager'
 import { handleTestEnd, handleTestStart, nextAttempt, restartAttempt } from './helpers/stateHelpers'
 import { fromWritingToResults } from './AnimationManager'
+import { isTimeMode } from './helpers/optionsHelpers'
 
 const preventDefaultCharacters: string[] = ["'", 'Tab', ' ', '?', '/', 'Escape']
 
@@ -41,6 +42,7 @@ const handleCharacter = (event: KeyboardEvent) => {
   if (attempt.state === AttemptStates.completed) return
 
   let isEnd = false
+  const isTimedTest = isTimeMode()
   setAttempt(
     produce((attempt) => {
       // Handle backspace
@@ -63,7 +65,7 @@ const handleCharacter = (event: KeyboardEvent) => {
 
       const performanceNow = performance.now()
       const isStart = attempt.finalText.length === 0
-      isEnd = attempt.finalText.length === typingTest().length - 1
+      isEnd = !isTimedTest && attempt.finalText.length === typingTest().length - 1
 
       if (isStart) {
         attempt = handleTestStart(attempt, performanceNow)
@@ -80,7 +82,7 @@ const handleCharacter = (event: KeyboardEvent) => {
       attempt.allText = attempt.allText + event.key
 
       // Handle standardized timestamps
-      if (attempt.finalText.length % CharactersPerWord === 0 || isEnd) {
+      if (attempt.finalText.length % CharactersPerWord === 0 && !isEnd) {
         attempt.measurements.timestamps.set(attempt.finalText.length, performanceNow)
       }
 
