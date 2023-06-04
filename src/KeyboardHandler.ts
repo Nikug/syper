@@ -1,16 +1,12 @@
 import { startTransition } from 'solid-js'
 import { produce } from 'solid-js/store'
-import {
-  attempt,
-  typingTest,
-  setAttempt,
-} from './StateManager'
+import { attempt, typingTest, setAttempt } from './StateManager'
 import { CharactersPerWord } from './constants'
 import { Attempt, AttemptStates } from './types'
 import { mapToString } from './util'
 import { submitTestResult } from './logic/testResult'
 import { userOptions } from './StateManager'
-import { nextAttempt, restartAttempt } from './helpers/stateHelpers'
+import { handleTestEnd, handleTestStart, nextAttempt, restartAttempt } from './helpers/stateHelpers'
 import { fromWritingToResults } from './AnimationManager'
 
 const preventDefaultCharacters: string[] = ["'", 'Tab', ' ', '?', '/', 'Escape']
@@ -69,16 +65,12 @@ const handleCharacter = (event: KeyboardEvent) => {
       const isStart = attempt.finalText.length === 0
       isEnd = attempt.finalText.length === typingTest().length - 1
 
-      // Handle start
       if (isStart) {
-        attempt.state = AttemptStates.started
-        attempt.measurements.startTime = performanceNow
+        attempt = handleTestStart(attempt, performanceNow)
       }
 
-      // Handle end
       if (isEnd) {
-        attempt.state = AttemptStates.completed
-        attempt.measurements.endTime = performanceNow
+        attempt = handleTestEnd(attempt, performanceNow)
       }
 
       // Handle word

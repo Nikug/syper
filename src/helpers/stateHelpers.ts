@@ -1,8 +1,10 @@
 import { startTransition } from 'solid-js'
 import { fromResultsToWriting, showingResults } from '../AnimationManager'
 import { newAttempt, setAttempt, setTypingTest, userOptions } from '../StateManager'
-import { QuotesJson, Word, WordsJson, Quote } from '../types'
+import { QuotesJson, Word, WordsJson, Quote, AttemptStates, Attempt } from '../types'
 import { getRandomFromArray, replaceBadCharacters } from '../util'
+import { isTimeMode } from './optionsHelpers'
+import { startTimer, stopTimer } from './timedTestHelpers'
 
 const getText = async (): Promise<Quote> => {
   if (userOptions.textMode === 'quote') {
@@ -72,6 +74,7 @@ export const nextAttempt = async () => {
   if (showingResults()) {
     await startTransition(fromResultsToWriting)
   }
+  stopTimer()
   setAttempt(newAttempt(userOptions))
   setTypingTest(await initializeText())
 }
@@ -80,5 +83,23 @@ export const restartAttempt = async () => {
   if (showingResults()) {
     await startTransition(fromResultsToWriting)
   }
+  stopTimer()
   setAttempt(newAttempt(userOptions))
+}
+
+export const handleTestStart = (attempt: Attempt, start: number) => {
+  if (isTimeMode()) {
+    startTimer()
+  }
+
+  attempt.state = AttemptStates.started
+  attempt.measurements.startTime = start
+  return attempt
+}
+
+export const handleTestEnd = (attempt: Attempt, end: number) => {
+  attempt.state = AttemptStates.completed
+  attempt.measurements.endTime = end
+  attempt.measurements.timestamps.set(attempt.finalText.length, end)
+  return attempt
 }
