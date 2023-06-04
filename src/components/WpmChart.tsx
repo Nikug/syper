@@ -3,7 +3,7 @@ import ApexCharts, { ApexOptions } from 'apexcharts'
 import { AnimationState, AnimationStates, Measurements } from '../types'
 import { wordsPerMinute } from '../helpers/mathHelpers'
 import './WpmChart.css'
-import { userOptions } from '../OptionsManager'
+import { userOptions } from '../StateManager'
 import { getColor } from '../themes/themeHelper'
 
 interface Props {

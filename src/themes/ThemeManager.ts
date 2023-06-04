@@ -1,4 +1,5 @@
-import { persistUserOptions, setUserOptions } from '../OptionsManager'
+import { persistUserOptions } from '../helpers/optionsHelpers'
+import { setUserOptions } from '../StateManager'
 import { ThemeKey, themes, ThemeVariables } from './themes'
 
 export const setTheme = (theme: ThemeKey) => {

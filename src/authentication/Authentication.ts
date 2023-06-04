@@ -1,8 +1,8 @@
 import { AccountInfo, PublicClientApplication } from '@azure/msal-browser'
 import { createSignal } from 'solid-js'
+import { getStoredUserOptions } from '../helpers/optionsHelpers'
 import { initializeText } from '../helpers/stateHelpers'
-import { getStoredUserOptions, setUserOptions } from '../OptionsManager'
-import { setTypingTest } from '../StateManager'
+import { setTypingTest, setUserOptions } from '../StateManager'
 import { setShowLoadingScreen } from '../SyncingManager'
 import { MsalConfig, scopes } from './constants'
 

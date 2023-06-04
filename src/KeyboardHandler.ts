@@ -2,17 +2,16 @@ import { startTransition } from 'solid-js'
 import { produce } from 'solid-js/store'
 import {
   attempt,
-  fromWritingToResults,
-  nextAttempt,
   typingTest,
-  restartAttempt,
   setAttempt,
 } from './StateManager'
 import { CharactersPerWord } from './constants'
 import { Attempt, AttemptStates } from './types'
 import { mapToString } from './util'
 import { submitTestResult } from './logic/testResult'
-import { userOptions } from './OptionsManager'
+import { userOptions } from './StateManager'
+import { nextAttempt, restartAttempt } from './helpers/stateHelpers'
+import { fromWritingToResults } from './AnimationManager'
 
 const preventDefaultCharacters: string[] = ["'", 'Tab', ' ', '?', '/', 'Escape']
 

@@ -4,8 +4,8 @@ import { Component, Show } from 'solid-js'
 import { getUserName } from '../authentication/Authentication'
 import { TimeDurations, WordCounts } from '../constants'
 import { getShortFormattedDuration } from '../helpers/mathHelpers'
-import { setTextMode, setTimeDuration, setWordCount, userOptions } from '../OptionsManager'
-import { attempt } from '../StateManager'
+import { setTextMode, setTimeDuration, setWordCount } from '../helpers/optionsHelpers'
+import { attempt, userOptions } from '../StateManager'
 import { setAndSaveTheme } from '../themes/ThemeManager'
 import { ThemeKey, themes } from '../themes/themes'
 import { AttemptStates, TextMode } from '../types'
@@ -64,7 +64,7 @@ export const Header: Component = () => {
             </Show>
             <Show when={userOptions.textMode === 'time'}>
               <Dropdown
-                value={`Time: ${getShortFormattedDuration(userOptions.timeDuration * 1000)}`}
+                value={`Time: ${getShortFormattedDuration(userOptions.timeDuration)}`}
                 options={TimeDurations}
                 onSelect={(option) => setTimeDuration(option.key)}
               />

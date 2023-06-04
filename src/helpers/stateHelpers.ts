@@ -1,4 +1,6 @@
-import { userOptions } from '../OptionsManager'
+import { startTransition } from 'solid-js'
+import { fromResultsToWriting, showingResults } from '../AnimationManager'
+import { newAttempt, setAttempt, setTypingTest, userOptions } from '../StateManager'
 import { QuotesJson, Word, WordsJson, Quote } from '../types'
 import { getRandomFromArray, replaceBadCharacters } from '../util'
 
@@ -6,20 +8,43 @@ const getText = async (): Promise<Quote> => {
   if (userOptions.textMode === 'quote') {
     const quotes: QuotesJson = await import('../assets/monkeytype-quotes.json')
     return getRandomFromArray(quotes.quotes)
-  } else {
+  } else if (userOptions.textMode === 'words') {
     const words: WordsJson = await import('../assets/english-1k.json')
-    const text: string[] = []
-    for (let i = 0, limit = userOptions.wordCount; i < limit; i++) {
-      text.push(getRandomFromArray(words.words))
-    }
-    const finalText = text.join(' ')
+    const text = generateText(userOptions.wordCount, words)
     return {
       id: 0,
       source: 'English 1k',
-      text: finalText,
-      length: finalText.length,
+      text: text,
+      length: text.length,
+    }
+  } else if (userOptions.textMode === 'time') {
+    const words: WordsJson = await import('../assets/english-1k.json')
+
+    // Generate enough words that it fills the three shown lines
+    const text = generateText(50, words)
+    return {
+      id: 0,
+      source: 'English 1k',
+      text: text,
+      length: 0, // Length is calculated after the test is finished
     }
   }
+
+  return {
+    id: 0,
+    source: 'English 1k',
+    text: '',
+    length: 0,
+  }
+}
+
+const generateText = (length: number, words: WordsJson) => {
+  const text: string[] = []
+  for (let i = 0, limit = length; i < limit; i++) {
+    text.push(getRandomFromArray(words.words))
+  }
+
+  return text.join(' ')
 }
 
 const splitParagraph = (text: string): Word[] => {
@@ -41,4 +66,19 @@ export const initializeText = async () => {
   const randomQuote = await getText()
   randomQuote.text = replaceBadCharacters(randomQuote.text)
   return { ...randomQuote, words: splitParagraph(randomQuote.text) }
+}
+
+export const nextAttempt = async () => {
+  if (showingResults()) {
+    await startTransition(fromResultsToWriting)
+  }
+  setAttempt(newAttempt(userOptions))
+  setTypingTest(await initializeText())
+}
+
+export const restartAttempt = async () => {
+  if (showingResults()) {
+    await startTransition(fromResultsToWriting)
+  }
+  setAttempt(newAttempt(userOptions))
 }

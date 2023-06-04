@@ -28,6 +28,8 @@ export interface Attempt {
   allText: string
   state: AttemptState
   measurements: Measurements
+  testDuration: number
+  remainingDuration: number
 }
 
 export interface Measurements {

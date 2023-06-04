@@ -1,15 +1,13 @@
-import { createSignal, startTransition } from 'solid-js'
+import { createSignal } from 'solid-js'
 import { createStore } from 'solid-js/store'
-import { AnimationDuration } from './constants'
-import { initializeText } from './helpers/stateHelpers'
-import { Attempt, Animation, AttemptStates, TypingTest, AnimationStates } from './types'
-import { sleep } from './util'
+import { Attempt, AttemptStates, TypingTest, UserOptions } from './types'
 
-// Helpers
-export const newAttempt = (): Attempt => ({
+export const newAttempt = (options: UserOptions): Attempt => ({
   state: AttemptStates.notStarted,
   allText: '',
   finalText: '',
+  testDuration: options.textMode === 'time' ? options.timeDuration : 0,
+  remainingDuration: options.textMode === 'time' ? options.timeDuration : 0,
   measurements: {
     startTime: null,
     endTime: null,
@@ -18,7 +16,7 @@ export const newAttempt = (): Attempt => ({
   },
 })
 
-const newText = (): TypingTest => ({
+export const newText = (): TypingTest => ({
   id: 0,
   text: '',
   source: '',
@@ -26,46 +24,14 @@ const newText = (): TypingTest => ({
   words: [],
 })
 
-export const nextAttempt = async () => {
-  if (animationState().view === 'results') {
-    await startTransition(fromResultsToWriting)
-  }
-  setAttempt(newAttempt())
-  setTypingTest(await initializeText())
-}
-
-export const restartAttempt = async () => {
-  if (animationState().view === 'results') {
-    await startTransition(fromResultsToWriting)
-  }
-  setAttempt(newAttempt())
-}
-
-// Main signals and stores
-export const [typingTest, setTypingTest] = createSignal<TypingTest>(newText())
-export const [attempt, setAttempt] = createStore<Attempt>(newAttempt())
-
-// Animation
-export const [animationState, setAnimationState] = createSignal<Animation>({
-  writingState: AnimationStates.shown,
-  resultsState: AnimationStates.hidden,
-  view: 'writing',
+export const defaultUserOptions = (): UserOptions => ({
+  theme: 'catppuccin-mocha',
+  textMode: 'quote',
+  wordCount: 50,
+  timeDuration: 60,
+  historyMode: 'tenDays',
 })
 
-export const fromWritingToResults = async () => {
-  setAnimationState({
-    ...animationState(),
-    writingState: AnimationStates.hidden,
-  })
-  await sleep(AnimationDuration)
-  setAnimationState({ ...animationState(), view: 'results' })
-  await sleep(0)
-  setAnimationState({ ...animationState(), resultsState: AnimationStates.shown })
-}
-export const fromResultsToWriting = async () => {
-  setAnimationState({ ...animationState(), resultsState: AnimationStates.hidden })
-  await sleep(AnimationDuration)
-  setAnimationState({ ...animationState(), view: 'writing' })
-  await sleep(0)
-  setAnimationState({ ...animationState(), writingState: AnimationStates.shown })
-}
+export const [userOptions, setUserOptions] = createStore<UserOptions>(defaultUserOptions())
+export const [typingTest, setTypingTest] = createSignal<TypingTest>(newText())
+export const [attempt, setAttempt] = createStore<Attempt>(newAttempt(userOptions))

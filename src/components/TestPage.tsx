@@ -1,7 +1,7 @@
 import { Component, Show } from 'solid-js'
 import { clsx } from 'clsx'
 import { Header } from './Header'
-import { animationState, attempt, typingTest } from '../StateManager'
+import { attempt, typingTest } from '../StateManager'
 import { QuoteInformation } from './QuoteInformation'
 import { TextContainer } from './TextContainer'
 import { ProgressBar } from './ProgressBar'
@@ -9,6 +9,7 @@ import { AnimationStates } from '../types'
 import { Footer } from './Footer'
 import { StatisticsContainer } from './StatisticsContainer'
 import { AnimationDurationClass } from '../constants'
+import { animationState, showingResults, showingWriting } from '../AnimationManager'
 
 const TestPage: Component = () => {
   return (
@@ -17,7 +18,7 @@ const TestPage: Component = () => {
         <div class="row-span-1">
           <Header />
         </div>
-        <Show when={animationState().view === 'writing'}>
+        <Show when={showingWriting()}>
           <div
             class={clsx(
               'row-span-3 my-auto justify-self-start',
@@ -37,7 +38,7 @@ const TestPage: Component = () => {
             </div>
           </div>
         </Show>
-        <Show when={animationState().view === 'results'}>
+        <Show when={showingResults()}>
           <div
             class={clsx(
               'row-span-4',
@@ -47,7 +48,7 @@ const TestPage: Component = () => {
             <StatisticsContainer attempt={attempt} typingTest={typingTest()} />
           </div>
         </Show>
-        <Show when={animationState().view === 'writing'}>
+        <Show when={showingWriting()}>
           <div
             class={clsx(
               'row-span-1',

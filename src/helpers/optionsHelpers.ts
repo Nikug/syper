@@ -1,21 +1,13 @@
-import { createStore } from 'solid-js/store'
-import { getUserOptions, saveUserOptions } from './api/userOptions'
-import { isSignedIn } from './authentication/Authentication'
-import { HistoryMode } from './components/HistoricalStatisticsContainer'
-import { nextAttempt } from './StateManager'
-import { startSyncing, stopSyncing } from './SyncingManager'
-import { setTheme } from './themes/ThemeManager'
-import { TextMode, UserOptions } from './types'
+import { getUserOptions, saveUserOptions } from '../api/userOptions'
+import { isSignedIn } from '../authentication/Authentication'
+import { HistoryMode } from '../components/HistoricalStatisticsContainer'
+import { nextAttempt } from '../helpers/stateHelpers'
+import { defaultUserOptions, setUserOptions, userOptions } from '../StateManager'
+import { startSyncing, stopSyncing } from '../SyncingManager'
+import { setTheme } from '../themes/ThemeManager'
+import { TextMode, UserOptions } from '../types'
 
 const UserOptionsStorageKey = 'userOptions'
-
-const defaultUserOptions = (): UserOptions => ({
-  theme: 'catppuccin-mocha',
-  textMode: 'quote',
-  wordCount: 50,
-  timeDuration: 60,
-  historyMode: 'tenDays',
-})
 
 export const getStoredUserOptions = async (): Promise<UserOptions> => {
   let options: Partial<UserOptions> | null = null
@@ -39,8 +31,6 @@ export const getStoredUserOptions = async (): Promise<UserOptions> => {
 
   return fullOptions
 }
-
-export const [userOptions, setUserOptions] = createStore<UserOptions>(defaultUserOptions())
 
 export const persistUserOptions = async () => {
   const jsonOptions = JSON.stringify(userOptions)
@@ -79,3 +69,5 @@ export const setHistoryMode = async (historyMode: HistoryMode) => {
   setUserOptions('historyMode', historyMode)
   await persistUserOptions()
 }
+
+export const isTimeMode = () => userOptions.textMode === 'time'
