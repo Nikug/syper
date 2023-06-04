@@ -2,8 +2,9 @@ import { A } from '@solidjs/router'
 import { clsx } from 'clsx'
 import { Component, Show } from 'solid-js'
 import { getUserName } from '../authentication/Authentication'
-import { WordCounts } from '../constants'
-import { setTextMode, setWordCount, userOptions } from '../OptionsManager'
+import { TimeDurations, WordCounts } from '../constants'
+import { getShortFormattedDuration } from '../helpers/mathHelpers'
+import { setTextMode, setTimeDuration, setWordCount, userOptions } from '../OptionsManager'
 import { attempt } from '../StateManager'
 import { setAndSaveTheme } from '../themes/ThemeManager'
 import { ThemeKey, themes } from '../themes/themes'
@@ -19,6 +20,7 @@ interface TextModeOption {
 const textModeOptions: TextModeOption[] = [
   { key: 'quote', value: 'Quote' },
   { key: 'words', value: 'Words' },
+  { key: 'time', value: 'Time' },
 ]
 
 export const Header: Component = () => {
@@ -58,6 +60,13 @@ export const Header: Component = () => {
                 value={`Words: ${userOptions.wordCount}`}
                 options={WordCounts.map((count) => ({ key: count, value: count }))}
                 onSelect={(option) => setWordCount(option.key)}
+              />
+            </Show>
+            <Show when={userOptions.textMode === 'time'}>
+              <Dropdown
+                value={`Time: ${getShortFormattedDuration(userOptions.timeDuration * 1000)}`}
+                options={TimeDurations}
+                onSelect={(option) => setTimeDuration(option.key)}
               />
             </Show>
           </div>

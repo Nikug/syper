@@ -13,6 +13,7 @@ const defaultUserOptions = (): UserOptions => ({
   theme: 'catppuccin-mocha',
   textMode: 'quote',
   wordCount: 50,
+  timeDuration: 60,
   historyMode: 'tenDays',
 })
 
@@ -64,6 +65,12 @@ export const setTextMode = async (textMode: TextMode) => {
 
 export const setWordCount = async (count: number) => {
   setUserOptions('wordCount', count)
+  await nextAttempt()
+  await persistUserOptions()
+}
+
+export const setTimeDuration = async (count: number) => {
+  setUserOptions('timeDuration', count)
   await nextAttempt()
   await persistUserOptions()
 }

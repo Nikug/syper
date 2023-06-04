@@ -72,12 +72,13 @@ export interface Animation {
   view: View
 }
 
-export type TextMode = 'quote' | 'words'
+export type TextMode = 'quote' | 'words' | 'time'
 
 export interface UserOptions {
   textMode: TextMode
   theme: ThemeKey
   wordCount: number
+  timeDuration: number
   historyMode: HistoryMode
 }
 
