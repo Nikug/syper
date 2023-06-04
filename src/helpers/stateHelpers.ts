@@ -1,14 +1,7 @@
 import { startTransition } from 'solid-js'
 import { fromResultsToWriting, showingResults } from '../AnimationManager'
 import { TimedTestWords } from '../constants'
-import {
-  attempt,
-  newAttempt,
-  setAttempt,
-  setTypingTest,
-  typingTest,
-  userOptions,
-} from '../StateManager'
+import { attempt, newAttempt, setAttempt, setTypingTest, userOptions } from '../StateManager'
 import { QuotesJson, Word, WordsJson, Quote, AttemptStates, Attempt } from '../types'
 import { getRandomFromArray, replaceBadCharacters } from '../util'
 import { isTimeMode } from './optionsHelpers'
