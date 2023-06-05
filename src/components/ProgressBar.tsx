@@ -20,7 +20,7 @@ export const ProgressBar: Component = () => {
       <div class={clsx(gradient, 'absolute inset-0')} />
       <div
         style={{ left: `${progress()}%` }}
-        class={`inset-y-0 right-0 absolute bg-theme-base transition-all ${
+        class={`inset-y-0 right-0 absolute bg-theme-base transition-left ${
           isTimeMode() ? 'duration-1000 ease-linear' : 'duration-75'
         }`}
       />
