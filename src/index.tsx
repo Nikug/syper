@@ -1,6 +1,6 @@
 /* @refresh reload */
 import { render } from 'solid-js/web'
-import { Router } from '@solidjs/router'
+import { Router, hashIntegration } from '@solidjs/router'
 import 'virtual:uno.css'
 import '@unocss/reset/tailwind.css'
 import './index.css'
@@ -8,7 +8,7 @@ import App from './App'
 
 render(
   () => (
-    <Router>
+    <Router source={hashIntegration()}>
       <App />
     </Router>
   ),
