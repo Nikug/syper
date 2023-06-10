@@ -38,7 +38,7 @@ export const Header: Component = () => {
     <div class={clsx('h-full pt-16 transition-all duration-300', isOngoingAttempt() && 'blurred')}>
       <div class="w-full mb-4 flex justify-between items-center">
         <A href="/" class="text-5xl font-bold">
-          Syper_
+          Syper_ <span class="font-normal text-lg opacity-50">(beta)</span>
         </A>
         <div>
           <A href="/profile" class="cursor-pointer flex items-center">
