@@ -6,6 +6,8 @@ import { getUserName } from '../authentication/Authentication'
 import { TimeDurations, WordCounts } from '../constants'
 import { getShortFormattedDuration } from '../helpers/mathHelpers'
 import {
+  isTimeMode,
+  isWordsMode,
   setDictionary,
   setTextMode,
   setTimeDuration,
@@ -61,7 +63,7 @@ export const Header: Component = () => {
               options={textModeOptions}
               onSelect={(option) => setTextMode(option.key)}
             />
-            <Show when={userOptions.textMode === 'words' || userOptions.textMode === 'time'}>
+            <Show when={isWordsMode() || isTimeMode()}>
               <Dropdown
                 value={getDictionaryName(userOptions.dictionary)}
                 options={Object.entries(dictionaries).map(([key, value]) => ({
@@ -71,16 +73,16 @@ export const Header: Component = () => {
                 onSelect={(option) => setDictionary(option.key)}
               />
             </Show>
-            <Show when={userOptions.textMode === 'words'}>
+            <Show when={isWordsMode()}>
               <Dropdown
-                value={`Words: ${userOptions.wordCount}`}
+                value={`Count: ${userOptions.wordCount}`}
                 options={WordCounts.map((count) => ({ key: count, value: count }))}
                 onSelect={(option) => setWordCount(option.key)}
               />
             </Show>
-            <Show when={userOptions.textMode === 'time'}>
+            <Show when={isTimeMode()}>
               <Dropdown
-                value={`Time: ${getShortFormattedDuration(userOptions.timeDuration)}`}
+                value={`Duration: ${getShortFormattedDuration(userOptions.timeDuration)}`}
                 options={TimeDurations}
                 onSelect={(option) => setTimeDuration(option.key)}
               />

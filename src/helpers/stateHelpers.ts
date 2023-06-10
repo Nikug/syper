@@ -22,7 +22,7 @@ const getText = async (): Promise<Quote> => {
       length: text.length,
     }
   } else if (userOptions.textMode === 'time') {
-    const words: WordsJson = await import('../assets/dictionaries/english-1k.json')
+    const words: WordsJson = await getDictionary(userOptions.dictionary)
 
     // Generate enough words that it fills the three shown lines
     const text = generateText(TimedTestWords, words)
