@@ -1,5 +1,6 @@
 import { startTransition } from 'solid-js'
 import { fromResultsToWriting, showingResults } from '../AnimationManager'
+import { getDictionary, getQuotes } from '../assets/files'
 import { TimedTestWords } from '../constants'
 import { attempt, newAttempt, setAttempt, setTypingTest, userOptions } from '../StateManager'
 import { QuotesJson, Word, WordsJson, Quote, AttemptStates, Attempt } from '../types'
@@ -9,25 +10,25 @@ import { startTimer, stopTimer } from './timedTestHelpers'
 
 const getText = async (): Promise<Quote> => {
   if (userOptions.textMode === 'quote') {
-    const quotes: QuotesJson = await import('../assets/monkeytype-quotes.json')
+    const quotes: QuotesJson = await getQuotes(userOptions.quotes)
     return getRandomFromArray(quotes.quotes)
   } else if (userOptions.textMode === 'words') {
-    const words: WordsJson = await import('../assets/english-1k.json')
+    const words: WordsJson = await getDictionary(userOptions.dictionary)
     const text = generateText(userOptions.wordCount, words)
     return {
       id: 0,
-      source: 'English 1k',
+      source: words.name,
       text: text,
       length: text.length,
     }
   } else if (userOptions.textMode === 'time') {
-    const words: WordsJson = await import('../assets/english-1k.json')
+    const words: WordsJson = await import('../assets/dictionaries/english-1k.json')
 
     // Generate enough words that it fills the three shown lines
     const text = generateText(TimedTestWords, words)
     return {
       id: 0,
-      source: 'English 1k',
+      source: words.name,
       text: text,
       length: text.length,
     }
@@ -35,7 +36,7 @@ const getText = async (): Promise<Quote> => {
 
   return {
     id: 0,
-    source: 'English 1k',
+    source: '',
     text: '',
     length: 0,
   }

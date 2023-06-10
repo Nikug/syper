@@ -1,6 +1,7 @@
 import { createSignal, startTransition } from 'solid-js'
 import { produce } from 'solid-js/store'
 import { fromWritingToResults } from '../AnimationManager'
+import { getDictionary } from '../assets/files'
 import { TimedTestCharacters } from '../constants'
 import { submitTestResult } from '../logic/testResult'
 import { attempt, setAttempt, setTypingTest, typingTest, userOptions } from '../StateManager'
@@ -63,7 +64,7 @@ const extendText = async () => {
 
   const testWords = typingTest().words
   let testText = typingTest().text
-  const words: WordsJson = await import('../assets/english-1k.json')
+  const words: WordsJson = await getDictionary(userOptions.dictionary)
 
   while (remainingTextLength < TimedTestCharacters) {
     const newWord = getRandomFromArray(words.words)

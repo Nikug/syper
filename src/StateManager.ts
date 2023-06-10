@@ -4,6 +4,8 @@ import { Attempt, AttemptStates, TypingTest, UserOptions } from './types'
 
 export const defaultUserOptions = (): UserOptions => ({
   theme: 'catppuccin-mocha',
+  dictionary: 'english-200',
+  quotes: 'quotes',
   textMode: 'quote',
   wordCount: 50,
   timeDuration: 60 * 1000,

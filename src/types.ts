@@ -1,3 +1,4 @@
+import { Dictionaries, Quotes } from './assets/files'
 import { HistoryMode } from './components/HistoricalStatisticsContainer'
 import { ThemeKey } from './themes/themes'
 
@@ -78,6 +79,8 @@ export type TextMode = 'quote' | 'words' | 'time'
 
 export interface UserOptions {
   textMode: TextMode
+  dictionary: Dictionaries
+  quotes: Quotes
   theme: ThemeKey
   wordCount: number
   timeDuration: number

@@ -1,4 +1,5 @@
 import { getUserOptions, saveUserOptions } from '../api/userOptions'
+import { Dictionaries, Quotes } from '../assets/files'
 import { isSignedIn } from '../authentication/Authentication'
 import { HistoryMode } from '../components/HistoricalStatisticsContainer'
 import { nextAttempt } from '../helpers/stateHelpers'
@@ -67,6 +68,18 @@ export const setTimeDuration = async (count: number) => {
 
 export const setHistoryMode = async (historyMode: HistoryMode) => {
   setUserOptions('historyMode', historyMode)
+  await persistUserOptions()
+}
+
+export const setDictionary = async (dictionary: Dictionaries) => {
+  setUserOptions('dictionary', dictionary)
+  await nextAttempt()
+  await persistUserOptions()
+}
+
+export const setQuotes = async (quotes: Quotes) => {
+  setUserOptions('quotes', quotes)
+  await nextAttempt()
   await persistUserOptions()
 }
 

@@ -1,10 +1,16 @@
 import { A } from '@solidjs/router'
 import { clsx } from 'clsx'
 import { Component, Show } from 'solid-js'
+import { Dictionaries, dictionaries, getDictionaryName } from '../assets/files'
 import { getUserName } from '../authentication/Authentication'
 import { TimeDurations, WordCounts } from '../constants'
 import { getShortFormattedDuration } from '../helpers/mathHelpers'
-import { setTextMode, setTimeDuration, setWordCount } from '../helpers/optionsHelpers'
+import {
+  setDictionary,
+  setTextMode,
+  setTimeDuration,
+  setWordCount,
+} from '../helpers/optionsHelpers'
 import { attempt, userOptions } from '../StateManager'
 import { setAndSaveTheme } from '../themes/ThemeManager'
 import { ThemeKey, themes } from '../themes/themes'
@@ -55,6 +61,16 @@ export const Header: Component = () => {
               options={textModeOptions}
               onSelect={(option) => setTextMode(option.key)}
             />
+            <Show when={userOptions.textMode === 'words' || userOptions.textMode === 'time'}>
+              <Dropdown
+                value={getDictionaryName(userOptions.dictionary)}
+                options={Object.entries(dictionaries).map(([key, value]) => ({
+                  key: key as Dictionaries,
+                  value: value.name,
+                }))}
+                onSelect={(option) => setDictionary(option.key)}
+              />
+            </Show>
             <Show when={userOptions.textMode === 'words'}>
               <Dropdown
                 value={`Words: ${userOptions.wordCount}`}
