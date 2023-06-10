@@ -1,4 +1,3 @@
-import { Part, StoreSetter } from 'solid-js/store/types/store'
 import { getUserOptions, saveUserOptions } from '../api/userOptions'
 import { Dictionaries, Quotes } from '../assets/files'
 import { isSignedIn } from '../authentication/Authentication'
