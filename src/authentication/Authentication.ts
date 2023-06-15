@@ -1,4 +1,8 @@
-import { AccountInfo, PublicClientApplication } from '@azure/msal-browser'
+import {
+  AccountInfo,
+  InteractionRequiredAuthError,
+  PublicClientApplication,
+} from '@azure/msal-browser'
 import { createSignal } from 'solid-js'
 import { getStoredUserOptions } from '../helpers/optionsHelpers'
 import { initializeText } from '../helpers/stateHelpers'
@@ -68,9 +72,17 @@ const getAccessToken = async (account: AccountInfo | null): Promise<string | nul
     })
     return response?.accessToken ?? response?.idToken ?? null
   } catch (e) {
-    await auth?.logoutRedirect({ account })
-    setAccount(null)
-    console.error(e)
+    if (!(e instanceof InteractionRequiredAuthError)) {
+      console.error(e)
+      return null
+    }
+
+    try {
+      const popupResponse = await auth?.acquireTokenPopup({ account, scopes })
+      return popupResponse?.accessToken ?? popupResponse?.idToken ?? null
+    } catch (e) {
+      console.error(e)
+    }
   }
 
   return null
