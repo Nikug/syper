@@ -29,8 +29,8 @@ export const newAttempt = (): Attempt => ({
   measurements: {
     startTime: null,
     endTime: null,
-    words: [],
     timestamps: new Map(),
+    errors: new Map(),
   },
 })
 

@@ -36,8 +36,8 @@ export interface Attempt {
 export interface Measurements {
   startTime: number | null
   endTime: number | null
-  words: WordMeasurement[]
-  timestamps: WordsPerMinuteTimestamp
+  timestamps: Map<number, number>
+  errors: Map<number, number>
 }
 
 export interface WordMeasurement {
@@ -60,7 +60,6 @@ export type AttemptState = (typeof AttemptStates)[AttemptStateKey]
 export type CharacterMode = 'default' | 'correct' | 'incorrect'
 
 export type Word = Map<number, string>
-export type WordsPerMinuteTimestamp = Map<number, number>
 
 export const AnimationStates = {
   hidden: 0,

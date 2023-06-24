@@ -3,7 +3,6 @@ import { produce } from 'solid-js/store'
 import { attempt, typingTest, setAttempt } from './StateManager'
 import { CharactersPerWord } from './constants'
 import { Attempt, AttemptStates } from './types'
-import { mapToString } from './util'
 import { submitTestResult } from './logic/testResult'
 import { userOptions } from './StateManager'
 import { handleTestEnd, handleTestStart, nextAttempt, restartAttempt } from './helpers/stateHelpers'
@@ -75,51 +74,34 @@ const handleCharacter = (event: KeyboardEvent) => {
         attempt = handleTestEnd(attempt, performanceNow)
       }
 
-      // Handle word
-      attempt = handleWordMeasurement(attempt, performanceNow)
+      attempt = handleTimestamp(attempt, performanceNow, event.key)
 
       attempt.finalText = attempt.finalText + event.key
       attempt.allText = attempt.allText + event.key
-
-      // Handle standardized timestamps
-      if (attempt.finalText.length % CharactersPerWord === 0 && !isEnd) {
-        attempt.measurements.timestamps.set(attempt.finalText.length, performanceNow)
-      }
 
       return attempt
     })
   )
 
   if (isEnd) {
+    console.log(attempt.measurements)
     startTransition(fromWritingToResults)
     submitTestResult(attempt, userOptions.textMode, typingTest())
   }
 }
 
-const handleWordMeasurement = (attempt: Attempt, performanceNow: number): Attempt => {
+const handleTimestamp = (attempt: Attempt, performanceNow: number, key: string): Attempt => {
   const currentIndex = attempt.finalText.length
-  const currentWord = typingTest().words.find((word) => word.has(currentIndex))
-  const currentMeasurement = attempt.measurements.words.find(
-    (word) => word.startIndex <= currentIndex && word.endIndex >= currentIndex
-  )
-  if (!currentWord) return attempt
+  const isError = typingTest().text[currentIndex] !== key
 
-  // Is the first character
-  if (!currentWord.has(currentIndex - 1) && !currentMeasurement) {
-    attempt.measurements.words.push({
-      startIndex: currentIndex,
-      endIndex: currentIndex + currentWord.size - 1,
-      word: mapToString(currentWord),
-      startTime: performanceNow,
-      endTime: null,
-    })
-  }
-
-  // Is the last character
-  if (!currentWord.has(currentIndex + 1)) {
-    attempt.measurements.words = attempt.measurements.words.map((word) =>
-      word.endIndex === currentIndex ? { ...word, endTime: performanceNow } : word
-    )
+  attempt.measurements.timestamps.set(currentIndex, performanceNow)
+  if (isError) {
+    const currentErrors = attempt.measurements.errors.get(currentIndex)
+    if (currentErrors == null) {
+      attempt.measurements.errors.set(currentIndex, 1)
+    } else {
+      attempt.measurements.errors.set(currentIndex, currentErrors + 1)
+    }
   }
 
   return attempt
