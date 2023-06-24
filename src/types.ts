@@ -38,6 +38,7 @@ export interface Measurements {
   endTime: number | null
   timestamps: Map<number, number>
   errors: Map<number, number>
+  words: WordMeasurement[]
 }
 
 export interface WordMeasurement {

@@ -1,8 +1,7 @@
 import { startTransition } from 'solid-js'
 import { produce } from 'solid-js/store'
 import { attempt, typingTest, setAttempt } from './StateManager'
-import { CharactersPerWord } from './constants'
-import { Attempt, AttemptStates } from './types'
+import { Attempt, AttemptStates, WordMeasurement } from './types'
 import { submitTestResult } from './logic/testResult'
 import { userOptions } from './StateManager'
 import { handleTestEnd, handleTestStart, nextAttempt, restartAttempt } from './helpers/stateHelpers'
@@ -84,7 +83,12 @@ const handleCharacter = (event: KeyboardEvent) => {
   )
 
   if (isEnd) {
-    console.log(attempt.measurements)
+    setAttempt(
+      produce((attempt) => {
+        attempt.measurements.words = parseWordMeasurements(attempt)
+        return attempt
+      })
+    )
     startTransition(fromWritingToResults)
     submitTestResult(attempt, userOptions.textMode, typingTest())
   }
@@ -105,4 +109,38 @@ const handleTimestamp = (attempt: Attempt, performanceNow: number, key: string):
   }
 
   return attempt
+}
+
+const parseWordMeasurements = (attempt: Attempt): WordMeasurement[] => {
+  const text = typingTest().text
+  const entries = attempt.measurements.timestamps.entries()
+  const words: WordMeasurement[] = []
+  let word: WordMeasurement | null = null
+
+  for (const [key, value] of entries) {
+    if (word == null) {
+      word = {
+        startTime: value,
+        endTime: value,
+        startIndex: key,
+        endIndex: key,
+        word: text[key],
+      }
+      continue
+    }
+
+    word.word += text[key]
+    word.endTime = value
+    word.endIndex = key
+    if (text[key] === ' ') {
+      words.push(word)
+      word = null
+    }
+  }
+
+  if (word != null) {
+    words.push(word)
+  }
+
+  return words
 }

@@ -104,7 +104,6 @@ export const handleTestStart = (attempt: Attempt, start: number) => {
 export const handleTestEnd = (attempt: Attempt, end: number) => {
   attempt.state = AttemptStates.completed
   attempt.measurements.endTime = end
-  attempt.measurements.timestamps.set(attempt.finalText.length, end)
   return attempt
 }
 

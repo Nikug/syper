@@ -33,12 +33,12 @@ const createOptions = (measurements: Measurements) => {
   const timestamps = Array.from(measurements.timestamps.entries())
   const startTime = measurements.startTime ?? 0
   const wpmOverTime = timestamps.map(([key, value]) => ({
-    x: key,
+    x: key + 1,
     y: wordsPerMinute(key, value - startTime),
   }))
 
   const wpmBetweenTimestamps = timestamps.map(([key, value], i) => ({
-    x: key,
+    x: key + 1,
     y: wordsPerMinute(
       key - (timestamps[i - 1]?.[0] ?? 0),
       value - (timestamps[i - 1]?.[1] ?? startTime)
@@ -104,7 +104,6 @@ export const createDefaultChartOptions = (xTitle: string, yTitle: string): ApexO
       width: 3,
     },
     markers: {
-      size: 5,
       strokeColors: undefined,
       strokeWidth: 0,
     },
