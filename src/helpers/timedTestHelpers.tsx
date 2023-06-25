@@ -7,7 +7,7 @@ import { submitTestResult } from '../logic/testResult'
 import { attempt, setAttempt, setTypingTest, typingTest, userOptions } from '../StateManager'
 import { Attempt, Word, WordsJson } from '../types'
 import { getRandomFromArray } from '../util'
-import { handleTestEnd } from './stateHelpers'
+import { handleTestEnd, parseWordMeasurements } from './stateHelpers'
 
 const [timer, setTimer] = createSignal<NodeJS.Timer | null>(null)
 
@@ -46,12 +46,20 @@ const updateAttempt = () => {
 
 const endAttempt = (attempt: Attempt) => {
   stopTimer()
-  startTransition(fromWritingToResults)
+
   setTypingTest({
     ...typingTest(),
     text: typingTest().text.substring(0, attempt.finalText.length),
     length: attempt.finalText.length,
   })
+
+  setAttempt(
+    produce((attempt) => {
+      attempt.measurements.words = parseWordMeasurements(attempt)
+    })
+  )
+
+  startTransition(fromWritingToResults)
   submitTestResult(attempt, userOptions.textMode, typingTest())
 }
 

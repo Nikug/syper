@@ -4,7 +4,13 @@ import { attempt, typingTest, setAttempt } from './StateManager'
 import { Attempt, AttemptStates, WordMeasurement } from './types'
 import { submitTestResult } from './logic/testResult'
 import { userOptions } from './StateManager'
-import { handleTestEnd, handleTestStart, nextAttempt, restartAttempt } from './helpers/stateHelpers'
+import {
+  handleTestEnd,
+  handleTestStart,
+  nextAttempt,
+  parseWordMeasurements,
+  restartAttempt,
+} from './helpers/stateHelpers'
 import { fromWritingToResults } from './AnimationManager'
 import { isTimeMode } from './helpers/optionsHelpers'
 
@@ -83,15 +89,19 @@ const handleCharacter = (event: KeyboardEvent) => {
   )
 
   if (isEnd) {
-    setAttempt(
-      produce((attempt) => {
-        attempt.measurements.words = parseWordMeasurements(attempt)
-        return attempt
-      })
-    )
-    startTransition(fromWritingToResults)
-    submitTestResult(attempt, userOptions.textMode, typingTest())
+    handlePostTest()
   }
+}
+
+const handlePostTest = () => {
+  setAttempt(
+    produce((attempt) => {
+      attempt.measurements.words = parseWordMeasurements(attempt)
+      return attempt
+    })
+  )
+  startTransition(fromWritingToResults)
+  submitTestResult(attempt, userOptions.textMode, typingTest())
 }
 
 const handleTimestamp = (attempt: Attempt, performanceNow: number, key: string): Attempt => {
@@ -109,38 +119,4 @@ const handleTimestamp = (attempt: Attempt, performanceNow: number, key: string):
   }
 
   return attempt
-}
-
-const parseWordMeasurements = (attempt: Attempt): WordMeasurement[] => {
-  const text = typingTest().text
-  const entries = attempt.measurements.timestamps.entries()
-  const words: WordMeasurement[] = []
-  let word: WordMeasurement | null = null
-
-  for (const [key, value] of entries) {
-    if (word == null) {
-      word = {
-        startTime: value,
-        endTime: value,
-        startIndex: key,
-        endIndex: key,
-        word: text[key],
-      }
-      continue
-    }
-
-    word.word += text[key]
-    word.endTime = value
-    word.endIndex = key
-    if (text[key] === ' ') {
-      words.push(word)
-      word = null
-    }
-  }
-
-  if (word != null) {
-    words.push(word)
-  }
-
-  return words
 }

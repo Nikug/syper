@@ -52,7 +52,7 @@ const createOptions = (measurements: Measurements) => {
 
   const options = createDefaultChartOptions('Characters written', 'Words per minute')
   options.series = [
-    { name: 'Words per minute total', data: wpmOverTime },
+    { name: 'Total words per minute', data: wpmOverTime },
     { name: 'Words per minute', data: wpmBetweenTimestamps },
   ]
 

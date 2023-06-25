@@ -2,8 +2,23 @@ import { startTransition } from 'solid-js'
 import { fromResultsToWriting, showingResults } from '../AnimationManager'
 import { getDictionary, getQuotes } from '../assets/files'
 import { TimedTestWords } from '../constants'
-import { attempt, newAttempt, setAttempt, setTypingTest, userOptions } from '../StateManager'
-import { QuotesJson, Word, WordsJson, Quote, AttemptStates, Attempt } from '../types'
+import {
+  attempt,
+  newAttempt,
+  setAttempt,
+  setTypingTest,
+  typingTest,
+  userOptions,
+} from '../StateManager'
+import {
+  QuotesJson,
+  Word,
+  WordsJson,
+  Quote,
+  AttemptStates,
+  Attempt,
+  WordMeasurement,
+} from '../types'
 import { getRandomFromArray, replaceBadCharacters } from '../util'
 import { isTimeMode } from './optionsHelpers'
 import { startTimer, stopTimer } from './timedTestHelpers'
@@ -108,3 +123,41 @@ export const handleTestEnd = (attempt: Attempt, end: number) => {
 }
 
 export const testStarted = () => attempt.state === AttemptStates.started
+
+export const parseWordMeasurements = (attempt: Attempt): WordMeasurement[] => {
+  const text = typingTest().text
+  const entries = attempt.measurements.timestamps.entries()
+  const words: WordMeasurement[] = []
+  let word: WordMeasurement | null = null
+
+  for (const [key, value] of entries) {
+    if (text[key] == null) {
+      continue
+    }
+
+    if (word == null) {
+      word = {
+        startTime: value,
+        endTime: value,
+        startIndex: key,
+        endIndex: key,
+        word: text[key],
+      }
+      continue
+    }
+
+    word.word += text[key]
+    word.endTime = value
+    word.endIndex = key
+    if (text[key] === ' ') {
+      words.push(word)
+      word = null
+    }
+  }
+
+  if (word != null) {
+    words.push(word)
+  }
+
+  return words
+}
