@@ -1,10 +1,11 @@
 import { Component, createEffect, createSignal, on } from 'solid-js'
 import ApexCharts, { ApexOptions } from 'apexcharts'
 import { AnimationState, AnimationStates, Measurements } from '../types'
-import { wordsPerMinute } from '../helpers/mathHelpers'
+import { sampleSeries, wordsPerMinute } from '../helpers/mathHelpers'
 import './WpmChart.css'
 import { userOptions } from '../StateManager'
 import { getColor } from '../themes/themeHelper'
+import { CharactersPerWord } from '../constants'
 
 interface Props {
   measurements: Measurements
@@ -30,15 +31,19 @@ export const WpmChart: Component<Props> = (props) => {
 }
 
 const createOptions = (measurements: Measurements) => {
-  const timestamps = Array.from(measurements.timestamps.entries())
+  const timestamps = sampleSeries(
+    Array.from(measurements.timestamps.entries()),
+    CharactersPerWord
+  ).slice(1)
   const startTime = measurements.startTime ?? 0
+
   const wpmOverTime = timestamps.map(([key, value]) => ({
-    x: key + 1,
+    x: key,
     y: wordsPerMinute(key, value - startTime),
   }))
 
   const wpmBetweenTimestamps = timestamps.map(([key, value], i) => ({
-    x: key + 1,
+    x: key,
     y: wordsPerMinute(
       key - (timestamps[i - 1]?.[0] ?? 0),
       value - (timestamps[i - 1]?.[1] ?? startTime)

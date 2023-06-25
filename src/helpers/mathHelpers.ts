@@ -90,3 +90,31 @@ export const calculateTrendLine = (points: Vector2[]): Vector2[] => {
   const endPoint = { x: points[count - 1].x, y: points[count - 1].x * slope + offset }
   return [startPoint, endPoint]
 }
+
+const mean = (array: number[]) => {
+  const sum = array.reduce((total, value) => total + value, 0)
+  return sum / array.length
+}
+
+export const smoothSeries = (series: number[], smoothCount: number): number[] => {
+  const smoothedSeries: number[] = new Array(series.length)
+  let subSeries: number[] = new Array(smoothCount)
+
+  for (let i = 0, limit = series.length; i < limit; i++) {
+    subSeries = series.slice(i, i + smoothCount)
+    smoothedSeries[i] = mean(subSeries)
+  }
+
+  return smoothedSeries
+}
+
+export const smoothYValues = (values: Vector2[], smoothCount: number): Vector2[] => {
+  const yValues = values.map((value) => value.y)
+  const smoothedYValues = smoothSeries(yValues, smoothCount)
+  values = values.map((value, i) => ({ x: value.x, y: smoothedYValues[i] }))
+  return values
+}
+
+export const sampleSeries = <T>(series: T[], frequency: number): T[] => {
+  return series.filter((_, index) => index % frequency === 0)
+}
