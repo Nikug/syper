@@ -1,7 +1,7 @@
 import { startTransition } from 'solid-js'
 import { produce } from 'solid-js/store'
 import { attempt, typingTest, setAttempt } from './StateManager'
-import { Attempt, AttemptStates, WordMeasurement } from './types'
+import { Attempt, AttemptStates } from './types'
 import { submitTestResult } from './logic/testResult'
 import { userOptions } from './StateManager'
 import {
