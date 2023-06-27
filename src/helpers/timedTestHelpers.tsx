@@ -47,10 +47,14 @@ const updateAttempt = () => {
 const endAttempt = (attempt: Attempt) => {
   stopTimer()
 
+  const textLength = attempt.finalText.length
+  const lastWordIndex = typingTest().words.findIndex((word) => word.has(textLength - 1))
+
   setTypingTest({
     ...typingTest(),
-    text: typingTest().text.substring(0, attempt.finalText.length),
-    length: attempt.finalText.length,
+    text: typingTest().text.substring(0, textLength),
+    length: textLength,
+    words: typingTest().words.slice(0, lastWordIndex + 1),
   })
 
   setAttempt(
