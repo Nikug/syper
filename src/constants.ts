@@ -16,3 +16,4 @@ export const AnimationDurationClass = 'duration-100'
 
 export const TimedTestWords = 50
 export const TimedTestCharacters = 300
+export const TimerUpdateFrequency = 1000

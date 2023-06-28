@@ -2,30 +2,31 @@ import { createSignal, startTransition } from 'solid-js'
 import { produce } from 'solid-js/store'
 import { fromWritingToResults } from '../AnimationManager'
 import { getDictionary } from '../assets/files'
-import { TimedTestCharacters } from '../constants'
+import { TimedTestCharacters, TimerUpdateFrequency } from '../constants'
 import { submitTestResult } from '../logic/testResult'
 import { attempt, setAttempt, setTypingTest, typingTest, userOptions } from '../StateManager'
 import { Attempt, Word, WordsJson } from '../types'
 import { getRandomFromArray } from '../util'
 import { handleTestEnd, parseWordMeasurements } from './stateHelpers'
+import { Timer } from './timer'
 
-const [timer, setTimer] = createSignal<NodeJS.Timer | null>(null)
+const [timer, setTimer] = createSignal<Timer | null>(null)
 
 export const startTimer = () => {
-  clearInterval(timer() ?? undefined)
-  const interval = setInterval(updateAttempt, 1000)
-  setTimer(interval)
+  const newTimer = new Timer(updateAttempt, TimerUpdateFrequency)
+  newTimer.start()
+  setTimer(newTimer)
 }
 
 export const stopTimer = () => {
-  clearInterval(timer() ?? undefined)
+  timer()?.stop()
 }
 
 const updateAttempt = () => {
   let isEnd = false
+  const performanceNow = performance.now()
   setAttempt(
     produce((attempt) => {
-      const performanceNow = performance.now()
       attempt.remainingDuration =
         (attempt.measurements.startTime ?? 0) + attempt.testDuration - performanceNow
 
