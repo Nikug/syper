@@ -30,6 +30,9 @@ export class Timer {
     const actualPassedTime = now - this.startTime
     const drift = actualPassedTime - targetPassedTime
     this.ticks += 1
+
+    if (this.stopped) return
+
     this.timeout = setTimeout(() => {
       if (!this.stopped) {
         this.tick()
