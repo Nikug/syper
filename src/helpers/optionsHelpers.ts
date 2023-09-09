@@ -1,6 +1,6 @@
 import { getUserOptions, saveUserOptions } from '../api/userOptions'
 import { Dictionaries, Quotes } from '../assets/files'
-import { isSignedIn } from '../authentication/Authentication'
+import { isSignedIn } from '../authentication/Supabase'
 import { HistoryMode } from '../components/HistoricalStatisticsContainer'
 import { nextAttempt } from '../helpers/stateHelpers'
 import { defaultUserOptions, setUserOptions, userOptions } from '../StateManager'

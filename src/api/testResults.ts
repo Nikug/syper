@@ -1,4 +1,4 @@
-import { authFetch, getUserId } from '../authentication/Authentication'
+import { authFetch, getUserId } from '../authentication/Supabase'
 import { DatabaseTestResult, DatabaseTestResultInput } from '../types'
 import { getBaseRoute } from './userOptions'
 import { endOfDay, startOfDay } from 'date-fns'

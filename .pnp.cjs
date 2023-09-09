@@ -28,7 +28,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {\
           "packageLocation": "./",\
           "packageDependencies": [\
-            ["@azure/msal-browser", "npm:2.37.0"],\
             ["@iconify-json/ri", "npm:1.1.12"],\
             ["@solidjs/router", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:0.8.3"],\
             ["@supabase/supabase-js", "npm:2.33.1"],\
@@ -105,25 +104,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@antfu-utils-npm-0.7.6-beeb78b1d6-92bf38ded4.zip/node_modules/@antfu/utils/",\
           "packageDependencies": [\
             ["@antfu/utils", "npm:0.7.6"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["@azure/msal-browser", [\
-        ["npm:2.37.0", {\
-          "packageLocation": "./.yarn/cache/@azure-msal-browser-npm-2.37.0-2cad072a1b-e57d04517d.zip/node_modules/@azure/msal-browser/",\
-          "packageDependencies": [\
-            ["@azure/msal-browser", "npm:2.37.0"],\
-            ["@azure/msal-common", "npm:13.0.0"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["@azure/msal-common", [\
-        ["npm:13.0.0", {\
-          "packageLocation": "./.yarn/cache/@azure-msal-common-npm-13.0.0-5d94df3115-89f56f9fbf.zip/node_modules/@azure/msal-common/",\
-          "packageDependencies": [\
-            ["@azure/msal-common", "npm:13.0.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -5376,7 +5356,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["solid-typer", "workspace:."],\
-            ["@azure/msal-browser", "npm:2.37.0"],\
             ["@iconify-json/ri", "npm:1.1.12"],\
             ["@solidjs/router", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:0.8.3"],\
             ["@supabase/supabase-js", "npm:2.33.1"],\

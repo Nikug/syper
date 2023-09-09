@@ -1,5 +1,5 @@
 import { saveTestResult } from '../api/testResults'
-import { getUserId } from '../authentication/Authentication'
+import { getUserId } from '../authentication/Supabase'
 import { CharactersPerWord } from '../constants'
 import { getAccuracy, getCorrectness, getWordsPerMinute } from '../helpers/mathHelpers'
 import { isQuoteMode, isTimeMode } from '../helpers/optionsHelpers'

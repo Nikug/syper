@@ -1,5 +1,5 @@
 import { UserOptions } from '../types'
-import { authFetch, getUserId } from '../authentication/Authentication'
+import { authFetch, getUserId } from '../authentication/Supabase'
 
 export const getBaseRoute = () => `${import.meta.env.VITE_API}/api`
 
