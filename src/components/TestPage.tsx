@@ -1,7 +1,7 @@
-import { Component, Show } from 'solid-js'
+import { Component, Show, onCleanup, onMount } from 'solid-js'
 import { clsx } from 'clsx'
 import { Header } from './Header'
-import { attempt, typingTest } from '../StateManager'
+import { attempt, setTypingTest, typingTest } from '../StateManager'
 import { QuoteInformation } from './QuoteInformation'
 import { TextContainer } from './TextContainer'
 import { ProgressBar } from './ProgressBar'
@@ -10,8 +10,17 @@ import { Footer } from './Footer'
 import { StatisticsContainer } from './StatisticsContainer'
 import { AnimationDurationClass } from '../constants'
 import { animationState, showingResults, showingWriting } from '../AnimationManager'
+import { cleanupKeyboard, setupKeyboard } from '../KeyboardHandler'
+import { initializeText } from '../helpers/stateHelpers'
 
 const TestPage: Component = () => {
+  onMount(async () => {
+    setupKeyboard()
+    setTypingTest(await initializeText())
+  })
+
+  onCleanup(() => cleanupKeyboard())
+
   return (
     <div class="w-full h-full">
       <div class="grid mx-auto max-w-7xl px-16 grid-rows-5 min-h-screen justify-items-stretch">

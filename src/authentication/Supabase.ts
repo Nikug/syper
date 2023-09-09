@@ -26,6 +26,18 @@ export const signIn = async (email: string, password: string) => {
   setSession(data.session)
 }
 
+export const signUp = async (email: string, password: string) => {
+  const { data, error } = await supabase.auth.signUp({ email, password })
+  if (error) {
+    console.log(error)
+  }
+  if (!data.session && data.user) {
+    console.log('Email not verified')
+  }
+
+  setSession(data.session)
+}
+
 export const signOut = async () => {
   await supabase.auth.signOut()
   setSession(null)
