@@ -2,6 +2,7 @@
   "name": "solid-typer",
   "version": "0.0.1",
   "description": "Typing game made with SolidJS",
+  "type": "module",
   "scripts": {
     "start": "vite",
     "dev": "vite",
@@ -45,5 +46,5 @@
     "date-fns": "^2.30.0",
     "solid-js": "^1.7.11"
   },
-  "packageManager": "yarn@3.4.1"
+  "packageManager": "yarn@3.6.3"
 }
