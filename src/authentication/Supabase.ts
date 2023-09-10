@@ -2,6 +2,14 @@ import { Session, createClient } from '@supabase/supabase-js'
 import { SupabaseConstants } from './constants'
 import { createSignal } from 'solid-js'
 
+if (!SupabaseConstants.url) {
+  console.error('Missing Supabase url. Please check environment variables.')
+}
+
+if (!SupabaseConstants.anonymousKey) {
+  console.error('Missing Supabase anonymous key. Please check environment variables.')
+}
+
 export const supabase = createClient(SupabaseConstants.url, SupabaseConstants.anonymousKey)
 
 const [session, setSession] = createSignal<Session | null>(null)
