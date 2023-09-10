@@ -4,7 +4,8 @@ import { CharactersPerWord } from '../constants'
 import { getAccuracy, getCorrectness, getWordsPerMinute } from '../helpers/mathHelpers'
 import { isQuoteMode, isTimeMode } from '../helpers/optionsHelpers'
 import { startSyncing, stopSyncing } from '../SyncingManager'
-import { Attempt, DatabaseTestResultInput, TextMode, TypingTest } from '../types'
+import { Attempt, TextMode, TypingTest } from '../types'
+import { DatabaseTestResultInput } from '../supabaseTypes'
 
 export const submitTestResult = async (
   attempt: Attempt,

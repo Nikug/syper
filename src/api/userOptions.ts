@@ -1,25 +1,34 @@
 import { UserOptions } from '../types'
-import { authFetch, getUserId } from '../authentication/Supabase'
+import { getUserId, supabase } from '../authentication/Supabase'
+import { SupabaseTables } from '../authentication/constants'
+import { DatabaseUserOptions, DatabaseUserOptionsInput } from '../supabaseTypes'
 
 export const getBaseRoute = () => `${import.meta.env.VITE_API}/api`
 
 export const saveUserOptions = async (options: UserOptions): Promise<boolean> => {
-  const result = await authFetch(`${getBaseRoute()}/userOptions`, {
-    method: 'post',
-    body: JSON.stringify(options),
-  })
+  const userId = getUserId()
+  if (!userId) return false
 
-  return result.ok
+  const input: DatabaseUserOptionsInput = { ...options, userId }
+  const result = await supabase
+    .from(SupabaseTables.UserOptions)
+    .upsert(input, { onConflict: 'userId' })
+
+  return !!result.error
 }
 
 export const getUserOptions = async (): Promise<UserOptions | null> => {
   const userId = getUserId()
   if (!userId) return null
 
-  const result = await authFetch(`${getBaseRoute()}/userOptions/${userId}`)
+  const result = await supabase
+    .from(SupabaseTables.UserOptions)
+    .select<string, DatabaseUserOptions>()
+    .eq('userId', userId)
+    .single()
 
-  if (result.ok) {
-    return await result.json()
+  if (!result.error) {
+    return result.data
   }
 
   return null

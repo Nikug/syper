@@ -10,6 +10,21 @@ import { TextMode, UserOptions } from '../types'
 
 const UserOptionsStorageKey = 'userOptions'
 
+const createValidOptions = (options: Partial<UserOptions> | null) => {
+  const defaultOptions = defaultUserOptions()
+  if (!options) return defaultOptions
+
+  const keys = Object.keys(defaultOptions)
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  keys.forEach((key: any) => {
+    // @ts-expect-error Any can be used to index object.
+    defaultOptions[key] = options[key]
+  })
+  /* eslint-enable*/
+
+  return defaultOptions
+}
+
 export const getStoredUserOptions = async (): Promise<UserOptions> => {
   let options: Partial<UserOptions> | null = null
   if (isSignedIn()) {
@@ -27,7 +42,7 @@ export const getStoredUserOptions = async (): Promise<UserOptions> => {
     }
   }
 
-  const fullOptions = options ? { ...defaultUserOptions(), ...options } : defaultUserOptions()
+  const fullOptions = createValidOptions(options)
   setTheme(fullOptions.theme)
 
   return fullOptions
