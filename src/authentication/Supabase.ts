@@ -50,6 +50,3 @@ export const signOut = async () => {
   await supabase.auth.signOut()
   setSession(null)
 }
-
-// eslint-disable-next-line
-export const authFetch: any = (...params: any[]) => console.log(params)

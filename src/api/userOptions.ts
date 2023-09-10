@@ -14,10 +14,10 @@ export const saveUserOptions = async (options: UserOptions): Promise<boolean> =>
     .from(SupabaseTables.UserOptions)
     .upsert(input, { onConflict: 'userId' })
 
-  return !!result.error
+  return !result.error
 }
 
-export const getUserOptions = async (): Promise<UserOptions | null> => {
+export const getUserOptions = async (): Promise<DatabaseUserOptions | null> => {
   const userId = getUserId()
   if (!userId) return null
 
