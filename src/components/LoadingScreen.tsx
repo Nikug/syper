@@ -18,7 +18,7 @@ const getDots = (start: number): number[] => {
 export const LoadingScreen: Component = () => {
   const [dotIndex, setDotIndex] = createSignal<number>(0)
   const [loadingDots, setLoadingDots] = createSignal<number[]>(getDots(0))
-  const [intervalId, setIntervalId] = createSignal<NodeJS.Timer | undefined>(undefined)
+  const [intervalId, setIntervalId] = createSignal<NodeJS.Timeout | undefined>(undefined)
 
   onMount(() => {
     const id = setInterval(() => {
