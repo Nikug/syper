@@ -87,24 +87,6 @@ export interface UserOptions {
   historyMode: HistoryMode
 }
 
-export interface DatabaseTestResultInput {
-  userId: string
-  textMode: TextMode
-  quoteId?: string
-  source: string
-  characters: number
-  words: number
-  duration: number
-  wordsPerMinute: number
-  accuracy: number
-  correctness: number
-}
-
-export interface DatabaseTestResult extends DatabaseTestResultInput {
-  id: string
-  date: string
-}
-
 export interface TestResultSum {
   tests: number
   characters: number

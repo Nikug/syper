@@ -2,7 +2,7 @@ import { createSignal } from 'solid-js'
 import { createStore } from 'solid-js/store'
 import { Attempt, AttemptStates, TypingTest, UserOptions } from './types'
 
-export const defaultUserOptions = (): UserOptions => ({
+const defaultOptions = {
   theme: 'catppuccin-mocha',
   dictionary: 'english-200',
   quotes: 'quotes',
@@ -10,7 +10,9 @@ export const defaultUserOptions = (): UserOptions => ({
   wordCount: 50,
   timeDuration: 60 * 1000,
   historyMode: 'tenDays',
-})
+} as const
+
+export const defaultUserOptions = (): UserOptions => defaultOptions
 
 export const newText = (): TypingTest => ({
   id: 0,

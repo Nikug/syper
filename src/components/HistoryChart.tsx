@@ -1,6 +1,6 @@
 import { Component, createEffect, createSignal, on } from 'solid-js'
 import ApexCharts, { ApexOptions } from 'apexcharts'
-import { DatabaseTestResult } from '../types'
+import { DatabaseTestResult } from '../supabaseTypes'
 import { createDefaultChartOptions } from './WpmChart'
 import { format } from 'date-fns'
 import { calculateTrendLine } from '../helpers/mathHelpers'

@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite'
 import solidPlugin from 'vite-plugin-solid'
+// @ts-expect-error Package is missing types.
 import eslintPlugin from 'vite-plugin-eslint'
 import unoCssPlugin from 'unocss/vite'
 

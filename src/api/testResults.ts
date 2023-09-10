@@ -1,15 +1,12 @@
-import { authFetch, getUserId } from '../authentication/Authentication'
-import { DatabaseTestResult, DatabaseTestResultInput } from '../types'
-import { getBaseRoute } from './userOptions'
+import { getUserId, supabase } from '../authentication/Supabase'
+import { SupabaseTables } from '../authentication/constants'
+import { DatabaseTestResult, DatabaseTestResultInput } from '../supabaseTypes'
 import { endOfDay, startOfDay } from 'date-fns'
 
 export const saveTestResult = async (testResult: DatabaseTestResultInput): Promise<boolean> => {
-  const result = await authFetch(`${getBaseRoute()}/userTestResults`, {
-    method: 'post',
-    body: JSON.stringify(testResult),
-  })
+  const result = await supabase.from(SupabaseTables.UserTestResults).insert(testResult)
 
-  return result.ok
+  return !!result.error
 }
 
 export const getTestResults = async (
@@ -22,12 +19,15 @@ export const getTestResults = async (
   const userId = getUserId()
   if (!userId) return []
 
-  const result = await authFetch(
-    `${getBaseRoute()}/userTestResults/${userId}?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`
-  )
+  const result = await supabase
+    .from(SupabaseTables.UserTestResults)
+    .select<string, DatabaseTestResult>()
+    .eq('userId', userId)
+    .gte('date', startDate.toISOString())
+    .lte('date', endDate.toISOString())
 
-  if (result.ok) {
-    return await result.json()
+  if (!result.error) {
+    return result.data
   }
 
   return []

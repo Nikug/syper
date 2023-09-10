@@ -18,7 +18,7 @@ const getDots = (start: number): number[] => {
 export const LoadingScreen: Component = () => {
   const [dotIndex, setDotIndex] = createSignal<number>(0)
   const [loadingDots, setLoadingDots] = createSignal<number[]>(getDots(0))
-  const [intervalId, setIntervalId] = createSignal<NodeJS.Timer | undefined>(undefined)
+  const [intervalId, setIntervalId] = createSignal<NodeJS.Timeout | undefined>(undefined)
 
   onMount(() => {
     const id = setInterval(() => {
@@ -33,8 +33,8 @@ export const LoadingScreen: Component = () => {
   return (
     <div class="bg-theme-base w-screen h-screen">
       <div class="flex flex-col justify-center items-center h-full">
-        <p class="text-3xl font-bold mb-2">Waking up Azure services</p>
-        <p class="mb-8">This usually takes around 15 seconds</p>
+        <p class="text-3xl font-bold mb-2">Waking up services</p>
+        <p class="mb-8">This shouldn't take long</p>
         <div>
           <For each={loadingDots()}>
             {(styles) => (

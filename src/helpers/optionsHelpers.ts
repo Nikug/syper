@@ -1,6 +1,6 @@
 import { getUserOptions, saveUserOptions } from '../api/userOptions'
 import { Dictionaries, Quotes } from '../assets/files'
-import { isSignedIn } from '../authentication/Authentication'
+import { isSignedIn } from '../authentication/Supabase'
 import { HistoryMode } from '../components/HistoricalStatisticsContainer'
 import { nextAttempt } from '../helpers/stateHelpers'
 import { defaultUserOptions, setUserOptions, userOptions } from '../StateManager'
@@ -9,6 +9,21 @@ import { setTheme } from '../themes/ThemeManager'
 import { TextMode, UserOptions } from '../types'
 
 const UserOptionsStorageKey = 'userOptions'
+
+const createValidOptions = (options: Partial<UserOptions> | null) => {
+  const defaultOptions = defaultUserOptions()
+  if (!options) return defaultOptions
+
+  const keys = Object.keys(defaultOptions)
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  keys.forEach((key: any) => {
+    // @ts-expect-error Any can be used to index object.
+    defaultOptions[key] = options[key]
+  })
+  /* eslint-enable*/
+
+  return defaultOptions
+}
 
 export const getStoredUserOptions = async (): Promise<UserOptions> => {
   let options: Partial<UserOptions> | null = null
@@ -27,7 +42,7 @@ export const getStoredUserOptions = async (): Promise<UserOptions> => {
     }
   }
 
-  const fullOptions = options ? { ...defaultUserOptions(), ...options } : defaultUserOptions()
+  const fullOptions = createValidOptions(options)
   setTheme(fullOptions.theme)
 
   return fullOptions

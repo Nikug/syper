@@ -2,7 +2,7 @@ import { A } from '@solidjs/router'
 import { clsx } from 'clsx'
 import { Component, Show } from 'solid-js'
 import { Dictionaries, dictionaries, getDictionaryName } from '../assets/files'
-import { getUserName } from '../authentication/Authentication'
+import { getUserName } from '../authentication/Supabase'
 import { TimeDurations, WordCounts } from '../constants'
 import { getShortFormattedDuration } from '../helpers/mathHelpers'
 import {

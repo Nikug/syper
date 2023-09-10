@@ -42,6 +42,18 @@ export default defineConfig({
       }),
     ],
     [
+      /^caret-theme-(\w*)(\/(.*))?$/,
+      ([, rgb, , alpha]) => ({
+        'caret-color': color(rgb, alpha),
+      }),
+    ],
+    [
+      /^accent-theme-(\w*)(\/(.*))?$/,
+      ([, rgb, , alpha]) => ({
+        'accent-color': color(rgb, alpha),
+      }),
+    ],
+    [
       /^bg-gradient-to-(.)$/,
       ([, direction]) => ({
         'background-image': `linear-gradient(to ${
