@@ -6,6 +6,8 @@ import './WpmChart.css'
 import { userOptions } from '../StateManager'
 import { getColor } from '../themes/themeHelper'
 import { CharactersPerWord } from '../constants'
+import { WpmChartHover } from './WpmChartHover'
+import { render } from 'solid-js/web'
 
 interface Props {
   measurements: Measurements
@@ -52,12 +54,14 @@ const createOptions = (measurements: Measurements) => {
 
   const options = createDefaultChartOptions('Characters written', 'Words per minute')
   options.series = [
-    { name: 'Total words per minute', data: wpmOverTime },
     { name: 'Words per minute', data: wpmBetweenTimestamps },
+    { name: 'Total words per minute', data: wpmOverTime },
   ]
 
   return options
 }
+
+const [disposeTooltip, setDisposeTooltip] = createSignal<{ dispose: () => void } | null>(null)
 
 export const createDefaultChartOptions = (xTitle: string, yTitle: string): ApexOptions => {
   const options: ApexOptions = {
@@ -106,13 +110,13 @@ export const createDefaultChartOptions = (xTitle: string, yTitle: string): ApexO
     },
     stroke: {
       curve: 'smooth',
-      width: 3,
+      width: [2, 4],
     },
     markers: {
       strokeColors: undefined,
       strokeWidth: 0,
     },
-    colors: [getColor(userOptions.theme, 'primary'), getColor(userOptions.theme, 'secondary')],
+    colors: [getColor(userOptions.theme, 'secondary'), getColor(userOptions.theme, 'primary')],
     xaxis: {
       tickAmount: 10,
       labels: {
@@ -161,37 +165,21 @@ export const createDefaultChartOptions = (xTitle: string, yTitle: string): ApexO
       },
     },
     tooltip: {
-      custom: ({ series, dataPointIndex, w }) => {
-        const showSeries0 = series.at(0)?.[dataPointIndex] != null
-        const showSeries1 = series.at(1)?.[dataPointIndex] != null
-        return `
-          <div class="bg-theme-surface1 rounded px-4 py-2 !border-theme-danger">
-            <h3 class="font-semibold mb-2">At ${
-              w.globals.initialSeries.at(0)?.data.at(dataPointIndex)?.x
-            } characters
-            </h3>
-            ${
-              showSeries0
-                ? `<div class="flex gap-x-2 items-center">
-                     <div class="bg-theme-primary rounded-full w-4 h-4"></div>
-                     <p>Total Wpm: <span class="font-bold">${series
-                       .at(0)
-                       ?.[dataPointIndex]?.toFixed(1)}</span></p>
-                   </div>`
-                : ''
-            }
-            ${
-              showSeries1
-                ? `<div class="flex gap-x-2 items-center">
-                     <div class="bg-theme-secondary rounded-full w-4 h-4"></div>
-                     <p>Current Wpm: <span class="font-bold">${series
-                       .at(1)
-                       ?.[dataPointIndex]?.toFixed(1)}</span></p>
-                   </div>`
-                : ''
-            }
-          </div>
-        `
+      custom: (tooltipProps) => {
+        disposeTooltip()?.dispose()
+        const div = document.createElement('div')
+        const result = render(
+          () => (
+            <WpmChartHover
+              series={tooltipProps.series}
+              dataPointIndex={tooltipProps.dataPointIndex}
+              w={tooltipProps.w}
+            />
+          ),
+          div
+        )
+        setDisposeTooltip({ dispose: result })
+        return div.innerHTML
       },
     },
   }
