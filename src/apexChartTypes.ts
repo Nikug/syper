@@ -2,13 +2,13 @@ import { ApexOptions } from 'apexcharts'
 
 export type Series = number[][]
 
-export interface Vector2 {
-  x: number
+export interface Vector2<T> {
+  x: T
   y: number
 }
 
 export interface InitialSeries {
-  data: Vector2[]
+  data: Vector2<number | Date | string>[]
   name: string
 }
 

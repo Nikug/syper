@@ -5,6 +5,8 @@ import { createDefaultChartOptions } from './WpmChart'
 import { format } from 'date-fns'
 import { calculateTrendLine } from '../helpers/mathHelpers'
 import { userOptions } from '../StateManager'
+import { render } from 'solid-js/web'
+import { HistoryChartTooltip } from './HistoryChartTooltip'
 
 interface Props {
   startDate?: Date
@@ -30,6 +32,8 @@ export const HistoryChart: Component<Props> = (props) => {
 
   return <div ref={element} class="paper p-4" />
 }
+
+const [disposeTooltip, setDisposeTooltip] = createSignal<{ dispose: () => void } | null>(null)
 
 const createOptions = (
   tests: DatabaseTestResult[],
@@ -61,6 +65,24 @@ const createOptions = (
   options.stroke!.curve = 'straight'
   options.stroke!.dashArray = 6
   options.markers!.size = [6, 0]
+  // eslint-disable-next-line solid/reactivity
+  options.tooltip!.custom = (tooltipProps) => {
+    disposeTooltip()?.dispose()
+    const div = document.createElement('div')
+    const result = render(
+      () => (
+        <HistoryChartTooltip
+          tests={tests}
+          series={tooltipProps.series}
+          dataPointIndex={tooltipProps.dataPointIndex}
+          w={tooltipProps.w}
+        />
+      ),
+      div
+    )
+    setDisposeTooltip({ dispose: result })
+    return div.innerHTML
+  }
   /* eslint-enable @typescript-eslint/no-non-null-assertion */
 
   return options

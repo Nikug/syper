@@ -6,7 +6,7 @@ import './WpmChart.css'
 import { userOptions } from '../StateManager'
 import { getColor } from '../themes/themeHelper'
 import { CharactersPerWord } from '../constants'
-import { WpmChartHover } from './WpmChartHover'
+import { WpmChartTooltip } from './WpmChartTooltip'
 import { render } from 'solid-js/web'
 
 interface Props {
@@ -170,7 +170,7 @@ export const createDefaultChartOptions = (xTitle: string, yTitle: string): ApexO
         const div = document.createElement('div')
         const result = render(
           () => (
-            <WpmChartHover
+            <WpmChartTooltip
               series={tooltipProps.series}
               dataPointIndex={tooltipProps.dataPointIndex}
               w={tooltipProps.w}

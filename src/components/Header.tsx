@@ -3,7 +3,7 @@ import { clsx } from 'clsx'
 import { Component, Show } from 'solid-js'
 import { Dictionaries, dictionaries, getDictionaryName } from '../assets/files'
 import { getUserName } from '../authentication/Supabase'
-import { TimeDurations, WordCounts } from '../constants'
+import { TimeDurations, WordCounts, textModeOptions } from '../constants'
 import { getShortFormattedDuration } from '../helpers/mathHelpers'
 import {
   isTimeMode,
@@ -16,20 +16,9 @@ import {
 import { attempt, userOptions } from '../StateManager'
 import { setAndSaveTheme } from '../themes/ThemeManager'
 import { ThemeKey, themes } from '../themes/themes'
-import { AttemptStates, TextMode } from '../types'
+import { AttemptStates } from '../types'
 import { capitalize } from '../util'
 import { Dropdown } from './Dropdown'
-
-interface TextModeOption {
-  key: TextMode
-  value: string
-}
-
-const textModeOptions: TextModeOption[] = [
-  { key: 'quote', value: 'Quote' },
-  { key: 'words', value: 'Words' },
-  { key: 'time', value: 'Time' },
-]
 
 export const Header: Component = () => {
   const isOngoingAttempt = () => attempt.state === AttemptStates.started

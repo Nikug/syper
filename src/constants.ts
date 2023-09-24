@@ -1,4 +1,5 @@
 import { getShortFormattedDuration } from './helpers/mathHelpers'
+import { TextMode } from './types'
 
 export const CharactersPerWord = 5
 
@@ -17,3 +18,14 @@ export const AnimationDurationClass = 'duration-100'
 export const TimedTestWords = 50
 export const TimedTestCharacters = 300
 export const TimerUpdateFrequency = 1000
+
+export interface TextModeOption {
+  key: TextMode
+  value: string
+}
+
+export const textModeOptions: TextModeOption[] = [
+  { key: 'quote', value: 'Quote' },
+  { key: 'words', value: 'Words' },
+  { key: 'time', value: 'Time' },
+]
