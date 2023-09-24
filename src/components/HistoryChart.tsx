@@ -61,10 +61,14 @@ const createOptions = (
   options.xaxis!.type = 'datetime'
   options.xaxis!.min = startDate?.getTime()
   options.xaxis!.max = endDate?.getTime()
+  options.xaxis!.crosshairs!.show = false
   options.title!.text = title
   options.stroke!.curve = 'straight'
   options.stroke!.dashArray = 6
   options.markers!.size = [6, 0]
+  options.tooltip!.intersect = true
+  options.tooltip!.shared = false
+  options.tooltip!.followCursor = true
   // eslint-disable-next-line solid/reactivity
   options.tooltip!.custom = (tooltipProps) => {
     disposeTooltip()?.dispose()
