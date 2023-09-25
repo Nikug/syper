@@ -6,4 +6,5 @@ export const SupabaseConstants = {
 export const SupabaseTables = {
   UserOptions: 'UserOptions',
   UserTestResults: 'UserTestResults',
+  UserPersonalBests: 'UserPersonalBests',
 }

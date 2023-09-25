@@ -26,3 +26,19 @@ export interface DatabaseUserOptions extends DatabaseUserOptionsInput {
   id: number
   date: Date
 }
+
+export interface DatabasePersonalBestInput {
+  userId: string
+  date: Date
+  testId: string
+  textMode: string
+  source: string
+  words?: number
+  duration?: number
+  wordsPerMinute: number
+}
+
+export interface DatabasePersonalBest extends DatabasePersonalBestInput {
+  id: string
+  date: Date
+}

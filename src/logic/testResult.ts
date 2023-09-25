@@ -6,6 +6,8 @@ import { isQuoteMode, isTimeMode } from '../helpers/optionsHelpers'
 import { startSyncing, stopSyncing } from '../SyncingManager'
 import { Attempt, TextMode, TypingTest } from '../types'
 import { DatabaseTestResultInput } from '../supabaseTypes'
+import { userOptions } from '../StateManager'
+import { handlePersonalBestUpdate } from '../helpers/personalBestHelpers'
 
 export const submitTestResult = async (
   attempt: Attempt,
@@ -28,13 +30,16 @@ export const submitTestResult = async (
       words: isTimeMode()
         ? Math.round(typingTest.length / CharactersPerWord)
         : typingTest.words.length,
-      duration: duration,
+      duration: isTimeMode() ? userOptions.timeDuration : duration,
       wordsPerMinute: getWordsPerMinute(attempt.measurements, typingTest) ?? 0,
       correctness: getCorrectness(typingTest, attempt),
       accuracy: getAccuracy(typingTest, attempt),
     }
 
-    await saveTestResult(testResult)
+    const result = await saveTestResult(testResult)
+    if (result.data) {
+      handlePersonalBestUpdate(result.data)
+    }
   } finally {
     stopSyncing()
   }

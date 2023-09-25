@@ -1,12 +1,19 @@
+import { PostgrestError } from '@supabase/supabase-js'
 import { getUserId, supabase } from '../authentication/Supabase'
 import { SupabaseTables } from '../authentication/constants'
 import { DatabaseTestResult, DatabaseTestResultInput } from '../supabaseTypes'
 import { endOfDay, startOfDay } from 'date-fns'
 
-export const saveTestResult = async (testResult: DatabaseTestResultInput): Promise<boolean> => {
-  const result = await supabase.from(SupabaseTables.UserTestResults).insert(testResult)
+export const saveTestResult = async (
+  testResult: DatabaseTestResultInput
+): Promise<{ data: DatabaseTestResult | null; error: PostgrestError | null }> => {
+  const result = await supabase
+    .from(SupabaseTables.UserTestResults)
+    .insert(testResult)
+    .select()
+    .single()
 
-  return !!result.error
+  return { data: result.data, error: result.error }
 }
 
 export const getTestResults = async (

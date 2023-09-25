@@ -6,6 +6,7 @@ import { SyncingIndicator } from './components/SyncingIndicator'
 import { LoadingScreen } from './components/LoadingScreen'
 import { setShowLoadingScreen, showLoadingScreen } from './SyncingManager'
 import { getStoredUserOptions } from './helpers/optionsHelpers'
+import { setupPersonalBests } from './helpers/personalBestHelpers'
 
 const TestPage = lazy(() => import('./components/TestPage'))
 const ProfilePage = lazy(() => import('./components/ProfilePage'))
@@ -17,8 +18,9 @@ const App: Component = () => {
     setShowLoadingScreen(true)
     await setupAuth()
 
-    // Setup user options from Azure if logged in
+    // Setup user options from Supabase if logged in
     setUserOptions(await getStoredUserOptions())
+    await setupPersonalBests()
     setShowLoadingScreen(false)
   })
 

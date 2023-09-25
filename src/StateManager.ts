@@ -1,6 +1,7 @@
 import { createSignal } from 'solid-js'
 import { createStore } from 'solid-js/store'
 import { Attempt, AttemptStates, TypingTest, UserOptions } from './types'
+import { DatabasePersonalBest } from './supabaseTypes'
 
 const defaultOptions = {
   theme: 'catppuccin-mocha',
@@ -40,3 +41,4 @@ export const newAttempt = (): Attempt => ({
 export const [userOptions, setUserOptions] = createStore<UserOptions>(defaultUserOptions())
 export const [typingTest, setTypingTest] = createSignal<TypingTest>(newText())
 export const [attempt, setAttempt] = createStore<Attempt>(newAttempt())
+export const [personalBests, setPersonalBests] = createStore<DatabasePersonalBest[]>([])

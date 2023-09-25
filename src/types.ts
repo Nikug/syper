@@ -96,3 +96,10 @@ export interface TestResultSum {
   accuracy: number
   correctness: number
 }
+
+export interface PersonalBestCategory {
+  textMode: string
+  words?: number | null
+  duration?: number | null
+  source: string
+}
