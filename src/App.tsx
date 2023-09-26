@@ -6,7 +6,7 @@ import { SyncingIndicator } from './components/SyncingIndicator'
 import { LoadingScreen } from './components/LoadingScreen'
 import { setShowLoadingScreen, showLoadingScreen } from './SyncingManager'
 import { getStoredUserOptions } from './helpers/optionsHelpers'
-import { setupPersonalBests } from './helpers/personalBestHelpers'
+import { handleInitialSetupAfterSignIn } from './helpers/stateHelpers'
 
 const TestPage = lazy(() => import('./components/TestPage'))
 const ProfilePage = lazy(() => import('./components/ProfilePage'))
@@ -19,8 +19,7 @@ const App: Component = () => {
     await setupAuth()
 
     // Setup user options from Supabase if logged in
-    setUserOptions(await getStoredUserOptions())
-    await setupPersonalBests()
+    await handleInitialSetupAfterSignIn()
     setShowLoadingScreen(false)
   })
 

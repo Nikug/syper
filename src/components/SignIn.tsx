@@ -2,6 +2,7 @@ import { Component, Show, createSignal } from 'solid-js'
 import { Input } from './Input'
 import { Button } from './Button'
 import { signIn, signUp } from '../authentication/Supabase'
+import { handleInitialSetupAfterSignIn } from '../helpers/stateHelpers'
 
 export const SignIn: Component = () => {
   const [email, setEmail] = createSignal<string>('')
@@ -23,6 +24,7 @@ export const SignIn: Component = () => {
     if (error) {
       setShowSignInFailed(true)
     }
+    await handleInitialSetupAfterSignIn()
   }
 
   const handleSignUp = async () => {

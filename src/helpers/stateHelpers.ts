@@ -6,7 +6,9 @@ import {
   attempt,
   newAttempt,
   setAttempt,
+  setPersonalBests,
   setTypingTest,
+  setUserOptions,
   typingTest,
   userOptions,
 } from '../StateManager'
@@ -20,8 +22,9 @@ import {
   WordMeasurement,
 } from '../types'
 import { getRandomFromArray, replaceBadCharacters } from '../util'
-import { isTimeMode } from './optionsHelpers'
+import { getStoredUserOptions, isTimeMode } from './optionsHelpers'
 import { startTimer, stopTimer } from './timedTestHelpers'
+import { setupPersonalBests } from './personalBestHelpers'
 
 const getText = async (): Promise<Quote> => {
   if (userOptions.textMode === 'quote') {
@@ -160,4 +163,13 @@ export const parseWordMeasurements = (attempt: Attempt): WordMeasurement[] => {
   }
 
   return words
+}
+
+export const handleInitialSetupAfterSignIn = async (): Promise<void> => {
+  setUserOptions(await getStoredUserOptions())
+  await setupPersonalBests()
+}
+
+export const handleTeardownAfterSignOut = (): void => {
+  setPersonalBests([])
 }
