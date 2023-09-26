@@ -36,6 +36,10 @@ export const newAttempt = (): Attempt => ({
     errors: new Map(),
     words: [],
   },
+  personalBest: {
+    isPersonalBest: false,
+    hasApprovedCorrectness: false,
+  },
 })
 
 export const [userOptions, setUserOptions] = createStore<UserOptions>(defaultUserOptions())

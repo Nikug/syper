@@ -7,11 +7,12 @@ import {
   getFormattedDuration,
   getWordsPerMinute,
 } from '../helpers/mathHelpers'
-import { attempt, typingTest } from '../StateManager'
-import { Attempt, AttemptStates, TypingTest } from '../types'
+import { typingTest } from '../StateManager'
+import { Attempt, TypingTest } from '../types'
 import { LabeledValue } from './LabeledValue'
 import { WordWithWpm } from './WordWithWpm'
 import { WpmChart } from './WpmChart'
+import { PersonalBestCorrectnessLimit } from '../constants'
 
 interface Props {
   typingTest: TypingTest
@@ -21,19 +22,29 @@ interface Props {
 export const StatisticsContainer: Component<Props> = (props) => {
   return (
     <div class="h-full pt-8 pb-32">
-      <Show when={attempt.state === AttemptStates.completed}>
-        <div class="mt-auto mb-16 text-center">
-          <span>source:</span>
-          <h2 class="text-4xl font-bold mb-2">{typingTest().source}</h2>
-          <span class="mr-4">
-            Words: <span class="font-bold">{props.typingTest.words.length}</span>
-          </span>
-          <span>
-            Characters: <span class="font-bold">{props.typingTest.text.length}</span>
-          </span>
+      <div class="mt-auto mb-8 text-center">
+        <span>source:</span>
+        <h2 class="text-4xl font-bold mb-2">{typingTest().source}</h2>
+        <span class="mr-4">
+          Words: <span class="font-bold">{props.typingTest.words.length}</span>
+        </span>
+        <span>
+          Characters: <span class="font-bold">{props.typingTest.text.length}</span>
+        </span>
+      </div>
+      <Show when={props.attempt.personalBest.isPersonalBest}>
+        <div class="w-full text-center">
+          <Show when={props.attempt.personalBest.hasApprovedCorrectness}>
+            <p class="font-bold text-3xl">New personal best!</p>
+          </Show>
+          <Show when={!props.attempt.personalBest.hasApprovedCorrectness}>
+            <p class="text-lg">
+              Personal best should have over {PersonalBestCorrectnessLimit * 100}% correctness
+            </p>
+          </Show>
         </div>
       </Show>
-      <div class="w-full flex justify-evenly">
+      <div class="w-full flex justify-evenly mt-8">
         <LabeledValue
           value={getWordsPerMinute(props.attempt.measurements, props.typingTest)?.toFixed(1)}
           label="Words per minute"

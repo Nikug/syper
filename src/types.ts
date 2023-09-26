@@ -31,6 +31,12 @@ export interface Attempt {
   measurements: Measurements
   testDuration: number
   remainingDuration: number
+  personalBest: AttemptPersonalBest
+}
+
+export interface AttemptPersonalBest {
+  isPersonalBest: boolean
+  hasApprovedCorrectness: boolean
 }
 
 export interface Measurements {

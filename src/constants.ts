@@ -29,3 +29,5 @@ export const textModeOptions: TextModeOption[] = [
   { key: 'words', value: 'Words' },
   { key: 'time', value: 'Time' },
 ]
+
+export const PersonalBestCorrectnessLimit = 0.95

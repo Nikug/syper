@@ -38,6 +38,7 @@ export const updatePersonalBest = async (
     .from(SupabaseTables.UserPersonalBests)
     .update(personalBest)
     .eq('id', personalBestId)
+    .lt('wordsPerMinute', personalBest.wordsPerMinute)
     .select<string, DatabasePersonalBest>()
     .single()
 
