@@ -76,9 +76,9 @@ export const handlePersonalBestUpdate = async (test: DatabaseTestResult): Promis
 
   setPersonalBests(
     produce((bests) => {
-      let existingBest = bests.find((best) => areSameTestCategory(best, newBest))
-      if (existingBest) {
-        existingBest = newBest
+      const existingBestIndex = bests.findIndex((best) => areSameTestCategory(best, newBest))
+      if (existingBestIndex !== -1) {
+        bests[existingBestIndex] = newBest
       } else {
         bests.push(newBest)
       }
