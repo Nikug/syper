@@ -5,6 +5,7 @@ import { personalBests, setAttempt, setPersonalBests } from '../StateManager'
 import { DatabasePersonalBest, DatabaseTestResult } from '../supabaseTypes'
 import { PersonalBestCategory, UserOptions } from '../types'
 import { PersonalBestCorrectnessLimit } from '../constants'
+import { getDictionaryName } from '../assets/files'
 
 export const setupPersonalBests = async (): Promise<void> => {
   const bests = await getPersonalBests()
@@ -14,8 +15,8 @@ export const setupPersonalBests = async (): Promise<void> => {
 export const areSameTestCategory = (best1: PersonalBestCategory, best2: PersonalBestCategory) => {
   return (
     best1.textMode === best2.textMode &&
-    best1.words === best2.words &&
-    best1.duration === best2.duration &&
+    best1.words == best2.words &&
+    best1.duration == best2.duration &&
     best1.source === best2.source
   )
 }
@@ -33,7 +34,7 @@ export const findPersonalBestFromOptions = (
     textMode: options.textMode,
     words: options.textMode === 'words' ? options.wordCount : undefined,
     duration: options.textMode === 'time' ? options.timeDuration : undefined,
-    source: options.dictionary,
+    source: getDictionaryName(options.dictionary),
   }
   return personalBests.find((best) => areSameTestCategory(best, category))
 }

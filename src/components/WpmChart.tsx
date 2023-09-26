@@ -8,6 +8,7 @@ import { getColor } from '../themes/themeHelper'
 import { CharactersPerWord } from '../constants'
 import { WpmChartTooltip } from './WpmChartTooltip'
 import { render } from 'solid-js/web'
+import { findPersonalBestFromOptions } from '../helpers/personalBestHelpers'
 
 interface Props {
   measurements: Measurements
@@ -54,9 +55,14 @@ const createOptions = (measurements: Measurements) => {
 
   const options = createDefaultChartOptions('Characters written', 'Words per minute')
   options.series = [
-    { name: 'Words per minute', data: wpmBetweenTimestamps },
-    { name: 'Total words per minute', data: wpmOverTime },
+    { name: 'Words per minute', data: wpmBetweenTimestamps, type: 'line' },
+    { name: 'Total words per minute', data: wpmOverTime, type: 'line' },
   ]
+
+  const best = findPersonalBestFromOptions(userOptions)
+  if (best) {
+    options.annotations = createPersonalBestAnnotation(best.wordsPerMinute)
+  }
 
   return options
 }
@@ -185,4 +191,30 @@ export const createDefaultChartOptions = (xTitle: string, yTitle: string): ApexO
   }
 
   return options
+}
+
+export const createPersonalBestAnnotation = (wpm: number): ApexAnnotations => {
+  return {
+    yaxis: [
+      {
+        y: wpm,
+        strokeDashArray: 8,
+        borderColor: getColor(userOptions.theme, 'primary'),
+        fillColor: getColor(userOptions.theme, 'primary'),
+        opacity: 0.7,
+        label: {
+          text: 'Personal best',
+          borderColor: undefined,
+          textAnchor: 'start',
+          position: 'left',
+          style: {
+            color: getColor(userOptions.theme, 'primary'),
+            fontSize: '13px',
+            background: getColor(userOptions.theme, 'base', 0),
+            cssClass: 'rounded-lg',
+          },
+        },
+      },
+    ],
+  }
 }

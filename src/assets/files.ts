@@ -14,17 +14,17 @@ export const dictionaries = {
     import: async () => await import('./dictionaries/english-200.json'),
   },
   'english-1k': {
-    name: 'English 1k',
+    name: 'English 1K',
     import: async () => await import('./dictionaries/english-1k.json'),
   },
   'finnish-1k': {
-    name: 'Finnish 1k',
+    name: 'Finnish 1K',
     import: async () => await import('./dictionaries/finnish-1k.json'),
   },
 } as const
 
 export type Dictionaries = keyof typeof dictionaries
-export type DictionaryValue = { name: string; value: () => Promise<WordsJson>}
+export type DictionaryValue = { name: string; value: () => Promise<WordsJson> }
 
 export const getDictionary = async (key: Dictionaries): Promise<WordsJson> => {
   let file = dictionaries[key]
