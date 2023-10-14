@@ -1,7 +1,7 @@
 import { startTransition } from 'solid-js'
 import { fromResultsToWriting, showingResults } from '../AnimationManager'
 import { getDictionary, getQuotes } from '../assets/files'
-import { TimedTestWords } from '../constants'
+import { AnimationDuration, TimedTestWords } from '../constants'
 import {
   attempt,
   newAttempt,
@@ -21,7 +21,7 @@ import {
   Attempt,
   WordMeasurement,
 } from '../types'
-import { getRandomFromArray, replaceBadCharacters } from '../util'
+import { getRandomFromArray, replaceBadCharacters, sleep } from '../util'
 import { getStoredUserOptions, isTimeMode } from './optionsHelpers'
 import { startTimer, stopTimer } from './timedTestHelpers'
 import { setupPersonalBests } from './personalBestHelpers'
@@ -93,6 +93,7 @@ export const initializeText = async () => {
 export const nextAttempt = async () => {
   if (showingResults()) {
     await startTransition(fromResultsToWriting)
+    await sleep(AnimationDuration)
   }
   stopTimer()
   setAttempt(newAttempt())
@@ -102,6 +103,7 @@ export const nextAttempt = async () => {
 export const restartAttempt = async () => {
   if (showingResults()) {
     await startTransition(fromResultsToWriting)
+    await sleep(AnimationDuration)
   }
   stopTimer()
   setAttempt(newAttempt())

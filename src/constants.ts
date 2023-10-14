@@ -12,8 +12,8 @@ export const TimeDurations: { key: number; value: string }[] = [
   { key: 120 * 1000, value: getShortFormattedDuration(120 * 1000) },
 ]
 
-export const AnimationDuration = 100
-export const AnimationDurationClass = 'duration-100'
+export const AnimationDuration = 200
+export const AnimationDurationClass = 'duration-200'
 
 export const TimedTestWords = 50
 export const TimedTestCharacters = 300

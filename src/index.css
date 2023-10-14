@@ -3,7 +3,7 @@
 }
 
 .blur {
-  @apply opacity-0 blur-lg;
+  @apply opacity-10 blur-lg;
 }
 
 .focus {

@@ -16,14 +16,14 @@ export const fromWritingToResults = async () => {
   })
   await sleep(AnimationDuration)
   setAnimationState({ ...animationState(), view: 'results' })
-  await sleep(0)
+  await sleep(1)
   setAnimationState({ ...animationState(), resultsState: AnimationStates.shown })
 }
 export const fromResultsToWriting = async () => {
   setAnimationState({ ...animationState(), resultsState: AnimationStates.hidden })
   await sleep(AnimationDuration)
   setAnimationState({ ...animationState(), view: 'writing' })
-  await sleep(0)
+  await sleep(1)
   setAnimationState({ ...animationState(), writingState: AnimationStates.shown })
 }
 

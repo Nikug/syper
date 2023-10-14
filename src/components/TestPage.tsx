@@ -73,6 +73,6 @@ const TestPage: Component = () => {
 }
 
 const handleBlur = (condition: boolean): string =>
-  clsx(condition ? 'focus' : 'blur', 'transition-opacity', AnimationDurationClass)
+  clsx(condition ? 'focus' : 'blur', 'transition-all', AnimationDurationClass)
 
 export default TestPage
