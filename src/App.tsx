@@ -8,6 +8,8 @@ import { setShowLoadingScreen, showLoadingScreen } from './SyncingManager'
 import { getStoredUserOptions } from './helpers/optionsHelpers'
 import { handleInitialSetupAfterSignIn } from './helpers/stateHelpers'
 import { Footer } from './components/Footer'
+import { Routes as AppRoutes } from './helpers/routeHelpers'
+import { BlurWhenTyping } from './components/BlurWhenTyping'
 
 const TestPage = lazy(() => import('./components/TestPage'))
 const ProfilePage = lazy(() => import('./components/ProfilePage'))
@@ -29,11 +31,13 @@ const App: Component = () => {
       <SyncingIndicator />
       <Show when={!showLoadingScreen()} fallback={<LoadingScreen />}>
         <Routes>
-          <Route path="/" component={TestPage} />
-          <Route path="/profile" component={ProfilePage} />
+          <Route path={AppRoutes.test} component={TestPage} />
+          <Route path={AppRoutes.profile} component={ProfilePage} />
         </Routes>
       </Show>
-      <Footer />
+      <BlurWhenTyping>
+        <Footer />
+      </BlurWhenTyping>
     </div>
   )
 }

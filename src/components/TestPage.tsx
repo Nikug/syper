@@ -11,7 +11,8 @@ import { StatisticsContainer } from './StatisticsContainer'
 import { AnimationDurationClass } from '../constants'
 import { animationState, showingResults, showingWriting } from '../AnimationManager'
 import { cleanupKeyboard, setupKeyboard } from '../KeyboardHandler'
-import { initializeText } from '../helpers/stateHelpers'
+import { initializeText, restartAttempt } from '../helpers/stateHelpers'
+import { BlurWhenTyping } from './BlurWhenTyping'
 
 const TestPage: Component = () => {
   onMount(async () => {
@@ -19,13 +20,18 @@ const TestPage: Component = () => {
     setTypingTest(await initializeText())
   })
 
-  onCleanup(() => cleanupKeyboard())
+  onCleanup(() => {
+    restartAttempt()
+    cleanupKeyboard()
+  })
 
   return (
     <div class="w-full h-full">
       <div class="grid mx-auto max-w-7xl px-16 grid-rows-5 min-h-screen justify-items-stretch">
         <div class="row-span-1">
-          <Header />
+          <BlurWhenTyping>
+            <Header />
+          </BlurWhenTyping>
         </div>
         <Show when={showingWriting()}>
           <div
@@ -64,7 +70,9 @@ const TestPage: Component = () => {
               handleBlur(animationState().writingState === AnimationStates.shown)
             )}
           >
-            <NavigationHelp />
+            <BlurWhenTyping>
+              <NavigationHelp />
+            </BlurWhenTyping>
           </div>
         </Show>
       </div>

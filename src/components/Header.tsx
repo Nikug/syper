@@ -12,20 +12,18 @@ import {
   setTimeDuration,
   setWordCount,
 } from '../helpers/optionsHelpers'
-import { attempt, userOptions } from '../StateManager'
+import { userOptions } from '../StateManager'
 import { setAndSaveTheme } from '../themes/ThemeManager'
 import { ThemeKey, themes } from '../themes/themes'
-import { AttemptStates } from '../types'
 import { capitalize } from '../util'
 import { Dropdown } from './Dropdown'
+import { Routes } from '../helpers/routeHelpers'
 
 export const Header: Component = () => {
-  const isOngoingAttempt = () => attempt.state === AttemptStates.started
-
   return (
-    <div class={clsx('h-full pt-16 transition-all duration-300', isOngoingAttempt() && 'blurred')}>
+    <div class={clsx('h-full pt-16 transition-all duration-300')}>
       <div class="w-full mb-4 flex justify-between items-center">
-        <A href="/" class="text-5xl font-bold">
+        <A href={Routes.test} class="text-5xl font-bold">
           Syper_ <span class="font-normal text-lg opacity-50">(beta)</span>
         </A>
       </div>
