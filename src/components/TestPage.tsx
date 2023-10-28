@@ -6,7 +6,7 @@ import { QuoteInformation } from './QuoteInformation'
 import { TextContainer } from './TextContainer'
 import { ProgressBar } from './ProgressBar'
 import { AnimationStates } from '../types'
-import { Footer } from './Footer'
+import { NavigationHelp } from './NavigationHelp'
 import { StatisticsContainer } from './StatisticsContainer'
 import { AnimationDurationClass } from '../constants'
 import { animationState, showingResults, showingWriting } from '../AnimationManager'
@@ -64,7 +64,7 @@ const TestPage: Component = () => {
               handleBlur(animationState().writingState === AnimationStates.shown)
             )}
           >
-            <Footer />
+            <NavigationHelp />
           </div>
         </Show>
       </div>

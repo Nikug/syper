@@ -13,3 +13,11 @@
 .blurred {
   @apply opacity-0 blur-md transition-all duration-300;
 }
+
+.border-button-active {
+  @apply border-y-2 border-theme-text font-bold;
+}
+
+.border-button {
+  @apply border-y-2 border-transparent transition-all cursor-pointer hover:border-theme-text hover:font-bold;
+}

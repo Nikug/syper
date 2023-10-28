@@ -2,7 +2,6 @@ import { A } from '@solidjs/router'
 import { clsx } from 'clsx'
 import { Component, Show } from 'solid-js'
 import { Dictionaries, dictionaries, getDictionaryName } from '../assets/files'
-import { getUserName } from '../authentication/Supabase'
 import { TimeDurations, WordCounts, textModeOptions } from '../constants'
 import { getShortFormattedDuration } from '../helpers/mathHelpers'
 import {
@@ -29,12 +28,6 @@ export const Header: Component = () => {
         <A href="/" class="text-5xl font-bold">
           Syper_ <span class="font-normal text-lg opacity-50">(beta)</span>
         </A>
-        <div>
-          <A href="/profile" class="cursor-pointer flex items-center">
-            <div class="i-ri-user-line w-8 h-8 mr-2" />
-            {getUserName() ?? 'Profile'}
-          </A>
-        </div>
       </div>
       <div class="h-full w-full flex justify-start">
         <div class="flex flex-col">
@@ -47,11 +40,13 @@ export const Header: Component = () => {
               }))}
               onSelect={(option) => setAndSaveTheme(option.key)}
             />
+            /
             <Dropdown
               value={capitalize(userOptions.textMode)}
               options={textModeOptions}
               onSelect={(option) => setTextMode(option.key)}
             />
+            /
             <Show when={isWordsMode() || isTimeMode()}>
               <Dropdown
                 value={getDictionaryName(userOptions.dictionary)}
@@ -61,6 +56,7 @@ export const Header: Component = () => {
                 }))}
                 onSelect={(option) => setDictionary(option.key)}
               />
+              /
             </Show>
             <Show when={isWordsMode()}>
               <Dropdown
@@ -68,6 +64,7 @@ export const Header: Component = () => {
                 options={WordCounts.map((count) => ({ key: count, value: count }))}
                 onSelect={(option) => setWordCount(option.key)}
               />
+              /
             </Show>
             <Show when={isTimeMode()}>
               <Dropdown
@@ -75,6 +72,7 @@ export const Header: Component = () => {
                 options={TimeDurations}
                 onSelect={(option) => setTimeDuration(option.key)}
               />
+              /
             </Show>
           </div>
         </div>

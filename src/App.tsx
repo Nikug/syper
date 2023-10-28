@@ -7,6 +7,7 @@ import { LoadingScreen } from './components/LoadingScreen'
 import { setShowLoadingScreen, showLoadingScreen } from './SyncingManager'
 import { getStoredUserOptions } from './helpers/optionsHelpers'
 import { handleInitialSetupAfterSignIn } from './helpers/stateHelpers'
+import { Footer } from './components/Footer'
 
 const TestPage = lazy(() => import('./components/TestPage'))
 const ProfilePage = lazy(() => import('./components/ProfilePage'))
@@ -24,7 +25,7 @@ const App: Component = () => {
   })
 
   return (
-    <div class="w-screen font-sans overflow-x-hidden min-h-screen bg-theme-base text-theme-text">
+    <div class="relative w-screen font-sans overflow-x-hidden min-h-screen bg-theme-base text-theme-text">
       <SyncingIndicator />
       <Show when={!showLoadingScreen()} fallback={<LoadingScreen />}>
         <Routes>
@@ -32,6 +33,7 @@ const App: Component = () => {
           <Route path="/profile" component={ProfilePage} />
         </Routes>
       </Show>
+      <Footer />
     </div>
   )
 }

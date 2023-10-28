@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { createSignal, For, JSX, onCleanup, onMount, Show } from 'solid-js'
 import { Portal } from 'solid-js/web'
 
@@ -48,7 +49,9 @@ export const Dropdown = <K, V extends string | number>(props: Props<K, V>) => {
 
   return (
     <div ref={dropdownRef} onClick={() => setOpen(!open())} class="cursor-pointer">
-      <p class="px-2 py-2">{props.value}</p>
+      <p class={clsx('px-2', { 'border-button': !open() }, { 'border-button-active': open() })}>
+        {props.value}
+      </p>
       <Show when={open()}>
         <Portal mount={document.getElementById('root') ?? undefined}>
           <div
