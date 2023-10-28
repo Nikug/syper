@@ -3,6 +3,7 @@ import { useLocation } from '@solidjs/router'
 export const Routes = {
   test: '/',
   profile: '/profile',
+  about: '/about',
 }
 
 export const isProfilePage = (): boolean => {
@@ -11,4 +12,8 @@ export const isProfilePage = (): boolean => {
 
 export const isTestPage = (): boolean => {
   return useLocation().pathname === Routes.test
+}
+
+export const isAboutPage = (): boolean => {
+  return useLocation().pathname === Routes.about
 }

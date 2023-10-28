@@ -21,7 +21,7 @@ const TestPage: Component = () => {
   })
 
   onCleanup(() => {
-    restartAttempt()
+    restartAttempt()  
     cleanupKeyboard()
   })
 

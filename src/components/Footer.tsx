@@ -1,7 +1,7 @@
 import { Component, Show } from 'solid-js'
 import { A } from '@solidjs/router'
 import { isSignedIn } from '../authentication/Supabase'
-import { Routes, isProfilePage, isTestPage } from '../helpers/routeHelpers'
+import { Routes, isAboutPage, isProfilePage, isTestPage } from '../helpers/routeHelpers'
 import clsx from 'clsx'
 
 const buttonClasses = `
@@ -18,7 +18,7 @@ const activeClasses = `
 export const Footer: Component = () => {
   return (
     <div class="fixed h-10 inset-x-0 bottom-0 bg-theme-base flex justify-center items-center">
-      <div class="flex justify-center items-center text-lg">
+      <div class="max-w-7xl w-7xl px-16 flex justify-center items-center text-lg">
         <A href={Routes.test} class={clsx(buttonClasses, { [activeClasses]: isTestPage() })}>
           <div class="i-ri-keyboard-box-line w-6 h-6 mr-2" />
           Test
@@ -29,6 +29,11 @@ export const Footer: Component = () => {
           <Show when={isSignedIn()} fallback="Sign in">
             Profile
           </Show>
+        </A>
+        /
+        <A href={Routes.about} class={clsx(buttonClasses, { [activeClasses]: isAboutPage() })}>
+          <div class="i-ri-question-line w-6 h-6 mr-2" />
+          About
         </A>
       </div>
     </div>
