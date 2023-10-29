@@ -1,7 +1,7 @@
 import { Component, Show, onCleanup, onMount } from 'solid-js'
 import { clsx } from 'clsx'
 import { Header } from './Header'
-import { attempt, setTypingTest, typingTest } from '../StateManager'
+import { attempt, setTypingTest, typingTest, userOptions } from '../StateManager'
 import { QuoteInformation } from './QuoteInformation'
 import { TextContainer } from './TextContainer'
 import { ProgressBar } from './ProgressBar'
@@ -21,7 +21,7 @@ const TestPage: Component = () => {
   })
 
   onCleanup(() => {
-    restartAttempt()  
+    restartAttempt()
     cleanupKeyboard()
   })
 
@@ -47,9 +47,11 @@ const TestPage: Component = () => {
               <div class="h-38 overflow-hidden">
                 <TextContainer attempt={attempt} quote={typingTest()} />
               </div>
-              <div class="h-8">
-                <ProgressBar />
-              </div>
+              <Show when={userOptions.showProgressBar}>
+                <div class="h-8">
+                  <ProgressBar />
+                </div>
+              </Show>
             </div>
           </div>
         </Show>

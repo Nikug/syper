@@ -11,12 +11,14 @@ export const QuoteInformation: Component = () => {
       <Show when={!isTimeMode()}>
         <span>{typingTest().length} characters</span>
       </Show>
-      <Show when={isTimeMode()}>
-        <span>
-          {getShortFormattedDuration(
-            testStarted() ? attempt.remainingDuration : userOptions.timeDuration
-          )}
-        </span>
+      <Show when={userOptions.showProgressCounter}>
+        <Show when={isTimeMode()}>
+          <span>
+            {getShortFormattedDuration(
+              testStarted() ? attempt.remainingDuration : userOptions.timeDuration
+            )}
+          </span>
+        </Show>
       </Show>
     </div>
   )

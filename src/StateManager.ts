@@ -3,7 +3,7 @@ import { createStore } from 'solid-js/store'
 import { Attempt, AttemptStates, TypingTest, UserOptions } from './types'
 import { DatabasePersonalBest } from './supabaseTypes'
 
-const defaultOptions = {
+const defaultOptions: UserOptions = {
   theme: 'catppuccin-mocha',
   dictionary: 'english-200',
   quotes: 'quotes',
@@ -11,9 +11,11 @@ const defaultOptions = {
   wordCount: 50,
   timeDuration: 60 * 1000,
   historyMode: 'tenDays',
+  showProgressBar: true,
+  showProgressCounter: false,
 } as const
 
-export const defaultUserOptions = (): UserOptions => defaultOptions
+export const defaultUserOptions = (): UserOptions => ({ ...defaultOptions })
 
 export const newText = (): TypingTest => ({
   id: 0,

@@ -18,7 +18,7 @@ const createValidOptions = (options: Partial<UserOptions> | null) => {
   /* eslint-disable @typescript-eslint/no-explicit-any */
   keys.forEach((key: any) => {
     // @ts-expect-error Any can be used to index object.
-    defaultOptions[key] = options[key]
+    defaultOptions[key] = Object.hasOwn(options, key) ? options[key] : defaultOptions[key]
   })
   /* eslint-enable*/
 
@@ -95,6 +95,16 @@ export const setDictionary = async (dictionary: Dictionaries) => {
 export const setQuotes = async (quotes: Quotes) => {
   setUserOptions('quotes', quotes)
   await nextAttempt()
+  await persistUserOptions()
+}
+
+export const setShowProgressBar = async (show: boolean) => {
+  setUserOptions('showProgressBar', show)
+  await persistUserOptions()
+}
+
+export const setShowProgressCounter = async (show: boolean) => {
+  setUserOptions('showProgressCounter', show)
   await persistUserOptions()
 }
 

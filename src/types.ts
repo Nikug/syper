@@ -91,6 +91,8 @@ export interface UserOptions {
   wordCount: number
   timeDuration: number
   historyMode: HistoryMode
+  showProgressBar: boolean
+  showProgressCounter: boolean
 }
 
 export interface TestResultSum {
