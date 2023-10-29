@@ -1,6 +1,6 @@
 import { Component, Show } from 'solid-js'
 import { getShortFormattedDuration } from '../helpers/mathHelpers'
-import { isTimeMode } from '../helpers/optionsHelpers'
+import { isQuoteMode, isTimeMode } from '../helpers/optionsHelpers'
 import { attempt, typingTest, userOptions } from '../StateManager'
 import { testStarted } from '../helpers/stateHelpers'
 
@@ -10,7 +10,6 @@ export const QuoteInformation: Component = () => {
 
   return (
     <div class="truncate">
-      <span class="mr-8">{typingTest().source}</span>
       <Show when={userOptions.showProgressCounter}>
         <Show when={!isTimeMode()}>
           <span>
@@ -28,6 +27,9 @@ export const QuoteInformation: Component = () => {
             {getShortFormattedDuration(userOptions.timeDuration)}
           </span>
         </Show>
+      </Show>
+      <Show when={isQuoteMode()}>
+        <span class="ml-8">{typingTest().source}</span>
       </Show>
     </div>
   )
