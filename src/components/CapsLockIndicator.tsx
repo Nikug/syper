@@ -1,5 +1,6 @@
 import { Component, Show } from 'solid-js'
-import { isCapsLockOn, userOptions } from '../StateManager'
+import { userOptions } from '../StateManager'
+import { isCapsLockOn } from '../handlers/CapsLockHandler'
 
 const classes = `
   font-bold

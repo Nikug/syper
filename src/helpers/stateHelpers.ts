@@ -25,6 +25,7 @@ import { getRandomFromArray, replaceBadCharacters, sleep } from '../util'
 import { getStoredUserOptions, isTimeMode } from './optionsHelpers'
 import { startTimer, stopTimer } from './timedTestHelpers'
 import { setupPersonalBests } from './personalBestHelpers'
+import { clearTestTimeout } from '../handlers/TestTimeoutHandler'
 
 const getText = async (): Promise<Quote> => {
   if (userOptions.textMode === 'quote') {
@@ -96,6 +97,7 @@ export const nextAttempt = async () => {
     await sleep(AnimationDuration)
   }
   stopTimer()
+  clearTestTimeout()
   setAttempt(newAttempt())
   setTypingTest(await initializeText())
 }
@@ -106,6 +108,7 @@ export const restartAttempt = async () => {
     await sleep(AnimationDuration)
   }
   stopTimer()
+  clearTestTimeout()
   setAttempt(newAttempt())
 }
 

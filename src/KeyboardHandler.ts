@@ -1,6 +1,6 @@
 import { startTransition } from 'solid-js'
 import { produce } from 'solid-js/store'
-import { attempt, typingTest, setAttempt, setIsCapsLockOn } from './StateManager'
+import { attempt, typingTest, setAttempt } from './StateManager'
 import { Attempt, AttemptStates } from './types'
 import { submitTestResult } from './logic/testResult'
 import { userOptions } from './StateManager'
@@ -13,11 +13,14 @@ import {
 } from './helpers/stateHelpers'
 import { fromWritingToResults } from './AnimationManager'
 import { isTimeMode } from './helpers/optionsHelpers'
+import { setIsCapsLockOn } from './handlers/CapsLockHandler'
+import { clearTestTimeout, resetTestTimeout } from './handlers/TestTimeoutHandler'
 
 const preventDefaultCharacters: string[] = ["'", 'Tab', ' ', '?', '/', 'Escape']
 
 const handleKeyboard = (event: KeyboardEvent) => {
   setIsCapsLockOn(event.getModifierState('CapsLock'))
+  resetTestTimeout()
 
   if (preventDefaultCharacters.includes(event.key)) {
     event.preventDefault()
@@ -102,6 +105,7 @@ const handlePostTest = () => {
       return attempt
     })
   )
+  clearTestTimeout()
   startTransition(fromWritingToResults)
   submitTestResult(attempt, userOptions.textMode, typingTest())
 }
