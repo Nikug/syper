@@ -13,6 +13,7 @@ const defaultOptions: UserOptions = {
   historyMode: 'tenDays',
   showProgressBar: true,
   showProgressCounter: false,
+  showCapsLockIndicator: true,
 } as const
 
 export const defaultUserOptions = (): UserOptions => ({ ...defaultOptions })

@@ -1,7 +1,11 @@
 import { Component, For } from 'solid-js'
 import { userOptions } from '../StateManager'
 import { CheckButton } from './CheckButton'
-import { setShowProgressBar, setShowProgressCounter } from '../helpers/optionsHelpers'
+import {
+  setShowCapsLockIndicator,
+  setShowProgressBar,
+  setShowProgressCounter,
+} from '../helpers/optionsHelpers'
 import { ThemeKey, themes } from '../themes/themes'
 import { setAndSaveTheme } from '../themes/ThemeManager'
 
@@ -19,6 +23,11 @@ export const UserOptions: Component = () => {
           value={userOptions.showProgressCounter}
           text="Show progress counter"
           onClick={setShowProgressCounter}
+        />
+        <CheckButton
+          value={userOptions.showCapsLockIndicator}
+          text="Show caps lock indicator"
+          onClick={setShowCapsLockIndicator}
         />
       </div>
       <h3 class="text-3xl font-bold mb-4">Theme</h3>

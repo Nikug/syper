@@ -93,6 +93,7 @@ export interface UserOptions {
   historyMode: HistoryMode
   showProgressBar: boolean
   showProgressCounter: boolean
+  showCapsLockIndicator: boolean
 }
 
 export interface TestResultSum {

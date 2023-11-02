@@ -1,7 +1,7 @@
 import { Component, Show, onCleanup, onMount } from 'solid-js'
 import { clsx } from 'clsx'
 import { Header } from './Header'
-import { attempt, isCapsLockOn, setTypingTest, typingTest, userOptions } from '../StateManager'
+import { attempt, setTypingTest, typingTest, userOptions } from '../StateManager'
 import { QuoteInformation } from './QuoteInformation'
 import { TextContainer } from './TextContainer'
 import { ProgressBar } from './ProgressBar'
@@ -13,7 +13,7 @@ import { animationState, showingResults, showingWriting } from '../AnimationMana
 import { cleanupKeyboard, setupKeyboard } from '../KeyboardHandler'
 import { initializeText, restartAttempt } from '../helpers/stateHelpers'
 import { BlurWhenTyping } from './BlurWhenTyping'
-import { CapslockIndicator } from './CapslockIndicator'
+import { CapsLockIndicator } from './CapsLockIndicator'
 
 const TestPage: Component = () => {
   onMount(async () => {
@@ -52,7 +52,7 @@ const TestPage: Component = () => {
                 <div class="h-24">
                   <ProgressBar />
                   <div class="h-16 flex justify-center items-center">
-                    <CapslockIndicator />
+                    <CapsLockIndicator />
                   </div>
                 </div>
               </Show>

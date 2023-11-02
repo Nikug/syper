@@ -108,6 +108,11 @@ export const setShowProgressCounter = async (show: boolean) => {
   await persistUserOptions()
 }
 
+export const setShowCapsLockIndicator = async (show: boolean) => {
+  setUserOptions('showCapsLockIndicator', show)
+  await persistUserOptions()
+}
+
 export const isTimeMode = () => userOptions.textMode === 'time'
 export const isQuoteMode = () => userOptions.textMode === 'quote'
 export const isWordsMode = () => userOptions.textMode === 'words'

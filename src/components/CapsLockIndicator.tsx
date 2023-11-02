@@ -1,19 +1,19 @@
 import { Component, Show } from 'solid-js'
-import { isCapsLockOn } from '../StateManager'
+import { isCapsLockOn, userOptions } from '../StateManager'
 
 const classes = `
   font-bold
   text-xl
-  bg-theme-text
+  bg-theme-primary
   text-theme-base
   rounded
   px-4
   py-2
 `
 
-export const CapslockIndicator: Component = () => {
+export const CapsLockIndicator: Component = () => {
   return (
-    <Show when={isCapsLockOn()}>
+    <Show when={isCapsLockOn() && userOptions.showCapsLockIndicator}>
       <div class={classes}>Caps lock on</div>
     </Show>
   )
