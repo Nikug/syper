@@ -48,3 +48,4 @@ export const [userOptions, setUserOptions] = createStore<UserOptions>(defaultUse
 export const [typingTest, setTypingTest] = createSignal<TypingTest>(newText())
 export const [attempt, setAttempt] = createStore<Attempt>(newAttempt())
 export const [personalBests, setPersonalBests] = createStore<DatabasePersonalBest[]>([])
+export const [isCapsLockOn, setIsCapsLockOn] = createSignal<boolean>(false)
