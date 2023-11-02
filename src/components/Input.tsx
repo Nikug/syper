@@ -5,7 +5,7 @@ type Props = JSX.InputHTMLAttributes<HTMLInputElement>
 
 const classes = `
   appearance-none
-  bg-theme-surface0
+  bg-theme-base
   rounded
   accent-theme-primary
   caret-theme-primary

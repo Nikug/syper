@@ -1,7 +1,13 @@
 import { Component, Show } from 'solid-js'
 import { A } from '@solidjs/router'
 import { isSignedIn } from '../authentication/Supabase'
-import { Routes, isAboutPage, isProfilePage, isTestPage } from '../helpers/routeHelpers'
+import {
+  Routes,
+  isAboutPage,
+  isOptionsPage,
+  isProfilePage,
+  isTestPage,
+} from '../helpers/routeHelpers'
 import clsx from 'clsx'
 
 const buttonClasses = `
@@ -22,6 +28,11 @@ export const Footer: Component = () => {
         <A href={Routes.test} class={clsx(buttonClasses, { [activeClasses]: isTestPage() })}>
           <div class="i-ri-keyboard-box-line w-6 h-6 mr-2" />
           Test
+        </A>
+        /
+        <A href={Routes.options} class={clsx(buttonClasses, { [activeClasses]: isOptionsPage() })}>
+          <div class="i-ri-settings-2-line w-6 h-6 mr-2" />
+          Options
         </A>
         /
         <A href={Routes.profile} class={clsx(buttonClasses, { [activeClasses]: isProfilePage() })}>

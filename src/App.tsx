@@ -12,6 +12,7 @@ import { Routes as AppRoutes } from './helpers/routeHelpers'
 import { BlurWhenTyping } from './components/BlurWhenTyping'
 
 const TestPage = lazy(() => import('./components/TestPage'))
+const OptionsPage = lazy(() => import('./components/OptionsPage'))
 const ProfilePage = lazy(() => import('./components/ProfilePage'))
 const AboutPage = lazy(() => import('./components/AboutPage'))
 
@@ -33,6 +34,7 @@ const App: Component = () => {
       <Show when={!showLoadingScreen()} fallback={<LoadingScreen />}>
         <Routes>
           <Route path={AppRoutes.test} component={TestPage} />
+          <Route path={AppRoutes.options} component={OptionsPage} />
           <Route path={AppRoutes.profile} component={ProfilePage} />
           <Route path={AppRoutes.about} component={AboutPage} />
         </Routes>

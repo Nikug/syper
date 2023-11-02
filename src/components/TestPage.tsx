@@ -30,7 +30,7 @@ const TestPage: Component = () => {
       <div class="grid mx-auto max-w-7xl px-16 grid-rows-5 min-h-screen justify-items-stretch">
         <div class="row-span-1">
           <BlurWhenTyping>
-            <Header />
+            <Header showOptions={true} />
           </BlurWhenTyping>
         </div>
         <Show when={showingWriting()}>

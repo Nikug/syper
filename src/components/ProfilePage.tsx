@@ -5,7 +5,6 @@ import { Header } from './Header'
 import { HistoricalStatisticsContainer } from './HistoricalStatisticsContainer'
 import { SignIn } from './SignIn'
 import { handleTeardownAfterSignOut } from '../helpers/stateHelpers'
-import { UserOptions } from './UserOptions'
 
 const ProfilePage: Component = () => {
   const handleSignOut = () => {
@@ -18,7 +17,7 @@ const ProfilePage: Component = () => {
       <Header />
       <div class="mt-16">
         <Show when={!isSignedIn()}>
-          <div class="mb-8">
+          <div class="mb-8 bg-theme-surface0 rounded-lg p-8 flex justify-center">
             <SignIn />
           </div>
         </Show>
@@ -28,10 +27,6 @@ const ProfilePage: Component = () => {
             <Button onClick={handleSignOut} text="Sign out" />
           </div>
         </Show>
-        <div class="mb-8 bg-theme-surface0 p-8 rounded-lg">
-          <h3 class="text-xl font-bold mb-4">User options</h3>
-          <UserOptions />
-        </div>
         <Show when={isSignedIn()}>
           <div>
             <HistoricalStatisticsContainer />
