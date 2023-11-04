@@ -18,6 +18,7 @@ import { ThemeKey, themes } from '../themes/themes'
 import { capitalize } from '../util'
 import { Dropdown } from './Dropdown'
 import { Routes } from '../helpers/routeHelpers'
+import { ThemeName } from './ThemeName'
 
 interface Props {
   showOptions?: boolean
@@ -39,7 +40,7 @@ export const Header: Component<Props> = (props) => {
                 value={themes[userOptions.theme].name}
                 options={Object.entries(themes).map(([key, value]) => ({
                   key: key as ThemeKey,
-                  value: value.name,
+                  value: <ThemeName theme={value} />,
                 }))}
                 onSelect={(option) => setAndSaveTheme(option.key)}
               />

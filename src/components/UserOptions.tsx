@@ -8,6 +8,7 @@ import {
 } from '../helpers/optionsHelpers'
 import { ThemeKey, themes } from '../themes/themes'
 import { setAndSaveTheme } from '../themes/ThemeManager'
+import { ThemeName } from './ThemeName'
 
 export const UserOptions: Component = () => {
   return (
@@ -31,12 +32,12 @@ export const UserOptions: Component = () => {
         />
       </div>
       <h3 class="text-3xl font-bold mb-4">Theme</h3>
-      <div class="flex flex-wrap gap-4 mb-16">
+      <div class="grid grid-cols-3 gap-4 mb-16">
         <For each={Object.entries(themes)}>
           {([key, value]) => (
             <CheckButton
               value={key === userOptions.theme}
-              text={value.name}
+              text={<ThemeName theme={value} />}
               onClick={() => setAndSaveTheme(key as ThemeKey)}
             />
           )}

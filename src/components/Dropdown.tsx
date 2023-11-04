@@ -7,13 +7,13 @@ export interface Option<K, V> {
   value: V
 }
 
-interface Props<K, V extends string | number> {
+interface Props<K, V extends string | number | JSX.Element> {
   value: string
   options: Option<K, V>[]
   onSelect?: (option: Option<K, V>) => void
 }
 
-export const Dropdown = <K, V extends string | number>(props: Props<K, V>) => {
+export const Dropdown = <K, V extends string | number | JSX.Element>(props: Props<K, V>) => {
   let dropdownRef: HTMLDivElement | undefined
   let panelRef: HTMLDivElement | undefined
   const [open, setOpen] = createSignal(false)

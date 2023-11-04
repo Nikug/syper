@@ -3,7 +3,7 @@ import { Component, JSX, Show, splitProps } from 'solid-js'
 
 interface Props extends Omit<JSX.ButtonHTMLAttributes<HTMLButtonElement>, 'value' | 'onClick'> {
   onClick?(value: boolean): void
-  text?: string
+  text?: string | JSX.Element
   value?: boolean
 }
 
