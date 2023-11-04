@@ -4,6 +4,7 @@ export type ThemeKey = keyof typeof themes
 
 export interface ThemeVariables {
   name: string
+  dark: boolean
   variables: () => ThemeVariable
 }
 
@@ -14,6 +15,7 @@ export type Themes = Record<ThemeKey, ThemeVariables>
 export const themes = {
   'catppuccin-latte': {
     name: 'Catppuccin Latte',
+    dark: false,
     variables: () => ({
       text: Color.rgb(76, 79, 105),
       primary: Color.rgb(136, 57, 239),
@@ -28,6 +30,7 @@ export const themes = {
   },
   'catppuccin-mocha': {
     name: 'Catppuccin Mocha',
+    dark: true,
     variables: () => ({
       text: Color.rgb(205, 214, 244), // Text default color
       primary: Color.rgb(203, 166, 247), // Correct character
@@ -42,6 +45,7 @@ export const themes = {
   },
   tokyonight: {
     name: 'Tokyo night',
+    dark: true,
     variables: () => ({
       text: Color('#9aa5ce'),
       primary: Color('#7aa2f7'),
@@ -56,6 +60,7 @@ export const themes = {
   },
   'gruvbox-dark': {
     name: 'Gruvbox dark',
+    dark: true,
     variables: () => ({
       text: Color('#ebdbb2'),
       primary: Color('#fabd2f'),
@@ -70,6 +75,7 @@ export const themes = {
   },
   farout: {
     name: 'Farout',
+    dark: true,
     variables: () => ({
       text: Color('#a4896f'),
       primary: Color('#f2a766'),
@@ -84,6 +90,7 @@ export const themes = {
   },
   synthwave: {
     name: 'Synthwave',
+    dark: true,
     variables: () => ({
       text: Color.rgb(45, 226, 230),
       primary: Color.rgb(255, 56, 100),
@@ -94,6 +101,36 @@ export const themes = {
       surface1: Color.rgb(36, 23, 52).lighten(0.5),
       surface0: Color.rgb(36, 23, 52),
       base: Color.rgb(13, 2, 33),
+    }),
+  },
+  cyberpunk: {
+    name: 'Cyberpunk',
+    dark: true,
+    variables: () => ({
+      text: Color('#fa4122').lighten(0.1),
+      primary: Color('#fbdc12'),
+      secondary: Color('#02fad5'),
+      highlight: Color('#02fad5'),
+      accent: Color('#fa4122'),
+      danger: Color('#fc5157'),
+      surface1: Color('#5f043d').darken(0.2),
+      surface0: Color('#5f043d').darken(0.5),
+      base: Color('#090f1f'),
+    }),
+  },
+  blackAndWhite: {
+    name: 'Black and white',
+    dark: false,
+    variables: () => ({
+      text: Color('#000000'),
+      primary: Color('#ffffff').darken(0.9),
+      secondary: Color('#ffffff').darken(0.5),
+      highlight: Color('#ffffff').darken(0.8),
+      accent: Color('#ffffff').darken(0.8),
+      danger: Color('#ffffff').darken(0.8),
+      surface1: Color.rgb('#ffffff').darken(0.2),
+      surface0: Color.rgb('#ffffff').darken(0.1),
+      base: Color('#ffffff'),
     }),
   },
 }
