@@ -14,7 +14,7 @@ export const UserOptions: Component = () => {
   return (
     <div class="flex flex-col">
       <h3 class="text-3xl font-bold mb-4">Options</h3>
-      <div class="flex flex-wrap gap-4 mb-16">
+      <div class="grid grid-cols-3 gap-4 mb-16">
         <CheckButton
           value={userOptions.showProgressBar}
           text="Show progress bar"
