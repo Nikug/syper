@@ -14,7 +14,7 @@ import {
 } from '../helpers/optionsHelpers'
 import { userOptions } from '../StateManager'
 import { setAndSaveTheme } from '../themes/ThemeManager'
-import { ThemeKey, themes } from '../themes/themes'
+import { getThemeList, themes } from '../themes/themes'
 import { capitalize } from '../util'
 import { Dropdown } from './Dropdown'
 import { Routes } from '../helpers/routeHelpers'
@@ -38,9 +38,9 @@ export const Header: Component<Props> = (props) => {
             <div class="flex items-center gap-x-2">
               <Dropdown
                 value={themes[userOptions.theme].name}
-                options={Object.entries(themes).map(([key, value]) => ({
-                  key: key as ThemeKey,
-                  value: <ThemeName theme={value} />,
+                options={getThemeList().map((theme) => ({
+                  key: theme.key,
+                  value: <ThemeName theme={theme.value} />,
                 }))}
                 onSelect={(option) => setAndSaveTheme(option.key)}
               />

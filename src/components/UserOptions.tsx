@@ -6,7 +6,7 @@ import {
   setShowProgressBar,
   setShowProgressCounter,
 } from '../helpers/optionsHelpers'
-import { ThemeKey, themes } from '../themes/themes'
+import { getThemeList } from '../themes/themes'
 import { setAndSaveTheme } from '../themes/ThemeManager'
 import { ThemeName } from './ThemeName'
 
@@ -33,12 +33,12 @@ export const UserOptions: Component = () => {
       </div>
       <h3 class="text-3xl font-bold mb-4">Theme</h3>
       <div class="grid grid-cols-3 gap-4 mb-16">
-        <For each={Object.entries(themes)}>
-          {([key, value]) => (
+        <For each={getThemeList()}>
+          {(theme) => (
             <CheckButton
-              value={key === userOptions.theme}
-              text={<ThemeName theme={value} />}
-              onClick={() => setAndSaveTheme(key as ThemeKey)}
+              value={theme.key === userOptions.theme}
+              text={<ThemeName theme={theme.value} />}
+              onClick={() => setAndSaveTheme(theme.key)}
             />
           )}
         </For>
