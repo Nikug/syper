@@ -113,6 +113,16 @@ export const setShowCapsLockIndicator = async (show: boolean) => {
   await persistUserOptions()
 }
 
+export const setShowTextHighlight = async (show: boolean) => {
+  setUserOptions('showTextHighlight', show)
+  await persistUserOptions()
+}
+
+export const setUseSmoothScrolling = async (show: boolean) => {
+  setUserOptions('useSmoothScrolling', show)
+  await persistUserOptions()
+}
+
 export const isTimeMode = () => userOptions.textMode === 'time'
 export const isQuoteMode = () => userOptions.textMode === 'quote'
 export const isWordsMode = () => userOptions.textMode === 'words'

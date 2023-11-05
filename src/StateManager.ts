@@ -14,6 +14,8 @@ const defaultOptions: UserOptions = {
   showProgressBar: true,
   showProgressCounter: false,
   showCapsLockIndicator: true,
+  showTextHighlight: true,
+  useSmoothScrolling: true,
 } as const
 
 export const defaultUserOptions = (): UserOptions => ({ ...defaultOptions })

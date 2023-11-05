@@ -9,7 +9,7 @@ interface Props {
 
 export const TextContainer: Component<Props> = (props) => {
   return (
-    <div class="flex justify-center w-full overflow-hidden font-mono leading-12">
+    <div class="flex justify-center w-full font-mono leading-12">
       <div class="flex flex-wrap justify-start">
         <For each={props.quote.words}>
           {(word) => (

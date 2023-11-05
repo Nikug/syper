@@ -45,7 +45,12 @@ const TestPage: Component = () => {
               <div class="h-8">
                 <QuoteInformation />
               </div>
-              <div class="h-38 overflow-hidden">
+              <div
+                class={clsx(
+                  'h-38 overflow-hidden',
+                  userOptions.useSmoothScrolling && 'scroll-smooth'
+                )}
+              >
                 <TextContainer attempt={attempt} quote={typingTest()} />
               </div>
               <Show when={userOptions.showProgressBar}>

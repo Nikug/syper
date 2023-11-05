@@ -5,6 +5,8 @@ import {
   setShowCapsLockIndicator,
   setShowProgressBar,
   setShowProgressCounter,
+  setShowTextHighlight,
+  setUseSmoothScrolling,
 } from '../helpers/optionsHelpers'
 import { getThemeList } from '../themes/themes'
 import { setAndSaveTheme } from '../themes/ThemeManager'
@@ -29,6 +31,16 @@ export const UserOptions: Component = () => {
           value={userOptions.showCapsLockIndicator}
           text="Show caps lock indicator"
           onClick={setShowCapsLockIndicator}
+        />
+        <CheckButton
+          value={userOptions.showTextHighlight}
+          text="Show text highlight"
+          onClick={setShowTextHighlight}
+        />
+        <CheckButton
+          value={userOptions.useSmoothScrolling}
+          text="Use smooth scrolling"
+          onClick={setUseSmoothScrolling}
         />
       </div>
       <h3 class="text-3xl font-bold mb-4">Theme</h3>

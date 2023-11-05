@@ -94,6 +94,8 @@ export interface UserOptions {
   showProgressBar: boolean
   showProgressCounter: boolean
   showCapsLockIndicator: boolean
+  showTextHighlight: boolean
+  useSmoothScrolling: boolean
 }
 
 export interface TestResultSum {
