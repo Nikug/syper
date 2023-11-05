@@ -53,14 +53,14 @@ const TestPage: Component = () => {
               >
                 <TextContainer attempt={attempt} quote={typingTest()} />
               </div>
-              <Show when={userOptions.showProgressBar}>
-                <div class="h-24">
+              <div class="h-24">
+                <Show when={userOptions.showProgressBar}>
                   <ProgressBar />
-                  <div class="h-16 flex justify-center items-center">
-                    <CapsLockIndicator />
-                  </div>
+                </Show>
+                <div class="h-16 flex justify-center items-center">
+                  <CapsLockIndicator />
                 </div>
-              </Show>
+              </div>
             </div>
           </div>
         </Show>

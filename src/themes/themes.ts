@@ -1,5 +1,4 @@
 import Color from 'color'
-import { createMemo } from 'solid-js'
 import { Entries } from '../utilityTypes'
 
 export type ThemeKey = keyof typeof themes
@@ -125,20 +124,20 @@ export const themes = {
     dark: false,
     variables: () => ({
       text: Color('#000000'),
-      primary: Color('#ffffff').darken(0.9),
-      secondary: Color('#ffffff').darken(0.5),
-      highlight: Color('#ffffff').darken(0.8),
-      accent: Color('#ffffff').darken(0.8),
-      danger: Color('#ffffff').darken(0.8),
-      surface1: Color.rgb('#ffffff').darken(0.2),
-      surface0: Color.rgb('#ffffff').darken(0.1),
+      primary: Color('#888888'),
+      secondary: Color('#888888').lighten(0.2),
+      highlight: Color('#888888').darken(0.2),
+      accent: Color('#888888'),
+      danger: Color('#888888').darken(0.3),
+      surface1: Color.rgb('#888888').lighten(0.7),
+      surface0: Color.rgb('#888888').lighten(0.6),
       base: Color('#ffffff'),
     }),
   },
 }
 
-export const getThemeList = createMemo(() => {
+export const getThemeList = () => {
   const entries = Object.entries(themes) as Entries<typeof themes>
   const mapped = entries.map(([key, value]) => ({ key, value }))
   return mapped.sort((a, b) => (a.value.name > b.value.name ? 1 : -1))
-})
+}

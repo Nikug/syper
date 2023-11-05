@@ -30,8 +30,8 @@ const buttonClasses = (checked: boolean | undefined) => `
   border
   border-2
   rounded
-  ${checked ? 'border-theme-primary' : 'border-theme-danger'}
-  ${checked ? 'text-theme-primary' : 'text-theme-danger'}
+  ${checked ? 'border-theme-primary' : 'border-theme-secondary'}
+  ${checked ? 'text-theme-primary' : 'text-theme-secondary'}
   hover:border-theme-highlight
   hover:text-theme-highlight
   hover:bg-theme-highlight/10
