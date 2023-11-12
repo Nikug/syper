@@ -134,6 +134,36 @@ export const themes = {
       base: Color('#ffffff'),
     }),
   },
+  solarizedLight: {
+    name: 'Solarized light',
+    dark: false,
+    variables: () => ({
+      text: Color('#586e75'),
+      primary: Color('#268bd2'),
+      secondary: Color('#2aa198'),
+      highlight: Color('#6c71c4'),
+      accent: Color('#6c71c4'),
+      danger: Color('#cb4b16'),
+      surface1: Color.rgb('#eee8d5').darken(0.1),
+      surface0: Color.rgb('#eee8d5'),
+      base: Color('#fdf6e3'),
+    }),
+  },
+  solarizedDark: {
+    name: 'Solarized dark',
+    dark: true,
+    variables: () => ({
+      text: Color('#586e75'),
+      primary: Color('#268bd2'),
+      secondary: Color('#2aa198'),
+      highlight: Color('#6c71c4'),
+      accent: Color('#6c71c4'),
+      danger: Color('#cb4b16'),
+      surface1: Color.rgb('#073642').darken(0.1),
+      surface0: Color.rgb('#073642'),
+      base: Color('#002b36'),
+    }),
+  },
 }
 
 export const getThemeList = () => {

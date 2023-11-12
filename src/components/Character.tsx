@@ -1,4 +1,5 @@
 import { clsx } from 'clsx'
+
 import { Component, createEffect } from 'solid-js'
 import { CharacterMode } from '../types'
 import { userOptions } from '../StateManager'
@@ -12,7 +13,7 @@ const defaultClasses = `
 const characterClasses: Record<CharacterMode, string> = {
   default: 'text-theme-text decoration-theme-primary',
   correct: 'text-theme-primary',
-  incorrect: 'text-theme-danger line-through decoration-theme-danger',
+  incorrect: 'text-theme-danger underline decoration-theme-danger',
 }
 
 const highlightClasses: Record<CharacterMode, string> = {
