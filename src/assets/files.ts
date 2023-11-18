@@ -17,9 +17,21 @@ export const dictionaries = {
     name: 'English 1K',
     import: async () => await import('./dictionaries/english-1k.json'),
   },
+  'english-10k': {
+    name: 'English 10K',
+    import: async () => await import('./dictionaries/english-10k.json'),
+  },
+  'english-67k': {
+    name: 'English 67K',
+    import: async () => await import('./dictionaries/english-67k.json'),
+  },
   'finnish-1k': {
     name: 'Finnish 1K',
     import: async () => await import('./dictionaries/finnish-1k.json'),
+  },
+  'finnish-100k': {
+    name: 'Finnish 100K',
+    import: async () => await import('./dictionaries/finnish-100k.json'),
   },
 } as const
 
