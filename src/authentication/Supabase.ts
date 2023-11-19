@@ -1,6 +1,7 @@
 import { AuthError, Session, createClient } from '@supabase/supabase-js'
 import { SupabaseConstants } from './constants'
 import { createSignal } from 'solid-js'
+import { Provider } from '@supabase/supabase-js'
 
 if (!SupabaseConstants.url) {
   console.error('Missing Supabase url. Please check environment variables.')
@@ -32,6 +33,18 @@ export const signIn = async (email: string, password: string): Promise<AuthError
   }
 
   setSession(data.session)
+}
+
+export const signInWithProvider = async (provider: Provider): Promise<void> => {
+  await supabase.auth.signInWithOAuth({
+    provider,
+    options: {
+      queryParams: {
+        access_type: 'offline',
+        prompt: 'consent',
+      },
+    },
+  })
 }
 
 export const signUp = async (email: string, password: string): Promise<AuthError | undefined> => {

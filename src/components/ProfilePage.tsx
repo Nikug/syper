@@ -5,6 +5,7 @@ import { Header } from './Header'
 import { HistoricalStatisticsContainer } from './HistoricalStatisticsContainer'
 import { SignIn } from './SignIn'
 import { handleTeardownAfterSignOut } from '../helpers/stateHelpers'
+import { SocialSignIn } from './SocialSignIn'
 
 const ProfilePage: Component = () => {
   const handleSignOut = () => {
@@ -17,8 +18,9 @@ const ProfilePage: Component = () => {
       <Header />
       <div class="mt-16">
         <Show when={!isSignedIn()}>
-          <div class="mb-8 bg-theme-surface0 rounded-lg p-8 flex justify-center">
+          <div class="mb-8 bg-theme-surface0 rounded-lg p-8 flex justify-center gap-16">
             <SignIn />
+            <SocialSignIn />
           </div>
         </Show>
         <Show when={isSignedIn()}>
