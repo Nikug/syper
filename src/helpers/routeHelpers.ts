@@ -5,6 +5,7 @@ export const Routes = {
   profile: '/profile',
   options: '/options',
   about: '/about',
+  privacy: '/privacy',
 }
 
 export const isProfilePage = (): boolean => {
@@ -21,4 +22,8 @@ export const isOptionsPage = (): boolean => {
 
 export const isAboutPage = (): boolean => {
   return useLocation().pathname === Routes.about
+}
+
+export const isPrivacyPage = (): boolean => {
+  return useLocation().pathname === Routes.privacy
 }

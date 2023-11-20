@@ -5,6 +5,7 @@ import {
   Routes,
   isAboutPage,
   isOptionsPage,
+  isPrivacyPage,
   isProfilePage,
   isTestPage,
 } from '../helpers/routeHelpers'
@@ -45,6 +46,11 @@ export const Footer: Component = () => {
         <A href={Routes.about} class={clsx(buttonClasses, { [activeClasses]: isAboutPage() })}>
           <div class="i-ri-question-line w-6 h-6 mr-2" />
           About
+        </A>
+        /
+        <A href={Routes.privacy} class={clsx(buttonClasses, { [activeClasses]: isPrivacyPage() })}>
+          <div class="i-ri-lock-line w-6 h-6 mr-2" />
+          Privacy
         </A>
       </div>
     </div>

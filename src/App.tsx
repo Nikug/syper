@@ -15,6 +15,7 @@ const TestPage = lazy(() => import('./components/TestPage'))
 const OptionsPage = lazy(() => import('./components/OptionsPage'))
 const ProfilePage = lazy(() => import('./components/ProfilePage'))
 const AboutPage = lazy(() => import('./components/AboutPage'))
+const PrivacyPage = lazy(() => import('./components/PrivacyPage'))
 
 const App: Component = () => {
   onMount(async () => {
@@ -37,6 +38,7 @@ const App: Component = () => {
           <Route path={AppRoutes.options} component={OptionsPage} />
           <Route path={AppRoutes.profile} component={ProfilePage} />
           <Route path={AppRoutes.about} component={AboutPage} />
+          <Route path={AppRoutes.privacy} component={PrivacyPage} />
         </Routes>
       </Show>
       <BlurWhenTyping>
