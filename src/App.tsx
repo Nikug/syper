@@ -30,7 +30,7 @@ const App: Component = () => {
   })
 
   return (
-    <div class="relative w-screen font-sans overflow-x-hidden min-h-screen bg-theme-base text-theme-text">
+    <div class="relative w-full font-sans overflow-x-hidden min-h-screen bg-theme-base text-theme-text">
       <SyncingIndicator />
       <Show when={!showLoadingScreen()} fallback={<LoadingScreen />}>
         <Routes>
