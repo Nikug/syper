@@ -7,13 +7,14 @@ export interface Option<K, V> {
   value: V
 }
 
-interface Props<K, V extends string | number | JSX.Element> {
-  value: string
+interface Props<K, V extends JSX.Element> {
+  key: K | K[]
   options: Option<K, V>[]
   onSelect?: (option: Option<K, V>) => void
+  valueFormatter?: (option: Option<K, V>) => JSX.Element
 }
 
-export const Dropdown = <K, V extends string | number | JSX.Element>(props: Props<K, V>) => {
+export const Dropdown = <K, V extends JSX.Element>(props: Props<K, V>) => {
   let dropdownRef: HTMLDivElement | undefined
   let panelRef: HTMLDivElement | undefined
   const [open, setOpen] = createSignal(false)
@@ -47,10 +48,44 @@ export const Dropdown = <K, V extends string | number | JSX.Element>(props: Prop
     props.onSelect?.(option)
   }
 
+  const getOption = (key: K | K[]): Option<K, V> | Option<K, V>[] =>
+    Array.isArray(key)
+      ? props.options.filter((option) => key.includes(option.key))
+      : props.options.find((option) => option.key === key)!
+
+  const formatValue = (key: K | K[]): JSX.Element => {
+    const options = getOption(key)
+    if (Array.isArray(options)) {
+      if (props.valueFormatter) {
+        return options.map((option) => props.valueFormatter!(option))
+      } else {
+        return options.map((option) => option.value).join(', ')
+      }
+    }
+
+    return props.valueFormatter ? props.valueFormatter(options) : options.value
+  }
+
+  const formatOption = (option: Option<K, V>) => {
+    const isSelected = () =>
+      Array.isArray(props.key)
+        ? props.key.some((value) => value === option.key)
+        : props.key === option.key
+
+    return (
+      <div>
+        <Show when={isSelected()}>
+          <div class="i-ri-check-line h-6 w-6" />
+        </Show>{' '}
+        {option.value}
+      </div>
+    )
+  }
+
   return (
     <div ref={dropdownRef} onClick={() => setOpen(!open())} class="cursor-pointer">
       <p class={clsx('px-2', { 'border-button': !open() }, { 'border-button-active': open() })}>
-        {props.value}
+        {formatValue(props.key)}
       </p>
       <Show when={open()}>
         <Portal mount={document.getElementById('root') ?? undefined}>
@@ -65,7 +100,7 @@ export const Dropdown = <K, V extends string | number | JSX.Element>(props: Prop
                   class="hover:bg-theme-surface1 px-4 py-1 cursor-pointer"
                   onClick={() => handleSelect(option)}
                 >
-                  {option.value}
+                  {formatOption(option)}
                 </div>
               )}
             </For>

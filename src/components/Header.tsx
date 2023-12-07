@@ -1,7 +1,7 @@
 import { A } from '@solidjs/router'
 import { clsx } from 'clsx'
 import { Component, Show } from 'solid-js'
-import { Dictionaries, dictionaries, getDictionaryName } from '../assets/files'
+import { Dictionaries, dictionaries } from '../assets/files'
 import { TimeDurations, WordCounts, textModeOptions } from '../constants'
 import { getShortFormattedDuration } from '../helpers/mathHelpers'
 import {
@@ -14,8 +14,7 @@ import {
 } from '../helpers/optionsHelpers'
 import { userOptions } from '../StateManager'
 import { setAndSaveTheme } from '../themes/ThemeManager'
-import { getThemeList, themes } from '../themes/themes'
-import { capitalize } from '../util'
+import { getThemeList } from '../themes/themes'
 import { Dropdown } from './Dropdown'
 import { Routes } from '../helpers/routeHelpers'
 import { ThemeName } from './ThemeName'
@@ -37,7 +36,7 @@ export const Header: Component<Props> = (props) => {
           <div class="flex flex-col">
             <div class="flex items-center gap-x-2">
               <Dropdown
-                value={themes[userOptions.theme].name}
+                key={userOptions.theme}
                 options={getThemeList().map((theme) => ({
                   key: theme.key,
                   value: <ThemeName theme={theme.value} />,
@@ -46,14 +45,14 @@ export const Header: Component<Props> = (props) => {
               />
               /
               <Dropdown
-                value={capitalize(userOptions.textMode)}
+                key={userOptions.textMode}
                 options={textModeOptions}
                 onSelect={(option) => setTextMode(option.key)}
               />
               /
               <Show when={isWordsMode() || isTimeMode()}>
                 <Dropdown
-                  value={getDictionaryName(userOptions.dictionary)}
+                  key={userOptions.dictionary}
                   options={Object.entries(dictionaries).map(([key, value]) => ({
                     key: key as Dictionaries,
                     value: value.name,
@@ -64,7 +63,8 @@ export const Header: Component<Props> = (props) => {
               </Show>
               <Show when={isWordsMode()}>
                 <Dropdown
-                  value={`Count: ${userOptions.wordCount}`}
+                  key={userOptions.wordCount}
+                  valueFormatter={(option) => `Count: ${option.key}`}
                   options={WordCounts.map((count) => ({ key: count, value: count }))}
                   onSelect={(option) => setWordCount(option.key)}
                 />
@@ -72,7 +72,8 @@ export const Header: Component<Props> = (props) => {
               </Show>
               <Show when={isTimeMode()}>
                 <Dropdown
-                  value={`Duration: ${getShortFormattedDuration(userOptions.timeDuration)}`}
+                  key={userOptions.timeDuration}
+                  valueFormatter={(option) => `Duration: ${getShortFormattedDuration(option.key)}`}
                   options={TimeDurations}
                   onSelect={(option) => setTimeDuration(option.key)}
                 />

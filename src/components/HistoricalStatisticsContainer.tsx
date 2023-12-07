@@ -81,16 +81,12 @@ export const HistoricalStatisticsContainer: Component = () => {
     setDates(durations[duration]())
   }
 
-  const durationValue = () => {
-    return durationOptions.find((option) => option.key === userOptions.historyMode)?.value ?? ''
-  }
-
   return (
     <div class="w-full mt-16 mb-32">
       <h3 class="text-3xl font-bold text-center mb-4">History</h3>
       <div class="flex justify-center mb-16">
         <Dropdown
-          value={durationValue()}
+          key={userOptions.historyMode}
           options={durationOptions}
           onSelect={(option) => handleHistorySelect(option.key)}
         />
