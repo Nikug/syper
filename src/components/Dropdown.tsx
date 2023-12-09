@@ -73,10 +73,12 @@ export const Dropdown = <K, V extends JSX.Element>(props: Props<K, V>) => {
         : props.key === option.key
 
     return (
-      <div>
-        <Show when={isSelected()}>
-          <div class="i-ri-check-line h-6 w-6" />
-        </Show>{' '}
+      <div class="flex items-center gap-2">
+        <Show when={Array.isArray(props.key)}>
+          <Show when={isSelected()} fallback={<div class="w-4" />}>
+            <div class="i-ri-check-line" />
+          </Show>
+        </Show>
         {option.value}
       </div>
     )
