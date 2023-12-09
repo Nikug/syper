@@ -35,6 +35,7 @@ export const Header: Component<Props> = (props) => {
         <div class="h-full w-full flex justify-start">
           <div class="flex flex-col">
             <div class="flex items-center gap-x-2">
+              /
               <Dropdown
                 key={userOptions.theme}
                 options={getThemeList().map((theme) => ({
