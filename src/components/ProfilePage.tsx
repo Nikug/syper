@@ -6,6 +6,7 @@ import { HistoricalStatisticsContainer } from './HistoricalStatisticsContainer'
 import { SignIn } from './SignIn'
 import { handleTeardownAfterSignOut } from '../helpers/stateHelpers'
 import { SocialSignIn } from './SocialSignIn'
+import { Meta, Title } from '@solidjs/meta'
 
 const ProfilePage: Component = () => {
   const handleSignOut = () => {
@@ -14,28 +15,35 @@ const ProfilePage: Component = () => {
   }
 
   return (
-    <div class="max-w-7xl px-16 mx-auto">
-      <Header />
-      <div class="mt-16">
-        <Show when={!isSignedIn()}>
-          <div class="mb-8 bg-theme-surface0 rounded-lg p-8 flex justify-center gap-16">
-            <SignIn />
-            <SocialSignIn />
-          </div>
-        </Show>
-        <Show when={isSignedIn()}>
-          <div class="mb-8 bg-theme-surface0 p-8 rounded-lg">
-            <h3 class="text-xl font-bold mb-4">Signed in: {getUserName()}</h3>
-            <Button onClick={handleSignOut} text="Sign out" />
-          </div>
-        </Show>
-        <Show when={isSignedIn()}>
-          <div>
-            <HistoricalStatisticsContainer />
-          </div>
-        </Show>
+    <>
+      <Title>Syper / Profile</Title>
+      <Meta
+        name="description"
+        content="Sign in to save your results. View how many typing tests you have completed and how your typing speed has changed over time."
+      />
+      <div class="max-w-7xl px-16 mx-auto">
+        <Header />
+        <div class="mt-16">
+          <Show when={!isSignedIn()}>
+            <div class="mb-8 bg-theme-surface0 rounded-lg p-8 flex justify-center gap-16">
+              <SignIn />
+              <SocialSignIn />
+            </div>
+          </Show>
+          <Show when={isSignedIn()}>
+            <div class="mb-8 bg-theme-surface0 p-8 rounded-lg">
+              <h3 class="text-xl font-bold mb-4">Signed in: {getUserName()}</h3>
+              <Button onClick={handleSignOut} text="Sign out" />
+            </div>
+          </Show>
+          <Show when={isSignedIn()}>
+            <div>
+              <HistoricalStatisticsContainer />
+            </div>
+          </Show>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

@@ -10,6 +10,7 @@ import { handleInitialSetupAfterSignIn } from './helpers/stateHelpers'
 import { Footer } from './components/Footer'
 import { Routes as AppRoutes } from './helpers/routeHelpers'
 import { BlurWhenTyping } from './components/BlurWhenTyping'
+import { Title } from '@solidjs/meta'
 
 const TestPage = lazy(() => import('./components/TestPage'))
 const OptionsPage = lazy(() => import('./components/OptionsPage'))
@@ -30,21 +31,24 @@ const App: Component = () => {
   })
 
   return (
-    <div class="relative w-full font-sans overflow-x-hidden min-h-screen bg-theme-base text-theme-text">
-      <SyncingIndicator />
-      <Show when={!showLoadingScreen()} fallback={<LoadingScreen />}>
-        <Routes>
-          <Route path={AppRoutes.test} component={TestPage} />
-          <Route path={AppRoutes.options} component={OptionsPage} />
-          <Route path={AppRoutes.profile} component={ProfilePage} />
-          <Route path={AppRoutes.about} component={AboutPage} />
-          <Route path={AppRoutes.privacy} component={PrivacyPage} />
-        </Routes>
-      </Show>
-      <BlurWhenTyping>
-        <Footer />
-      </BlurWhenTyping>
-    </div>
+    <>
+      <Title>Syper_</Title>
+      <div class="relative w-full font-sans overflow-x-hidden min-h-screen bg-theme-base text-theme-text">
+        <SyncingIndicator />
+        <Show when={!showLoadingScreen()} fallback={<LoadingScreen />}>
+          <Routes>
+            <Route path={AppRoutes.test} component={TestPage} />
+            <Route path={AppRoutes.options} component={OptionsPage} />
+            <Route path={AppRoutes.profile} component={ProfilePage} />
+            <Route path={AppRoutes.about} component={AboutPage} />
+            <Route path={AppRoutes.privacy} component={PrivacyPage} />
+          </Routes>
+        </Show>
+        <BlurWhenTyping>
+          <Footer />
+        </BlurWhenTyping>
+      </div>
+    </>
   )
 }
 

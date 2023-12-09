@@ -4,13 +4,16 @@ import { Router, hashIntegration } from '@solidjs/router'
 import 'virtual:uno.css'
 import '@unocss/reset/tailwind.css'
 import './index.css'
+import { MetaProvider } from '@solidjs/meta'
 import App from './App'
 
 render(
   () => (
-    <Router source={hashIntegration()}>
-      <App />
-    </Router>
+    <MetaProvider>
+      <Router source={hashIntegration()}>
+        <App />
+      </Router>
+    </MetaProvider>
   ),
   document.getElementById('root') as HTMLElement
 )

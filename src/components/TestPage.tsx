@@ -14,6 +14,7 @@ import { cleanupKeyboard, setupKeyboard } from '../KeyboardHandler'
 import { initializeText, restartAttempt } from '../helpers/stateHelpers'
 import { BlurWhenTyping } from './BlurWhenTyping'
 import { CapsLockIndicator } from './CapsLockIndicator'
+import { Meta, Title } from '@solidjs/meta'
 
 const TestPage: Component = () => {
   onMount(async () => {
@@ -27,67 +28,74 @@ const TestPage: Component = () => {
   })
 
   return (
-    <div class="w-full h-full">
-      <div class="grid mx-auto max-w-7xl px-16 grid-rows-5 min-h-screen justify-items-stretch">
-        <div class="row-span-1">
-          <BlurWhenTyping>
-            <Header showOptions={true} />
-          </BlurWhenTyping>
-        </div>
-        <Show when={showingWriting()}>
-          <div
-            class={clsx(
-              'row-span-3 my-auto justify-self-start',
-              handleBlur(animationState().writingState === AnimationStates.shown)
-            )}
-          >
-            <div class="h-48">
-              <div class="h-8">
-                <QuoteInformation />
-              </div>
-              <div
-                class={clsx(
-                  'h-38 overflow-hidden',
-                  userOptions.useSmoothScrolling && 'scroll-smooth'
-                )}
-              >
-                <TextContainer attempt={attempt} quote={typingTest()} />
-              </div>
-              <div class="h-24">
-                <Show when={userOptions.showProgressBar}>
-                  <ProgressBar />
-                </Show>
-                <div class="h-16 flex justify-center items-center">
-                  <CapsLockIndicator />
+    <>
+      <Title>Syper / Typing test</Title>
+      <Meta
+        name="description"
+        content="Syper: a solid typing experience. Test your typing speed and see your improvements over time in this minimalistic and customizable typing game."
+      />
+      <div class="w-full h-full">
+        <div class="grid mx-auto max-w-7xl px-16 grid-rows-5 min-h-screen justify-items-stretch">
+          <div class="row-span-1">
+            <BlurWhenTyping>
+              <Header showOptions={true} />
+            </BlurWhenTyping>
+          </div>
+          <Show when={showingWriting()}>
+            <div
+              class={clsx(
+                'row-span-3 my-auto justify-self-start',
+                handleBlur(animationState().writingState === AnimationStates.shown)
+              )}
+            >
+              <div class="h-48">
+                <div class="h-8">
+                  <QuoteInformation />
+                </div>
+                <div
+                  class={clsx(
+                    'h-38 overflow-hidden',
+                    userOptions.useSmoothScrolling && 'scroll-smooth'
+                  )}
+                >
+                  <TextContainer attempt={attempt} quote={typingTest()} />
+                </div>
+                <div class="h-24">
+                  <Show when={userOptions.showProgressBar}>
+                    <ProgressBar />
+                  </Show>
+                  <div class="h-16 flex justify-center items-center">
+                    <CapsLockIndicator />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </Show>
-        <Show when={showingResults()}>
-          <div
-            class={clsx(
-              'row-span-4',
-              handleBlur(animationState().resultsState === AnimationStates.shown)
-            )}
-          >
-            <StatisticsContainer attempt={attempt} typingTest={typingTest()} />
-          </div>
-        </Show>
-        <Show when={showingWriting()}>
-          <div
-            class={clsx(
-              'row-span-1',
-              handleBlur(animationState().writingState === AnimationStates.shown)
-            )}
-          >
-            <BlurWhenTyping>
-              <NavigationHelp />
-            </BlurWhenTyping>
-          </div>
-        </Show>
+          </Show>
+          <Show when={showingResults()}>
+            <div
+              class={clsx(
+                'row-span-4',
+                handleBlur(animationState().resultsState === AnimationStates.shown)
+              )}
+            >
+              <StatisticsContainer attempt={attempt} typingTest={typingTest()} />
+            </div>
+          </Show>
+          <Show when={showingWriting()}>
+            <div
+              class={clsx(
+                'row-span-1',
+                handleBlur(animationState().writingState === AnimationStates.shown)
+              )}
+            >
+              <BlurWhenTyping>
+                <NavigationHelp />
+              </BlurWhenTyping>
+            </div>
+          </Show>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
