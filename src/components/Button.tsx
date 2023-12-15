@@ -3,7 +3,7 @@ import { Component, JSX, splitProps } from 'solid-js'
 
 interface Props extends JSX.ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?(event: MouseEvent): void
-  text?: string
+  text?: string | JSX.Element
 }
 
 export const Button: Component<Props> = (props) => {

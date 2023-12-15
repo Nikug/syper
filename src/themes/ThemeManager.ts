@@ -1,5 +1,5 @@
 import { persistUserOptions } from '../helpers/optionsHelpers'
-import { setUserOptions } from '../StateManager'
+import { setUserOptions, userOptions } from '../StateManager'
 import { ThemeKey, themes, ThemeVariables } from './themes'
 
 export const setTheme = (theme: ThemeKey) => {
@@ -26,3 +26,6 @@ const setCssVariables = (theme: ThemeVariables) => {
 const isValidTheme = (theme: string): boolean => {
   return Object.keys(themes).includes(theme)
 }
+
+export const getThemeVariables = (): ThemeVariables => themes[userOptions.theme]
+export const isCurrentThemeDark = (): boolean => getThemeVariables().dark
