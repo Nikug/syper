@@ -44,9 +44,11 @@ const App: Component = () => {
             <Route path={AppRoutes.privacy} component={PrivacyPage} />
           </Routes>
         </Show>
-        <BlurWhenTyping>
-          <Footer />
-        </BlurWhenTyping>
+        <Show when={!showLoadingScreen()}>
+          <BlurWhenTyping>
+            <Footer />
+          </BlurWhenTyping>
+        </Show>
       </div>
     </>
   )
