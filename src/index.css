@@ -49,3 +49,17 @@
 .ul > li {
   @apply list-disc ml-8;
 }
+
+.blink {
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  0% {
+    text-decoration-color: rgba(var(--theme-primary));
+  }
+
+  50% {
+    text-decoration-color: rgba(0, 0, 0, 0);
+  }
+}

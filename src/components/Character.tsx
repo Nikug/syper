@@ -3,6 +3,7 @@ import { clsx } from 'clsx'
 import { Component, createEffect } from 'solid-js'
 import { CharacterMode } from '../types'
 import { userOptions } from '../StateManager'
+import { testStarted } from '../helpers/stateHelpers'
 
 const defaultClasses = `
   whitespace-pre
@@ -49,7 +50,8 @@ export const Character: Component<Props> = (props) => {
         characterClasses[characterMode()],
         userOptions.showTextHighlight && highlightClasses[characterMode()],
         defaultClasses,
-        props.isNext && 'underline'
+        props.isNext && 'underline',
+        props.isNext && !testStarted() && 'blink'
       )}
     >
       {props.expected}
