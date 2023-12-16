@@ -15,7 +15,7 @@ import { Title } from '@solidjs/meta'
 const TestPage = lazy(() => import('./components/TestPage'))
 const OptionsPage = lazy(() => import('./components/OptionsPage'))
 const ProfilePage = lazy(() => import('./components/ProfilePage'))
-const AboutPage = lazy(() => import('./components/AboutPage'))
+const AboutPage = lazy(() => import('./components/about/AboutPage'))
 const PrivacyPage = lazy(() => import('./components/PrivacyPage'))
 
 const App: Component = () => {

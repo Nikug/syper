@@ -1,5 +1,7 @@
 # Syper
-The solid typing game.
+
+A solid typing experience.
 
 ## Hosted at
-[nikug.github.io/syper](https://nikug.github.io/syper)
+
+[syper.app](https://syper.app)
