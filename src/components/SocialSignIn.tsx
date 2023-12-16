@@ -27,11 +27,7 @@ export const SocialSignIn: Component = () => {
           }
         />
         <img
-          src={
-            isCurrentThemeDark()
-              ? '/src/assets/Google sign in dark.png'
-              : '/src/assets/Google sign in.png'
-          }
+          src={isCurrentThemeDark() ? '/Google sign in dark.png' : '/Google sign in.png'}
           class="w-52 cursor-pointer"
           onClick={handleGoogleSignIn}
         />
