@@ -4,3 +4,7 @@
   border: unset !important;
   box-shadow: unset !important;
 }
+
+.apexcharts-yaxis-annotations > line {
+  stroke-width: 4;
+}

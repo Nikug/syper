@@ -197,11 +197,9 @@ export const createPersonalBestAnnotation = (wpm: number): ApexAnnotations => {
   return {
     yaxis: [
       {
-        y: wpm + 0.5,
-        y2: wpm - 0.5,
+        y: wpm,
         strokeDashArray: 8,
-        fillColor: getColor(userOptions.theme, 'text'),
-        borderColor: '#00000000',
+        borderColor: getColor(userOptions.theme, 'text'),
         opacity: 1,
         label: {
           text: `Personal best ${wpm.toFixed(2)} wpm`,
