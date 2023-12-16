@@ -14,7 +14,7 @@ export const GeneralInformation: Component = () => {
       </p>
       <p class="mb-16">
         <A href={Routes.privacy} class="link">
-          Privace policy
+          Privacy policy
         </A>{' '}
         can be read here. It describes what data is collected and how it is used.
       </p>
