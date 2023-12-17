@@ -83,6 +83,7 @@ export const handlePersonalBestUpdate = async (test: DatabaseTestResult): Promis
       } else {
         bests.push(newBest)
       }
+
       return bests
     })
   )
