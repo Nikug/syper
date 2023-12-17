@@ -37,6 +37,7 @@ export interface Attempt {
 export interface AttemptPersonalBest {
   isPersonalBest: boolean
   hasApprovedCorrectness: boolean
+  previousPersonalBest?: number
 }
 
 export interface Measurements {

@@ -7,12 +7,13 @@ import {
   getFormattedDuration,
   getWordsPerMinute,
 } from '../helpers/mathHelpers'
-import { typingTest } from '../StateManager'
+import { typingTest, userOptions } from '../StateManager'
 import { Attempt, TypingTest } from '../types'
 import { LabeledValue } from './LabeledValue'
 import { WordWithWpm } from './WordWithWpm'
 import { WpmChart } from './WpmChart'
 import { PersonalBestCorrectnessLimit } from '../constants'
+import { findPersonalBestFromOptions } from '../helpers/personalBestHelpers'
 
 interface Props {
   typingTest: TypingTest
@@ -20,6 +21,8 @@ interface Props {
 }
 
 export const StatisticsContainer: Component<Props> = (props) => {
+  const getWpm = () => getWordsPerMinute(props.attempt.measurements, props.typingTest)
+
   return (
     <div class="h-full pt-8 pb-32">
       <div class="mt-auto mb-8 text-center">
@@ -35,7 +38,17 @@ export const StatisticsContainer: Component<Props> = (props) => {
       <Show when={props.attempt.personalBest.isPersonalBest}>
         <div class="w-full text-center">
           <Show when={props.attempt.personalBest.hasApprovedCorrectness}>
-            <p class="font-bold text-3xl">New personal best!</p>
+            <p class="font-bold text-3xl mb-2">New personal best!</p>
+            <div class="font-bold text-3xl flex justify-center items-center gap-4">
+              <Show when={props.attempt.personalBest.previousPersonalBest != null}>
+                <p class="text-xl">
+                  {props.attempt.personalBest.previousPersonalBest?.toFixed(1)}{' '}
+                </p>
+                <div class="i-ri-arrow-right-line w-8 h-8" />
+              </Show>
+              <p>{getWpm()?.toFixed(1)}</p>
+            </div>
+            <p>Words per minute</p>
           </Show>
           <Show when={!props.attempt.personalBest.hasApprovedCorrectness}>
             <p class="text-lg">
@@ -44,11 +57,8 @@ export const StatisticsContainer: Component<Props> = (props) => {
           </Show>
         </div>
       </Show>
-      <div class="w-full flex justify-evenly mt-8">
-        <LabeledValue
-          value={getWordsPerMinute(props.attempt.measurements, props.typingTest)?.toFixed(1)}
-          label="Words per minute"
-        />
+      <div class="w-full flex justify-evenly mt-12">
+        <LabeledValue value={getWpm()?.toFixed(1)} label="Words per minute" />
         <LabeledValue
           value={getFormattedDuration(getDuration(props.attempt.measurements) ?? 0)}
           label="Duration"

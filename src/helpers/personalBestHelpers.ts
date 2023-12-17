@@ -87,14 +87,19 @@ export const handlePersonalBestUpdate = async (test: DatabaseTestResult): Promis
     })
   )
 
-  setAttemptPersonalBest(true, true)
+  setAttemptPersonalBest(true, true, currentBest?.wordsPerMinute)
 }
 
-const setAttemptPersonalBest = (isPersonalBest: boolean, hasApprovedCorrectness: boolean) => {
+const setAttemptPersonalBest = (
+  isPersonalBest: boolean,
+  hasApprovedCorrectness: boolean,
+  previousBest?: number
+) => {
   setAttempt(
     produce((attempt) => {
       attempt.personalBest.isPersonalBest = isPersonalBest
       attempt.personalBest.hasApprovedCorrectness = hasApprovedCorrectness
+      attempt.personalBest.previousPersonalBest = previousBest
     })
   )
 }
