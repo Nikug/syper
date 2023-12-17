@@ -7,13 +7,12 @@ import {
   getFormattedDuration,
   getWordsPerMinute,
 } from '../helpers/mathHelpers'
-import { typingTest, userOptions } from '../StateManager'
+import { typingTest } from '../StateManager'
 import { Attempt, TypingTest } from '../types'
 import { LabeledValue } from './LabeledValue'
 import { WordWithWpm } from './WordWithWpm'
 import { WpmChart } from './WpmChart'
 import { PersonalBestCorrectnessLimit } from '../constants'
-import { findPersonalBestFromOptions } from '../helpers/personalBestHelpers'
 
 interface Props {
   typingTest: TypingTest
