@@ -7,6 +7,7 @@ import { SignIn } from './SignIn'
 import { handleTeardownAfterSignOut } from '../helpers/stateHelpers'
 import { SocialSignIn } from './SocialSignIn'
 import { Meta, Title } from '@solidjs/meta'
+import { HistoricalPersonalBests } from './HistoricalPersonalBests'
 
 const ProfilePage: Component = () => {
   const handleSignOut = () => {
@@ -38,6 +39,7 @@ const ProfilePage: Component = () => {
           </Show>
           <Show when={isSignedIn()}>
             <div>
+              <HistoricalPersonalBests />
               <HistoricalStatisticsContainer />
             </div>
           </Show>
