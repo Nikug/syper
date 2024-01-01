@@ -2,6 +2,8 @@ import { Component, Show } from 'solid-js'
 import { personalBests } from '../StateManager'
 import { DatabasePersonalBest } from '../supabaseTypes'
 import { textModeOptions } from '../constants'
+import { HistoricalPersonalBestContainer } from './HistoricalPersonalBestContainer'
+import { getFormattedDuration } from '../helpers/mathHelpers'
 
 export const HistoricalPersonalBests: Component = () => {
   const getBestPersonalBest = () =>
@@ -18,17 +20,22 @@ export const HistoricalPersonalBests: Component = () => {
 
   return (
     <div>
-      <h3 class="text-3xl font-bold text-center mb-4">Personal best</h3>
-      <div>
+      <h3 class="text-3xl font-bold text-center mb-4">Personal bests</h3>
+      <div class="flex gap-4 items-center mb-8">
+        <div class="i-ri-vip-crown-line w-6 h-6 -mr-2" />
+        <h4 class="text-xl font-bold">Best:</h4>
+        <p>{getBestPersonalBest()?.wordsPerMinute.toFixed(2)} wpm</p>
         <p>Mode: {getTextMode(getBestPersonalBest()?.textMode)}</p>
-        <p>Words per minute: {getBestPersonalBest()?.wordsPerMinute.toFixed(2)}</p>
         <p>Dictionary: {getBestPersonalBest()?.source}</p>
         <Show when={getBestPersonalBest()?.words}>
           <p>Words: {getBestPersonalBest()?.words}</p>
         </Show>
         <Show when={getBestPersonalBest()?.duration}>
-          <p>Duration: {getBestPersonalBest()?.duration}</p>
+          <p>Duration: {getFormattedDuration(getBestPersonalBest()?.duration ?? 0)}</p>
         </Show>
+      </div>
+      <div>
+        <HistoricalPersonalBestContainer />
       </div>
     </div>
   )

@@ -93,7 +93,7 @@ export const Dropdown = <K, V extends JSX.Element>(props: Props<K, V>) => {
         <Portal mount={document.getElementById('root') ?? undefined}>
           <div
             ref={panelRef}
-            class="absolute paper text-theme-text"
+            class="absolute paper text-theme-text border border-theme-surface1"
             style={{ ...dropdownPosition() }}
           >
             <For each={props.options}>

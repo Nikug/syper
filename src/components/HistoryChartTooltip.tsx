@@ -1,9 +1,9 @@
 import { Component } from 'solid-js'
 import { W } from '../apexChartTypes'
-import { format } from 'date-fns'
 import { DatabaseTestResult } from '../supabaseTypes'
 import { getFormattedDuration } from '../helpers/mathHelpers'
 import { textModeOptions } from '../constants'
+import { toDateTimeString } from '../helpers/dateHelpers'
 
 interface Props {
   series: number[][]
@@ -17,7 +17,7 @@ export const HistoryChartTooltip: Component<Props> = (props) => {
 
   return (
     <div class="bg-theme-surface1 rounded px-4 py-2 !border-theme-danger">
-      <h3 class="font-semibold mb-2">{format(new Date(test().date), 'dd.MM.yyyy HH:mm')}</h3>
+      <h3 class="font-semibold mb-2">{toDateTimeString(new Date(test().date))}</h3>
       <div>
         <p>
           Type:{' '}

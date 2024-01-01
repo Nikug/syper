@@ -188,6 +188,9 @@ export const createDefaultChartOptions = (xTitle: string, yTitle: string): ApexO
         return div.innerHTML
       },
     },
+    noData: {
+      text: 'No data',
+    },
   }
 
   return options
