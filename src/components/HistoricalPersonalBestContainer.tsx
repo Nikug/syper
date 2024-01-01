@@ -38,7 +38,7 @@ export const HistoricalPersonalBestContainer: Component = () => {
           onSelect={(option) => setDictionary(option.key)}
         />
       </div>
-      <div class="min-h-[400px]">
+      <div>
         <HistoricalPersonalBestChart personalBests={selectedPersonalBests()} textMode={mode()} />
       </div>
     </>

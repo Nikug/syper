@@ -38,10 +38,8 @@ const ProfilePage: Component = () => {
             </div>
           </Show>
           <Show when={isSignedIn()}>
-            <div>
-              <HistoricalStatisticsContainer />
-              <HistoricalPersonalBests />
-            </div>
+            <HistoricalStatisticsContainer />
+            <HistoricalPersonalBests />
           </Show>
         </div>
       </div>

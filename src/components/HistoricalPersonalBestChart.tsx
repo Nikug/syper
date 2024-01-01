@@ -26,7 +26,11 @@ export const HistoricalPersonalBestChart: Component<Props> = (props) => {
     })
   )
 
-  return <div ref={element} class="paper p-4 min-h-[400px]" />
+  return (
+    <div class="paper p-4 chart-container">
+      <div ref={element} />
+    </div>
+  )
 }
 
 const parseData = (

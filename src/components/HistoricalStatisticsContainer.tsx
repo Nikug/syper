@@ -111,7 +111,10 @@ export const HistoricalStatisticsContainer: Component = () => {
           label="Average Correctness"
         />
       </div>
-      <Show when={!testResults.loading} fallback={'Loading'}>
+      <Show
+        when={!testResults.loading}
+        fallback={<div class="chart-container p-4 paper">Loading...</div>}
+      >
         <HistoryChart
           tests={testResults() ?? []}
           startDate={dates().startDate}

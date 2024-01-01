@@ -30,7 +30,11 @@ export const HistoryChart: Component<Props> = (props) => {
     })
   )
 
-  return <div ref={element} class="paper p-4" />
+  return (
+    <div class="paper p-4 chart-container">
+      <div ref={element} />
+    </div>
+  )
 }
 
 const [disposeTooltip, setDisposeTooltip] = createSignal<{ dispose: () => void } | null>(null)
