@@ -20,7 +20,7 @@ export const HistoricalPersonalBests: Component = () => {
 
   return (
     <div>
-      <h3 class="text-3xl font-bold text-center mb-4">Personal bests</h3>
+      <h3 class="text-3xl font-bold text-center mb-8">Personal bests</h3>
       <div class="flex gap-4 items-center mb-8">
         <div class="i-ri-vip-crown-line w-6 h-6 -mr-2" />
         <h4 class="text-xl font-bold">Best:</h4>
