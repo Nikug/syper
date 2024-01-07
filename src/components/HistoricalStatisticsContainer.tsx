@@ -4,10 +4,11 @@ import { getTestResults } from '../api/testResults'
 import { getFormattedDuration } from '../helpers/mathHelpers'
 import { setHistoryMode } from '../helpers/optionsHelpers'
 import { userOptions } from '../StateManager'
-import { TestResultSum } from '../types'
+import { TestResultSum, TextMode } from '../types'
 import { Dropdown } from './Dropdown'
 import { HistoryChart } from './HistoryChart'
 import { LabeledValue } from './LabeledValue'
+import { textModeOptions } from '../constants'
 
 const durations = {
   day: () => ({ startDate: startOfDay(new Date()), endDate: endOfDay(new Date()) }),
@@ -40,6 +41,7 @@ interface Dates {
 
 export const HistoricalStatisticsContainer: Component = () => {
   const [dates, setDates] = createSignal<Dates>(durations[userOptions.historyMode]())
+  const [modes, setModes] = createSignal<TextMode[]>([])
   const [testResults] = createResource(dates, (dates) =>
     getTestResults(dates.startDate, dates.endDate)
   )
@@ -81,6 +83,14 @@ export const HistoricalStatisticsContainer: Component = () => {
     setDates(durations[duration]())
   }
 
+  const getFilteredTestResults = () => {
+    if (!modes().length) {
+      return testResults()
+    }
+
+    testResults()?.filter((test) => modes().includes(test.textMode))
+  }
+
   return (
     <div class="w-full mt-16 mb-32">
       <h3 class="text-3xl font-bold text-center mb-4">History</h3>
@@ -89,6 +99,12 @@ export const HistoricalStatisticsContainer: Component = () => {
           key={userOptions.historyMode}
           options={durationOptions}
           onSelect={(option) => handleHistorySelect(option.key)}
+        />
+        <Dropdown
+          key={modes()}
+          options={textModeOptions}
+          onMultipleSelect={(options) => setModes(options.map((option) => option.key))}
+          placeholder="All modes"
         />
       </div>
       <div class="w-full flex justify-center mb-8 gap-16">
@@ -116,7 +132,7 @@ export const HistoricalStatisticsContainer: Component = () => {
         fallback={<div class="chart-container p-4 paper">Loading...</div>}
       >
         <HistoryChart
-          tests={testResults() ?? []}
+          tests={getFilteredTestResults() ?? []}
           startDate={dates().startDate}
           endDate={dates().endDate}
         />

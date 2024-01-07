@@ -11,7 +11,9 @@ interface Props<K, V extends JSX.Element> {
   key: K | K[]
   options: Option<K, V>[]
   onSelect?: (option: Option<K, V>) => void
+  onMultipleSelect?: (options: Option<K, V>[]) => void
   valueFormatter?: (option: Option<K, V>) => JSX.Element
+  placeholder?: string
 }
 
 export const Dropdown = <K, V extends JSX.Element>(props: Props<K, V>) => {
@@ -27,10 +29,20 @@ export const Dropdown = <K, V extends JSX.Element>(props: Props<K, V>) => {
   })
 
   const handleClick = (event: MouseEvent) => {
+    if (!open) return
+
     const target = event.target
     if (!dropdownRef?.contains(target as Node) && !panelRef?.contains(target as Node)) {
       setOpen(false)
     }
+  }
+
+  const handleButtonClick = (event: MouseEvent) => {
+    if (!dropdownRef?.contains(event.target as Node)) {
+      return
+    }
+
+    setOpen(!open())
   }
 
   const dropdownPosition = (): JSX.CSSProperties => {
@@ -43,9 +55,19 @@ export const Dropdown = <K, V extends JSX.Element>(props: Props<K, V>) => {
     }
   }
 
-  const handleSelect = (option: Option<K, V>) => {
-    setOpen(false)
-    props.onSelect?.(option)
+  const handleSelect = (selectedOption: Option<K, V>) => {
+    if (Array.isArray(props.key)) {
+      let newSelected: K[] = []
+      if (props.key.some((key) => key === selectedOption.key)) {
+        newSelected = props.key.filter((key) => key !== selectedOption.key)
+      } else {
+        newSelected = [...props.key, selectedOption.key]
+      }
+      props.onMultipleSelect?.(props.options.filter((option) => newSelected.includes(option.key)))
+    } else {
+      setOpen(false)
+      props.onSelect?.(selectedOption)
+    }
   }
 
   const getOption = (key: K | K[]): Option<K, V> | Option<K, V>[] =>
@@ -85,9 +107,9 @@ export const Dropdown = <K, V extends JSX.Element>(props: Props<K, V>) => {
   }
 
   return (
-    <div ref={dropdownRef} onClick={() => setOpen(!open())} class="cursor-pointer">
+    <div ref={dropdownRef} onClick={handleButtonClick} class="cursor-pointer">
       <p class={clsx('px-2', { 'border-button': !open() }, { 'border-button-active': open() })}>
-        {formatValue(props.key)}
+        {formatValue(props.key) || props.placeholder}
       </p>
       <Show when={open()}>
         <Portal mount={document.getElementById('root') ?? undefined}>
