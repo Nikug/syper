@@ -123,6 +123,16 @@ export const setUseSmoothScrolling = async (show: boolean) => {
   await persistUserOptions()
 }
 
+export const setHistoryPersonalBestMode = async (mode: TextMode) => {
+  setUserOptions('historyPersonalBestMode', mode)
+  await persistUserOptions()
+}
+
+export const setHistoryPersonalBestDictionary = async (dictionary: Dictionaries) => {
+  setUserOptions('historyPersonalBestDictionary', dictionary)
+  await persistUserOptions()
+}
+
 export const isTimeMode = () => userOptions.textMode === 'time'
 export const isQuoteMode = () => userOptions.textMode === 'quote'
 export const isWordsMode = () => userOptions.textMode === 'words'

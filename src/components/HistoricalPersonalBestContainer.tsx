@@ -1,15 +1,15 @@
-import { Component, createSignal } from 'solid-js'
+import { Component } from 'solid-js'
 import { Dropdown } from './Dropdown'
 import { Dictionaries, dictionaries } from '../assets/files'
-import { TextMode } from '../types'
 import { textModeOptions } from '../constants'
-import { personalBests } from '../StateManager'
+import { personalBests, userOptions } from '../StateManager'
 import { HistoricalPersonalBestChart } from './HistoricalPersonalBestChart'
+import {
+  setHistoryPersonalBestDictionary,
+  setHistoryPersonalBestMode,
+} from '../helpers/optionsHelpers'
 
 export const HistoricalPersonalBestContainer: Component = () => {
-  const [dictionary, setDictionary] = createSignal<Dictionaries>('english-200')
-  const [mode, setMode] = createSignal<TextMode>('words')
-
   const dictionaryOptions = () =>
     Object.entries(dictionaries).map(([key, value]) => ({
       key: key as Dictionaries,
@@ -20,7 +20,9 @@ export const HistoricalPersonalBestContainer: Component = () => {
 
   const selectedPersonalBests = () => {
     return personalBests.filter(
-      (best) => best.textMode === mode() && best.source === dictionaries[dictionary()].name
+      (best) =>
+        best.textMode === userOptions.historyPersonalBestMode &&
+        best.source === dictionaries[userOptions.historyPersonalBestDictionary].name
     )
   }
   return (
@@ -28,18 +30,21 @@ export const HistoricalPersonalBestContainer: Component = () => {
       <div class="flex gap-4 my-4">
         <p class="font-bold">Chart options:</p>
         <Dropdown
-          key={mode()}
+          key={userOptions.historyPersonalBestMode}
           options={modeOptions()}
-          onSelect={(newMode) => setMode(newMode.key)}
+          onSelect={(newMode) => setHistoryPersonalBestMode(newMode.key)}
         />
         <Dropdown
-          key={dictionary()}
+          key={userOptions.historyPersonalBestDictionary}
           options={dictionaryOptions()}
-          onSelect={(option) => setDictionary(option.key)}
+          onSelect={(option) => setHistoryPersonalBestDictionary(option.key)}
         />
       </div>
       <div>
-        <HistoricalPersonalBestChart personalBests={selectedPersonalBests()} textMode={mode()} />
+        <HistoricalPersonalBestChart
+          personalBests={selectedPersonalBests()}
+          textMode={userOptions.historyPersonalBestMode}
+        />
       </div>
     </>
   )

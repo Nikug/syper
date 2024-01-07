@@ -16,6 +16,8 @@ const defaultOptions: UserOptions = {
   showCapsLockIndicator: true,
   showTextHighlight: true,
   useSmoothScrolling: true,
+  historyPersonalBestMode: 'words',
+  historyPersonalBestDictionary: 'english-200',
 } as const
 
 export const defaultUserOptions = (): UserOptions => ({ ...defaultOptions })

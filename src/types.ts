@@ -97,6 +97,8 @@ export interface UserOptions {
   showCapsLockIndicator: boolean
   showTextHighlight: boolean
   useSmoothScrolling: boolean
+  historyPersonalBestMode: TextMode
+  historyPersonalBestDictionary: Dictionaries
 }
 
 export interface TestResultSum {
