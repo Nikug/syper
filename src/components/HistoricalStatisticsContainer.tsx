@@ -88,7 +88,7 @@ export const HistoricalStatisticsContainer: Component = () => {
       return testResults()
     }
 
-    testResults()?.filter((test) => modes().includes(test.textMode))
+    return testResults()?.filter((test) => modes().includes(test.textMode))
   }
 
   return (

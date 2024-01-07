@@ -19,7 +19,7 @@ export const HistoryChart: Component<Props> = (props) => {
   const [chart, setChart] = createSignal<ApexCharts | null>(null)
 
   createEffect(
-    on([() => userOptions.theme], () => {
+    on([() => userOptions.theme, () => props.tests], () => {
       chart()?.destroy()
       const newChart = new ApexCharts(
         element,
