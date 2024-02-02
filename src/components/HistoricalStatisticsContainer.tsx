@@ -2,9 +2,15 @@ import { endOfDay, startOfDay, subDays, subYears } from 'date-fns'
 import { Component, createMemo, createResource, createSignal, Show } from 'solid-js'
 import { getTestResults } from '../api/testResults'
 import { getFormattedDuration } from '../helpers/mathHelpers'
-import { setHistoryMode } from '../helpers/optionsHelpers'
+import {
+  setHistoryDictionaries,
+  setHistoryDurations,
+  setHistoryMode,
+  setHistoryTextModes,
+  setHistoryWordCounts,
+} from '../helpers/optionsHelpers'
 import { userOptions } from '../StateManager'
-import { TestResultSum, TextMode } from '../types'
+import { TestResultSum } from '../types'
 import { Dropdown } from './Dropdown'
 import { HistoryChart } from './HistoryChart'
 import { LabeledValue } from './LabeledValue'
@@ -43,10 +49,6 @@ interface Dates {
 
 export const HistoricalStatisticsContainer: Component = () => {
   const [dates, setDates] = createSignal<Dates>(durations[userOptions.historyMode]())
-  const [filterModes, setFilterModes] = createSignal<TextMode[]>([])
-  const [filterDictionaries, setFilterDictionaries] = createSignal<Dictionaries[]>([])
-  const [filterWordCounts, setFilterWordCounts] = createSignal<number[]>([])
-  const [filterDurations, setFilterDurations] = createSignal<number[]>([])
   const [testResults] = createResource(dates, (dates) =>
     getTestResults(dates.startDate, dates.endDate)
   )
@@ -54,24 +56,26 @@ export const HistoricalStatisticsContainer: Component = () => {
   const getFilteredTestResults = () => {
     let results = testResults()
 
-    if (filterModes().length) {
-      results = results?.filter((test) => filterModes().includes(test.textMode))
+    if (userOptions.historyTextModes.length) {
+      results = results?.filter((test) => userOptions.historyTextModes.includes(test.textMode))
     }
 
-    if (filterDictionaries().length) {
+    if (userOptions.historyDictionaries.length) {
       results = results?.filter(
         (test) =>
           test.textMode === 'quote' ||
-          filterDictionaries().some((dictionary) => getDictionaryName(dictionary) === test.source)
+          userOptions.historyDictionaries.some(
+            (dictionary) => getDictionaryName(dictionary) === test.source
+          )
       )
     }
 
-    if (filterWordCounts().length) {
-      results = results?.filter((test) => filterWordCounts().includes(test.words))
+    if (userOptions.historyWordCounts.length) {
+      results = results?.filter((test) => userOptions.historyWordCounts.includes(test.words))
     }
 
-    if (filterDurations().length) {
-      results = results?.filter((test) => filterDurations().includes(test.duration))
+    if (userOptions.historyDurations.length) {
+      results = results?.filter((test) => userOptions.historyDurations.includes(test.duration))
     }
 
     return results
@@ -115,10 +119,10 @@ export const HistoricalStatisticsContainer: Component = () => {
   }
 
   const clearFilters = () => {
-    setFilterWordCounts([])
-    setFilterDurations([])
-    setFilterModes([])
-    setFilterDictionaries([])
+    setHistoryWordCounts([])
+    setHistoryDurations([])
+    setHistoryTextModes([])
+    setHistoryDictionaries([])
   }
 
   return (
@@ -133,33 +137,35 @@ export const HistoricalStatisticsContainer: Component = () => {
         />
         /
         <Dropdown
-          key={filterModes()}
+          key={userOptions.historyTextModes}
           options={textModeOptions}
-          onMultipleSelect={(options) => setFilterModes(options.map((option) => option.key))}
+          onMultipleSelect={(options) => setHistoryTextModes(options.map((option) => option.key))}
           placeholder="All modes"
         />
         /
         <Dropdown
-          key={filterDictionaries()}
+          key={userOptions.historyDictionaries}
           options={Object.entries(dictionaries).map(([key, value]) => ({
             key: key as Dictionaries,
             value: value.name,
           }))}
-          onMultipleSelect={(options) => setFilterDictionaries(options.map((option) => option.key))}
+          onMultipleSelect={(options) =>
+            setHistoryDictionaries(options.map((option) => option.key))
+          }
           placeholder="All dictionaries"
         />
         /
         <Dropdown
-          key={filterWordCounts()}
+          key={userOptions.historyWordCounts}
           options={WordCounts.map((count) => ({ key: count, value: count }))}
-          onMultipleSelect={(options) => setFilterWordCounts(options.map((option) => option.key))}
+          onMultipleSelect={(options) => setHistoryWordCounts(options.map((option) => option.key))}
           placeholder="All word counts"
         />
         /
         <Dropdown
-          key={filterDurations()}
+          key={userOptions.historyDurations}
           options={TimeDurations}
-          onMultipleSelect={(options) => setFilterDurations(options.map((option) => option.key))}
+          onMultipleSelect={(options) => setHistoryDurations(options.map((option) => option.key))}
           placeholder="All durations"
         />
         /
