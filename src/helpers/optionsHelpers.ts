@@ -4,6 +4,7 @@ import { isSignedIn } from '../authentication/Supabase'
 import { HistoryMode } from '../components/HistoricalStatisticsContainer'
 import { nextAttempt } from '../helpers/stateHelpers'
 import { defaultUserOptions, setUserOptions, userOptions } from '../StateManager'
+import { DatabaseUserOptions, DatabaseUserOptionsInput } from '../supabaseTypes'
 import { startSyncing, stopSyncing } from '../SyncingManager'
 import { setTheme } from '../themes/ThemeManager'
 import { TextMode, UserOptions } from '../types'
@@ -133,6 +134,48 @@ export const setHistoryPersonalBestDictionary = async (dictionary: Dictionaries)
   await persistUserOptions()
 }
 
+export const setHistoryTextModes = async (modes: TextMode[]) => {
+  setUserOptions('historyTextModes', modes)
+  await persistUserOptions()
+}
+
+export const setHistoryDictionaries = async (dictionaries: Dictionaries[]) => {
+  setUserOptions('historyDictionaries', dictionaries)
+  await persistUserOptions()
+}
+
+export const setHistoryWordCounts = async (wordCounts: number[]) => {
+  setUserOptions('historyWordCounts', wordCounts)
+  await persistUserOptions()
+}
+
+export const setHistoryDurations = async (durations: number[]) => {
+  setUserOptions('historyDurations', durations)
+  await persistUserOptions()
+}
+
 export const isTimeMode = () => userOptions.textMode === 'time'
 export const isQuoteMode = () => userOptions.textMode === 'quote'
 export const isWordsMode = () => userOptions.textMode === 'words'
+
+export const mapOptionsToDatabase = (
+  options: UserOptions
+): Omit<DatabaseUserOptionsInput, 'userId'> => {
+  return {
+    ...options,
+    historyTextModes: options.historyTextModes.join(','),
+    historyDictionaries: options.historyDictionaries.join(','),
+    historyWordCounts: options.historyWordCounts.join(','),
+    historyDurations: options.historyDurations.join(','),
+  }
+}
+
+export const mapOptionsFromDatabase = (options: DatabaseUserOptions): UserOptions => {
+  return {
+    ...options,
+    historyTextModes: options.historyTextModes.split(',') as TextMode[],
+    historyDictionaries: options.historyDictionaries.split(',') as Dictionaries[],
+    historyWordCounts: options.historyWordCounts.split(',').map(Number),
+    historyDurations: options.historyDurations.split(',').map(Number),
+  }
+}

@@ -1,7 +1,8 @@
 import { createSignal } from 'solid-js'
 import { createStore } from 'solid-js/store'
-import { Attempt, AttemptStates, TypingTest, UserOptions } from './types'
+import { Attempt, AttemptStates, TextMode, TypingTest, UserOptions } from './types'
 import { DatabasePersonalBest } from './supabaseTypes'
+import { Dictionaries } from './assets/files'
 
 const defaultOptions: UserOptions = {
   theme: 'catppuccin-mocha',
@@ -18,6 +19,10 @@ const defaultOptions: UserOptions = {
   useSmoothScrolling: true,
   historyPersonalBestMode: 'words',
   historyPersonalBestDictionary: 'english-200',
+  historyTextModes: [] as TextMode[],
+  historyDictionaries: [] as Dictionaries[],
+  historyWordCounts: [] as number[],
+  historyDurations: [] as number[],
 } as const
 
 export const defaultUserOptions = (): UserOptions => ({ ...defaultOptions })

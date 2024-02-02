@@ -18,8 +18,16 @@ export interface DatabaseTestResult extends DatabaseTestResultInput {
   date: string
 }
 
-export interface DatabaseUserOptionsInput extends UserOptions {
+export interface DatabaseUserOptionsInput
+  extends Omit<
+    UserOptions,
+    'historyTextModes' | 'historyDictionaries' | 'historyWordCounts' | 'historyDurations'
+  > {
   userId: string
+  historyTextModes: string
+  historyDictionaries: string
+  historyWordCounts: string
+  historyDurations: string
 }
 
 export interface DatabaseUserOptions extends DatabaseUserOptionsInput {

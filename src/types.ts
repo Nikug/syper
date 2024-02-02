@@ -99,6 +99,10 @@ export interface UserOptions {
   useSmoothScrolling: boolean
   historyPersonalBestMode: TextMode
   historyPersonalBestDictionary: Dictionaries
+  historyTextModes: TextMode[]
+  historyDictionaries: Dictionaries[]
+  historyWordCounts: number[]
+  historyDurations: number[]
 }
 
 export interface TestResultSum {
