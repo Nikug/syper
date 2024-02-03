@@ -9,6 +9,7 @@ const defaultClasses = `
   whitespace-pre
   text-4xl
   decoration-3
+  scroll-my-16
 `
 
 const characterClasses: Record<CharacterMode, string> = {
@@ -39,7 +40,7 @@ export const Character: Component<Props> = (props) => {
 
   createEffect(() => {
     if (props.isNext && element) {
-      element.scrollIntoView({ block: 'center' })
+      element.scrollIntoView({ block: 'start' })
     }
   })
 

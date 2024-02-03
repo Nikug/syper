@@ -25,7 +25,7 @@ interface Props {
 
 export const Header: Component<Props> = (props) => {
   return (
-    <div class={clsx('h-full pt-16 transition-all duration-300')}>
+    <div class={clsx('h-full pt-8 transition-all duration-300')}>
       <div class="w-full mb-4 flex justify-between items-center">
         <A href={Routes.test} class="text-5xl font-bold">
           Syper_ <span class="font-normal text-lg opacity-50">(beta)</span>
