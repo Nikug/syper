@@ -4,13 +4,16 @@ export const fonts = {
   'Source Code Pro': 'Source+Code+Pro',
   'Space Mono': 'Space+Mono',
   'Ubuntu Mono': 'Ubuntu+Mono',
-  'Courier Pro': 'Courier+Pro',
+  'Courier Prime': 'Courier+Prime',
   'Noto Sans Mono': 'Noto+Sans+Mono',
   'JetBrains Mono': 'JetBrains+Mono',
   'Share Tech Mono': 'Share+Tech+Mono',
   'Fira Mono': 'Fira+Mono',
   'Fragment Mono': 'Fragment+Mono',
   'Syne Mono': 'Syne+Mono',
+  'DM Mono': 'DM+Mono',
+  'Nova Mono': 'Nova+Mono',
+  VT323: 'VT323',
   Sono: 'Sono',
 }
 
