@@ -1,7 +1,9 @@
+import { loadFont } from '../api/fonts'
 import { getUserOptions, saveUserOptions } from '../api/userOptions'
 import { Dictionaries, Quotes } from '../assets/files'
 import { isSignedIn } from '../authentication/Supabase'
 import { HistoryMode } from '../components/HistoricalStatisticsContainer'
+import { Fonts } from '../fonts'
 import { nextAttempt } from '../helpers/stateHelpers'
 import { defaultUserOptions, setUserOptions, userOptions } from '../StateManager'
 import { DatabaseUserOptions, DatabaseUserOptionsInput } from '../supabaseTypes'
@@ -45,6 +47,7 @@ export const getStoredUserOptions = async (): Promise<UserOptions> => {
 
   const fullOptions = createValidOptions(options)
   setTheme(fullOptions.theme)
+  await loadFont(fullOptions.font)
 
   return fullOptions
 }
@@ -151,6 +154,12 @@ export const setHistoryWordCounts = async (wordCounts: number[]) => {
 
 export const setHistoryDurations = async (durations: number[]) => {
   setUserOptions('historyDurations', durations)
+  await persistUserOptions()
+}
+
+export const setFont = async (font: Fonts) => {
+  setUserOptions('font', font)
+  await loadFont(font)
   await persistUserOptions()
 }
 

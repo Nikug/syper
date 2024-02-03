@@ -23,6 +23,7 @@ const defaultOptions: UserOptions = {
   historyDictionaries: [] as Dictionaries[],
   historyWordCounts: [] as number[],
   historyDurations: [] as number[],
+  font: 'Fragment Mono',
 } as const
 
 export const defaultUserOptions = (): UserOptions => ({ ...defaultOptions })

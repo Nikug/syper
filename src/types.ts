@@ -1,6 +1,7 @@
 import { Dictionaries, Quotes } from './assets/files'
 import { HistoryMode } from './components/HistoricalStatisticsContainer'
 import { ThemeKey } from './themes/themes'
+import { Fonts } from './fonts'
 
 export interface WordsJson {
   name: string
@@ -103,6 +104,7 @@ export interface UserOptions {
   historyDictionaries: Dictionaries[]
   historyWordCounts: number[]
   historyDurations: number[]
+  font: Fonts
 }
 
 export interface TestResultSum {
