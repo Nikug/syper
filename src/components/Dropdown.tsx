@@ -85,7 +85,7 @@ export const Dropdown = <K, V extends JSX.Element>(props: Props<K, V>) => {
       }
     }
 
-    return props.valueFormatter ? props.valueFormatter(options) : options.value
+    return props.valueFormatter ? props.valueFormatter(options) : options?.value
   }
 
   const formatOption = (option: Option<K, V>) => {

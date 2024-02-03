@@ -3,6 +3,7 @@ import { createStore } from 'solid-js/store'
 import { Attempt, AttemptStates, TextMode, TypingTest, UserOptions } from './types'
 import { DatabasePersonalBest } from './supabaseTypes'
 import { Dictionaries } from './assets/files'
+import { DefaultFont } from './constants'
 
 const defaultOptions: UserOptions = {
   theme: 'catppuccin-mocha',
@@ -23,7 +24,7 @@ const defaultOptions: UserOptions = {
   historyDictionaries: [] as Dictionaries[],
   historyWordCounts: [] as number[],
   historyDurations: [] as number[],
-  font: 'Fragment Mono',
+  font: DefaultFont,
 } as const
 
 export const defaultUserOptions = (): UserOptions => ({ ...defaultOptions })

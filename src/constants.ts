@@ -33,3 +33,5 @@ export const textModeOptions: TextModeOption[] = [
 export const PersonalBestCorrectnessLimit = 0.95
 
 export const TestTimeoutDuration = 30 * 1000
+
+export const DefaultFont = 'Fragment Mono'

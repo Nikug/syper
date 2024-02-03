@@ -20,5 +20,6 @@ export const loadFont = async (font: Fonts) => {
 
   const url = await getUrl(fonts[font])
   const newFont = new FontFace(font, url)
+  document.fonts.add(newFont)
   await newFont.load()
 }

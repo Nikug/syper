@@ -15,3 +15,5 @@ export const fonts = {
 }
 
 export type Fonts = keyof typeof fonts
+
+export const getFontList = (): Fonts[] => Object.keys(fonts) as Fonts[]

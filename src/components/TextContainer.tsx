@@ -1,6 +1,7 @@
 import { Component, For } from 'solid-js'
 import { Attempt, TypingTest } from '../types'
 import { Character } from './Character'
+import { userOptions } from '../StateManager'
 
 interface Props {
   quote: TypingTest
@@ -9,7 +10,10 @@ interface Props {
 
 export const TextContainer: Component<Props> = (props) => {
   return (
-    <div class="flex justify-center w-full font-mono leading-12">
+    <div
+      style={{ 'font-family': userOptions.font }}
+      class="flex justify-center w-full font-mono leading-12"
+    >
       <div class="flex flex-wrap justify-start">
         <For each={props.quote.words}>
           {(word) => (

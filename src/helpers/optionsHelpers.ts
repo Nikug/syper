@@ -3,6 +3,7 @@ import { getUserOptions, saveUserOptions } from '../api/userOptions'
 import { Dictionaries, Quotes } from '../assets/files'
 import { isSignedIn } from '../authentication/Supabase'
 import { HistoryMode } from '../components/HistoricalStatisticsContainer'
+import { DefaultFont } from '../constants'
 import { Fonts } from '../fonts'
 import { nextAttempt } from '../helpers/stateHelpers'
 import { defaultUserOptions, setUserOptions, userOptions } from '../StateManager'
@@ -24,6 +25,8 @@ const createValidOptions = (options: Partial<UserOptions> | null) => {
     defaultOptions[key] = Object.hasOwn(options, key) ? options[key] : defaultOptions[key]
   })
   /* eslint-enable*/
+
+  defaultOptions.font ||= DefaultFont
 
   return defaultOptions
 }

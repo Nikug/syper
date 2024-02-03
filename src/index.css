@@ -39,7 +39,7 @@
 }
 
 .h3 {
-  @apply text-2xl font-bold mb-4;
+  @apply text-2xl font-bold mb-8;
 }
 
 .h4 {
