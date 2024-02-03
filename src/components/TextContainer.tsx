@@ -12,7 +12,7 @@ export const TextContainer: Component<Props> = (props) => {
   return (
     <div
       style={{ 'font-family': userOptions.font }}
-      class="flex justify-center w-full font-mono leading-12"
+      class="flex justify-center w-full font-mono leading-16"
     >
       <div class="flex flex-wrap justify-start">
         <For each={props.quote.words}>

@@ -48,13 +48,13 @@ const TestPage: Component = () => {
                 handleBlur(animationState().writingState === AnimationStates.shown)
               )}
             >
-              <div class="h-48">
+              <div class="h-56">
                 <div class="h-8">
                   <QuoteInformation />
                 </div>
                 <div
                   class={clsx(
-                    'h-38 overflow-hidden',
+                    'h-46 overflow-hidden',
                     userOptions.useSmoothScrolling && 'scroll-smooth'
                   )}
                 >
