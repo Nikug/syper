@@ -173,9 +173,17 @@ export const mapOptionsToDatabase = (
 export const mapOptionsFromDatabase = (options: DatabaseUserOptions): UserOptions => {
   return {
     ...options,
-    historyTextModes: options.historyTextModes.split(',') as TextMode[],
-    historyDictionaries: options.historyDictionaries.split(',') as Dictionaries[],
-    historyWordCounts: options.historyWordCounts.split(',').map(Number),
-    historyDurations: options.historyDurations.split(',').map(Number),
+    historyTextModes: options.historyTextModes.split(',').filter((value) => value) as TextMode[],
+    historyDictionaries: options.historyDictionaries
+      .split(',')
+      .filter((value) => value) as Dictionaries[],
+    historyWordCounts: options.historyWordCounts
+      .split(',')
+      .filter((value) => value)
+      .map(Number),
+    historyDurations: options.historyDurations
+      .split(',')
+      .filter((value) => value)
+      .map(Number),
   }
 }
