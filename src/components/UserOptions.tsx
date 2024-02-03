@@ -48,11 +48,13 @@ export const UserOptions: Component = () => {
       </div>
       <h3 class="h3">Font</h3>
       <div class="mb-8 flex flex-col gap-8">
-        <Dropdown
-          key={userOptions.font}
-          options={getFontList().map((font) => ({ key: font, value: font }))}
-          onSelect={(option) => setFont(option.key)}
-        />
+        <div class="flex">
+          <Dropdown
+            key={userOptions.font}
+            options={getFontList().map((font) => ({ key: font, value: font }))}
+            onSelect={(option) => setFont(option.key)}
+          />
+        </div>
         <div style={{ 'font-family': userOptions.font }} class="font-mono text-4xl">
           This is what your text will look like
         </div>
