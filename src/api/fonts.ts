@@ -1,3 +1,4 @@
+import { addNotification } from '../NotificationsHandler'
 import { Fonts, fonts } from '../fonts'
 
 const getUrl = async (font: string) => {
@@ -6,6 +7,11 @@ const getUrl = async (font: string) => {
   const sources = [...css.matchAll(/url\(.*\)/g)]
 
   if (sources.length === 0) {
+    addNotification({
+      type: 'error',
+      content: `Failed to get font: ${font}.`,
+    })
+
     throw 'Could not find src url in font css'
   }
 

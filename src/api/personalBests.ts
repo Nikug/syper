@@ -1,3 +1,4 @@
+import { addNotification } from '../NotificationsHandler'
 import { getUserId, supabase } from '../authentication/Supabase'
 import { SupabaseTables } from '../authentication/constants'
 import { DatabasePersonalBest, DatabasePersonalBestInput } from '../supabaseTypes'
@@ -15,6 +16,13 @@ export const getPersonalBests = async (): Promise<DatabasePersonalBest[]> => {
     return result.data
   }
 
+  if (result.error) {
+    addNotification({
+      type: 'error',
+      content: 'Failed to get personal bests.',
+    })
+  }
+
   return []
 }
 
@@ -26,6 +34,13 @@ export const insertPersonalBest = async (
     .insert(personalBest)
     .select<string, DatabasePersonalBest>()
     .single()
+
+  if (result.error) {
+    addNotification({
+      type: 'error',
+      content: 'Failed to save personal best.',
+    })
+  }
 
   return result.data
 }
@@ -41,6 +56,13 @@ export const updatePersonalBest = async (
     .lt('wordsPerMinute', personalBest.wordsPerMinute)
     .select<string, DatabasePersonalBest>()
     .single()
+
+  if (result.error) {
+    addNotification({
+      type: 'error',
+      content: 'Failed to update personal best.',
+    })
+  }
 
   return result.data
 }
