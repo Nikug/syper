@@ -13,6 +13,7 @@ import { LabeledValue } from './LabeledValue'
 import { WordWithWpm } from './WordWithWpm'
 import { WpmChart } from './WpmChart'
 import { PersonalBestCorrectnessLimit } from '../constants'
+import { NavigationHelp } from './NavigationHelp'
 
 interface Props {
   typingTest: TypingTest
@@ -79,6 +80,9 @@ export const StatisticsContainer: Component<Props> = (props) => {
         <div class="flex flex-wrap gap-x-4 gap-y-4 w-full paper p-4">
           <For each={props.attempt.measurements.words}>{(word) => <WordWithWpm word={word} />}</For>
         </div>
+      </div>
+      <div class="my-8">
+        <NavigationHelp />
       </div>
     </div>
   )
