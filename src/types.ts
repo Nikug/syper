@@ -4,11 +4,13 @@ import { ThemeKey } from './themes/themes'
 import { Fonts } from './fonts'
 
 export interface WordsJson {
+  id: string
   name: string
   words: string[]
 }
 
 export interface QuotesJson {
+  id: string
   language: string
   groups: number[][]
   quotes: Quote[]

@@ -44,7 +44,8 @@ export const getDictionary = async (key: Dictionaries): Promise<WordsJson> => {
     file = dictionaries['english-200']
   }
 
-  return await file.import()
+  const json = await file.import()
+  return { id: key, name: json.name, words: json.words }
 }
 
 export const getQuotes = async (key: Quotes): Promise<QuotesJson> => {
@@ -53,8 +54,10 @@ export const getQuotes = async (key: Quotes): Promise<QuotesJson> => {
     file = quotes.quotes
   }
 
-  return await file.import()
+  const json = await file.import()
+  return { id: key, language: json.language, quotes: json.quotes, groups: json.groups }
 }
 
-export const getDictionaryName = (key: Dictionaries) => dictionaries[key].name
+export const getDictionaryName = (key: Dictionaries | undefined) =>
+  key ? dictionaries[key]?.name ?? '' : ''
 export const getQuotesName = (key: Quotes) => quotes[key].name

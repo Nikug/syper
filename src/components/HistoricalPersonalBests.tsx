@@ -4,6 +4,7 @@ import { DatabasePersonalBest } from '../supabaseTypes'
 import { textModeOptions } from '../constants'
 import { HistoricalPersonalBestContainer } from './HistoricalPersonalBestContainer'
 import { getFormattedDuration } from '../helpers/mathHelpers'
+import { Dictionaries, getDictionaryName } from '../assets/files'
 
 export const HistoricalPersonalBests: Component = () => {
   const getBestPersonalBest = () =>
@@ -26,7 +27,7 @@ export const HistoricalPersonalBests: Component = () => {
         <h4 class="text-xl font-bold">Best:</h4>
         <p>{getBestPersonalBest()?.wordsPerMinute.toFixed(2)} wpm</p>
         <p>Mode: {getTextMode(getBestPersonalBest()?.textMode)}</p>
-        <p>Dictionary: {getBestPersonalBest()?.source}</p>
+        <p>Dictionary: {getDictionaryName(getBestPersonalBest()?.source as Dictionaries)}</p>
         <Show when={getBestPersonalBest()?.words}>
           <p>Words: {getBestPersonalBest()?.words}</p>
         </Show>

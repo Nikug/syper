@@ -22,7 +22,7 @@ export const HistoricalPersonalBestContainer: Component = () => {
     return personalBests.filter(
       (best) =>
         best.textMode === userOptions.historyPersonalBestMode &&
-        best.source === dictionaries[userOptions.historyPersonalBestDictionary].name
+        best.source === userOptions.historyPersonalBestDictionary
     )
   }
   return (

@@ -36,7 +36,7 @@ const getText = async (): Promise<Quote> => {
     const text = generateText(userOptions.wordCount, words)
     return {
       id: 0,
-      source: words.name,
+      source: words.id,
       text: text,
       length: text.length,
     }
@@ -47,7 +47,7 @@ const getText = async (): Promise<Quote> => {
     const text = generateText(TimedTestWords, words)
     return {
       id: 0,
-      source: words.name,
+      source: words.id,
       text: text,
       length: text.length,
     }

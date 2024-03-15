@@ -15,7 +15,7 @@ import { Dropdown } from './Dropdown'
 import { HistoryChart } from './HistoryChart'
 import { LabeledValue } from './LabeledValue'
 import { TimeDurations, WordCounts, textModeOptions } from '../constants'
-import { Dictionaries, dictionaries, getDictionaryName } from '../assets/files'
+import { Dictionaries, dictionaries } from '../assets/files'
 import { Button } from './Button'
 
 const durations = {
@@ -64,9 +64,7 @@ export const HistoricalStatisticsContainer: Component = () => {
       results = results?.filter(
         (test) =>
           test.textMode === 'quote' ||
-          userOptions.historyDictionaries.some(
-            (dictionary) => getDictionaryName(dictionary) === test.source
-          )
+          userOptions.historyDictionaries.some((dictionary) => dictionary === test.source)
       )
     }
 

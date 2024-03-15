@@ -14,6 +14,8 @@ import { WordWithWpm } from './WordWithWpm'
 import { WpmChart } from './WpmChart'
 import { PersonalBestCorrectnessLimit } from '../constants'
 import { NavigationHelp } from './NavigationHelp'
+import { isQuoteMode } from '../helpers/optionsHelpers'
+import { Dictionaries, getDictionaryName } from '../assets/files'
 
 interface Props {
   typingTest: TypingTest
@@ -27,7 +29,11 @@ export const StatisticsContainer: Component<Props> = (props) => {
     <div class="h-full pt-8 pb-32">
       <div class="mt-auto mb-8 text-center">
         <span>source:</span>
-        <h2 class="text-4xl font-bold mb-2">{typingTest().source}</h2>
+        <h2 class="text-4xl font-bold mb-2">
+          {isQuoteMode()
+            ? typingTest().source
+            : getDictionaryName(typingTest().source as Dictionaries)}
+        </h2>
         <span class="mr-4">
           Words: <span class="font-bold">{props.typingTest.words.length}</span>
         </span>
