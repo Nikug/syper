@@ -44,3 +44,17 @@ jobs:
       - name: Deploy to Github Pages
         id: deployment
         uses: actions/deploy-pages@v1
+
+  update_release:
+    name: Update release in Supabase
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - name: Send update request
+        run: |
+          curl -X POST \
+            -L "${{ vars.VITE_SUPABASE_URL }}/rest/v1/Releases" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_API_KEY }}" \
+            -H "apiKey: ${{ secrets.SUPABASE_SERVICE_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d "{\"version\":\"${{ github.sha }}\"}"
