@@ -51,10 +51,12 @@ jobs:
     needs: deploy
     steps:
       - name: Send update request
+        env:
+          SUPABASE_SERVICE_API_KEY: ${{ secrets.SUPABASE_SERVICE_API_KEY }}
         run: |
           curl -X POST \
             -L "${{ vars.VITE_SUPABASE_URL }}/rest/v1/Releases" \
-            -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_API_KEY }}" \
-            -H "apiKey: ${{ secrets.SUPABASE_SERVICE_API_KEY }}" \
+            -H "Authorization: Bearer $SUPABASE_SERVICE_API_KEY" \
+            -H "apiKey: $SUPABASE_SERVICE_API_KEY" \
             -H "Content-Type: application/json" \
             -d "{\"version\":\"${{ github.sha }}\"}"
