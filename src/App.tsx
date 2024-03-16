@@ -12,6 +12,7 @@ import { Routes as AppRoutes } from './helpers/routeHelpers'
 import { BlurWhenTyping } from './components/BlurWhenTyping'
 import { Title } from '@solidjs/meta'
 import { Notifications } from './components/Notifications'
+import { handleVersionCheck } from './helpers/versionHelpers'
 
 const TestPage = lazy(() => import('./components/TestPage'))
 const OptionsPage = lazy(() => import('./components/OptionsPage'))
@@ -29,6 +30,9 @@ const App: Component = () => {
     // Setup user options from Supabase if logged in
     await handleInitialSetupAfterSignIn()
     setShowLoadingScreen(false)
+
+    // Check if version is outdated
+    await handleVersionCheck()
   })
 
   return (
