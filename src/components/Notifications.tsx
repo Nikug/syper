@@ -4,7 +4,7 @@ import { Notification } from './Notification'
 
 export const Notifications: Component = () => {
   return (
-    <div class="fixed top-24 right-8 w-72 flex flex-col justify-start items-start gap-4">
+    <div class="fixed top-24 right-8 w-72 flex flex-col justify-start items-start gap-4 z-10">
       <For each={notifications.notifications}>
         {(notification) => <Notification notification={notification} />}
       </For>
