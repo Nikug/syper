@@ -1,13 +1,26 @@
 import { addNotification } from '../NotificationsHandler'
 import { getLatestVersion } from '../api/releases'
 
-export const handleVersionCheck = async () => {
+export const setupVersionCheck = () => {
+  addEventListener('focus', handleVersionCheck)
+}
+
+export const teardownVersionCheck = () => {
+  removeEventListener('focus', handleVersionCheck)
+}
+
+export const initialVersionCheck = async () => {
+  const version = await handleVersionCheck()
+  if (version) {
+    console.log('App version:', version)
+  }
+}
+
+const handleVersionCheck = async () => {
   const version = import.meta.env.VITE_APP_VERSION
   if (!version) {
     return
   }
-
-  console.log('App version:', version)
 
   const currentVersion = await getLatestVersion()
   if (!currentVersion) {
@@ -20,4 +33,6 @@ export const handleVersionCheck = async () => {
       content: 'A new version is available. Please reload the page.',
     })
   }
+
+  return version
 }

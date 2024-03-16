@@ -1,4 +1,4 @@
-import { Component, onMount, lazy, Show } from 'solid-js'
+import { Component, onMount, lazy, Show, onCleanup } from 'solid-js'
 import { Routes, Route } from '@solidjs/router'
 import { setupAuth } from './authentication/Supabase'
 import { setUserOptions } from './StateManager'
@@ -12,7 +12,11 @@ import { Routes as AppRoutes } from './helpers/routeHelpers'
 import { BlurWhenTyping } from './components/BlurWhenTyping'
 import { Title } from '@solidjs/meta'
 import { Notifications } from './components/Notifications'
-import { handleVersionCheck } from './helpers/versionHelpers'
+import {
+  initialVersionCheck,
+  setupVersionCheck,
+  teardownVersionCheck,
+} from './helpers/versionHelpers'
 
 const TestPage = lazy(() => import('./components/TestPage'))
 const OptionsPage = lazy(() => import('./components/OptionsPage'))
@@ -31,8 +35,13 @@ const App: Component = () => {
     await handleInitialSetupAfterSignIn()
     setShowLoadingScreen(false)
 
-    // Check if version is outdated
-    await handleVersionCheck()
+    // Check if version is outdated on window focus
+    initialVersionCheck()
+    setupVersionCheck()
+  })
+
+  onCleanup(() => {
+    teardownVersionCheck()
   })
 
   return (
