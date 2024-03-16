@@ -36,7 +36,7 @@ const TestPage: Component = () => {
       />
       <div class="w-full h-full">
         <div class="grid mx-auto max-w-7xl px-16 grid-rows-5 min-h-screen justify-items-stretch items-center">
-          <div class="row-span-1">
+          <div class="row-span-1 self-start">
             <BlurWhenTyping>
               <Header showOptions={true} />
             </BlurWhenTyping>
@@ -54,7 +54,7 @@ const TestPage: Component = () => {
                 </div>
                 <div
                   class={clsx(
-                    'h-46 overflow-hidden',
+                    'max-h-46 overflow-hidden',
                     userOptions.useSmoothScrolling && 'scroll-smooth'
                   )}
                 >
