@@ -1,5 +1,5 @@
 import { addNotification } from '../NotificationsHandler'
-import { getLatestCommit } from '../api/github'
+import { getLatestVersion } from '../api/releases'
 
 export const handleVersionCheck = async () => {
   const version = import.meta.env.VITE_APP_VERSION
@@ -9,7 +9,7 @@ export const handleVersionCheck = async () => {
 
   console.log('App version:', version)
 
-  const currentVersion = await getLatestCommit()
+  const currentVersion = await getLatestVersion()
   if (!currentVersion) {
     return
   }

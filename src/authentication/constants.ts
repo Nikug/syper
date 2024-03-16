@@ -7,4 +7,5 @@ export const SupabaseTables = {
   UserOptions: 'UserOptions',
   UserTestResults: 'UserTestResults',
   UserPersonalBests: 'UserPersonalBests',
+  Releases: 'Releases',
 }
