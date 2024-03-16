@@ -7,6 +7,8 @@ export const handleVersionCheck = async () => {
     return
   }
 
+  console.log('App version:', version)
+
   const currentVersion = await getLatestCommit()
   if (!currentVersion) {
     return
