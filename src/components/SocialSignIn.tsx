@@ -1,7 +1,7 @@
 import { Component } from 'solid-js'
 import { Button } from './Button'
 import { signInWithProvider } from '../authentication/Supabase'
-import { isCurrentThemeDark } from '../themes/ThemeManager'
+// import { isCurrentThemeDark } from '../themes/ThemeManager'
 
 export const SocialSignIn: Component = () => {
   const handleGoogleSignIn = async () => {
@@ -26,11 +26,21 @@ export const SocialSignIn: Component = () => {
             </div>
           }
         />
-        <img
+        <Button
+          class="w-full"
+          onClick={handleGoogleSignIn}
+          text={
+            <div class="flex gap-4 items-center">
+              <div class="i-ri-google-fill h-5 w-5" />
+              Sign in with Google
+            </div>
+          }
+        />
+        {/*<img
           src={isCurrentThemeDark() ? '/Google sign in dark.png' : '/Google sign in.png'}
           class="w-52 cursor-pointer"
           onClick={handleGoogleSignIn}
-        />
+        />*/}
       </div>
     </div>
   )
