@@ -35,7 +35,7 @@ export const themes = {
     variables: () => ({
       text: Color.rgb(205, 214, 244), // Text default color
       primary: Color.rgb(203, 166, 247), // Correct character
-      secondary: Color.rgb(147, 153, 178), // Wpm chart secondary line
+      secondary: Color.rgb(147, 153, 178), // Wpm chart secondary line, not selected button
       danger: Color.rgb(243, 139, 168), // Incorrect character
       highlight: Color.rgb(235, 160, 172), // Button highlight
       accent: Color.rgb(137, 180, 250), // Used only in progress meter gradient
@@ -162,6 +162,36 @@ export const themes = {
       surface1: Color.rgb('#073642').darken(0.1),
       surface0: Color.rgb('#073642'),
       base: Color('#002b36'),
+    }),
+  },
+  ocean: {
+    name: 'Ocean',
+    dark: true,
+    variables: () => ({
+      text: Color('#0ea5e9'),
+      primary: Color('#38bdf8'),
+      secondary: Color.rgb(147, 153, 178),
+      danger: Color('#eab308'),
+      highlight: Color('#eab308'),
+      accent: Color('#7dd3fc'),
+      surface1: Color('#075985').darken(0.1),
+      surface0: Color('#0c4a6e').darken(0.1),
+      base: Color('#082f49'),
+    }),
+  },
+  deepOcean: {
+    name: 'Deep ocean',
+    dark: true,
+    variables: () => ({
+      text: Color('#146ead'),
+      primary: Color('#2196f3'),
+      secondary: Color.rgb(147, 153, 178),
+      danger: Color('#ca8a04'),
+      highlight: Color('#eab308'),
+      accent: Color('#0284c7'),
+      surface1: Color.hsl(232, 24, 20),
+      surface0: Color.hsl(232, 24, 14),
+      base: Color.hsl(234, 36, 10),
     }),
   },
 }
