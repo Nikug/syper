@@ -81,11 +81,9 @@ export const StatisticsContainer: Component<Props> = (props) => {
       <div class="mt-4">
         <WpmChart measurements={props.attempt.measurements} state={animationState().resultsState} />
       </div>
-      <h2 class="h2 mt-32 text-center">Words per minute by words</h2>
-      <div class="mt-4">
-        <div class="flex flex-wrap gap-x-4 gap-y-4 w-full paper p-4">
-          <For each={props.attempt.measurements.words}>{(word) => <WordWithWpm word={word} />}</For>
-        </div>
+      <h2 class="h2 pb-8 mt-32 text-center">Words per minute by words</h2>
+      <div class="flex flex-wrap gap-x-4 gap-y-4 w-full paper p-4">
+        <For each={props.attempt.measurements.words}>{(word) => <WordWithWpm word={word} />}</For>
       </div>
       <div class="my-8">
         <NavigationHelp />
