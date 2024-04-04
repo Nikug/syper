@@ -14,7 +14,7 @@ export const SocialSignIn: Component = () => {
 
   return (
     <div class="max-w-sm">
-      <h3 class="text-xl font-bold mb-8">Sign in with a provider</h3>
+      <h3 class="h3 pb-8">Sign in with a provider</h3>
       <div class="flex flex-col gap-8">
         <Button
           class="w-full"

@@ -29,7 +29,7 @@ export const StatisticsContainer: Component<Props> = (props) => {
     <div class="h-full pt-8 pb-32">
       <div class="mt-auto mb-8 text-center">
         <span>source:</span>
-        <h2 class="text-4xl font-bold mb-2">
+        <h2 class="h2">
           {isQuoteMode()
             ? typingTest().source
             : getDictionaryName(typingTest().source as Dictionaries)}
@@ -81,7 +81,7 @@ export const StatisticsContainer: Component<Props> = (props) => {
       <div class="mt-4">
         <WpmChart measurements={props.attempt.measurements} state={animationState().resultsState} />
       </div>
-      <h2 class="font-bold text-2xl mt-8 text-center">Words per minute by words</h2>
+      <h2 class="h2 mt-32 text-center">Words per minute by words</h2>
       <div class="mt-4">
         <div class="flex flex-wrap gap-x-4 gap-y-4 w-full paper p-4">
           <For each={props.attempt.measurements.words}>{(word) => <WordWithWpm word={word} />}</For>

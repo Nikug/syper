@@ -33,7 +33,7 @@ const ProfilePage: Component = () => {
           </Show>
           <Show when={isSignedIn()}>
             <div class="mb-8 bg-theme-surface0 p-8 rounded-lg">
-              <h3 class="text-xl font-bold mb-4">Signed in: {getUserName()}</h3>
+              <h3 class="h3">Signed in: {getUserName()}</h3>
               <Button onClick={handleSignOut} text="Sign out" />
             </div>
           </Show>

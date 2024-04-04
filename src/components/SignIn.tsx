@@ -41,7 +41,7 @@ export const SignIn: Component = () => {
 
   return (
     <div class="max-w-sm">
-      <h3 class="text-xl font-bold mb-8">Sign in to save your results</h3>
+      <h3 class="h3">Sign in to save your results</h3>
       <form
         class="pb-4"
         onSubmit={(e) => {

@@ -5,7 +5,7 @@ import { Routes } from '../../helpers/routeHelpers'
 export const HowToUse: Component = () => {
   return (
     <div class="w-full">
-      <h2 class="text-3xl font-bold mb-8">How to use</h2>
+      <h2 class="h2">How to use</h2>
       <p class="mb-4">
         To complete your first typing test, go to the{' '}
         {
@@ -28,7 +28,7 @@ export const HowToUse: Component = () => {
         </A>
         .
       </p>
-      <h2 class="text-3xl font-bold mb-8">Definitions</h2>
+      <h2 class="h2">Definitions</h2>
       <p class="font-bold">Word per minute (WPM):</p>
       <p class="mb-4">
         Standardized measure of typing speed. Calculated by dividing the number of typed words by

@@ -125,7 +125,7 @@ export const HistoricalStatisticsContainer: Component = () => {
 
   return (
     <div class="w-full mt-16 mb-32">
-      <h3 class="text-3xl font-bold text-center mb-4">History</h3>
+      <h3 class="h3 text-center mb-4">History</h3>
       <div class="flex justify-center items-center mb-4 gap-4 flex-wrap">
         /
         <Dropdown
