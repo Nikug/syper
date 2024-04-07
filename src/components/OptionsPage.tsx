@@ -9,7 +9,7 @@ const OptionsPage: Component = () => {
       <Title>Syper / Options</Title>
       <Meta name="description" content="Customize your Syper typing experience." />
       <PageContainer>
-        <div class="mb-8 bg-theme-surface0 p-8 rounded-lg">
+        <div class="bg-theme-surface0 md:p-8 p-2 rounded-lg">
           <UserOptions />
         </div>
       </PageContainer>

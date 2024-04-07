@@ -19,7 +19,7 @@ export const UserOptions: Component = () => {
   return (
     <div class="flex flex-col">
       <h3 class="h3">Options</h3>
-      <div class="grid grid-cols-3 gap-4 mb-16">
+      <div class="grid md:grid-cols-3 grid-cols-1 gap-4 mb-16">
         <CheckButton
           value={userOptions.showProgressBar}
           text="Show progress bar"
@@ -60,7 +60,7 @@ export const UserOptions: Component = () => {
         </div>
       </div>
       <h3 class="h3">Theme</h3>
-      <div class="grid grid-cols-3 gap-4 mb-16">
+      <div class="grid md:grid-cols-3 grid-cols-1 gap-4">
         <For each={getThemeList()}>
           {(theme) => (
             <CheckButton

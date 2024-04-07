@@ -24,8 +24,8 @@ const activeClasses = `
 
 export const Footer: Component = () => {
   return (
-    <div class="fixed h-10 inset-x-0 bottom-0 bg-theme-base flex justify-center items-center">
-      <div class="max-w-7xl w-7xl px-16 flex justify-center items-center text-lg">
+    <div class="fixed min-h-10 inset-x-0 bottom-0 bg-theme-base flex justify-center items-center">
+      <div class="max-w-7xl w-7xl md:px-16 flex justify-center items-center text-lg flex-wrap">
         /
         <A href={Routes.test} class={clsx(buttonClasses, { [activeClasses]: isTestPage() })}>
           <div class="i-ri-keyboard-box-line w-6 h-6 mr-2" />

@@ -35,7 +35,7 @@ const TestPage: Component = () => {
         content="Syper: a solid typing experience. Test your typing speed and see your improvements over time in this minimalistic and customizable typing game."
       />
       <div class="w-full h-full">
-        <div class="grid mx-auto max-w-7xl px-16 grid-rows-5 min-h-screen justify-items-stretch items-center">
+        <div class="grid mx-auto max-w-7xl md:px-16 px-2 grid-rows-5 min-h-screen justify-items-stretch items-center">
           <div class="row-span-1 self-start">
             <BlurWhenTyping>
               <Header showOptions={true} />

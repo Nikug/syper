@@ -85,6 +85,8 @@ export default defineConfig({
         '--custom-gradient-to': color(rgb, alpha),
       }),
     ],
+    // Override Windicss h4 type of names
+    [/^h(\d+)$/, () => ({ height: 'auto' })],
   ],
 })
 

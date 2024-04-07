@@ -58,7 +58,7 @@ export const StatisticsContainer: Component<Props> = (props) => {
           </Show>
         </div>
       </Show>
-      <div class="w-full flex justify-evenly mt-12">
+      <div class="w-full flex justify-evenly mt-12 max-sm:flex-col max-sm:gap-4">
         <LabeledValue value={getWpm()?.toFixed(1)} label="Words per minute" />
         <LabeledValue
           value={getFormattedDuration(getDuration(props.attempt.measurements) ?? 0)}

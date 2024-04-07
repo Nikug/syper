@@ -22,11 +22,11 @@ const ProfilePage: Component = () => {
         name="description"
         content="Sign in to save your results. View how many typing tests you have completed and how your typing speed has changed over time."
       />
-      <div class="max-w-7xl px-16 mx-auto mb-32">
+      <div class="max-w-7xl md:px-16 px-2 mx-auto mb-32">
         <Header />
         <div class="mt-16">
           <Show when={!isSignedIn()}>
-            <div class="mb-8 bg-theme-surface0 rounded-lg p-8 flex justify-center gap-16">
+            <div class="mb-8 bg-theme-surface0 rounded-lg p-8 flex justify-center gap-16 max-sm:flex-col max-sm:items-center">
               <SignIn />
               <SocialSignIn />
             </div>

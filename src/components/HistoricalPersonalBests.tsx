@@ -24,7 +24,7 @@ export const HistoricalPersonalBests: Component = () => {
       <h3 class="h3 text-center">Personal bests</h3>
       <div class="flex gap-4 items-center mb-8">
         <div class="i-ri-vip-crown-line w-6 h-6 -mr-2" />
-        <h4 class="h4">Best:</h4>
+        <p class="font-bold text-xl">Best:</p>
         <p>{getBestPersonalBest()?.wordsPerMinute.toFixed(2)} wpm</p>
         <p>Mode: {getTextMode(getBestPersonalBest()?.textMode)}</p>
         <p>Dictionary: {getDictionaryName(getBestPersonalBest()?.source as Dictionaries)}</p>

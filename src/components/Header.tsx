@@ -34,7 +34,7 @@ export const Header: Component<Props> = (props) => {
       <Show when={props.showOptions}>
         <div class="h-full w-full flex justify-start">
           <div class="flex flex-col">
-            <div class="flex items-center gap-x-2">
+            <div class="flex items-center gap-x-2 flex-wrap">
               /
               <Dropdown
                 key={userOptions.theme}

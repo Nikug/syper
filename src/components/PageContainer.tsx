@@ -7,9 +7,9 @@ interface Props {
 
 export const PageContainer: Component<Props> = (props) => {
   return (
-    <div class="max-w-7xl px-16 mx-auto">
+    <div class="max-w-7xl md:px-16 px-2 mx-auto">
       <Header />
-      <div class="mt-16">{props.children}</div>
+      <div class="mt-16 mb-32">{props.children}</div>
     </div>
   )
 }

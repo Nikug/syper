@@ -47,7 +47,7 @@ const App: Component = () => {
   return (
     <>
       <Title>Syper_</Title>
-      <div class="relative w-full font-sans overflow-x-hidden min-h-screen bg-theme-base text-theme-text">
+      <div class="relative w-screen font-sans overflow-x-hidden min-h-screen bg-theme-base text-theme-text">
         <SyncingIndicator />
         <Notifications />
         <Show when={!showLoadingScreen()} fallback={<LoadingScreen />}>

@@ -125,7 +125,7 @@ export const HistoricalStatisticsContainer: Component = () => {
 
   return (
     <div class="w-full mt-16 mb-32">
-      <h3 class="h3 text-center mb-4">History</h3>
+      <h3 class="h3 text-center">History</h3>
       <div class="flex justify-center items-center mb-4 gap-4 flex-wrap">
         /
         <Dropdown
@@ -168,10 +168,10 @@ export const HistoricalStatisticsContainer: Component = () => {
         />
         /
       </div>
-      <div class="flex justify-end">
+      <div class="flex md:justify-end justify-center">
         <Button onClick={clearFilters} text="Clear filters" />
       </div>
-      <div class="w-full flex justify-center mt-16 mb-8 gap-16">
+      <div class="w-full flex justify-center mt-16 mb-8 gap-16 flex-wrap">
         <LabeledValue value={summedResult().tests} label="Completed tests" />
         <LabeledValue value={summedResult().characters} label="Total characters" />
         <LabeledValue value={summedResult().words} label="Total words" />
@@ -180,7 +180,7 @@ export const HistoricalStatisticsContainer: Component = () => {
           label="Total duration"
         />
       </div>
-      <div class="w-full flex justify-center mb-8 gap-16">
+      <div class="w-full flex justify-center mb-8 gap-16 flex-wrap">
         <LabeledValue value={summedResult().wordsPerMinute.toFixed(2)} label="Average Wpm" />
         <LabeledValue
           value={`${(summedResult().accuracy * 100).toFixed(2)}%`}
