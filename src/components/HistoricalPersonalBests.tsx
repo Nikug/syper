@@ -3,7 +3,7 @@ import { personalBests } from '../StateManager'
 import { DatabasePersonalBest } from '../supabaseTypes'
 import { textModeOptions } from '../constants'
 import { HistoricalPersonalBestContainer } from './HistoricalPersonalBestContainer'
-import { getFormattedDuration } from '../helpers/mathHelpers'
+import { getFormattedDuration } from '../helpers/dateHelpers'
 import { Dictionaries, getDictionaryName } from '../assets/files'
 
 export const HistoricalPersonalBests: Component = () => {

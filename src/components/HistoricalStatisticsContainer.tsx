@@ -1,7 +1,7 @@
 import { endOfDay, startOfDay, subDays, subYears } from 'date-fns'
 import { Component, createMemo, createResource, createSignal, Show } from 'solid-js'
 import { getTestResults } from '../api/testResults'
-import { getFormattedDuration } from '../helpers/mathHelpers'
+import { getFormattedDuration } from '../helpers/dateHelpers'
 import {
   setHistoryDictionaries,
   setHistoryDurations,

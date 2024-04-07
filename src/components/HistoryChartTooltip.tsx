@@ -1,9 +1,8 @@
 import { Component } from 'solid-js'
 import { W } from '../apexChartTypes'
 import { DatabaseTestResult } from '../supabaseTypes'
-import { getFormattedDuration } from '../helpers/mathHelpers'
 import { textModeOptions } from '../constants'
-import { toDateTimeString } from '../helpers/dateHelpers'
+import { toDateTimeString, getFormattedDuration } from '../helpers/dateHelpers'
 
 interface Props {
   series: number[][]

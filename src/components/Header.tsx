@@ -3,7 +3,7 @@ import { clsx } from 'clsx'
 import { Component, Show } from 'solid-js'
 import { Dictionaries, dictionaries } from '../assets/files'
 import { TimeDurations, WordCounts, textModeOptions } from '../constants'
-import { getShortFormattedDuration } from '../helpers/mathHelpers'
+import { getShortFormattedDuration } from '../helpers/dateHelpers'
 import {
   isTimeMode,
   isWordsMode,

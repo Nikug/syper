@@ -1,12 +1,7 @@
 import { Component, For, Show } from 'solid-js'
 import { animationState } from '../AnimationManager'
-import {
-  getAccuracy,
-  getCorrectness,
-  getDuration,
-  getFormattedDuration,
-  getWordsPerMinute,
-} from '../helpers/mathHelpers'
+import { getAccuracy, getCorrectness, getDuration, getWordsPerMinute } from '../helpers/mathHelpers'
+import { getFormattedDuration } from '../helpers/dateHelpers'
 import { typingTest } from '../StateManager'
 import { Attempt, TypingTest } from '../types'
 import { LabeledValue } from './LabeledValue'

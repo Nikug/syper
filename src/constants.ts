@@ -1,4 +1,4 @@
-import { getShortFormattedDuration } from './helpers/mathHelpers'
+import { getShortFormattedDuration } from './helpers/dateHelpers'
 import { TextMode } from './types'
 
 export const CharactersPerWord = 5

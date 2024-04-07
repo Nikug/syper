@@ -1,5 +1,5 @@
 import { Component, Show } from 'solid-js'
-import { getShortFormattedDuration } from '../helpers/mathHelpers'
+import { getShortFormattedDuration } from '../helpers/dateHelpers'
 import { isQuoteMode, isTimeMode } from '../helpers/optionsHelpers'
 import { attempt, typingTest, userOptions } from '../StateManager'
 import { testStarted } from '../helpers/stateHelpers'
