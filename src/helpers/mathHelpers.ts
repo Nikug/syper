@@ -41,6 +41,8 @@ interface Vector2 {
 export const calculateTrendLine = (points: Vector2[]): Vector2[] => {
   if (points.length < 2) return []
 
+  points = points.toSorted((a, b) => a.x - b.x)
+
   let xSum = 0
   let ySum = 0
   let xySum = 0
@@ -55,9 +57,9 @@ export const calculateTrendLine = (points: Vector2[]): Vector2[] => {
   }
 
   const slope = (count * xySum - xSum * ySum) / (count * xxSum - xSum * xSum)
-  const offset = (ySum - slope * xSum) / count
-  const startPoint = { x: points[0].x, y: points[0].x * slope + offset }
-  const endPoint = { x: points[count - 1].x, y: points[count - 1].x * slope + offset }
+  const intercept = (ySum - slope * xSum) / count
+  const startPoint = { x: points[0].x, y: points[0].x * slope + intercept }
+  const endPoint = { x: points[count - 1].x, y: points[count - 1].x * slope + intercept }
   return [startPoint, endPoint]
 }
 
