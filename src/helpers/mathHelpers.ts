@@ -1,3 +1,4 @@
+import { Vector2 } from '../apexChartTypes'
 import { CharactersPerWord } from '../constants'
 import { Attempt, Measurements, TypingTest } from '../types'
 import { numberOfMatchingItems } from '../util'
@@ -33,12 +34,8 @@ export const getAccuracy = (test: TypingTest, attempt: Attempt): number => {
   return numberOfMatchingItems(test.text, attempt.finalText) / attempt.allText.length
 }
 
-interface Vector2 {
-  x: number
-  y: number
-}
 // Source: https://math.stackexchange.com/questions/204020/what-is-the-equation-used-to-calculate-a-linear-trendline
-export const calculateTrendLine = (points: Vector2[]): Vector2[] => {
+export const calculateTrendLine = (points: Vector2<number>[]): Vector2<number>[] => {
   if (points.length < 2) return []
 
   let xSum = 0
