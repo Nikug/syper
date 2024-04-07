@@ -9,7 +9,7 @@
     "build": "vite build",
     "serve": "vite preview",
     "test": "uvu -r tsm tests",
-    "predeploy": "yarn run build",
+    "predeploy": "yarn build",
     "deploy": "gh-pages -d dist",
     "tsc": "tsc -p tsconfig.json --noEmit",
     "watch": "tsc -p tsconfig.json --noEmit --watch"
