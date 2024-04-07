@@ -9,12 +9,15 @@ interface Props {
 }
 
 export const TextContainer: Component<Props> = (props) => {
+  let hiddenInput!: HTMLInputElement
+
   return (
     <div
       style={{ 'font-family': userOptions.font }}
       class="flex justify-center w-full font-mono leading-16"
     >
-      <div class="flex flex-wrap justify-start">
+      <div class="flex flex-wrap justify-start relative" onClick={() => hiddenInput.focus()}>
+        <input ref={hiddenInput} class="hidden" />
         <For each={props.quote.words}>
           {(word) => (
             <div>
