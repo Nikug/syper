@@ -40,6 +40,7 @@ export const getTestResults = async (
     .eq('userId', userId)
     .gte('date', startDate.toISOString())
     .lte('date', endDate.toISOString())
+    .order('date', { ascending: true })
 
   if (!result.error) {
     return result.data
