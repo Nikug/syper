@@ -17,7 +17,7 @@ export const TextContainer: Component<Props> = (props) => {
       class="flex justify-center w-full font-mono leading-16"
     >
       <div class="flex flex-wrap justify-start relative" onClick={() => hiddenInput.focus()}>
-        <input ref={hiddenInput} class="hidden" />
+        <input ref={hiddenInput} class="fixed w-0 h-0 opacity-0" />
         <For each={props.quote.words}>
           {(word) => (
             <div>
