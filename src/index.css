@@ -28,7 +28,7 @@ body {
 
 .border-button {
   @apply border-y-2 border-transparent transition-all cursor-pointer hover:border-theme-text hover:font-bold;
-
+}
 
 .link {
   @apply hover:underline text-theme-primary;
