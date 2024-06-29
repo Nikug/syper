@@ -62,7 +62,12 @@ const createOptions = (measurements: Measurements) => {
   options.series = [
     { name: 'Words per minute', data: wpmBetweenTimestamps, type: 'line' },
     { name: 'Total words per minute', data: wpmOverTime, type: 'line' },
-    { name: 'Errors', data: errors, type: 'scatter', color: getColor(userOptions.theme, 'danger') },
+    {
+      name: 'Errors',
+      data: errors,
+      type: 'column',
+      color: getColor(userOptions.theme, 'danger', 0.5),
+    },
   ]
   options.tooltip = {
     custom: (tooltipProps) => {
@@ -159,6 +164,11 @@ export const createDefaultChartOptions = (xTitle: string, yTitle: string): ApexO
         show: false,
       },
       fontFamily: 'inherit',
+    },
+    plotOptions: {
+      bar: {
+        columnWidth: 2,
+      },
     },
     grid: {
       position: 'back',
