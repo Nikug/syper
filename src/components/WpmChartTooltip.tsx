@@ -19,8 +19,12 @@ interface Props {
 export const WpmChartTooltip: Component<Props> = (props) => {
   const wpmSeries = () => props.series[0]
   const totalWpmSeries = () => props.series[1]
+  const errorSeries = () => props.series[2]
+
   const wpmPoint = () => wpmSeries()?.[props.dataPointIndex]
   const totalWpmPoint = () => totalWpmSeries()?.[props.dataPointIndex]
+  const errorPoint = () => errorSeries()?.[props.dataPointIndex]
+
   const showWpmSeries = () => wpmPoint() != null
   const showTotalWpmSeries = () => totalWpmPoint() != null
   const characterIndex = () =>
@@ -74,6 +78,12 @@ export const WpmChartTooltip: Component<Props> = (props) => {
           </p>
         </div>
       </Show>
+      <div class="flex gap-x-2 items-center">
+        <div class="bg-theme-danger rounded-full w-4 h-4" />
+        <p>
+          Errors: <span class="font-bold">{errorPoint() ?? 0}</span>
+        </p>
+      </div>
     </div>
   )
 }
