@@ -5,6 +5,7 @@ import {
   getAccuracy,
   getCorrectness,
   getWordsPerMinute,
+  mapErrorsToSeries,
   sampleSeries,
   smoothSeries,
   wordsPerMinute,
@@ -117,6 +118,23 @@ test('calculateTrendline - horizontal between 0 and 1', () => {
   assert.equal(calculateTrendLine(series), [
     { x: 0, y: 1 / 2.75 },
     { x: 9, y: 1 - 1 / 2.75 },
+  ])
+})
+
+test('mapErrorsToSeries', () => {
+  const series = Array.from({ length: 4 }, (_, index) => ({ x: (index + 1) * 5, y: 10 }))
+  const errors = new Map<number, number>()
+  errors.set(0, 1)
+  errors.set(2, 1)
+  errors.set(5, 2)
+  errors.set(7, 1)
+
+  const errorSeries = mapErrorsToSeries(errors, series.at(-1)!.x, 5)
+  assert.equal(errorSeries, [
+    { x: 5, y: 2 },
+    { x: 10, y: 3 },
+    { x: 15, y: null },
+    { x: 20, y: null },
   ])
 })
 

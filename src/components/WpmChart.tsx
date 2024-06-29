@@ -1,7 +1,7 @@
 import { Component, createEffect, createSignal, on } from 'solid-js'
 import ApexCharts, { ApexOptions } from 'apexcharts'
 import { AnimationState, AnimationStates, Measurements } from '../types'
-import { sampleSeries, wordsPerMinute } from '../helpers/mathHelpers'
+import { mapErrorsToSeries, sampleSeries, wordsPerMinute } from '../helpers/mathHelpers'
 import './WpmChart.css'
 import { userOptions } from '../StateManager'
 import { getColor } from '../themes/themeHelper'
@@ -57,10 +57,12 @@ const createOptions = (measurements: Measurements) => {
     ),
   }))
 
+  const errors = mapErrorsToSeries(measurements.errors, wpmOverTime.at(-1)!.x, CharactersPerWord)
   const options = createDefaultChartOptions('Characters written', 'Words per minute')
   options.series = [
     { name: 'Words per minute', data: wpmBetweenTimestamps, type: 'line' },
     { name: 'Total words per minute', data: wpmOverTime, type: 'line' },
+    { name: 'Errors', data: errors, type: 'scatter', color: getColor(userOptions.theme, 'danger') },
   ]
   options.tooltip = {
     custom: (tooltipProps) => {
@@ -69,6 +71,7 @@ const createOptions = (measurements: Measurements) => {
       const result = render(
         () => (
           <WpmChartTooltip
+            seriesIndex={tooltipProps.seriesIndex}
             series={tooltipProps.series}
             dataPointIndex={tooltipProps.dataPointIndex}
             w={tooltipProps.w}
@@ -81,6 +84,45 @@ const createOptions = (measurements: Measurements) => {
       return div.innerHTML
     },
   }
+  options.yaxis = [
+    {
+      labels: {
+        style: {
+          colors: getColor(userOptions.theme, 'text'),
+        },
+        formatter: (value: number) => value?.toFixed(),
+      },
+      axisTicks: {
+        color: getColor(userOptions.theme, 'text', 0.5),
+      },
+      title: {
+        text: 'Words per minute',
+        style: {
+          color: getColor(userOptions.theme, 'text'),
+          fontSize: 'inherit',
+          fontWeight: 'normal',
+        },
+      },
+    },
+    { labels: { show: false } },
+    {
+      labels: {
+        style: {
+          colors: getColor(userOptions.theme, 'text'),
+        },
+        formatter: (value: number) => value?.toFixed(),
+      },
+      title: {
+        text: 'Errors',
+        style: {
+          color: getColor(userOptions.theme, 'text'),
+          fontSize: 'inherit',
+          fontWeight: 'normal',
+        },
+      },
+      opposite: true,
+    },
+  ]
 
   const best = findPersonalBestFromOptions(userOptions)
   if (best) {
@@ -144,6 +186,7 @@ export const createDefaultChartOptions = (xTitle: string, yTitle: string): ApexO
     markers: {
       strokeColors: undefined,
       strokeWidth: 0,
+      size: [1, 1, 5],
     },
     colors: [getColor(userOptions.theme, 'secondary'), getColor(userOptions.theme, 'primary')],
     xaxis: {

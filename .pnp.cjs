@@ -41,7 +41,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@unocss/preset-web-fonts", "npm:0.55.7"],\
             ["@unocss/reset", "npm:0.55.7"],\
             ["@unocss/transformer-directives", "npm:0.55.7"],\
-            ["apexcharts", "npm:3.42.0"],\
+            ["apexcharts", "npm:3.49.2"],\
             ["clsx", "npm:2.0.0"],\
             ["color", "npm:4.2.3"],\
             ["date-fns", "npm:2.30.0"],\
@@ -2053,10 +2053,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["apexcharts", [\
-        ["npm:3.42.0", {\
-          "packageLocation": "./.yarn/cache/apexcharts-npm-3.42.0-8d9bf64a4f-e29ce35d9b.zip/node_modules/apexcharts/",\
+        ["npm:3.49.2", {\
+          "packageLocation": "./.yarn/cache/apexcharts-npm-3.49.2-24101a2ec2-8c2a429800.zip/node_modules/apexcharts/",\
           "packageDependencies": [\
-            ["apexcharts", "npm:3.42.0"],\
+            ["apexcharts", "npm:3.49.2"],\
             ["@yr/monotone-cubic-spline", "npm:1.0.3"],\
             ["svg.draggable.js", "npm:2.2.2"],\
             ["svg.easing.js", "npm:2.0.0"],\
@@ -5663,7 +5663,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@unocss/preset-web-fonts", "npm:0.55.7"],\
             ["@unocss/reset", "npm:0.55.7"],\
             ["@unocss/transformer-directives", "npm:0.55.7"],\
-            ["apexcharts", "npm:3.42.0"],\
+            ["apexcharts", "npm:3.49.2"],\
             ["clsx", "npm:2.0.0"],\
             ["color", "npm:4.2.3"],\
             ["date-fns", "npm:2.30.0"],\

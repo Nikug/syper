@@ -1575,9 +1575,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"apexcharts@npm:^3.42.0":
-  version: 3.42.0
-  resolution: "apexcharts@npm:3.42.0"
+"apexcharts@npm:^3.49.2":
+  version: 3.49.2
+  resolution: "apexcharts@npm:3.49.2"
   dependencies:
     "@yr/monotone-cubic-spline": ^1.0.3
     svg.draggable.js: ^2.2.2
@@ -1586,7 +1586,7 @@ __metadata:
     svg.pathmorphing.js: ^0.1.3
     svg.resize.js: ^1.4.3
     svg.select.js: ^3.0.1
-  checksum: e29ce35d9b8ad8c06fbda6b0350337ee7ccbd540bc08d5edb73dcaa97295340ca00509159a5be70273a25cd0a910e44bf08b71e5d37909ff5d26f0d7c825cbd5
+  checksum: 8c2a429800ace53f653720c713f1e6c2f125f22d1b8c9e6d0cecf8d0936b4dc9aa912daf798944c6aa594fc6c058705d5791eceff801e75298d547a710531edf
   languageName: node
   linkType: hard
 
@@ -4796,7 +4796,7 @@ __metadata:
     "@unocss/preset-web-fonts": ^0.55.7
     "@unocss/reset": ^0.55.7
     "@unocss/transformer-directives": ^0.55.7
-    apexcharts: ^3.42.0
+    apexcharts: ^3.49.2
     clsx: ^2.0.0
     color: ^4.2.3
     date-fns: ^2.30.0

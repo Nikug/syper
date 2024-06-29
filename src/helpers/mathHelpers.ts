@@ -79,7 +79,10 @@ export const smoothSeries = (series: number[], smoothCount: number): number[] =>
   return smoothedSeries
 }
 
-export const smoothYValues = (values: Vector2[], smoothCount: number): Vector2[] => {
+export const smoothYValues = (
+  values: Vector2<number>[],
+  smoothCount: number
+): Vector2<number>[] => {
   const yValues = values.map((value) => value.y)
   const smoothedYValues = smoothSeries(yValues, smoothCount)
   values = values.map((value, i) => ({ x: value.x, y: smoothedYValues[i] }))
@@ -88,4 +91,26 @@ export const smoothYValues = (values: Vector2[], smoothCount: number): Vector2[]
 
 export const sampleSeries = <T>(series: T[], frequency: number): T[] => {
   return series.filter((_, index) => index % frequency === 0)
+}
+
+export const mapErrorsToSeries = (
+  errors: Map<number, number>,
+  seriesLength: number,
+  frequency: number
+) => {
+  let sample = 0
+  const series: { x: number; y: number | null }[] = []
+  for (let i = 0; i < seriesLength; ++i) {
+    if (i % frequency === 0 && i !== 0) {
+      series.push({ x: i, y: sample === 0 ? null : sample })
+      sample = 0
+    }
+
+    const value = errors.get(i)
+    if (value) sample += value
+  }
+
+  series.push({ x: seriesLength, y: sample === 0 ? null : sample })
+
+  return series
 }

@@ -9,6 +9,7 @@ interface Character {
 }
 
 interface Props {
+  seriesIndex: number
   series: number[][]
   dataPointIndex: number
   w: W
