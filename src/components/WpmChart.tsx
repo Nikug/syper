@@ -1,4 +1,4 @@
-import { Component, createEffect, createSignal, on } from 'solid-js'
+import { Component, createEffect, createSignal, on, onCleanup } from 'solid-js'
 import ApexCharts, { ApexOptions } from 'apexcharts'
 import { AnimationState, AnimationStates, Measurements } from '../types'
 import { mapErrorsToSeries, sampleSeries, wordsPerMinute } from '../helpers/mathHelpers'
@@ -22,13 +22,15 @@ export const WpmChart: Component<Props> = (props) => {
 
   createEffect(
     on([getState, () => userOptions.theme], () => {
-      chart()?.destroy()
       if (!getState()) return
+      chart()?.destroy()
       const newChart = new ApexCharts(element, createOptions(props.measurements))
       newChart.render()
       setChart(newChart)
     })
   )
+
+  onCleanup(() => chart()?.destroy())
 
   return (
     <div class="paper p-4 chart-container">

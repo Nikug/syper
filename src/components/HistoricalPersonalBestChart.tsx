@@ -1,4 +1,4 @@
-import { Component, createEffect, createSignal, on } from 'solid-js'
+import { Component, createEffect, createSignal, on, onCleanup } from 'solid-js'
 import { DatabasePersonalBest } from '../supabaseTypes'
 import { userOptions } from '../StateManager'
 import ApexCharts, { ApexOptions } from 'apexcharts'
@@ -25,6 +25,8 @@ export const HistoricalPersonalBestChart: Component<Props> = (props) => {
       setChart(newChart)
     })
   )
+
+  onCleanup(() => chart()?.destroy())
 
   return (
     <div class="paper p-4 chart-container">

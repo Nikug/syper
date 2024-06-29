@@ -1,4 +1,4 @@
-import { Component, createEffect, createSignal, on } from 'solid-js'
+import { Component, createEffect, createSignal, on, onCleanup } from 'solid-js'
 import ApexCharts, { ApexOptions } from 'apexcharts'
 import { DatabaseTestResult } from '../supabaseTypes'
 import { createDefaultChartOptions } from './WpmChart'
@@ -29,6 +29,8 @@ export const HistoryChart: Component<Props> = (props) => {
       setChart(newChart)
     })
   )
+
+  onCleanup(() => chart()?.destroy())
 
   return (
     <div class="paper p-4 chart-container">
