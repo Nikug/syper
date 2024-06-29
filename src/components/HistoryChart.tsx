@@ -70,9 +70,10 @@ const createOptions = (
   options.stroke!.curve = 'straight'
   options.stroke!.dashArray = 6
   options.markers!.size = [6, 0]
-  options.tooltip!.intersect = true
-  options.tooltip!.shared = false
-  options.tooltip!.followCursor = true
+  options.tooltip = {}
+  options.tooltip.intersect = true
+  options.tooltip.shared = false
+  options.tooltip.followCursor = true
   // eslint-disable-next-line solid/reactivity
   options.tooltip!.custom = (tooltipProps) => {
     disposeTooltip()?.dispose()

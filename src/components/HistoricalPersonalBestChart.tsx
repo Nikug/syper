@@ -65,9 +65,10 @@ const createOptions = (personalBests: DatabasePersonalBest[], textMode: TextMode
   options.chart!.type = 'bar'
   options.series = [{ name: 'Words per minute', data }]
   options.title!.text = 'Personal bests'
-  options.tooltip!.intersect = true
-  options.tooltip!.shared = false
-  options.tooltip!.followCursor = true
+  options.tooltip = {}
+  options.tooltip.intersect = true
+  options.tooltip.shared = false
+  options.tooltip.followCursor = true
   options.plotOptions = { bar: { borderRadius: 4 } }
   // eslint-disable-next-line solid/reactivity
   options.tooltip!.custom = (tooltipProps) => {
