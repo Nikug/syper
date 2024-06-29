@@ -62,6 +62,25 @@ const createOptions = (measurements: Measurements) => {
     { name: 'Words per minute', data: wpmBetweenTimestamps, type: 'line' },
     { name: 'Total words per minute', data: wpmOverTime, type: 'line' },
   ]
+  options.tooltip = {
+    custom: (tooltipProps) => {
+      disposeTooltip()?.dispose()
+      const div = document.createElement('div')
+      const result = render(
+        () => (
+          <WpmChartTooltip
+            series={tooltipProps.series}
+            dataPointIndex={tooltipProps.dataPointIndex}
+            w={tooltipProps.w}
+            measurements={measurements}
+          />
+        ),
+        div
+      )
+      setDisposeTooltip({ dispose: result })
+      return div.innerHTML
+    },
+  }
 
   const best = findPersonalBestFromOptions(userOptions)
   if (best) {
@@ -172,24 +191,6 @@ export const createDefaultChartOptions = (xTitle: string, yTitle: string): ApexO
           fontSize: 'inherit',
           fontWeight: 'normal',
         },
-      },
-    },
-    tooltip: {
-      custom: (tooltipProps) => {
-        disposeTooltip()?.dispose()
-        const div = document.createElement('div')
-        const result = render(
-          () => (
-            <WpmChartTooltip
-              series={tooltipProps.series}
-              dataPointIndex={tooltipProps.dataPointIndex}
-              w={tooltipProps.w}
-            />
-          ),
-          div
-        )
-        setDisposeTooltip({ dispose: result })
-        return div.innerHTML
       },
     },
     noData: {
