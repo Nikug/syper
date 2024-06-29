@@ -22,8 +22,8 @@ export const WpmChart: Component<Props> = (props) => {
 
   createEffect(
     on([getState, () => userOptions.theme], () => {
-      if (!getState()) return
       chart()?.destroy()
+      if (!getState()) return
       const newChart = new ApexCharts(element, createOptions(props.measurements))
       newChart.render()
       setChart(newChart)
@@ -91,6 +91,7 @@ const createOptions = (measurements: Measurements) => {
   }
   options.yaxis = [
     {
+      seriesName: 'Words per minute',
       labels: {
         style: {
           colors: getColor(userOptions.theme, 'text'),
@@ -109,8 +110,9 @@ const createOptions = (measurements: Measurements) => {
         },
       },
     },
-    { labels: { show: false } },
+    { seriesName: 'Words per minute', labels: { show: false } },
     {
+      seriesName: 'Errors',
       labels: {
         style: {
           colors: getColor(userOptions.theme, 'text'),
