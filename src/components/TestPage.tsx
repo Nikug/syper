@@ -17,6 +17,8 @@ import { CapsLockIndicator } from './CapsLockIndicator'
 import { Meta, Title } from '@solidjs/meta'
 
 const TestPage: Component = () => {
+  let textContainerRef!: HTMLDivElement
+
   onMount(async () => {
     setupKeyboard()
     setTypingTest(await initializeText())
@@ -26,6 +28,11 @@ const TestPage: Component = () => {
     restartAttempt()
     cleanupKeyboard()
   })
+
+  const getTargetHeight = () => {
+    const { top, height } = textContainerRef.getBoundingClientRect()
+    return top + height / 2
+  }
 
   return (
     <>
@@ -52,13 +59,12 @@ const TestPage: Component = () => {
                 <div class="h-8">
                   <QuoteInformation />
                 </div>
-                <div
-                  class={clsx(
-                    'max-h-46 overflow-hidden',
-                    userOptions.useSmoothScrolling && 'scroll-smooth'
-                  )}
-                >
-                  <TextContainer attempt={attempt} quote={typingTest()} />
+                <div ref={textContainerRef} class="max-h-46 overflow-hidden">
+                  <TextContainer
+                    targetHeight={getTargetHeight()}
+                    attempt={attempt}
+                    quote={typingTest()}
+                  />
                 </div>
                 <div class="h-24">
                   <Show when={userOptions.showProgressBar}>

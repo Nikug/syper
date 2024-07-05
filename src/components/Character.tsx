@@ -28,6 +28,8 @@ interface Props {
   expected: string
   actual?: string
   isNext: boolean
+  targetHeight: number
+  translate: (amount: number) => void
 }
 
 export const Character: Component<Props> = (props) => {
@@ -38,9 +40,18 @@ export const Character: Component<Props> = (props) => {
     return props.actual === props.expected ? 'correct' : 'incorrect'
   }
 
+  const getParent = () => element?.parentElement
+
   createEffect(() => {
-    if (props.isNext && element) {
-      element.scrollIntoView({ block: 'start' })
+    if (props.isNext && element && props.translate) {
+      const parent = getParent()
+      if (!parent) return
+
+      const { top, height } = parent.getBoundingClientRect()
+      const amount = props.targetHeight - top - height / 2
+      if (amount !== 0) {
+        props.translate(amount)
+      }
     }
   })
 
