@@ -8,7 +8,7 @@ import { ProgressBar } from './ProgressBar'
 import { AnimationStates } from '../types'
 import { NavigationHelp } from './NavigationHelp'
 import { StatisticsContainer } from './StatisticsContainer'
-import { AnimationDurationClass } from '../constants'
+import { AnimationDurationClass, LineHeightMultiplier } from '../constants'
 import { animationState, showingResults, showingWriting } from '../AnimationManager'
 import { cleanupKeyboard, setupKeyboard } from '../KeyboardHandler'
 import { initializeText, restartAttempt } from '../helpers/stateHelpers'
@@ -59,7 +59,11 @@ const TestPage: Component = () => {
                 <div class="h-8">
                   <QuoteInformation />
                 </div>
-                <div ref={textContainerRef} class="max-h-46 overflow-hidden">
+                <div
+                  ref={textContainerRef}
+                  class="overflow-hidden"
+                  style={{ height: `${userOptions.fontSize * LineHeightMultiplier * 3}px` }}
+                >
                   <TextContainer
                     targetHeight={getTargetHeight()}
                     attempt={attempt}

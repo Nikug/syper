@@ -37,3 +37,5 @@ export const TestTimeoutDuration = 30 * 1000
 export const DefaultFont = 'Fragment Mono'
 
 export const NotificationDuration = 5 * 1000
+
+export const LineHeightMultiplier = 1.75

@@ -3,6 +3,7 @@ import { Attempt, TypingTest } from '../types'
 import { Character } from './Character'
 import { userOptions } from '../StateManager'
 import clsx from 'clsx'
+import { LineHeightMultiplier } from '../constants'
 
 const animationDuration = 250
 
@@ -14,7 +15,7 @@ interface Props {
 
 export const TextContainer: Component<Props> = (props) => {
   let containerRef!: HTMLDivElement
-  const [offsetY, setOffsetY] = createSignal(60) // Moving the first row to middle happens to be 60px
+  const [offsetY, setOffsetY] = createSignal(userOptions.fontSize * LineHeightMultiplier)
   const [animating, setAnimating] = createSignal(false)
   const [timeoutId, setTimeoutId] = createSignal<undefined | NodeJS.Timeout>(undefined)
 
@@ -38,9 +39,11 @@ export const TextContainer: Component<Props> = (props) => {
         'font-family': userOptions.font,
         transform: `translateY(${offsetY()}px)`,
         'transition-duration': `${animationDuration}ms`,
+        'line-height': `${userOptions.fontSize * LineHeightMultiplier}px`,
+        'font-size': `${userOptions.fontSize}px`,
       }}
       class={clsx(
-        'flex justify-center w-full font-mono leading-16',
+        'flex justify-center w-full font-mono',
         userOptions.useSmoothScrolling ? 'transition-transform ease-out' : 'transition-none'
       )}
     >

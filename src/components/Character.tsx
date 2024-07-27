@@ -57,7 +57,6 @@ export const Character: Component<Props> = (props) => {
   return (
     <span
       ref={element}
-      style={{ 'font-size': `${userOptions.fontSize}px` }}
       class={clsx(
         characterClasses[characterMode()],
         userOptions.showTextHighlight && highlightClasses[characterMode()],
