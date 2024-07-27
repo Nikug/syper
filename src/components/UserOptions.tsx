@@ -14,7 +14,6 @@ import { setAndSaveTheme } from '../themes/ThemeManager'
 import { ThemeName } from './ThemeName'
 import { Dropdown } from './Dropdown'
 import { getFontList } from '../fonts'
-import { Input } from './Input'
 import { FontSizeSelector } from './FontSizeSlider'
 
 export const UserOptions: Component = () => {
