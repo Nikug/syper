@@ -25,6 +25,7 @@ const defaultOptions: UserOptions = {
   historyWordCounts: [] as number[],
   historyDurations: [] as number[],
   font: DefaultFont,
+  fontSize: 32,
 } as const
 
 export const defaultUserOptions = (): UserOptions => ({ ...defaultOptions })

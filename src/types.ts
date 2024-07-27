@@ -107,6 +107,7 @@ export interface UserOptions {
   historyWordCounts: number[]
   historyDurations: number[]
   font: Fonts
+  fontSize: number
 }
 
 export interface TestResultSum {

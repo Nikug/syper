@@ -4,6 +4,7 @@ import { Router, hashIntegration } from '@solidjs/router'
 import 'virtual:uno.css'
 import '@unocss/reset/tailwind.css'
 import './index.css'
+import './slider.css'
 import { MetaProvider } from '@solidjs/meta'
 import App from './App'
 

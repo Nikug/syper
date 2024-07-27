@@ -14,6 +14,8 @@ import { setAndSaveTheme } from '../themes/ThemeManager'
 import { ThemeName } from './ThemeName'
 import { Dropdown } from './Dropdown'
 import { getFontList } from '../fonts'
+import { Input } from './Input'
+import { FontSizeSelector } from './FontSizeSlider'
 
 export const UserOptions: Component = () => {
   return (
@@ -48,14 +50,18 @@ export const UserOptions: Component = () => {
       </div>
       <h3 class="h3">Font</h3>
       <div class="mb-8 flex flex-col gap-8">
-        <div class="flex">
+        <div class="flex gap-4">
           <Dropdown
             key={userOptions.font}
             options={getFontList().map((font) => ({ key: font, value: font }))}
             onSelect={(option) => setFont(option.key)}
           />
+          <FontSizeSelector />
         </div>
-        <div style={{ 'font-family': userOptions.font }} class="font-mono text-4xl">
+        <div
+          style={{ 'font-family': userOptions.font, 'font-size': `${userOptions.fontSize}px` }}
+          class="font-mono"
+        >
           This is what your text will look like
         </div>
       </div>

@@ -7,7 +7,6 @@ import { testStarted } from '../helpers/stateHelpers'
 
 const defaultClasses = `
   whitespace-pre
-  text-4xl
   decoration-3
   scroll-my-16
 `
@@ -58,6 +57,7 @@ export const Character: Component<Props> = (props) => {
   return (
     <span
       ref={element}
+      style={{ 'font-size': `${userOptions.fontSize}px` }}
       class={clsx(
         characterClasses[characterMode()],
         userOptions.showTextHighlight && highlightClasses[characterMode()],

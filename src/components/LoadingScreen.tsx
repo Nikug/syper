@@ -34,6 +34,8 @@ export const LoadingScreen: Component = () => {
                 expected={char}
                 actual={i() < index() ? loadingText[i()] : undefined}
                 isNext={i() === index()}
+                targetHeight={0}
+                translate={() => {}}
               />
             )}
           </For>
