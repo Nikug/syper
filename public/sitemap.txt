@@ -1,6 +1,6 @@
 https://syper.app/
-https://syper.app/#/options
-https://syper.app/#/profile
-https://syper.app/#/about
-https://syper.app/#/privacy
+https://syper.app/options
+https://syper.app/profile
+https://syper.app/about
+https://syper.app/privacy
 
