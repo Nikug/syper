@@ -24,9 +24,6 @@ jobs:
         with:
           node-version: '20.12.1'
 
-      - name: Install
-        run: yarn
-
       - name: Test
         run: yarn test
 
