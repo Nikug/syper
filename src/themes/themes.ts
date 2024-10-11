@@ -14,6 +14,36 @@ type ThemeVariable = Record<string, Color>
 export type Themes = Record<ThemeKey, ThemeVariables>
 
 export const themes = {
+  'syper-dark': {
+    name: 'Syper dark',
+    dark: true,
+    variables: () => ({
+      text: Color('#a1a1aa'),
+      primary: Color('#a855f7'),
+      secondary: Color('#a1a1aa'),
+      highlight: Color('#ec4899'),
+      accent: Color('#db2777'),
+      danger: Color('#f43f5e'),
+      surface1: Color('#52525b'),
+      surface0: Color('#3f3f46'),
+      base: Color('#27272a'),
+    }),
+  },
+  'syper-light': {
+    name: 'Syper light',
+    dark: false,
+    variables: () => ({
+      text: Color('#52525b'),
+      primary: Color('#9333ea'),
+      secondary: Color('#a1a1aa'),
+      highlight: Color('#ec4899'),
+      accent: Color('#db2777'),
+      danger: Color('#e11d48'),
+      surface1: Color('#fafafa'),
+      surface0: Color('#f4f4f5'),
+      base: Color('#e4e4e7'),
+    }),
+  },
   'catppuccin-latte': {
     name: 'Catppuccin Latte',
     dark: false,

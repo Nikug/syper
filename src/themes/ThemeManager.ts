@@ -4,7 +4,7 @@ import { ThemeKey, themes, ThemeVariables } from './themes'
 
 export const setTheme = (theme: ThemeKey) => {
   if (!isValidTheme(theme)) {
-    theme = 'catppuccin-mocha'
+    theme = 'syper-dark'
   }
 
   setUserOptions('theme', theme)
