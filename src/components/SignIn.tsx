@@ -88,7 +88,10 @@ export const SignIn: Component = () => {
         </div>
       </Show>
       <Show when={showEmailVerification()}>
-        <p>Verification email send! Click the link in the email to sign in.</p>
+        <p>
+          Verification email send from <span class="font-bold">noreply@syper.app</span>! Click the
+          link in the email to sign in.
+        </p>
       </Show>
     </div>
   )
