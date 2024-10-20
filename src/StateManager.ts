@@ -6,7 +6,7 @@ import { Dictionaries } from './assets/files'
 import { DefaultFont } from './constants'
 
 const defaultOptions: UserOptions = {
-  theme: 'catppuccin-mocha',
+  theme: 'syper-dark',
   dictionary: 'english-200',
   quotes: 'quotes',
   textMode: 'words',

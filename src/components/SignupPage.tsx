@@ -7,9 +7,9 @@ import { setupAuth } from '../authentication/Supabase'
 
 const SignupPage: Component = () => {
   onMount(async () => {
-    await setupAuth()
     const options = getLocallyStoredOptions()
     setUserOptions(options)
+    await setupAuth()
     await persistUserOptions()
 
     window.location.replace(Routes.profile)
