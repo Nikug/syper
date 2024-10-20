@@ -42,16 +42,24 @@ export const getStoredUserOptions = async (): Promise<UserOptions> => {
   }
 
   if (options === null) {
-    const optionsString = localStorage.getItem(UserOptionsStorageKey)
-    if (optionsString) {
-      options = JSON.parse(optionsString)
-    }
+    options = getLocallyStoredOptions()
   }
 
   const fullOptions = createValidOptions(options)
   setTheme(fullOptions.theme)
   await loadFont(fullOptions.font)
 
+  return fullOptions
+}
+
+export const getLocallyStoredOptions = (): UserOptions => {
+  let options: Partial<UserOptions> | null = null
+  const optionsString = localStorage.getItem(UserOptionsStorageKey)
+  if (optionsString) {
+    options = JSON.parse(optionsString)
+  }
+
+  const fullOptions = createValidOptions(options)
   return fullOptions
 }
 

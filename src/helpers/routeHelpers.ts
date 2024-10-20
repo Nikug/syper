@@ -6,6 +6,7 @@ export const Routes = {
   options: '/options',
   about: '/about',
   privacy: '/privacy',
+  signup: '/signup',
 }
 
 export const isProfilePage = (): boolean => {
@@ -26,4 +27,8 @@ export const isAboutPage = (): boolean => {
 
 export const isPrivacyPage = (): boolean => {
   return useLocation().pathname === Routes.privacy
+}
+
+export const isSignupPage = (): boolean => {
+  return useLocation().pathname === Routes.signup
 }

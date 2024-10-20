@@ -8,7 +8,7 @@ import { setShowLoadingScreen, showLoadingScreen } from './SyncingManager'
 import { getStoredUserOptions } from './helpers/optionsHelpers'
 import { handleInitialSetupAfterSignIn } from './helpers/stateHelpers'
 import { Footer } from './components/Footer'
-import { Routes as AppRoutes } from './helpers/routeHelpers'
+import { Routes as AppRoutes, isSignupPage } from './helpers/routeHelpers'
 import { BlurWhenTyping } from './components/BlurWhenTyping'
 import { Title } from '@solidjs/meta'
 import { Notifications } from './components/Notifications'
@@ -23,9 +23,12 @@ const OptionsPage = lazy(() => import('./components/OptionsPage'))
 const ProfilePage = lazy(() => import('./components/ProfilePage'))
 const AboutPage = lazy(() => import('./components/about/AboutPage'))
 const PrivacyPage = lazy(() => import('./components/PrivacyPage'))
+const SignupPage = lazy(() => import('./components/SignupPage'))
 
 const App: Component = () => {
   onMount(async () => {
+    if (isSignupPage()) return
+
     // Setup user options from local storage
     setUserOptions(await getStoredUserOptions())
     setShowLoadingScreen(true)
@@ -57,6 +60,7 @@ const App: Component = () => {
             <Route path={AppRoutes.profile} component={ProfilePage} />
             <Route path={AppRoutes.about} component={AboutPage} />
             <Route path={AppRoutes.privacy} component={PrivacyPage} />
+            <Route path={AppRoutes.signup} component={SignupPage} />
           </Routes>
         </Show>
         <Show when={!showLoadingScreen()}>

@@ -2,6 +2,7 @@ import { AuthError, Session, createClient } from '@supabase/supabase-js'
 import { SupabaseConstants } from './constants'
 import { createSignal } from 'solid-js'
 import { Provider } from '@supabase/supabase-js'
+import { Routes } from '../helpers/routeHelpers'
 
 if (!SupabaseConstants.url) {
   console.error('Missing Supabase url. Please check environment variables.')
@@ -48,7 +49,13 @@ export const signInWithProvider = async (provider: Provider): Promise<void> => {
 }
 
 export const signUp = async (email: string, password: string): Promise<AuthError | undefined> => {
-  const { data, error } = await supabase.auth.signUp({ email, password })
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      emailRedirectTo: `${window.location.origin}${Routes.signup}`,
+    },
+  })
   if (error) {
     console.log(error)
     return error
