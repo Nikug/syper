@@ -43,7 +43,12 @@ const TestPage: Component = () => {
         content="Syper: a solid typing experience. Test your typing speed and see your improvements over time in this minimalistic and customizable typing game."
       />
       <div class="w-full h-full">
-        <div class="grid mx-auto max-w-7xl md:px-16 px-2 grid-rows-5 min-h-screen justify-items-stretch items-center">
+        <div
+          class={clsx(
+            'grid mx-auto max-w-7xl md:px-16 px-2 min-h-screen justify-items-stretch items-center',
+            { 'grid-rows-5': showingWriting(), 'auto-rows-min': showingResults() }
+          )}
+        >
           <div class="row-span-1 self-start min-w-0">
             <BlurWhenTyping>
               <Header showOptions={true} />
@@ -95,7 +100,7 @@ const TestPage: Component = () => {
           <Show when={showingResults()}>
             <div
               class={clsx(
-                'row-span-4 min-w-0',
+                'row-span-1 min-w-0',
                 handleBlur(animationState().resultsState === AnimationStates.shown)
               )}
             >

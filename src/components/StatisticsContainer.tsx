@@ -22,9 +22,9 @@ export const StatisticsContainer: Component<Props> = (props) => {
 
   return (
     <div class="h-full pt-8 pb-32">
-      <div class="mt-auto mb-8 text-center">
+      <div class="mt-8 text-center">
         <span>source:</span>
-        <h2 class="h2">
+        <h2 class="h2 mb-4!">
           {isQuoteMode()
             ? typingTest().source
             : getDictionaryName(typingTest().source as Dictionaries)}
@@ -37,7 +37,7 @@ export const StatisticsContainer: Component<Props> = (props) => {
         </span>
       </div>
       <Show when={props.attempt.personalBest.isPersonalBest}>
-        <div class="w-full text-center">
+        <div class="w-full text-center bg-theme-surface0 rounded mt-8 py-4">
           <Show when={props.attempt.personalBest.hasApprovedCorrectness}>
             <p class="font-bold text-3xl mb-2">New personal best!</p>
             <div class="font-bold text-3xl flex justify-center items-center gap-4">
@@ -45,7 +45,7 @@ export const StatisticsContainer: Component<Props> = (props) => {
                 <p class="text-xl">
                   {props.attempt.personalBest.previousPersonalBest?.toFixed(1)}{' '}
                 </p>
-                <div class="i-ri-arrow-right-line w-8 h-8" />
+                <div class="i-ri-arrow-right-s-line w-8 h-8" />
               </Show>
               <p>{getWpm()?.toFixed(1)}</p>
             </div>
