@@ -51,6 +51,9 @@ const TestPage: Component = () => {
           </div>
           <Show when={showingWriting()}>
             <div
+              style={{
+                'margin-top': `${userOptions.typingMode === 'vertical' ? -userOptions.fontSize * LineHeightMultiplier * 2 : 0}px`,
+              }}
               class={clsx(
                 'row-span-3 justify-self-start min-w-0 w-full',
                 handleBlur(animationState().writingState === AnimationStates.shown)

@@ -46,7 +46,6 @@ export const HorizontalTextContainer: Component<Props> = (props) => {
       ref={containerRef}
       style={{
         'font-family': userOptions.font,
-        'padding-top': `${userOptions.fontSize * LineHeightMultiplier}px`,
         'line-height': `${userOptions.fontSize * LineHeightMultiplier}px`,
         'font-size': `${userOptions.fontSize}px`,
         transform: `translateX(${translateX()}px)`,
