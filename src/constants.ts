@@ -18,6 +18,7 @@ export const TypingModes: { key: TypingMode; value: string }[] = [
 
 export const AnimationDuration = 200
 export const AnimationDurationClass = 'duration-200'
+export const SmoothScrollDuration = 250
 
 export const TimedTestWords = 50
 export const TimedTestCharacters = 300

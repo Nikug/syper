@@ -1,8 +1,8 @@
-import { Component, For } from 'solid-js'
+import { Component, For, createSignal } from 'solid-js'
 import { Attempt, TypingTest } from '../types'
 import { userOptions } from '../StateManager'
 import clsx from 'clsx'
-import { LineHeightMultiplier } from '../constants'
+import { LineHeightMultiplier, SmoothScrollDuration } from '../constants'
 import { HorizontallyScrollingCharacter } from './HorizontallScrollingCharacter'
 
 interface Props {
@@ -12,6 +12,20 @@ interface Props {
 
 export const HorizontalTextContainer: Component<Props> = (props) => {
   let containerRef!: HTMLDivElement
+  const [translateX, setTranslateX] = createSignal(0)
+
+  const centerOfContainer = () => {
+    const { width, left } = containerRef.getBoundingClientRect()
+    return left + width / 2
+  }
+
+  const scrollToNextCharacter = (x: number) => {
+    let difference = centerOfContainer() - x
+    if (difference > 0) {
+      difference = 0
+    }
+    setTranslateX(difference)
+  }
 
   return (
     <div
@@ -21,6 +35,8 @@ export const HorizontalTextContainer: Component<Props> = (props) => {
         'padding-top': `${userOptions.fontSize * LineHeightMultiplier}px`,
         'line-height': `${userOptions.fontSize * LineHeightMultiplier}px`,
         'font-size': `${userOptions.fontSize}px`,
+        transform: `translateX(${translateX()}px)`,
+        'transition-duration': `${SmoothScrollDuration}ms`,
       }}
       class={clsx(
         'w-full font-mono',
@@ -37,6 +53,7 @@ export const HorizontalTextContainer: Component<Props> = (props) => {
                     expected={character}
                     actual={props.attempt.finalText[index]}
                     isNext={props.attempt.finalText.length === index}
+                    translate={scrollToNextCharacter}
                   />
                 )}
               </For>

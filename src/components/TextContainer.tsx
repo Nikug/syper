@@ -2,10 +2,8 @@ import { Component, For, createSignal, onCleanup } from 'solid-js'
 import { Attempt, TypingTest } from '../types'
 import { userOptions } from '../StateManager'
 import clsx from 'clsx'
-import { LineHeightMultiplier } from '../constants'
+import { LineHeightMultiplier, SmoothScrollDuration } from '../constants'
 import { VerticallyScrollingCharacter } from './VerticallyScrollingCharacter'
-
-const animationDuration = 250
 
 interface Props {
   quote: TypingTest
@@ -25,7 +23,7 @@ export const TextContainer: Component<Props> = (props) => {
       if (!userOptions.useSmoothScrolling) return
 
       setAnimating(true)
-      const id = setTimeout(() => setAnimating(false), animationDuration)
+      const id = setTimeout(() => setAnimating(false), SmoothScrollDuration)
       setTimeoutId(id)
     }
   }
@@ -38,7 +36,7 @@ export const TextContainer: Component<Props> = (props) => {
       style={{
         'font-family': userOptions.font,
         transform: `translateY(${offsetY()}px)`,
-        'transition-duration': `${animationDuration}ms`,
+        'transition-duration': `${SmoothScrollDuration}ms`,
         'line-height': `${userOptions.fontSize * LineHeightMultiplier}px`,
         'font-size': `${userOptions.fontSize}px`,
       }}

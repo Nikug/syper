@@ -1,11 +1,11 @@
 import { Component, createEffect } from 'solid-js'
 import { Character } from './Character'
-import { userOptions } from '../StateManager'
 
 interface Props {
   expected: string
   actual?: string
   isNext: boolean
+  translate: (x: number) => void
 }
 
 export const HorizontallyScrollingCharacter: Component<Props> = (props) => {
@@ -13,10 +13,8 @@ export const HorizontallyScrollingCharacter: Component<Props> = (props) => {
 
   createEffect(() => {
     if (props.isNext && element) {
-      element.scrollIntoView({
-        inline: 'center',
-        behavior: userOptions.useSmoothScrolling ? 'smooth' : 'instant',
-      })
+      const { left } = element.getBoundingClientRect()
+      props.translate(left)
     }
   })
 
