@@ -59,17 +59,22 @@ const TestPage: Component = () => {
                 <div class="h-8">
                   <QuoteInformation />
                 </div>
-                <div
-                  ref={textContainerRef}
-                  class="overflow-hidden"
-                  style={{ height: `${userOptions.fontSize * LineHeightMultiplier * 3}px` }}
-                >
-                  <TextContainer
-                    targetHeight={getTargetHeight()}
-                    attempt={attempt}
-                    quote={typingTest()}
-                  />
-                </div>
+                <Show when={userOptions.typingMode === 'vertical'}>
+                  <div
+                    ref={textContainerRef}
+                    class="overflow-hidden"
+                    style={{ height: `${userOptions.fontSize * LineHeightMultiplier * 3}px` }}
+                  >
+                    <TextContainer
+                      targetHeight={getTargetHeight()}
+                      attempt={attempt}
+                      quote={typingTest()}
+                    />
+                  </div>
+                </Show>
+                <Show when={userOptions.typingMode === 'horizontal'}>
+                  <div>this is horizontal mode</div>
+                </Show>
                 <div class="h-24">
                   <Show when={userOptions.showProgressBar}>
                     <ProgressBar />

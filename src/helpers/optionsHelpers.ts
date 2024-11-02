@@ -10,7 +10,7 @@ import { defaultUserOptions, setUserOptions, userOptions } from '../StateManager
 import { DatabaseUserOptions, DatabaseUserOptionsInput } from '../supabaseTypes'
 import { startSyncing, stopSyncing } from '../SyncingManager'
 import { setTheme } from '../themes/ThemeManager'
-import { TextMode, UserOptions } from '../types'
+import { TextMode, TypingMode, UserOptions } from '../types'
 
 const UserOptionsStorageKey = 'userOptions'
 
@@ -80,6 +80,12 @@ export const persistUserOptions = async () => {
 
 export const setTextMode = async (textMode: TextMode) => {
   setUserOptions('textMode', textMode)
+  await nextAttempt()
+  await persistUserOptions()
+}
+
+export const setTypingMode = async (typingMode: TypingMode) => {
+  setUserOptions('typingMode', typingMode)
   await nextAttempt()
   await persistUserOptions()
 }

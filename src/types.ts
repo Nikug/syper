@@ -86,9 +86,11 @@ export interface Animation {
 }
 
 export type TextMode = 'quote' | 'words' | 'time'
+export type TypingMode = 'vertical' | 'horizontal'
 
 export interface UserOptions {
   textMode: TextMode
+  typingMode: TypingMode
   dictionary: Dictionaries
   quotes: Quotes
   theme: ThemeKey

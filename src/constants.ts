@@ -1,5 +1,5 @@
 import { getShortFormattedDuration } from './helpers/dateHelpers'
-import { TextMode } from './types'
+import { TextMode, TypingMode } from './types'
 
 export const CharactersPerWord = 5
 
@@ -10,6 +10,10 @@ export const TimeDurations: { key: number; value: string }[] = [
   { key: 60 * 1000, value: getShortFormattedDuration(60 * 1000) },
   { key: 90 * 1000, value: getShortFormattedDuration(90 * 1000) },
   { key: 120 * 1000, value: getShortFormattedDuration(120 * 1000) },
+]
+export const TypingModes: { key: TypingMode; value: string }[] = [
+  { key: 'vertical', value: 'Vertical' },
+  { key: 'horizontal', value: 'Horizontal' },
 ]
 
 export const AnimationDuration = 200

@@ -2,7 +2,7 @@ import { A } from '@solidjs/router'
 import { clsx } from 'clsx'
 import { Component, Show } from 'solid-js'
 import { Dictionaries, dictionaries } from '../assets/files'
-import { TimeDurations, WordCounts, textModeOptions } from '../constants'
+import { TimeDurations, TypingModes, WordCounts, textModeOptions } from '../constants'
 import { getShortFormattedDuration } from '../helpers/dateHelpers'
 import {
   isTimeMode,
@@ -10,6 +10,7 @@ import {
   setDictionary,
   setTextMode,
   setTimeDuration,
+  setTypingMode,
   setWordCount,
 } from '../helpers/optionsHelpers'
 import { userOptions } from '../StateManager'
@@ -43,6 +44,12 @@ export const Header: Component<Props> = (props) => {
                   value: <ThemeName theme={theme.value} />,
                 }))}
                 onSelect={(option) => setAndSaveTheme(option.key)}
+              />
+              /
+              <Dropdown
+                key={userOptions.typingMode}
+                options={TypingModes}
+                onSelect={(option) => setTypingMode(option.key)}
               />
               /
               <Dropdown

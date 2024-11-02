@@ -10,6 +10,7 @@ const defaultOptions: UserOptions = {
   dictionary: 'english-200',
   quotes: 'quotes',
   textMode: 'words',
+  typingMode: 'vertical',
   wordCount: 25,
   timeDuration: 60 * 1000,
   historyMode: 'tenDays',
