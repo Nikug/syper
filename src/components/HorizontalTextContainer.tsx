@@ -22,6 +22,13 @@ export const HorizontalTextContainer: Component<Props> = (props) => {
   const scrollToNextCharacter = (x: number) => {
     let difference = centerOfContainer() - x
 
+    // Offset the scroll a bit, so user feels like writing on the center of the screen
+    if (userOptions.scrollOnWordEnd) {
+      difference -= userOptions.fontSize * 3
+    } else {
+      difference -= userOptions.fontSize
+    }
+
     if (difference > 0) {
       difference = 0
     }
