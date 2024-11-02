@@ -28,6 +28,9 @@ export const HistoryChartTooltip: Component<Props> = (props) => {
           Source: <span class="font-bold">{test()?.source}</span>
         </p>
         <p>
+          Typing mode: <span class="font-bold capitalize">{test()?.typingMode}</span>
+        </p>
+        <p>
           Duration: <span class="font-bold">{getFormattedDuration(test()?.duration)}</span>
         </p>
         <p class="border-b border-theme-text pb-2">

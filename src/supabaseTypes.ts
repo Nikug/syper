@@ -1,8 +1,9 @@
-import { TextMode, UserOptions } from './types'
+import { TextMode, TypingMode, UserOptions } from './types'
 
 export interface DatabaseTestResultInput {
   userId: string
   textMode: TextMode
+  typingMode: TypingMode
   quoteId?: string
   source: string
   characters: number

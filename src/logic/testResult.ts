@@ -4,7 +4,7 @@ import { CharactersPerWord } from '../constants'
 import { getAccuracy, getCorrectness, getWordsPerMinute } from '../helpers/mathHelpers'
 import { isQuoteMode, isTimeMode } from '../helpers/optionsHelpers'
 import { startSyncing, stopSyncing } from '../SyncingManager'
-import { Attempt, TextMode, TypingTest } from '../types'
+import { Attempt, TextMode, TypingMode, TypingTest } from '../types'
 import { DatabaseTestResultInput } from '../supabaseTypes'
 import { userOptions } from '../StateManager'
 import { handlePersonalBestUpdate } from '../helpers/personalBestHelpers'
@@ -12,6 +12,7 @@ import { handlePersonalBestUpdate } from '../helpers/personalBestHelpers'
 export const submitTestResult = async (
   attempt: Attempt,
   textMode: TextMode,
+  typingMode: TypingMode,
   typingTest: TypingTest
 ): Promise<void> => {
   const userId = getUserId()
@@ -24,6 +25,7 @@ export const submitTestResult = async (
     const testResult: DatabaseTestResultInput = {
       userId: userId,
       textMode: textMode,
+      typingMode: typingMode,
       quoteId: isQuoteMode() ? typingTest.id.toString() : undefined,
       source: typingTest.source,
       characters: typingTest.length,

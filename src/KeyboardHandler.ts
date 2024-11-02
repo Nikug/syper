@@ -107,7 +107,7 @@ const handlePostTest = () => {
   )
   clearTestTimeout()
   startTransition(fromWritingToResults)
-  submitTestResult(attempt, userOptions.textMode, typingTest())
+  submitTestResult(attempt, userOptions.textMode, userOptions.typingMode, typingTest())
 }
 
 const handleTimestamp = (attempt: Attempt, performanceNow: number, key: string): Attempt => {

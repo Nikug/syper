@@ -65,7 +65,7 @@ const endAttempt = (attempt: Attempt) => {
   )
 
   startTransition(fromWritingToResults)
-  submitTestResult(attempt, userOptions.textMode, typingTest())
+  submitTestResult(attempt, userOptions.textMode, userOptions.typingMode, typingTest())
 }
 
 const extendText = async () => {
