@@ -60,6 +60,7 @@ export const HorizontalTextContainer: Component<Props> = (props) => {
                     expected={character}
                     actual={props.attempt.finalText[index]}
                     isNext={props.attempt.finalText.length === index}
+                    isCurrent={props.attempt.finalText.length - 1 === index}
                     translate={scrollToNextCharacter}
                   />
                 )}

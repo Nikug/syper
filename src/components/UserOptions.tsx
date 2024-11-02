@@ -3,6 +3,7 @@ import { userOptions } from '../StateManager'
 import { CheckButton } from './CheckButton'
 import {
   setFont,
+  setScrollOnWordEnd,
   setShowCapsLockIndicator,
   setShowProgressBar,
   setShowProgressCounter,
@@ -45,6 +46,11 @@ export const UserOptions: Component = () => {
           value={userOptions.useSmoothScrolling}
           text="Use smooth scrolling"
           onClick={setUseSmoothScrolling}
+        />
+        <CheckButton
+          value={userOptions.scrollOnWordEnd}
+          text="Scroll on word end"
+          onClick={setScrollOnWordEnd}
         />
       </div>
       <h3 class="h3">Font</h3>

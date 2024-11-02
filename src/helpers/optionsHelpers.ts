@@ -180,6 +180,11 @@ export const setFont = async (font: Fonts) => {
   await persistUserOptions()
 }
 
+export const setScrollOnWordEnd = async (scroll: boolean) => {
+  setUserOptions('scrollOnWordEnd', scroll)
+  await persistUserOptions()
+}
+
 export const isTimeMode = () => userOptions.textMode === 'time'
 export const isQuoteMode = () => userOptions.textMode === 'quote'
 export const isWordsMode = () => userOptions.textMode === 'words'

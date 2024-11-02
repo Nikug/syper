@@ -110,6 +110,7 @@ export interface UserOptions {
   historyDurations: number[]
   font: Fonts
   fontSize: number
+  scrollOnWordEnd: boolean
 }
 
 export interface TestResultSum {

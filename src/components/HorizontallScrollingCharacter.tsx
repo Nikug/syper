@@ -1,20 +1,33 @@
 import { Component, createEffect } from 'solid-js'
 import { Character } from './Character'
+import { userOptions } from '../StateManager'
 
 interface Props {
   expected: string
   actual?: string
   isNext: boolean
+  isCurrent: boolean
   translate: (x: number) => void
 }
 
 export const HorizontallyScrollingCharacter: Component<Props> = (props) => {
   let element: HTMLSpanElement | undefined
 
+  const scrollToCharacter = () => {
+    if (!element) return
+    const { left } = element.getBoundingClientRect()
+    props.translate(left)
+  }
+
   createEffect(() => {
-    if (props.actual && element && props.expected === ' ') {
-      const { left } = element.getBoundingClientRect()
-      props.translate(left)
+    if (userOptions.scrollOnWordEnd) {
+      if (props.isCurrent && element && props.expected === ' ') {
+        scrollToCharacter()
+      }
+    } else {
+      if (props.isNext && element) {
+        scrollToCharacter()
+      }
     }
   })
 

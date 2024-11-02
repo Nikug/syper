@@ -27,6 +27,7 @@ const defaultOptions: UserOptions = {
   historyDurations: [] as number[],
   font: DefaultFont,
   fontSize: 32,
+  scrollOnWordEnd: false,
 } as const
 
 export const defaultUserOptions = (): UserOptions => ({ ...defaultOptions })
