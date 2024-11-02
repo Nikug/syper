@@ -1,6 +1,6 @@
 import { clsx } from 'clsx'
 
-import { Component, createEffect } from 'solid-js'
+import { Component } from 'solid-js'
 import { CharacterMode } from '../types'
 import { userOptions } from '../StateManager'
 import { testStarted } from '../helpers/stateHelpers'
@@ -27,36 +27,18 @@ interface Props {
   expected: string
   actual?: string
   isNext: boolean
-  targetHeight: number
-  translate: (amount: number) => void
+  ref?: HTMLSpanElement | undefined
 }
 
 export const Character: Component<Props> = (props) => {
-  let element: HTMLSpanElement | undefined
-
   const characterMode = () => {
     if (props.actual == null) return 'default'
     return props.actual === props.expected ? 'correct' : 'incorrect'
   }
 
-  const getParent = () => element?.parentElement
-
-  createEffect(() => {
-    if (props.isNext && element && props.translate) {
-      const parent = getParent()
-      if (!parent) return
-
-      const { top, height } = parent.getBoundingClientRect()
-      const amount = props.targetHeight - top - height / 2
-      if (amount !== 0) {
-        props.translate(amount)
-      }
-    }
-  })
-
   return (
     <span
-      ref={element}
+      ref={props.ref}
       class={clsx(
         characterClasses[characterMode()],
         userOptions.showTextHighlight && highlightClasses[characterMode()],

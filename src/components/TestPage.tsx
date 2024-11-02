@@ -15,6 +15,7 @@ import { initializeText, restartAttempt } from '../helpers/stateHelpers'
 import { BlurWhenTyping } from './BlurWhenTyping'
 import { CapsLockIndicator } from './CapsLockIndicator'
 import { Meta, Title } from '@solidjs/meta'
+import { HorizontalTextContainer } from './HorizontalTextContainer'
 
 const TestPage: Component = () => {
   let textContainerRef!: HTMLDivElement
@@ -43,7 +44,7 @@ const TestPage: Component = () => {
       />
       <div class="w-full h-full">
         <div class="grid mx-auto max-w-7xl md:px-16 px-2 grid-rows-5 min-h-screen justify-items-stretch items-center">
-          <div class="row-span-1 self-start">
+          <div class="row-span-1 self-start min-w-0">
             <BlurWhenTyping>
               <Header showOptions={true} />
             </BlurWhenTyping>
@@ -51,7 +52,7 @@ const TestPage: Component = () => {
           <Show when={showingWriting()}>
             <div
               class={clsx(
-                'row-span-3 justify-self-start',
+                'row-span-3 justify-self-start min-w-0 w-full',
                 handleBlur(animationState().writingState === AnimationStates.shown)
               )}
             >
@@ -73,7 +74,9 @@ const TestPage: Component = () => {
                   </div>
                 </Show>
                 <Show when={userOptions.typingMode === 'horizontal'}>
-                  <div>this is horizontal mode</div>
+                  <div class="overflow-hidden w-full">
+                    <HorizontalTextContainer attempt={attempt} quote={typingTest()} />
+                  </div>
                 </Show>
                 <div class="h-24">
                   <Show when={userOptions.showProgressBar}>
@@ -89,7 +92,7 @@ const TestPage: Component = () => {
           <Show when={showingResults()}>
             <div
               class={clsx(
-                'row-span-4',
+                'row-span-4 min-w-0',
                 handleBlur(animationState().resultsState === AnimationStates.shown)
               )}
             >
@@ -99,7 +102,7 @@ const TestPage: Component = () => {
           <Show when={showingWriting()}>
             <div
               class={clsx(
-                'row-span-1',
+                'row-span-1 min-w-0',
                 handleBlur(animationState().writingState === AnimationStates.shown)
               )}
             >

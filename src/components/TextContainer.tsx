@@ -1,9 +1,9 @@
 import { Component, For, createSignal, onCleanup } from 'solid-js'
 import { Attempt, TypingTest } from '../types'
-import { Character } from './Character'
 import { userOptions } from '../StateManager'
 import clsx from 'clsx'
 import { LineHeightMultiplier } from '../constants'
+import { VerticallyScrollingCharacter } from './VerticallyScrollingCharacter'
 
 const animationDuration = 250
 
@@ -53,7 +53,7 @@ export const TextContainer: Component<Props> = (props) => {
             <div>
               <For each={[...word.entries()]}>
                 {([index, character]) => (
-                  <Character
+                  <VerticallyScrollingCharacter
                     targetHeight={props.targetHeight}
                     expected={character}
                     actual={props.attempt.finalText[index]}
