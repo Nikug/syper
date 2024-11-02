@@ -12,7 +12,7 @@ export const HorizontallyScrollingCharacter: Component<Props> = (props) => {
   let element: HTMLSpanElement | undefined
 
   createEffect(() => {
-    if (props.isNext && element) {
+    if (props.actual && element && props.expected === ' ') {
       const { left } = element.getBoundingClientRect()
       props.translate(left)
     }

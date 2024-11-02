@@ -1,6 +1,6 @@
-import { Component, For, createSignal } from 'solid-js'
-import { Attempt, TypingTest } from '../types'
-import { userOptions } from '../StateManager'
+import { Component, For, createEffect, createSignal } from 'solid-js'
+import { Attempt, AttemptStates, TypingTest } from '../types'
+import { attempt, userOptions } from '../StateManager'
 import clsx from 'clsx'
 import { LineHeightMultiplier, SmoothScrollDuration } from '../constants'
 import { HorizontallyScrollingCharacter } from './HorizontallScrollingCharacter'
@@ -21,11 +21,18 @@ export const HorizontalTextContainer: Component<Props> = (props) => {
 
   const scrollToNextCharacter = (x: number) => {
     let difference = centerOfContainer() - x
+
     if (difference > 0) {
       difference = 0
     }
     setTranslateX(difference)
   }
+
+  createEffect(() => {
+    if (attempt.state === AttemptStates.notStarted) {
+      setTranslateX(0)
+    }
+  })
 
   return (
     <div
