@@ -1,11 +1,11 @@
-import { defineConfig, presetUno } from 'unocss'
+import { defineConfig, presetWind4 } from 'unocss'
 import presetWebFonts from '@unocss/preset-web-fonts'
 import transformerDirectives from '@unocss/transformer-directives'
-import presetIcons from '@unocss/preset-icons'
+import presetIcons from '@unocss/preset-icons/browser'
 
 export default defineConfig({
   presets: [
-    presetUno(),
+    presetWind4(),
     presetWebFonts({
       provider: 'google',
       fonts: {
@@ -13,7 +13,11 @@ export default defineConfig({
         mono: 'Fragment Mono:400,600,700',
       },
     }),
-    presetIcons(),
+    presetIcons({
+      collections: {
+        ri: () => import('@iconify-json/ri/icons.json').then((collection) => collection.default),
+      },
+    }),
   ],
   transformers: [transformerDirectives()],
   rules: [
