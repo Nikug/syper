@@ -63,7 +63,6 @@ const createOptions = (personalBests: DatabasePersonalBest[], textMode: TextMode
     'Words per minute'
   )
 
-  /* eslint-disable @typescript-eslint/no-non-null-assertion */
   options.chart!.type = 'bar'
   options.series = [{ name: 'Words per minute', data }]
   options.title!.text = 'Personal bests'
@@ -82,7 +81,6 @@ const createOptions = (personalBests: DatabasePersonalBest[], textMode: TextMode
     setDisposeTooltip({ dispose: result })
     return div.innerHTML
   }
-  /* eslint-enable @typescript-eslint/no-non-null-assertion */
 
   return options
 }

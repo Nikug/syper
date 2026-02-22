@@ -63,7 +63,6 @@ const createOptions = (
     { name: 'Words per minute', data, type: 'scatter' },
     { name: 'Trend', data: trendLine, type: 'line' },
   ]
-  /* eslint-disable @typescript-eslint/no-non-null-assertion */
   options.xaxis!.type = 'datetime'
   options.xaxis!.min = startDate?.getTime()
   options.xaxis!.max = endDate?.getTime()
@@ -94,7 +93,6 @@ const createOptions = (
     setDisposeTooltip({ dispose: result })
     return div.innerHTML
   }
-  /* eslint-enable @typescript-eslint/no-non-null-assertion */
 
   return options
 }
