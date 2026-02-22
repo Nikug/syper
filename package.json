@@ -12,7 +12,9 @@
     "predeploy": "yarn build",
     "deploy": "gh-pages -d dist",
     "tsc": "tsc -p tsconfig.json --noEmit",
-    "watch": "tsc -p tsconfig.json --noEmit --watch"
+    "watch": "tsc -p tsconfig.json --noEmit --watch",
+    "supabase:start": "supabase start",
+    "supabase:stop": "supabase stop"
   },
   "license": "MIT",
   "devDependencies": {
@@ -30,6 +32,7 @@
     "eslint-plugin-solid": "^0.13.0",
     "gh-pages": "^6.0.0",
     "prettier": "^3.0.3",
+    "supabase": "^2.76.12",
     "tsm": "^2.3.0",
     "typescript": "^5.2.2",
     "unocss": "^0.55.7",
