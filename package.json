@@ -37,7 +37,6 @@
     "unocss": "^66.6.0",
     "uvu": "^0.5.6",
     "vite": "^7.3.1",
-    "vite-plugin-eslint": "^1.8.1",
     "vite-plugin-solid": "^2.11.10"
   },
   "dependencies": {
