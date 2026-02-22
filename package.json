@@ -41,15 +41,15 @@
     "vite-plugin-solid": "^2.11.10"
   },
   "dependencies": {
-    "@solidjs/meta": "^0.29.1",
-    "@solidjs/router": "^0.8.3",
-    "@supabase/supabase-js": "^2.33.1",
+    "@solidjs/meta": "^0.29.4",
+    "@solidjs/router": "^0.15.4",
+    "@supabase/supabase-js": "^2.97.0",
     "@unocss/reset": "^66.6.0",
-    "apexcharts": "^3.49.2",
-    "clsx": "^2.0.0",
+    "apexcharts": "^5.6.0",
+    "clsx": "^2.1.1",
     "color": "^5.0.3",
-    "date-fns": "^2.30.0",
-    "solid-js": "^1.8.7"
+    "date-fns": "^4.1.0",
+    "solid-js": "^1.9.11"
   },
   "packageManager": "yarn@3.6.3"
 }

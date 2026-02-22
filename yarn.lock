@@ -192,13 +192,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.21.0":
-  version: 7.28.6
-  resolution: "@babel/runtime@npm:7.28.6"
-  checksum: 42d8a868c2fc2e9a77927945a6daa7ec03c7ea49e611e0d15442933cdabb12f20e3a6849c729259076c10a4247adec229331d1f94c2d0073ea0979d7853e29fd
-  languageName: node
-  linkType: hard
-
 "@babel/template@npm:^7.27.2, @babel/template@npm:^7.28.6":
   version: 7.28.6
   resolution: "@babel/template@npm:7.28.6"
@@ -844,7 +837,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@solidjs/meta@npm:^0.29.1":
+"@solidjs/meta@npm:^0.29.4":
   version: 0.29.4
   resolution: "@solidjs/meta@npm:0.29.4"
   peerDependencies:
@@ -853,12 +846,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@solidjs/router@npm:^0.8.3":
-  version: 0.8.4
-  resolution: "@solidjs/router@npm:0.8.4"
+"@solidjs/router@npm:^0.15.4":
+  version: 0.15.4
+  resolution: "@solidjs/router@npm:0.15.4"
   peerDependencies:
-    solid-js: ^1.5.3
-  checksum: fa74174c29b5854fc06aec165088b2e537290e14f9e4c308a1fd9c4cbc0d0fe9725bf58825bcdff3f13eca838dad1b53ec5ca76e68f4de65c4d31b65c28268b0
+    solid-js: ^1.8.6
+  checksum: 0c10a7873a90aa395e88beab60f2435f29286f9069c6fa4aa82bb464b1dde1da3181e7b60f681ed685fd6e8e3d97f823ad325804c613c844fa60041df0122b30
   languageName: node
   linkType: hard
 
@@ -911,7 +904,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supabase/supabase-js@npm:^2.33.1":
+"@supabase/supabase-js@npm:^2.97.0":
   version: 2.97.0
   resolution: "@supabase/supabase-js@npm:2.97.0"
   dependencies:
@@ -1516,18 +1509,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"apexcharts@npm:^3.49.2":
-  version: 3.54.1
-  resolution: "apexcharts@npm:3.54.1"
+"apexcharts@npm:^5.6.0":
+  version: 5.6.0
+  resolution: "apexcharts@npm:5.6.0"
   dependencies:
     "@yr/monotone-cubic-spline": ^1.0.3
-    svg.draggable.js: ^2.2.2
-    svg.easing.js: ^2.0.0
-    svg.filter.js: ^2.0.2
-    svg.pathmorphing.js: ^0.1.3
-    svg.resize.js: ^1.4.3
-    svg.select.js: ^3.0.1
-  checksum: 05d15d00fa47b67f4b08eb539803982387c136e81ae84e5f10b524879636ceef426ec8f86553bd561a83a2d240542f1b67dc2ee85a9b2b94549b44b0913f4f8a
+  checksum: 7310e80b411db4fc17f1164713cd9cdfcd8f9fa6cb0369f737bd599c64ea392b6ddf522ad4df984cfe56cd88b34aa4a61953f09b56906f90beb382389cb2e46b
   languageName: node
   linkType: hard
 
@@ -1663,7 +1650,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clsx@npm:^2.0.0":
+"clsx@npm:^2.1.1":
   version: 2.1.1
   resolution: "clsx@npm:2.1.1"
   checksum: acd3e1ab9d8a433ecb3cc2f6a05ab95fe50b4a3cfc5ba47abb6cbf3754585fcb87b84e90c822a1f256c4198e3b41c7f6c391577ffc8678ad587fc0976b24fd57
@@ -1775,12 +1762,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:^2.30.0":
-  version: 2.30.0
-  resolution: "date-fns@npm:2.30.0"
-  dependencies:
-    "@babel/runtime": ^7.21.0
-  checksum: f7be01523282e9bb06c0cd2693d34f245247a29098527d4420628966a2d9aad154bd0e90a6b1cf66d37adcb769cd108cf8a7bd49d76db0fb119af5cdd13644f4
+"date-fns@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "date-fns@npm:4.1.0"
+  checksum: fb681b242cccabed45494468f64282a7d375ea970e0adbcc5dcc92dcb7aba49b2081c2c9739d41bf71ce89ed68dd73bebfe06ca35129490704775d091895710b
   languageName: node
   linkType: hard
 
@@ -3470,7 +3455,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"solid-js@npm:^1.8.7":
+"solid-js@npm:^1.9.11":
   version: 1.9.11
   resolution: "solid-js@npm:1.9.11"
   dependencies:
@@ -3499,9 +3484,9 @@ __metadata:
   resolution: "solid-typer@workspace:."
   dependencies:
     "@iconify-json/ri": ^1.2.10
-    "@solidjs/meta": ^0.29.1
-    "@solidjs/router": ^0.8.3
-    "@supabase/supabase-js": ^2.33.1
+    "@solidjs/meta": ^0.29.4
+    "@solidjs/router": ^0.15.4
+    "@supabase/supabase-js": ^2.97.0
     "@types/color": ^4.2.0
     "@types/node": 24.1.0
     "@typescript-eslint/eslint-plugin": ^8.56.0
@@ -3511,15 +3496,15 @@ __metadata:
     "@unocss/preset-web-fonts": ^66.6.0
     "@unocss/reset": ^66.6.0
     "@unocss/transformer-directives": ^66.6.0
-    apexcharts: ^3.49.2
-    clsx: ^2.0.0
+    apexcharts: ^5.6.0
+    clsx: ^2.1.1
     color: ^5.0.3
-    date-fns: ^2.30.0
+    date-fns: ^4.1.0
     eslint: ^10.0.1
     eslint-config-prettier: ^10.1.8
     eslint-plugin-solid: ^0.14.5
     prettier: ^3.8.1
-    solid-js: ^1.8.7
+    solid-js: ^1.9.11
     supabase: ^2.76.12
     tsm: ^2.3.0
     typescript: ^5.9.3
@@ -3567,77 +3552,6 @@ __metadata:
   bin:
     supabase: bin/supabase
   checksum: 431264c8db38471b017dc4a7291f49a52d5d3d1022ce1960d6287b08a59f62329c4f0cb68b1b1d5e3bb1a55f4a864c310b4e070342dfab3984e5816072b15452
-  languageName: node
-  linkType: hard
-
-"svg.draggable.js@npm:^2.2.2":
-  version: 2.2.2
-  resolution: "svg.draggable.js@npm:2.2.2"
-  dependencies:
-    svg.js: ^2.0.1
-  checksum: b9068975d743be664695e7d4323624bba8ff2795b855a46a2f15c842827022684501d63239c99723238d39c9f991940dc04639b8f43ac124fd9ca44a34e6aab2
-  languageName: node
-  linkType: hard
-
-"svg.easing.js@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "svg.easing.js@npm:2.0.0"
-  dependencies:
-    svg.js: ">=2.3.x"
-  checksum: 0f7df78333d879dc00200ddbb4e9d7d745307c002b5dd242ddaf276e8d907067ab75383869ef1940975be1765d595d379ced491ff4bdf78d867bff8225544e92
-  languageName: node
-  linkType: hard
-
-"svg.filter.js@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "svg.filter.js@npm:2.0.2"
-  dependencies:
-    svg.js: ^2.2.5
-  checksum: f0e780bfe385336a7c9d1d8a3ebba1ca9712f6bf0917769fd30c9fd4e3559186ec18d4d6520d9841a9cceba2ac8ff1eacc76b98f7e8b15d5f4a58975a8ecdc64
-  languageName: node
-  linkType: hard
-
-"svg.js@npm:>=2.3.x, svg.js@npm:^2.0.1, svg.js@npm:^2.2.5, svg.js@npm:^2.4.0, svg.js@npm:^2.6.5":
-  version: 2.7.1
-  resolution: "svg.js@npm:2.7.1"
-  checksum: 945bfc9623985fefb4c7275a1b98b5168e5857291f46cbd299bd2e14ce7f4428fea6569c7446d37b75694c43dea01a5f179fbce4f770e7dcd136117bb8f1a3f3
-  languageName: node
-  linkType: hard
-
-"svg.pathmorphing.js@npm:^0.1.3":
-  version: 0.1.3
-  resolution: "svg.pathmorphing.js@npm:0.1.3"
-  dependencies:
-    svg.js: ^2.4.0
-  checksum: bcbe1ccea95c980fa127cb6ad955f1970d763143ab11576cca2fd8d13616deedf933bc17a6310754cd0cb404ac501d627afb5805c578878e4c8f24e1818a7de6
-  languageName: node
-  linkType: hard
-
-"svg.resize.js@npm:^1.4.3":
-  version: 1.4.3
-  resolution: "svg.resize.js@npm:1.4.3"
-  dependencies:
-    svg.js: ^2.6.5
-    svg.select.js: ^2.1.2
-  checksum: 8f4116f4422b72c66bb1110dca2d77ab2cc0665db1e0cd1c0020e06fe9684f53d9bc7aca3b90ce82ce35103ff8ea83a93df1db5d88c889e511d7622c9b000884
-  languageName: node
-  linkType: hard
-
-"svg.select.js@npm:^2.1.2":
-  version: 2.1.2
-  resolution: "svg.select.js@npm:2.1.2"
-  dependencies:
-    svg.js: ^2.2.5
-  checksum: 1dbbb44d16170aad1372e0f8f0d109a21e4216e1e4e28a566738c6cb6b4519b37e44cd1f7de06f3c8eec5e588845d8cbb0e37efc89b8d27401e4c6a0a13564a4
-  languageName: node
-  linkType: hard
-
-"svg.select.js@npm:^3.0.1":
-  version: 3.0.1
-  resolution: "svg.select.js@npm:3.0.1"
-  dependencies:
-    svg.js: ^2.6.5
-  checksum: 0ce3bda86f4b527ce1add02d0ac61ac26678db24c0e4126c584b752e65a1c3458bbe958e29eb4604b3157ef1fdace37b727eccbc2ccdb4fce0015e0ad196fc1c
   languageName: node
   linkType: hard
 

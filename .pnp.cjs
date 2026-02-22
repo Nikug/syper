@@ -30,7 +30,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@iconify-json/ri", "npm:1.2.10"],\
             ["@solidjs/meta", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:0.29.4"],\
-            ["@solidjs/router", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:0.8.4"],\
+            ["@solidjs/router", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:0.15.4"],\
             ["@supabase/supabase-js", "npm:2.97.0"],\
             ["@types/color", "npm:4.2.0"],\
             ["@types/node", "npm:24.1.0"],\
@@ -41,10 +41,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@unocss/preset-web-fonts", "npm:66.6.0"],\
             ["@unocss/reset", "npm:66.6.0"],\
             ["@unocss/transformer-directives", "npm:66.6.0"],\
-            ["apexcharts", "npm:3.54.1"],\
+            ["apexcharts", "npm:5.6.0"],\
             ["clsx", "npm:2.1.1"],\
             ["color", "npm:5.0.3"],\
-            ["date-fns", "npm:2.30.0"],\
+            ["date-fns", "npm:4.1.0"],\
             ["eslint", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:10.0.1"],\
             ["eslint-config-prettier", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:10.1.8"],\
             ["eslint-plugin-solid", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:0.14.5"],\
@@ -283,15 +283,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packagePeers": [\
             "@babel/core",\
             "@types/babel__core"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["@babel/runtime", [\
-        ["npm:7.28.6", {\
-          "packageLocation": "./.yarn/cache/@babel-runtime-npm-7.28.6-f40c99aeef-42d8a868c2.zip/node_modules/@babel/runtime/",\
-          "packageDependencies": [\
-            ["@babel/runtime", "npm:7.28.6"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -1113,17 +1104,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@solidjs/router", [\
-        ["npm:0.8.4", {\
-          "packageLocation": "./.yarn/cache/@solidjs-router-npm-0.8.4-88aeb8678c-fa74174c29.zip/node_modules/@solidjs/router/",\
+        ["npm:0.15.4", {\
+          "packageLocation": "./.yarn/cache/@solidjs-router-npm-0.15.4-a2b4eff3db-0c10a7873a.zip/node_modules/@solidjs/router/",\
           "packageDependencies": [\
-            ["@solidjs/router", "npm:0.8.4"]\
+            ["@solidjs/router", "npm:0.15.4"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:0.8.4", {\
-          "packageLocation": "./.yarn/__virtual__/@solidjs-router-virtual-d955fe17db/0/cache/@solidjs-router-npm-0.8.4-88aeb8678c-fa74174c29.zip/node_modules/@solidjs/router/",\
+        ["virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:0.15.4", {\
+          "packageLocation": "./.yarn/__virtual__/@solidjs-router-virtual-04ff3fe5fc/0/cache/@solidjs-router-npm-0.15.4-a2b4eff3db-0c10a7873a.zip/node_modules/@solidjs/router/",\
           "packageDependencies": [\
-            ["@solidjs/router", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:0.8.4"],\
+            ["@solidjs/router", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:0.15.4"],\
             ["@types/solid-js", null],\
             ["solid-js", "npm:1.9.11"]\
           ],\
@@ -1989,17 +1980,11 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["apexcharts", [\
-        ["npm:3.54.1", {\
-          "packageLocation": "./.yarn/cache/apexcharts-npm-3.54.1-4f734276a8-05d15d00fa.zip/node_modules/apexcharts/",\
+        ["npm:5.6.0", {\
+          "packageLocation": "./.yarn/cache/apexcharts-npm-5.6.0-871ce1a9af-7310e80b41.zip/node_modules/apexcharts/",\
           "packageDependencies": [\
-            ["apexcharts", "npm:3.54.1"],\
-            ["@yr/monotone-cubic-spline", "npm:1.0.3"],\
-            ["svg.draggable.js", "npm:2.2.2"],\
-            ["svg.easing.js", "npm:2.0.0"],\
-            ["svg.filter.js", "npm:2.0.2"],\
-            ["svg.pathmorphing.js", "npm:0.1.3"],\
-            ["svg.resize.js", "npm:1.4.3"],\
-            ["svg.select.js", "npm:3.0.1"]\
+            ["apexcharts", "npm:5.6.0"],\
+            ["@yr/monotone-cubic-spline", "npm:1.0.3"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -2307,11 +2292,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["date-fns", [\
-        ["npm:2.30.0", {\
-          "packageLocation": "./.yarn/cache/date-fns-npm-2.30.0-895c790e0f-f7be015232.zip/node_modules/date-fns/",\
+        ["npm:4.1.0", {\
+          "packageLocation": "./.yarn/cache/date-fns-npm-4.1.0-764604ee0f-fb681b242c.zip/node_modules/date-fns/",\
           "packageDependencies": [\
-            ["date-fns", "npm:2.30.0"],\
-            ["@babel/runtime", "npm:7.28.6"]\
+            ["date-fns", "npm:4.1.0"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -4168,7 +4152,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["solid-typer", "workspace:."],\
             ["@iconify-json/ri", "npm:1.2.10"],\
             ["@solidjs/meta", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:0.29.4"],\
-            ["@solidjs/router", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:0.8.4"],\
+            ["@solidjs/router", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:0.15.4"],\
             ["@supabase/supabase-js", "npm:2.97.0"],\
             ["@types/color", "npm:4.2.0"],\
             ["@types/node", "npm:24.1.0"],\
@@ -4179,10 +4163,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@unocss/preset-web-fonts", "npm:66.6.0"],\
             ["@unocss/reset", "npm:66.6.0"],\
             ["@unocss/transformer-directives", "npm:66.6.0"],\
-            ["apexcharts", "npm:3.54.1"],\
+            ["apexcharts", "npm:5.6.0"],\
             ["clsx", "npm:2.1.1"],\
             ["color", "npm:5.0.3"],\
-            ["date-fns", "npm:2.30.0"],\
+            ["date-fns", "npm:4.1.0"],\
             ["eslint", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:10.0.1"],\
             ["eslint-config-prettier", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:10.1.8"],\
             ["eslint-plugin-solid", "virtual:b7eca9d0dabea56db5912d0431af59e76c6859a0c38680fb5e37365aa5d72e77d622d6af2550b03328c6d1bf2ea8e1fe74d88c29aecfe7500ddd26891945c1d5#npm:0.14.5"],\
@@ -4238,84 +4222,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["https-proxy-agent", "npm:7.0.6"],\
             ["node-fetch", "npm:3.3.2"],\
             ["tar", "npm:7.5.9"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["svg.draggable.js", [\
-        ["npm:2.2.2", {\
-          "packageLocation": "./.yarn/cache/svg.draggable.js-npm-2.2.2-91cd7475f3-b9068975d7.zip/node_modules/svg.draggable.js/",\
-          "packageDependencies": [\
-            ["svg.draggable.js", "npm:2.2.2"],\
-            ["svg.js", "npm:2.7.1"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["svg.easing.js", [\
-        ["npm:2.0.0", {\
-          "packageLocation": "./.yarn/cache/svg.easing.js-npm-2.0.0-0c84ce8158-0f7df78333.zip/node_modules/svg.easing.js/",\
-          "packageDependencies": [\
-            ["svg.easing.js", "npm:2.0.0"],\
-            ["svg.js", "npm:2.7.1"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["svg.filter.js", [\
-        ["npm:2.0.2", {\
-          "packageLocation": "./.yarn/cache/svg.filter.js-npm-2.0.2-f65ff6d47e-f0e780bfe3.zip/node_modules/svg.filter.js/",\
-          "packageDependencies": [\
-            ["svg.filter.js", "npm:2.0.2"],\
-            ["svg.js", "npm:2.7.1"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["svg.js", [\
-        ["npm:2.7.1", {\
-          "packageLocation": "./.yarn/cache/svg.js-npm-2.7.1-c232ccf7aa-945bfc9623.zip/node_modules/svg.js/",\
-          "packageDependencies": [\
-            ["svg.js", "npm:2.7.1"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["svg.pathmorphing.js", [\
-        ["npm:0.1.3", {\
-          "packageLocation": "./.yarn/cache/svg.pathmorphing.js-npm-0.1.3-83b910d5a4-bcbe1ccea9.zip/node_modules/svg.pathmorphing.js/",\
-          "packageDependencies": [\
-            ["svg.pathmorphing.js", "npm:0.1.3"],\
-            ["svg.js", "npm:2.7.1"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["svg.resize.js", [\
-        ["npm:1.4.3", {\
-          "packageLocation": "./.yarn/cache/svg.resize.js-npm-1.4.3-9e6b42a70f-8f4116f442.zip/node_modules/svg.resize.js/",\
-          "packageDependencies": [\
-            ["svg.resize.js", "npm:1.4.3"],\
-            ["svg.js", "npm:2.7.1"],\
-            ["svg.select.js", "npm:2.1.2"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["svg.select.js", [\
-        ["npm:2.1.2", {\
-          "packageLocation": "./.yarn/cache/svg.select.js-npm-2.1.2-d8be268fcb-1dbbb44d16.zip/node_modules/svg.select.js/",\
-          "packageDependencies": [\
-            ["svg.select.js", "npm:2.1.2"],\
-            ["svg.js", "npm:2.7.1"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
-        ["npm:3.0.1", {\
-          "packageLocation": "./.yarn/cache/svg.select.js-npm-3.0.1-9baa0ca5b5-0ce3bda86f.zip/node_modules/svg.select.js/",\
-          "packageDependencies": [\
-            ["svg.select.js", "npm:3.0.1"],\
-            ["svg.js", "npm:2.7.1"]\
           ],\
           "linkType": "HARD"\
         }]\
