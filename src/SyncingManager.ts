@@ -4,9 +4,9 @@ const syncingDebounceDuration = 200
 
 const [syncing, setSyncing] = createSignal(false)
 const [loadingScreen, setloadingScreen] = createSignal(false)
-const [syncingStopFunction, setSyncingStopFunction] = createSignal<NodeJS.Timeout | undefined>(
-  undefined
-)
+const [syncingStopFunction, setSyncingStopFunction] = createSignal<
+  ReturnType<typeof setTimeout> | undefined
+>(undefined)
 
 export const isSyncing = syncing
 export const showLoadingScreen = loadingScreen

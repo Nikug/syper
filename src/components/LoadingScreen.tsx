@@ -5,7 +5,9 @@ const updateInterval = 100
 const loadingText = 'loading...'.split('')
 
 export const LoadingScreen: Component = () => {
-  const [intervalId, setIntervalId] = createSignal<NodeJS.Timeout | undefined>(undefined)
+  const [intervalId, setIntervalId] = createSignal<ReturnType<typeof setTimeout> | undefined>(
+    undefined
+  )
   const [index, setIndex] = createSignal<number>(0)
 
   const updateIndex = () => {

@@ -5,7 +5,7 @@ export class Timer {
   private ticks = 0
   private startTime = 0
   private callback: Callback | null = null
-  private timeout: NodeJS.Timeout | undefined
+  private timeout: ReturnType<typeof setTimeout> | undefined
   private stopped = false
 
   constructor(callback: Callback | null, interval: number) {

@@ -258,7 +258,7 @@ export const createDefaultChartOptions = (xTitle: string, yTitle: string): ApexO
   return options
 }
 
-export const createPersonalBestAnnotation = (wpm: number): ApexAnnotations => {
+export const createPersonalBestAnnotation = (wpm: number) => {
   return {
     yaxis: [
       {

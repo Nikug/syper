@@ -9,7 +9,7 @@ export interface ThemeVariables {
   variables: () => ThemeVariable
 }
 
-type ThemeVariable = Record<string, Color>
+type ThemeVariable = Record<string, typeof Color>
 
 export type Themes = Record<ThemeKey, ThemeVariables>
 

@@ -1,5 +1,5 @@
 import { Component, onMount, lazy, Show, onCleanup } from 'solid-js'
-import { Routes, Route } from '@solidjs/router'
+import { Router, Route } from '@solidjs/router'
 import { setupAuth } from './authentication/Supabase'
 import { setUserOptions } from './StateManager'
 import { SyncingIndicator } from './components/SyncingIndicator'
@@ -54,14 +54,14 @@ const App: Component = () => {
         <SyncingIndicator />
         <Notifications />
         <Show when={!showLoadingScreen()} fallback={<LoadingScreen />}>
-          <Routes>
+          <Router>
             <Route path={AppRoutes.test} component={TestPage} />
             <Route path={AppRoutes.options} component={OptionsPage} />
             <Route path={AppRoutes.profile} component={ProfilePage} />
             <Route path={AppRoutes.about} component={AboutPage} />
             <Route path={AppRoutes.privacy} component={PrivacyPage} />
             <Route path={AppRoutes.signup} component={SignupPage} />
-          </Routes>
+          </Router>
         </Show>
         <Show when={!showLoadingScreen()}>
           <BlurWhenTyping>
