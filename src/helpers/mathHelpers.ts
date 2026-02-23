@@ -69,10 +69,9 @@ const mean = (array: number[]) => {
 
 export const smoothSeries = (series: number[], smoothCount: number): number[] => {
   const smoothedSeries: number[] = new Array(series.length)
-  let subSeries: number[] = new Array(smoothCount)
 
   for (let i = 0, limit = series.length; i < limit; i++) {
-    subSeries = series.slice(i, i + smoothCount)
+    const subSeries = series.slice(i, i + smoothCount)
     smoothedSeries[i] = mean(subSeries)
   }
 

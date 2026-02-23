@@ -3,7 +3,9 @@ import { restartAttempt, testStarted } from '../helpers/stateHelpers'
 import { NotificationDuration, TestTimeoutDuration } from '../constants'
 import { addNotification } from '../NotificationsHandler'
 
-const [timeoutFunction, setTimeoutFunction] = createSignal<NodeJS.Timeout | undefined>(undefined)
+const [timeoutFunction, setTimeoutFunction] = createSignal<
+  ReturnType<typeof setTimeout> | undefined
+>(undefined)
 
 export const resetTestTimeout = () => {
   clearTestTimeout()

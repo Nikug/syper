@@ -17,8 +17,8 @@ interface Props<K, V extends JSX.Element> {
 }
 
 export const Dropdown = <K, V extends JSX.Element>(props: Props<K, V>) => {
-  let dropdownRef: HTMLDivElement | undefined
-  let panelRef: HTMLDivElement | undefined
+  let dropdownRef!: HTMLDivElement
+  let panelRef!: HTMLDivElement
   const [open, setOpen] = createSignal(false)
 
   onMount(() => {
@@ -32,13 +32,13 @@ export const Dropdown = <K, V extends JSX.Element>(props: Props<K, V>) => {
     if (!open) return
 
     const target = event.target
-    if (!dropdownRef?.contains(target as Node) && !panelRef?.contains(target as Node)) {
+    if (!dropdownRef.contains(target as Node) && !panelRef?.contains(target as Node)) {
       setOpen(false)
     }
   }
 
   const handleButtonClick = (event: MouseEvent) => {
-    if (!dropdownRef?.contains(event.target as Node)) {
+    if (!dropdownRef.contains(event.target as Node)) {
       return
     }
 
@@ -46,7 +46,6 @@ export const Dropdown = <K, V extends JSX.Element>(props: Props<K, V>) => {
   }
 
   const dropdownPosition = (): JSX.CSSProperties => {
-    if (!dropdownRef) return {}
     const bounds = dropdownRef.getBoundingClientRect()
     return {
       top: `${bounds.y + dropdownRef.clientHeight + window.scrollY}px`,

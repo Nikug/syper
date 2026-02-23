@@ -32,6 +32,7 @@ const updateAttempt = () => {
 
       if (attempt.remainingDuration <= 0) {
         isEnd = true
+        // eslint-disable-next-line no-useless-assignment
         attempt = handleTestEnd(attempt, performanceNow)
       }
     })

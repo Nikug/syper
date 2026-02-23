@@ -15,7 +15,9 @@ export const TextContainer: Component<Props> = (props) => {
   let containerRef!: HTMLDivElement
   const [offsetY, setOffsetY] = createSignal(userOptions.fontSize * LineHeightMultiplier)
   const [animating, setAnimating] = createSignal(false)
-  const [timeoutId, setTimeoutId] = createSignal<undefined | NodeJS.Timeout>(undefined)
+  const [timeoutId, setTimeoutId] = createSignal<undefined | ReturnType<typeof setTimeout>>(
+    undefined
+  )
 
   const translate = (amount: number) => {
     if (amount !== 0 && !animating()) {

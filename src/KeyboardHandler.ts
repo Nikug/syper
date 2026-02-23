@@ -61,7 +61,7 @@ const handleCharacter = (event: KeyboardEvent) => {
           const word = typingTest().words.find((word) => word.has(index))
           if (!word) return attempt
 
-          const wordStartIndex = word.entries().next().value[0]
+          const wordStartIndex = word.entries().next().value?.[0]
           attempt.finalText = attempt.finalText.substring(0, wordStartIndex)
         } else {
           attempt.finalText = attempt.finalText.substring(0, attempt.finalText.length - 1)

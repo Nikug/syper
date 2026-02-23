@@ -15,7 +15,7 @@ export interface CreateNotification {
 
 export interface Notification extends CreateNotification {
   id: number
-  timeout?: NodeJS.Timeout
+  timeout?: ReturnType<typeof setTimeout>
 }
 
 export const [notifications, setNotifications] = createStore<NotificationStore>({

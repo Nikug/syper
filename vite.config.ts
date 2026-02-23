@@ -1,24 +1,9 @@
 import { defineConfig } from 'vite'
 import solidPlugin from 'vite-plugin-solid'
-// @ts-expect-error Package is missing types.
-import eslintPlugin from 'vite-plugin-eslint'
 import unoCssPlugin from 'unocss/vite'
 
 export default defineConfig({
-  plugins: [
-    solidPlugin(),
-    unoCssPlugin(),
-    { ...eslintPlugin(), apply: 'build' },
-    {
-      ...eslintPlugin({
-        failOnWarning: false,
-        failOnError: false,
-        cache: true,
-      }),
-      apply: 'serve',
-      enforce: 'post',
-    },
-  ],
+  plugins: [solidPlugin(), unoCssPlugin()],
   base: './',
   server: {
     port: 3000,
