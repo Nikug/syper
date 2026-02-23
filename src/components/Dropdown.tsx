@@ -38,7 +38,6 @@ export const Dropdown = <K, V extends JSX.Element>(props: Props<K, V>) => {
   }
 
   const handleButtonClick = (event: MouseEvent) => {
-    console.log('yeet')
     if (!dropdownRef.contains(event.target as Node)) {
       return
     }
