@@ -5,6 +5,10 @@
   box-shadow: unset !important;
 }
 
-.apexcharts-yaxis-annotations > line {
+.apexcharts-yaxis-annotations>line {
   stroke-width: 4;
+}
+
+.apexcharts-legend-group {
+  flex-direction: row !important;
 }
