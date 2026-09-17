@@ -50,5 +50,5 @@
     "date-fns": "^4.1.0",
     "solid-js": "^1.9.11"
   },
-  "packageManager": "yarn@4.12.0"
+  "packageManager": "yarn@4.18.0"
 }
